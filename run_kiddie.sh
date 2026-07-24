@@ -15,9 +15,10 @@ RESPONSES="data/kiddie/runs/repgen/"
 TRUTH="data/kiddie/eval/kiddie_fake.eval.ir_measures.txt"
 
 # --- Run the NaiveJudge (no LLM needed) ---
-WORKFLOW="judges/naive/workflow.yml"
+WORKFLOW="judges/tinyjudge/workflow.yml"
 
 # Other example judges:
+#   judges/naive/workflow.yml    (mo LLM used)
 #   judges/tinyjudge/workflow.yml     (minimal LLM judge, requires API key)
 #   judges/complete_example/workflow.yml  (full protocol example, no LLM)
 

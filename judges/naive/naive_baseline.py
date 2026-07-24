@@ -17,7 +17,11 @@ from autojudge_base import (
     NuggetBanks,
     NuggetBanksProtocol,
 )
-from tqdm import tqdm
+try:
+    from tqdm import tqdm
+except ImportError:  # tqdm ships in the [all] extra; fall back to a no-op wrapper
+    def tqdm(iterable, *args, **kwargs):
+        return iterable
 import random
 
 

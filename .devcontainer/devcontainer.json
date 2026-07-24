@@ -1,5 +1,5 @@
 {
-  "image": "mam10eks/trec-auto-judge-base:dev-0.0.1",
+  "image": "ghcr.io/trec-auto-judge/trec-auto-judge-base:dev-0.0.1",
   "customizations": {
     "vscode": {
       "extensions": [
