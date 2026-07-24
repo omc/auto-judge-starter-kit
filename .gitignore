@@ -14,3 +14,14 @@ results/
 
 # Fetched evaluation data (fetch_datasets.py); never committed
 /local-data/
+
+# bonsai-auto-judge (fork) additions
+output-kiddie/
+.env
+data/rag*
+temp/rag25/
+temp/ragtime25/
+temp/rag26_consensus/shard_cache/
+temp/rag26_consensus/~*
+temp/rag26_slice/
+temp/cache-20260910.tar.gz
