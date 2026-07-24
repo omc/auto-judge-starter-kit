@@ -3,14 +3,14 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "auto-judge-starterkit"
+name = "bonsai-auto-judge"
 version = "0.3.18"
-description = "Example AutoJudge implementations for building custom judges"
+description = "Bonsai LLM judge for TREC Auto-Judge"
 readme = "README.md"
 license = {text = "MIT"}
 requires-python = ">=3.10"
 authors = [
-    {name = "TREC AutoJudge Team"}
+    {name = "Max Irwin, Bonsai"}
 ]
 keywords = ["trec", "autojudge", "rag", "evaluation", "ir"]
 classifiers = [
@@ -28,6 +28,7 @@ classifiers = [
 
 dependencies = [
     "autojudge-base>=0.3.18",
+    "openai>=1.0",
     "tira>=0.0.100",
     "tqdm>=4.0",
 ]
@@ -47,12 +48,12 @@ evaluate = [
     "autojudge-evaluate>=0.3.18",
 ]
 all = [
-    "auto-judge-starterkit[minima-llm,pyterrier,evaluate,test]",
+    "bonsai-auto-judge[minima-llm,pyterrier,evaluate,test]",
 ]
 
 [project.urls]
-Homepage = "https://github.com/trec-autojudge/auto-judge-starterkit"
-Repository = "https://github.com/trec-autojudge/auto-judge-starterkit"
+Homepage = "https://github.com/omc/bonsai-auto-judge"
+Repository = "https://github.com/omc/bonsai-auto-judge"
 
 [tool.setuptools.packages.find]
 where = ["."]

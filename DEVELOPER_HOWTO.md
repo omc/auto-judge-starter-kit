@@ -45,20 +45,20 @@ git merge upstream/main
 ```
 
 **What comes from where:**
+
 - **Upstream (starterkit repo)** provides template structure, example judges, test data, and build config.
 - **Library updates** (`autojudge-base`, `minima-llm`, etc.) come via `pip`/`uv pip install --upgrade`. The starterkit pins `autojudge-base>=0.3.2`; pulling upstream gets template changes, not library upgrades.
-
 
 ## 2. Update `pyproject.toml`
 
 Open `pyproject.toml` and make these changes:
 
-| Field | Change to |
-|-------|-----------|
-| `name` | Your project name (e.g., `"my-awesome-judge"`) |
-| `description` | One-line summary of your approach |
-| `authors` | Your name / team |
-| `project.urls` | Your fork's URL |
+| Field          | Change to                                      |
+| -------------- | ---------------------------------------------- |
+| `name`         | Your project name (e.g., `"my-awesome-judge"`) |
+| `description`  | One-line summary of your approach              |
+| `authors`      | Your name / team                               |
+| `project.urls` | Your fork's URL                                |
 
 **Add your dependencies** under `[project] > dependencies`. For example, if your judge uses DSPy and LiteLLM:
 
@@ -72,6 +72,7 @@ dependencies = [
 ```
 
 **Keep these unchanged:**
+
 - `[tool.setuptools.packages.find]` with `include = ["judges*"]` -- this is how your judge package gets discovered
 - The optional dependency groups (`test`, `minima-llm`, `evaluate`, etc.) unless you need to modify them
 
@@ -80,7 +81,6 @@ After editing, refresh your environment:
 ```bash
 uv pip install -e '.[all]' --refresh
 ```
-
 
 ## 3. Update README.md
 
@@ -92,7 +92,6 @@ Replace the starterkit overview with your project's description:
 - Brief acknowledgment that this was built on the auto-judge-starterkit
 
 Remove the descriptions of example judges (NaiveJudge, TinyJudge, etc.) since those won't ship with your submission.
-
 
 ## 4. Create Your Judge Directory
 
@@ -108,7 +107,6 @@ judges/myjudge/
 Don't forget to `git add judges/myjudge/` -- new directories are untracked by default.
 
 **Example judges** (`judges/naive/`, `judges/tinyjudge/`, `judges/complete_example/`, `judges/pyterrier_retrieval/`) are useful as reference during development. **Delete them before submission** (see [Section 8](#8-submission)).
-
 
 ## 5. Implement Your Judge
 
@@ -193,12 +191,12 @@ You can also use separate classes for each phase (see `judges/complete_example/w
 
 ### Key References
 
-| Resource | What it covers |
-|----------|---------------|
-| [autojudge-base workflow README](https://github.com/trec-auto-judge/auto-judge-base/tree/main/src/autojudge_base/workflow/README.md) | Quick-start template, lifecycle flags, variants, sweeps, settings |
-| `judges/complete_example/` | Full working example with all three protocols |
-| `judges/tinyjudge/` | Minimal LLM-based judge |
-| [autojudge-base](https://github.com/trec-auto-judge/auto-judge-base) | Data classes: `Report`, `Request`, `Leaderboard`, `NuggetBanks`, etc. |
+| Resource                                                                                                                             | What it covers                                                        |
+| ------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------- |
+| [autojudge-base workflow README](https://github.com/trec-auto-judge/auto-judge-base/tree/main/src/autojudge_base/workflow/README.md) | Quick-start template, lifecycle flags, variants, sweeps, settings     |
+| `judges/complete_example/`                                                                                                           | Full working example with all three protocols                         |
+| `judges/tinyjudge/`                                                                                                                  | Minimal LLM-based judge                                               |
+| [autojudge-base](https://github.com/trec-auto-judge/auto-judge-base)                                                                 | Data classes: `Report`, `Request`, `Leaderboard`, `NuggetBanks`, etc. |
 
 ### Important Conventions
 
@@ -206,7 +204,6 @@ You can also use separate classes for each phase (see `judges/complete_example/w
 - **Deterministic ordering**: Sort responses by `run_id` before creating comparison pairs to ensure consistent cache keys and reproducible results.
 - **`{_name}` in filebase**: Using `filebase: "{_name}"` in workflow.yml automatically names output files after the variant/sweep name being run.
 - **`filebase` and `outdir` parameters**: All judge methods receive these auto-filled parameters for constructing output paths. Include them explicitly: `filebase: str = "default", outdir: Path = Path(".")`
-
 
 ## 6. Run Your Judge
 
@@ -267,27 +264,26 @@ See [minima-llm](https://github.com/trec-auto-judge/minima-llm) for full backend
 
 ### Useful Development Flags
 
-| Flag | Purpose |
-|------|---------|
-| `--limit-topics 2` | Run on a subset of topics |
-| `--topic TOPIC_ID` | Run on one specific topic |
-| `--variant NAME` | Run a specific variant from workflow.yml |
-| `-S KEY=VALUE` | Override a shared setting |
-| `-N KEY=VALUE` | Override a nugget setting |
-| `-J KEY=VALUE` | Override a judge setting |
+| Flag               | Purpose                                  |
+| ------------------ | ---------------------------------------- |
+| `--limit-topics 2` | Run on a subset of topics                |
+| `--topic TOPIC_ID` | Run on one specific topic                |
+| `--variant NAME`   | Run a specific variant from workflow.yml |
+| `-S KEY=VALUE`     | Override a shared setting                |
+| `-N KEY=VALUE`     | Override a nugget setting                |
+| `-J KEY=VALUE`     | Override a judge setting                 |
 
 ### Output Files
 
 Given `filebase: "myjudge"` and `--out-dir ./output/`:
 
-| File | When produced | Purpose |
-|------|--------------|---------|
-| `myjudge.judgment.json` | `judge: true` | Leaderboard scores (JSON) |
-| `myjudge.eval.txt` | `judge: true` | Leaderboard in evaluation format (primary input for meta-evaluate) |
-| `myjudge.nuggets.jsonl` | `create_nuggets: true` | Generated nugget banks |
-| `myjudge.qrels` | `create_qrels: true` | Relevance judgments |
-| `myjudge.config.yml` | always | Full config snapshot for reproducibility |
-
+| File                    | When produced          | Purpose                                                            |
+| ----------------------- | ---------------------- | ------------------------------------------------------------------ |
+| `myjudge.judgment.json` | `judge: true`          | Leaderboard scores (JSON)                                          |
+| `myjudge.eval.txt`      | `judge: true`          | Leaderboard in evaluation format (primary input for meta-evaluate) |
+| `myjudge.nuggets.jsonl` | `create_nuggets: true` | Generated nugget banks                                             |
+| `myjudge.qrels`         | `create_qrels: true`   | Relevance judgments                                                |
+| `myjudge.config.yml`    | always                 | Full config snapshot for reproducibility                           |
 
 ## 7. Meta-Evaluation
 
@@ -311,7 +307,6 @@ auto-judge-evaluate meta-evaluate \
 **Note:** The kiddie dataset has synthetic/fake ground truth. It's useful for validating that the pipeline runs end-to-end, but not for drawing conclusions about judge quality.
 
 For real evaluation, use actual TREC datasets with manual relevance judgments, or the shared evaluation service.
-
 
 ## 8. Submission
 
