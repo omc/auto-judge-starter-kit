@@ -1,0 +1,273 @@
+{
+  "is_ragtime": true,
+  "metadata": {
+    "team_id": "T433",
+    "run_id": "seal",
+    "topic_id": "464",
+    "type": "automatic",
+    "request_id": "464",
+    "narrative_id": "464",
+    "narrative": "I want a thorough understanding of what makes up a community, including its definitions in various contexts like science and what it means to be a 'civilized community.' I'm also interested in related terms like 'grassroots organizations,' how communities set boundaries and priorities, and their roles in important areas such as preparedness and nation-building."
+  },
+  "responses": [
+    {
+      "citations": [2, 7],
+      "text": "- Community (sociology): a set of patterned interactions grounded in shared expectations, values, and meanings, with fuzzy, overlapping boundaries rather than fixed lines,."
+    },
+    {
+      "citations": [8, 27, 26],
+      "text": "Communities may be geographic or constructed (e.g., NGOs or online), with members belonging to multiple communities simultaneously and operating through both formal institutions (schools, governments) and informal networks (elders, clubs),,."
+    },
+    {
+      "citations": [15, 7, 12, 18, 2],
+      "text": "Community differs from society: community is concrete, territorially bounded with belongingness, while society is an abstract network of relations without necessary locality or shared sentiment,. - Community (ecology): all different populations living together in an area, situated between population and ecosystem in the organizational hierarchy of life. - Boundaries and priorities: communities define membership and exclusions using criteria like family, trade, race, religion, and skills, which serve political, economic, and social functions, while boundaries remain context-dependent and permeable,."
+    },
+    {
+      "citations": [26, 14, 25, 5],
+      "text": "Community priorities reflect cultural organization and needs, guided by formal and informal institutions and social capital that structure decision-making and support,,. - \"Civilized community\" and civilization: the term has an ethnocentric history and remains contested, but modern criteria typically include urban settlements, division of labor, surplus food, governance, writing, trade, arts, and technological development, with acknowledged exceptions, ["
+    },
+    {
+      "citations": [1, 5],
+      "text": "4]. Scholars caution against equating \"civilized\" with moral superiority, rejecting earlier evolutionary hierarchies that labeled non-urban societies as inferior,."
+    },
+    {
+      "citations": [13, 5, 6, 23],
+      "text": "Some argue civilization's state structures reduce violence by providing order, while others emphasize the term's problematic moral connotations, indicating a debated area,. - Grassroots organizations: bottom-up, values-based efforts that build community groups and leadership to act for the common good, often through community organizing,."
+    },
+    {
+      "citations": [11, 24, 20],
+      "text": "They facilitate participation and empowerment, provide services where states fail, and pursue change via self-help and/or confrontation, with examples including U.S. desegregation, land and agrarian reforms, and township service provision,,."
+    },
+    {
+      "citations": [21, 6, 16],
+      "text": "Tactics include door-to-door recruitment, protests, petitions, and electoral action, aiming for democratic, broadly empowering structures,. - Roles in preparedness and nation-building: community-based disaster mitigation leverages local knowledge, volunteer labor, and linkage to agencies to build resilience and cohesion."
+    },
+    {
+      "citations": [19, 0],
+      "text": "Grassroots innovations in energy illustrate localized, diverse approaches to sustainability and infrastructure, with motivations spanning environmental, economic, social, and political aims and no one-size-fits-all model,."
+    },
+    {
+      "citations": [9, 28],
+      "text": "Education, visibility, and local priority-setting drive effective grassroots mobilization and policy influence,."
+    }
+  ],
+  "answer": [
+    {
+      "citations": [2, 7],
+      "text": "- Community (sociology): a set of patterned interactions grounded in shared expectations, values, and meanings, with fuzzy, overlapping boundaries rather than fixed lines,."
+    },
+    {
+      "citations": [8, 27, 26],
+      "text": "Communities may be geographic or constructed (e.g., NGOs or online), with members belonging to multiple communities simultaneously and operating through both formal institutions (schools, governments) and informal networks (elders, clubs),,."
+    },
+    {
+      "citations": [15, 7, 12, 18, 2],
+      "text": "Community differs from society: community is concrete, territorially bounded with belongingness, while society is an abstract network of relations without necessary locality or shared sentiment,. - Community (ecology): all different populations living together in an area, situated between population and ecosystem in the organizational hierarchy of life. - Boundaries and priorities: communities define membership and exclusions using criteria like family, trade, race, religion, and skills, which serve political, economic, and social functions, while boundaries remain context-dependent and permeable,."
+    },
+    {
+      "citations": [26, 14, 25, 5],
+      "text": "Community priorities reflect cultural organization and needs, guided by formal and informal institutions and social capital that structure decision-making and support,,. - \"Civilized community\" and civilization: the term has an ethnocentric history and remains contested, but modern criteria typically include urban settlements, division of labor, surplus food, governance, writing, trade, arts, and technological development, with acknowledged exceptions, ["
+    },
+    {
+      "citations": [1, 5],
+      "text": "4]. Scholars caution against equating \"civilized\" with moral superiority, rejecting earlier evolutionary hierarchies that labeled non-urban societies as inferior,."
+    },
+    {
+      "citations": [13, 5, 6, 23],
+      "text": "Some argue civilization's state structures reduce violence by providing order, while others emphasize the term's problematic moral connotations, indicating a debated area,. - Grassroots organizations: bottom-up, values-based efforts that build community groups and leadership to act for the common good, often through community organizing,."
+    },
+    {
+      "citations": [11, 24, 20],
+      "text": "They facilitate participation and empowerment, provide services where states fail, and pursue change via self-help and/or confrontation, with examples including U.S. desegregation, land and agrarian reforms, and township service provision,,."
+    },
+    {
+      "citations": [21, 6, 16],
+      "text": "Tactics include door-to-door recruitment, protests, petitions, and electoral action, aiming for democratic, broadly empowering structures,. - Roles in preparedness and nation-building: community-based disaster mitigation leverages local knowledge, volunteer labor, and linkage to agencies to build resilience and cohesion."
+    },
+    {
+      "citations": [19, 0],
+      "text": "Grassroots innovations in energy illustrate localized, diverse approaches to sustainability and infrastructure, with motivations spanning environmental, economic, social, and political aims and no one-size-fits-all model,."
+    },
+    {
+      "citations": [9, 28],
+      "text": "Education, visibility, and local priority-setting drive effective grassroots mobilization and policy influence,."
+    }
+  ],
+  "references": [
+    "msmarco_v2.1_doc_51_1676907987#3_3168116319",
+    "msmarco_v2.1_doc_03_1479327089#3_2443895971",
+    "msmarco_v2.1_doc_00_952987248#7_1737397320",
+    "msmarco_v2.1_doc_15_709816141#0_1389719974",
+    "msmarco_v2.1_doc_05_907471130#8_1506191816",
+    "msmarco_v2.1_doc_47_1436790126#1_3076935032",
+    "msmarco_v2.1_doc_16_3194649350#6_3527447485",
+    "msmarco_v2.1_doc_16_465672841#11_722991209",
+    "msmarco_v2.1_doc_00_952974661#15_1737366413",
+    "msmarco_v2.1_doc_15_709816141#4_1389729191",
+    "msmarco_v2.1_doc_03_1479327089#2_2443893658",
+    "msmarco_v2.1_doc_37_445831792#5_941141581",
+    "msmarco_v2.1_doc_02_1238350886#10_2089985826",
+    "msmarco_v2.1_doc_55_599718075#6_1362420910",
+    "msmarco_v2.1_doc_28_1100563864#9_2353786020",
+    "msmarco_v2.1_doc_52_1274534386#11_2564232701",
+    "msmarco_v2.1_doc_00_1212177261#8_2171868559",
+    "msmarco_v2.1_doc_52_1274534386#10_2564231262",
+    "msmarco_v2.1_doc_39_1520335712#4_3191987969",
+    "msmarco_v2.1_doc_51_1676907987#5_3168121347",
+    "msmarco_v2.1_doc_37_445831792#7_941145089",
+    "msmarco_v2.1_doc_16_465885883#2_723126913",
+    "msmarco_v2.1_doc_03_770344228#12_1315459874",
+    "msmarco_v2.1_doc_16_3194623408#0_3527400964",
+    "msmarco_v2.1_doc_37_445831792#8_941146758",
+    "msmarco_v2.1_doc_14_1198650161#9_2470434924",
+    "msmarco_v2.1_doc_28_1100563864#8_2353783940",
+    "msmarco_v2.1_doc_04_555267517#1_1252029123",
+    "msmarco_v2.1_doc_15_709816141#8_1389738619"
+  ],
+  "documents": {
+    "msmarco_v2.1_doc_51_1676907987#3_3168116319": {
+      "id": "msmarco_v2.1_doc_51_1676907987#3_3168116319",
+      "text": "Introduction\nNew technological and social innovations have emerged to deal with society\u2019s problems, especially regarding the sustainability of electricity, transport, and other related systems. Civil society organisations such as community groups, voluntary organisations, charities and community co-operatives, are taking energy action to produce services that have traditionally been provided by incumbent organisations. These civil society initiatives, which take a sustainability approach to addressing every day services in the area of energy (as well as food and transport) have been conceptualised as grassroots innovations ( Seyfang and Smith, 2007 ). Grassroots innovations are \u201c networks of activists and organisations generating novel bottom\u2013up solutions for sustainable development; solutions that respond to the local situation and the interests and values of the communities involved \u201d ( Seyfang and Smith, 2007; p. 585 ). Grassroots innovations differ from technology or market innovations in a sense that they usually have motives for creating social good rather than pure monetary profits ( Seyfang and Smith, 2007 ). This in turn can give an opportunity to the development of new social experiments that would not have been developed or implemented in a purely profit-driven context ( Verheul and Vergragt, 1995 ). Grassroots innovations have been studied in relation to empirical topics such as community currencies ( Seyfang and Longhurst, 2013 ), community gardens and food networks ( Seyfang, 2007, White and Stirling, 2013) and community energy ( Seyfang et al., 2014 ).",
+      "title": "The role of community leadership in the development of grassroots innovations - ScienceDirect",
+      "url": "https://www.sciencedirect.com/science/article/pii/S2210422416300417"
+    },
+    "msmarco_v2.1_doc_16_465885883#2_723126913": {
+      "id": "msmarco_v2.1_doc_16_465885883#2_723126913",
+      "text": "Where negotiations fail, these organizations quickly seek to inform others outside of the organization of the issues being addressed and expose or pressure the decision-makers through a variety of means, including picketing, boycotting, sit-ins, petitioning, and electoral politics. Organizing groups often seek out issues they know will generate controversy and conflict, this allows them to draw in and educate participants, build commitment, and establish a reputation for advancing local justice. Community organizers generally seek to build groups that are democratic in governance, open and accessible to community members, and concerned with the general health of a specific interest group, rather than the community as a whole. Organizing seeks to broadly empower community members, with the end goal of \"distributing\" power more equally throughout the community. The four basic types of community organizing are grassroots or \"door-knocking\" organizing, faith-based community organizing (FBCO), broad-based and coalition building. FBCOs and many grassroots organizing models are built on the work of Saul Alinsky, discussed below, from the 1930s into the 1970s. Grassroots action\nProtest against fracking in Balcombe, UK\nGrassroots organizing builds community groups from scratch, developing new leadership where none existed and organizing the unorganized. It is a values based process where people are brought together to act in the interest of their communities and the common good. Networks of community organizations that employ this method and support local organizing groups include National People's Action and ACORN . \"Door knocking\" grassroots organizations like ACORN organize poor and working-class members recruiting members one by one in the community.",
+      "title": "Community organizing - Wikipedia",
+      "url": "https://en.m.wikipedia.org/wiki/Community_organizing"
+    },
+    "msmarco_v2.1_doc_00_952974661#15_1737366413": {
+      "id": "msmarco_v2.1_doc_00_952974661#15_1737366413",
+      "text": "Maybe there is a natural need, or at least a strong desire, by humans, to have much of their daily social interaction to be with known persons in contrast to strangers who interact with flat or single dimensional roles. Sufficient here to say that urbanization and alienation have given rise to constructed communities, where they might not have geographic boundaries, might not have originated and grown in a natural and unplanned way, and may be in the cities or on the Internet (1). Some of those new communities consist of voluntary associations of individuals who may share an interest or a passion, as in model trains, square dancing, chess, military training, international development, baseball, masons, civil liberties or fan clubs. These are voluntary, not for profit organisations, often called NGOs (Non Governmental Organisations). Members are not paid, but donate their time and effort to the running of the organisations. The formation of residential communes and kibutzes is another deliberate way to create constructed communities. An elementary manifestation of the desire for gemeinschaft can be found in such urban practices as learning the name of a letter carrier, bus driver, librarian, street person, pharmacist or sales clerk (coffee shop, deli, video rental shop, post office, restaurant, other service establishments), and greeting them by name daily. The sam",
+      "title": "Community Characteristics",
+      "url": "http://cec.vcn.bc.ca/cmp/modules/com-cch.htm"
+    },
+    "msmarco_v2.1_doc_00_952987248#7_1737397320": {
+      "id": "msmarco_v2.1_doc_00_952987248#7_1737397320",
+      "text": "It is a set of interactions, human behaviours that have meaning and expectations between its members. Not just action, but actions based on shared expectations, values, beliefs and meanings between individuals. To understand how a community operates, and how it changes, it is necessary to learn a little bit about sociology the science. The mobilizer is an applied scientist; social scientist. While a pure scientist is interested in how things work, the applied scientist is interested in taking that knowledge and getting useful results. A COMMUNITY HAS FUZZY BOUNDARIES\nWhen an identified community is a little village, separated by a few kilometres from other villages, in a rural area, its boundaries appear at first to be very simple. That pattern of human interaction may be seen as consisting only of relations between the residents living inside that location, inside that village. But its residents interact also with people outside the village. They marry persons from near and far, and may move or bring a spouse in to live with them.",
+      "title": "What is Community? A Sociological Perspective",
+      "url": "http://cec.vcn.bc.ca/cmp/modules/com-wha.htm"
+    },
+    "msmarco_v2.1_doc_37_445831792#7_941145089": {
+      "id": "msmarco_v2.1_doc_37_445831792#7_941145089",
+      "text": "In the US, 30 years of grassroots organizing led to legal desegregation of public schools. In Nicaragua, mass organizations are playing an instrumental role in pressuring the government to fully implement land reform. And in Zimbabwe, women's organizations are working to make agrarian reform focus more on the needs of women farmers. Grassroots organizations also provide services and goods where governments fail to do so. In Mexico City, for example, neighborhood committees formed health care clinics and reconstruction brigades to serve the neglected victims of the 1985 earthquake. In South Africa, communities in the black townships organized to provide education and services where the government has denied them these rights. Either through building alternative structures or through pressuring for change in existing structures, grassroots organizations present a challenge to the status quo. In typologies of grassroots organizations, theorists point to two general forms of grassroots action: self-help and confrontation. Some groups take on both these forms of action, as they see confrontation as the only way to bring government attention to their demands.",
+      "title": "Grassroots Development: A Question of Empowerment | Cultural Survival",
+      "url": "https://www.culturalsurvival.org/publications/cultural-survival-quarterly/grassroots-development-question-empowerment"
+    },
+    "msmarco_v2.1_doc_02_1238350886#10_2089985826": {
+      "id": "msmarco_v2.1_doc_02_1238350886#10_2089985826",
+      "text": "All\n \nthe\n \nmembers\n \nof\n \none\n \nspecies\n \nin\n \na\n \nparticular\n \narea\n \nare\nreferred\n \nto\n \nas\n \na\n \npopulation. Some\n \nanimal\n \npopulations\n \nform\nhighly\n \nstructured\n \ngroups\n \ncalled\n \nsocieties. A\n \nsociety\n \nis\n \na\nclosely\n \nrelated\n \npopulation\n \nof\n \nanimals\n \nthat\n \nwork\n \ntogether\n \nfor\nthe\n \nbenefit\n \nof\n \nthe\n \nwhole\n \ngroup. All\n \nthe\n \ndifferent\n \npopulations\n \nthat\n \nlive\n \ntogether\n \nin\n \nan\narea\n \nmake\n \nup\n \na\n \ncommunity. The\n \nsmallest\n \nunit\n \nof\n \norganization\n \nis\na\n \nsingle\n \norganism,\n \nwhich\n \nbelongs\n \nto\n \na\n \npopulation\n \nof\n \nother\nmembers\n \nof\n \nits\n \nspecies. The\n \npopulation\n \nbelongs\n \nto\n \na\n \ncommunity\nof\n \ndifferent\n \nspecies. The\n \ncommunity\n \nand\n \nabiotic\n \nfactors\ntogether\n \nform\n \nan\n \necosystem. The\n \nstudy\n \nof\n \nhow\n \nliving\n \nthings\n \ninteract\n \nwith\n \neach\n \nother\nand\n \nwith\n \ntheir\n \nenvironment\n \nis\n \ncalled\n \necology. Ecologists,\nscientists\n \nwho\n \nstudy\n \necology,\n \nlook\n \nat\n \nhow\n \nall\n \nthe\n \nbiotic\n \nand\nabiotic\n \nfactors\n \nin\n \nan\n \necosystem\n \nare\n \nrelated. They\n \nstudy\n \nhow\norganisms\n \nreact\n \nto\n \nchanges\n \nin\n \ntheir\n \nenvironment.",
+      "title": "",
+      "url": "http://reedleychemistry.weebly.com/uploads/1/9/6/5/19650939/ecosystem_parts_pics.pdf"
+    },
+    "msmarco_v2.1_doc_52_1274534386#11_2564232701": {
+      "id": "msmarco_v2.1_doc_52_1274534386#11_2564232701",
+      "text": "However, community refers to a group of individuals with a certain sense of belongingness. A community is defined by a geographical boundary. However, society is universal as it has no definite locality or boundary. A sense of belongingness is central to the community. However, a society refers to the network of human relationships and does not require people to feel like they belong to the society. Society exists irrespective of personal royalties. Community is concrete i.e. it exists in physical reality and is defined by a territorial boundary. Society, however, is abstract and does not exist in physical space. The Sociology Group is now on Instagram, Follow us\nAbout Sociology Group\nOurs is a youth-led virtual learning platform with dedicated social scientists and students. We aim at providing virtual guidance to the ones taking their first steps into the world of Social Science, either through formal education or because of their never-ending quest for learning.",
+      "title": "Explained: What is a Community in Sociology",
+      "url": "https://www.sociologygroup.com/community-meaning/"
+    },
+    "msmarco_v2.1_doc_28_1100563864#9_2353786020": {
+      "id": "msmarco_v2.1_doc_28_1100563864#9_2353786020",
+      "text": "Every community is organized to meet its members\u2019 needs, but they operate differently based on the cultures, religions, and other experiences of their members. For example, while the African American church is generally understood as playing an important role in promoting health education and social justice for that community, not all faith institutions such as the mosque or Buddhist temple are organized and operate in the same way. Global migration has led to an assortment of communities based on people\u2019s needs and desire for that sense of trust, belonging, safety, and caring for each other. For example, one group of new immigrants may form a community around its need to advocate for better treatment by law enforcement. Another group may form a community around its need for spiritual guidance. The former may not look like a community, as we imagine them, while the latter likely will. The meaning of community requires more thoughtfulness and deliberation than we typically give it. Going forward, researchers, practitioners, and policymakers must embrace this complexity\u2014including the crucial impact communities have on health and well-being\u2014as they strive to understand and create social change.",
+      "title": "What Is Community Anyway?",
+      "url": "https://ssir.org/articles/entry/what_is_community_anyway"
+    },
+    "msmarco_v2.1_doc_15_709816141#4_1389729191": {
+      "id": "msmarco_v2.1_doc_15_709816141#4_1389729191",
+      "text": "When executed correctly and effectively, these movements can offer a wide range of creative and inspiring approaches for ordinary people to get involved in the change they want to see. Furthermore, grassroots movements often function as a powerful conversation platform where ordinary people come to terms with their ability to ignite change and make a difference. A true \u201cgrassroots movement\u201d isn\u2019t organized by political forces \u2013 instead, a \u201cgrassroots movement\u201d springs up spontaneously due to some pressing issue that a community feels needs to be changed or enhanced. Education is the backbone of any grassroots campaign as people cannot participate in something that they do not understand. It is important therefore to raise awareness of an issue and to communicate effectively why it is such a concern. A higher level of visibility garners more support, and information is power for followers who want to be able to advocate for themselves, increasing the collective impact of the group. Grassroots movements and organizations use collective action from the local level to effect change at the local, regional, national, or international level. Grassroots movements are associated with bottom-up, rather than top-down decision making, and are sometimes considered more natural or spontaneous than more traditional power structures\nGrassroots Organizations\nIn recent years, there is a significant rise in grassroots organizations worldwide. Not only they\u2019re gaining more massive support from civilians or the ordinary people, but many large bodies such as the UNHCR (United Nations High Commissioner for Refugees) are also recognizing and supporting their causes. In January 2019, UNCHR published an article on how grassroots organizations are just as important as seed money for innovation.",
+      "title": "Grassroots (What, Why, How) - The Complete Guide to Grassroots [2021 ] | Diversity & Social Impact Made Easy",
+      "url": "https://diversity.social/grassroots/"
+    },
+    "msmarco_v2.1_doc_03_1479327089#3_2443895971": {
+      "id": "msmarco_v2.1_doc_03_1479327089#3_2443895971",
+      "text": "Civilization, in this context, was understood as the last stop in the long journey of human society. The different stages of this social evolution were equated to specific human communities: Palaeolithic and Mesolithic hunter-gatherer communities were considered part of the savagery stage, Neolithic and Bronze Age farmers as part of the barbarism stage, and finally Bronze Age urban communities (particularly those in the Near East) were considered an early phase of the civilized world. Today, this approach is no longer valid since it is linked to an attitude of cultural superiority, by which human communities which are not yet \"civilized\" are seen as somehow inferior. The Roman Aqueduct of Pont du Gard\nMichael Gwyther-Jones (CC BY)\nEthnocentric Views\nIn everyday conversation, there is a tendency to use the word \"civilization\" to refer to a type of society that displays a set of moral values, such as respect for human rights or a compassionate attitude for the sick and the elderly. This can be problematic, since moral values are inevitably one-sided and ethnocentric. A behaviour considered \"civilized\" by a particular culture may be judged senseless or even seen with horror by another culture. History records an abundant number of examples of this issue. A famous one is reported by Herodotus, who describes the conflicting funerary practices of a group of Greeks, who cremated their dead, and the Indians known as the Kallatiai, who ate their dead: Remove Ads\nAdvertisement\nDuring his reign, Darius summoned the Hellenes at his court and asked them how much money they would accept for eating the bodies of their dead fathers.",
+      "title": "Civilization - World History Encyclopedia",
+      "url": "http://www.ancient.eu/civilization/"
+    },
+    "msmarco_v2.1_doc_37_445831792#5_941141581": {
+      "id": "msmarco_v2.1_doc_37_445831792#5_941141581",
+      "text": "Defined in this way, participation implies control. Understanding participation in terms of economic and political empowerment makes the task of development seem immense. Where do we begin if the process demands a restructuring of power relationships to give greater control to the poor? Obviously, the process is multifaceted, with many levels of necessary action. The grassroots organization is one essential actor in this process. Grassroots Organizations in Development\nGrassroots organizations serve as primary vehicles for popular participation in social and economic development. In societies where citizens involvement in local or national policies is limited, such organizations may serve as the only means for participation. In the prolonged military state of emergency in Chile, where even the most benign organizing is seen as subversive, women in the slums of Santiago have formed public kitchens. Not only do these kitchens help to feed the people of the neighborhood, but they create the auspices under which the community can meet to discuss problems. In other cases, grassroots organizations may serve to ensure democratic implementation of government policies.",
+      "title": "Grassroots Development: A Question of Empowerment | Cultural Survival",
+      "url": "https://www.culturalsurvival.org/publications/cultural-survival-quarterly/grassroots-development-question-empowerment"
+    },
+    "msmarco_v2.1_doc_16_465672841#11_722991209": {
+      "id": "msmarco_v2.1_doc_16_465672841#11_722991209",
+      "text": "But socialization also includes adults moving into a significantly different environment where they must learn a new set of behaviors. Socialization is influenced primarily by the family, through which children first learn community norms. Other important influences include schools, peer groups, people, mass media, the workplace, and government. The degree to which the norms of a particular society or community are adopted determines one's willingness to engage with others. The norms of tolerance, reciprocity, and trust are important \"habits of the heart,\" as de Tocqueville put it, in an individual's involvement in community. Community development\nMain article: Community development\nCommunity development is often linked with community work or community planning, and may involve stakeholders, foundations, governments, or contracted entities including non-government organisations (NGOs), universities or government agencies to progress the social well-being of local, regional and, sometimes, national communities. More grassroots efforts, called community building or community organizing, seek to empower individuals and groups of people by providing them with the skills they need to effect change in their own communities. These skills often assist in building political power through the formation of large social groups working for a common agenda. Community development practitioners must understand both how to work with individuals and how to affect communities' positions within the context of larger social institutions.",
+      "title": "Community - Wikipedia",
+      "url": "https://en.m.wikipedia.org/wiki/Community"
+    },
+    "msmarco_v2.1_doc_00_1212177261#8_2171868559": {
+      "id": "msmarco_v2.1_doc_00_1212177261#8_2171868559",
+      "text": "Volunteering is a kind of grass roots organization which views the local community as the primary actors who have a good sense of what needs to be done and needs to be involved to make the changes that are needed. Working together on building mitigation structures, such as seawalls and evacuation centers, creates a sense of control over the environment after a disaster and builds a sense of community among workers. Volunteers working on disaster preparedness are able to make connections between local villages and the larger disaster agencies. Community-Based Approaches to Disaster Mitigation\nThis paper discusses the importance of community as a part of disaster mitigation. Locally involved people know what the needs are, are able to define the problems. The disaster survivors themselves are knowledgeable about local resources and can use their skills and knowledge so that costs are kept low. The advantage of the community-based approach is that projects can combine projects involving for example, housing and agriculture or health and agriculture. This kind of grassroots organizing emphasizes solutions rather than law and order issues. In addition,local peole can easily identify who are the natural leaders. In Cambodia in 2001 local workers repaired dams and dikes;",
+      "title": "Case Studies:prevention",
+      "url": "http://courses.washington.edu/larescue/precedents/prevention.htm"
+    },
+    "msmarco_v2.1_doc_37_445831792#8_941146758": {
+      "id": "msmarco_v2.1_doc_37_445831792#8_941146758",
+      "text": "In South Africa, communities in the black townships organized to provide education and services where the government has denied them these rights. Either through building alternative structures or through pressuring for change in existing structures, grassroots organizations present a challenge to the status quo. In typologies of grassroots organizations, theorists point to two general forms of grassroots action: self-help and confrontation. Some groups take on both these forms of action, as they see confrontation as the only way to bring government attention to their demands. The Coalition of Collective Ejidos in northern Mexico, for example, occupied the offices of the government marketing agency to demand fair prices for their crops. Brazilian peasants have staged repeated land occupations to pressure the government for land reform. In many cases the line between self-help and confrontation cannot be fixed, and may depend in shifts in external pressure or support. Limitations on Grassroots Organizations\nWhen grassroots organizations begin to address issues of control, their supporters, whether private, government or religious, often withdraw and harassment begins. These \"anti-participatory forces\" aim at crushing, co-opting or corrupting organizations that go too far in their attempts to challenge the roots of their poverty.",
+      "title": "Grassroots Development: A Question of Empowerment | Cultural Survival",
+      "url": "https://www.culturalsurvival.org/publications/cultural-survival-quarterly/grassroots-development-question-empowerment"
+    },
+    "msmarco_v2.1_doc_39_1520335712#4_3191987969": {
+      "id": "msmarco_v2.1_doc_39_1520335712#4_3191987969",
+      "text": "we wouldn\u2019t be able to deal with the daily onslaught of people and objects if we couldn\u2019t predict a lot about them and feel that we know who or what they are. Throughout history, communities have classified people into groups in order to establish boundaries on membership. Understanding these communities (or societies) demands an awareness of who is included and who is excluded, as well as what factors are used to make the decisions about who belongs. Membership has been based on family, tribe, nationality, race, class, religion, gender, and even skills; and organizing people into categories has served many functions (e.g., political, economic, and social). For example, in India, the caste system created strict rules about membership based on family. It was once impossible for someone to become a member of a different caste. In the Middle Ages, groups of people with similar trades formed guilds. Membership often required serving an apprenticeship and proving one\u2019s skill. In the history of the United States, race has been used to classify people into groups with different rights and privileges.",
+      "title": "Lesson: How Do Communities Define We & They? | Facing History",
+      "url": "https://www.facinghistory.org/resource-library/identity-and-community/communities-define-we-they"
+    },
+    "msmarco_v2.1_doc_28_1100563864#8_2353783940": {
+      "id": "msmarco_v2.1_doc_28_1100563864#8_2353783940",
+      "text": "Communities have formal and informal institutions. Communities form institutions\u2014what we usually think of as large organizations and systems such as schools, government, faith, law enforcement, or the nonprofit sector\u2014to more effectively fulfill their needs. Equally important, however, are communities\u2019 informal institutions, such as the social or cultural networks of helpers and leaders (for example, council of elders, barbershops, rotating credit and savings associations, gardening clubs). Lower-income and immigrant communities, in particular, rely heavily on these informal institutions to help them make decisions, save money, solve family or intra-community problems, and link to more-formal institutions. Communities are organized in different ways. Every community is organized to meet its members\u2019 needs, but they operate differently based on the cultures, religions, and other experiences of their members. For example, while the African American church is generally understood as playing an important role in promoting health education and social justice for that community, not all faith institutions such as the mosque or Buddhist temple are organized and operate in the same way. Global migration has led to an assortment of communities based on people\u2019s needs and desire for that sense of trust, belonging, safety, and caring for each other. For example, one group of new immigrants may form a community around its need to advocate for better treatment by law enforcement. Another group may form a community around its need for spiritual guidance.",
+      "title": "What Is Community Anyway?",
+      "url": "https://ssir.org/articles/entry/what_is_community_anyway"
+    },
+    "msmarco_v2.1_doc_55_599718075#6_1362420910": {
+      "id": "msmarco_v2.1_doc_55_599718075#6_1362420910",
+      "text": "If all societies are equal in terms of civilization (and therefore, presumably, significance), teachers and students would be swamped by having to look a vast array of small-scale, simple societies. One has to make choices, and determine criteria. Another point to make is that, labelling a society \u201ccivilized\u201d does not imply moral superiority for that society \u2013 although it is a fact that civilized societies are, on the whole, far more orderly than less civilized ones. Anthropologists have described murder rates in simple societies up to 200 times greater than those in the most deprived areas of modern inner cities. This factor is at the heart of why civilization has proved so beneficial to mankind. People in many, perhaps most, simple or \u201cprimitive\u201d societies experience a level of personal insecurity and violence which most Westerners would find utterly intolerable. Without the over-arching control provided by an organized state, one of whose primary functions is to provide law and order to its inhabitants, small-scale societies often live in a condition of constant low-level but lethal warfare. This is not to say that simple societies do not have rich oral cultures, or are incapable of creating beautiful artefacts. Individuals living in societies which lack urban settlements and literacy are in no way inferior to members of societies which do. On the contrary, it has been argued that the constant alertness and shrewdness required to thrive in hunter-gatherer bands or small-scale farming societies culls the weaker, less savvy individuals, whereas more advanced communities allow its weaker members to survive.",
+      "title": "What Is Civilization? A Discussion | TimeMaps",
+      "url": "https://www.timemaps.com/encyclopedia/what-is-civilization/"
+    },
+    "msmarco_v2.1_doc_16_3194623408#0_3527400964": {
+      "id": "msmarco_v2.1_doc_16_3194623408#0_3527400964",
+      "text": "Community organization - Wikipedia\nCommunity organization\nFrom Wikipedia, the free encyclopedia\nJump to navigation Jump to search\nCommunity organization or Community Based Organization refers to organizing aimed at making desired improvements to a community's social health, well-being, and overall functioning. Community organization occurs in geographically, psychosocially, culturally, spiritually, and/or digitally bounded communities. Community organization includes community work, community projects, community development, community empowerment, community building, and community mobilization. It is a commonly used model for organizing community within community projects, neighborhoods, organizations, voluntary associations, localities, and social networks, which may operate as ways to mobilize around geography, shared space, shared experience, interest, need, and/or concern. Community organization is a process by which a community identifies needs or objectives, takes action, and through this process, develops cooperative and collaborative attitudes and practices within a community. ( Murray G. Ross, 1967). Community organization is differentiated from conflict-oriented community organizing which focuses on short-term change through appeals to authority (i.e., pressuring established power structures for desired change), by focusing on long-term and short-term change through direct action and the organizing of community (i.e., the creation of alternative systems outside of established power structures). This often includes inclusive networking, interpersonal organizing, listening, reflexivity, non-violent communication, cooperation, mutual aid and social care, prefiguration, popular education, and direct democracy. Within organizations, variations exist in terms of size and structure. Some are formally incorporated, with codified bylaws and Boards of Directors (also known as a committee ), while others are much smaller, more informal, and grassroots.",
+      "title": "Community organization - Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Community_organization"
+    },
+    "msmarco_v2.1_doc_04_555267517#1_1252029123": {
+      "id": "msmarco_v2.1_doc_04_555267517#1_1252029123",
+      "text": "We have come, for example, to recognize that people can belong to a number of different \"communities\" simultaneously\u2014communities of place; cultural communities; communities of memory, in which people who may be strangers share \"a morally significant history\"; and psychological communities \"of face-to-face personal interaction governed by sentiments of trust, co-operation, and altruism.\" 1\nThe world, we are repeatedly reminded, has contracted into a \"global village.\" One effect of this contraction is the bringing together of hitherto isolated peoples, allowing for the development of new patterns of civilization\u2014but also creating new tensions. Thus, challenges now confront communities at local, national, and global levels. For example, new information technologies have created \"networks\" and \"cybercommunities\" in the world of the Internet that link individuals and organizations around the globe without regard for national boundaries; small communities around the planet are affected by urban migration or by degradation of the natural and built environment; the existence of national communities\u2014nation states\u2014is under threat from assaults by ethnic or tribal enclaves.",
+      "title": "The Meaning of Community by Ann Boyles",
+      "url": "http://www.bahai.org/documents/essays/boyles-ann/meaning-community"
+    },
+    "msmarco_v2.1_doc_14_1198650161#9_2470434924": {
+      "id": "msmarco_v2.1_doc_14_1198650161#9_2470434924",
+      "text": "Rural-to-urban migration contributed to neighborhood distinctiveness and social cohesion in historical cities. A community is a group of interacting people, living in some proximity. Community usually refers to a social unit\u2014larger than a household\u2014that shares common values and has social cohesion. Social capital refers to a sense of connectedness due to the formation of social networks in a given community. Key Terms\ncommunity: A group sharing a common understanding and often the same language, manners, tradition and law. See civilization. ethnic enclave: An ethnic enclave is an ethnic community which retains some cultural distinction from a larger, surrounding area, it may be a neighborhood, an area or an administrative division based on ethnic groups. social capital:",
+      "title": "Agents of Socialization | Boundless Sociology",
+      "url": "https://courses.lumenlearning.com/boundless-sociology/chapter/agents-of-socialization/"
+    },
+    "msmarco_v2.1_doc_47_1436790126#1_3076935032": {
+      "id": "msmarco_v2.1_doc_47_1436790126#1_3076935032",
+      "text": "But early in the development of the term, anthropologists and others used \u201ccivilization\u201d and \u201ccivilized society\u201d to differentiate between societies they found culturally superior (which they were often a part of), and those they found culturally inferior (which they referred to as \u201c savage \u201d or \u201cbarbaric\u201d cultures). The term \u201ccivilization\u201d was often applied in an ethnocentric way, with \u201ccivilizations\u201d being considered morally good and culturally advanced, and other societies being morally wrong and \u201cbackward.\u201d This complicated history is what makes defining a civilization troublesome for scholars, and why today\u2019s modern definition is still in flux. Still, most anthropologists agree on some criteria to define a society as a civilization. First, civilizations have some kind of urban settlements and are not nomadic. With support from the other people living in the settlement, labor is divided up into specific jobs (called the division of labor), so not everyone has to focus on growing their own food. From this specialization comes class structure and government, both aspects of a civilization. Another criterion for civilization is a surplus of food, which comes from having tools to aid in growing crops. Writing, trading, artwork and monuments, and development of science and technology are all aspects of civilizations. However, there are many societies that scholars consider civilizations that do not meet all of the criteria above.",
+      "title": "Civilizations  | National Geographic Society",
+      "url": "https://www.nationalgeographic.org/encyclopedia/civilizations/"
+    },
+    "msmarco_v2.1_doc_51_1676907987#5_3168121347": {
+      "id": "msmarco_v2.1_doc_51_1676907987#5_3168121347",
+      "text": "Factors such as local traditions, pre-existing practices, voluntary effort, interpersonal networks and community cohesion are important for the success of grassroots innovations (see for example Ornetzeder and Rohracher, 2013, Seyfang et al., 2014, Seyfang and Longhurst, 2015, Seyfang et al., 2013 ), though there has been limited focus on community leadership. This article builds on that literature and analyses the development of grassroots innovations in the context of community energy. Community energy initiatives in the UK context have included a range technologies and set ups, such as solar PV clubs, renewable energy switching schemes and energy saving networks ( Seyfang et al., 2013 ). The development of community energy projects often involves innovative practice or activity ( Seyfang et al., 2014) and groups can have varying motivations ranging from environmental, to economic, social, political and infrastructural ( Seyfang et al., 2013 ). There is no one typical community energy project, in fact the common denominator for the sector seems to be that \u2018one size does not fit all\u2019.",
+      "title": "The role of community leadership in the development of grassroots innovations - ScienceDirect",
+      "url": "https://www.sciencedirect.com/science/article/pii/S2210422416300417"
+    },
+    "msmarco_v2.1_doc_16_3194649350#6_3527447485": {
+      "id": "msmarco_v2.1_doc_16_3194649350#6_3527447485",
+      "text": "Grassroots organizers build community groups from scratch, developing new leadership where none existed and organizing the unorganized. This type of organizing uses a process where people collectively act in the interest of their communities and the common good. According to scholar Brian D. Christens, grassroots organizing focuses on building and maintaining interpersonal relationships between their community members. Building social relationships allow community members to build collaborative skills, deliberative skills to handle conflict, and strengthen civil engagement. Some networks of community organizations that employ this method and support local organizing groups include National People's Action and ACORN. Although efforts in grassroots organizing are significant in marginalized communities, it is specifically popular among marginalized communities of color. \"Door-knocking\" grassroots organizations like ACORN organize poor and working-class members recruiting members one by one in the community. Because they go door-to-door, they are able to reach beyond established organizations and the \"churched\" to bring together a wide range of less privileged people. ACORN tends to stress the importance of constant action in order to maintain the commitment of a less rooted group of participants. ACORN has a reputation of being more forceful than faith-based (FBCO) groups, and there are indications that their local groups were more staff (organizer) directed than the leader (local volunteer) directed. (",
+      "title": "Community organizing - Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Community_organizing"
+    },
+    "msmarco_v2.1_doc_15_709816141#8_1389738619": {
+      "id": "msmarco_v2.1_doc_15_709816141#8_1389738619",
+      "text": "Where communicating with governmental representatives is one. This is to influence the opinion of the public and ultimately aims to influence the decisions within social, political, and economic institutions. Grassroots organizations are primarily made up of civilians advocating a cause to spur change at local, national, or international levels. Grassroots initiatives are community-based approaches created to address localized problems. Projects backed by local organizations can quickly gain momentum on the local level because they are generally enacted by local actors. Moreover, larger organizations could benefit from local grassroots initiatives that are directly connected to the issues and the people living in need. Grassroots Examples\nOne non-profit grassroots organization that is well-known among musicians is the Axis of Justice. Co-founded by musicians, singers, and songwriters Tom Morello, who is well-known for his role as the lead guitarist of the rock band Rage Against the Machine, and Serj Tankian, best known as the lead vocalist and primary lyricist for the heavy metal band System of a Down. The organization was formed after Morello witnessed some audience members promoted racist symbols and imagery at the 2002 Ozzfest concert. They were adamant about eradicating racism and fascism in the music industry.",
+      "title": "Grassroots (What, Why, How) - The Complete Guide to Grassroots [2021 ] | Diversity & Social Impact Made Easy",
+      "url": "https://diversity.social/grassroots/"
+    }
+  }
+}

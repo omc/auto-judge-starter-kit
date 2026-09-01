@@ -31,3 +31,8 @@ qrels_settings:
 
 judge_settings:
   on_missing_evals: "fix_aggregate"
+  # deterministic concept-F1 measures (no extra LLM calls)
+  spacy_model: "en_core_web_lg"   # en_core_web_trf for the transformer (~25x slower)
+  include_propn: true
+  nproc: 1
+  batch_size: 128

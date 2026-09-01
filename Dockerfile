@@ -10,6 +10,12 @@ WORKDIR /auto-judge
 # install would be invisible at runtime, breaking any dependency added here.
 RUN . /venv/bin/activate && uv pip install -e .[all]
 
+# spaCy model for concept-F1 (bonsai_judge). The model is not a pip dependency;
+# `spacy download` fetches the wheel matching the installed spaCy version.
+# For the transformer variant use en_core_web_trf instead (also needs
+# spacy-transformers + torch; much larger image).
+RUN . /venv/bin/activate && python -m spacy download en_core_web_lg
+
 # git metadata for provenance (tira's runtime stats look for a repo at ./)
 ADD .git /auto-judge/.git
 

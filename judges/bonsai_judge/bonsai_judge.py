@@ -9,6 +9,8 @@ Three modular classes:
 """
 
 import asyncio
+import html
+import re
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple, Type
 
@@ -32,12 +34,130 @@ from minima_llm import MinimaLlmConfig, MinimaLlmRequest, MinimaLlmResponse, Ope
 
 
 # =============================================================================
+# Concept-F1 (deterministic, no LLM) — port of maxirwin.com/articles/llm-rag/
+# =============================================================================
+#
+# Concept = spaCy NOUN/PROPN token lemma (lowercased), as a SET.
+#   reference (hn) = lemma-noun concepts of the documents a report CITES
+#   candidate (sn) = lemma-noun concepts of the report's summary text
+#   CONCEPT_PRECISION = |sn & hn| / |sn|   grounding / anti-hallucination
+#   CONCEPT_RECALL    = |sn & hn| / |hn|   coverage of cited-doc concepts
+#   CONCEPT_F1        = 2PR/(P+R)
+# Precision and recall are reported separately: with full-document citations
+# recall is length-driven, so precision is the discriminative signal.
+
+CONCEPT_MEASURES = (
+    MeasureSpec("CONCEPT_PRECISION", description=(
+        "Concept-F1 precision: fraction of the summary's noun/proper-noun lemma "
+        "concepts that also occur in the cited documents (grounding / "
+        "anti-hallucination). Higher is better.")),
+    MeasureSpec("CONCEPT_RECALL", description=(
+        "Concept-F1 recall: fraction of the cited documents' noun/proper-noun lemma "
+        "concepts present in the summary (coverage). Length-driven when citing full "
+        "documents; compare across runs rather than as an absolute.")),
+    MeasureSpec("CONCEPT_F1", description=(
+        "Harmonic mean of CONCEPT_PRECISION and CONCEPT_RECALL "
+        "(concept-f1, after maxirwin.com/articles/llm-rag/).")),
+)
+
+_CONCEPT_DISABLE = ["parser", "senter", "ner", "entity_ruler", "textcat",
+                    "morphologizer", "trainable_lemmatizer"]
+_TAG_RE = re.compile(r"<.*?>")
+_NLP_CACHE: dict = {}
+
+
+def _get_nlp(model: str):
+    nlp = _NLP_CACHE.get(model)
+    if nlp is None:
+        import spacy
+        nlp = spacy.load(model, disable=_CONCEPT_DISABLE)
+        nlp.max_length = 3_000_000
+        _NLP_CACHE[model] = nlp
+    return nlp
+
+
+def _clean(text: str) -> str:
+    """Strip HTML tags and unescape entities, as in the reference getnouns()."""
+    return html.unescape(_TAG_RE.sub("", text or ""))
+
+
+def _noun_lemmas(doc, include_propn: bool) -> frozenset:
+    tags = ("NOUN", "PROPN") if include_propn else ("NOUN",)
+    return frozenset(t.lemma_.lower() for t in doc if t.pos_ in tags)
+
+
+def _prf(sn: frozenset, hn: frozenset) -> Tuple[float, float, float]:
+    """Precision, recall, F1 on two non-empty concept sets (reference formulas)."""
+    precision = 1 - len(sn - hn) / len(sn)
+    recall = 1 - len(hn - sn) / len(hn)
+    f1 = 2 * precision * recall / (precision + recall) if (precision + recall) else 0.0
+    return precision, recall, f1
+
+
+def concept_scores(
+    reports: Iterable[Report],
+    spacy_model: str = "en_core_web_lg",
+    include_propn: bool = True,
+    nproc: int = 1,
+    batch_size: int = 128,
+) -> Dict[Tuple[str, str], Optional[Tuple[float, float, float]]]:
+    """Compute concept-F1 per report.
+
+    Returns {(run_id, topic_id): (precision, recall, f1)}, or None when either
+    concept set is empty (the reference skips those). Cited-document concept sets
+    are cached by shard id across reports.
+    """
+    nlp = _get_nlp(spacy_model)
+
+    records: List[Tuple[str, str, frozenset]] = []
+    candidate_texts: List[str] = []
+    shard_text: dict = {}
+    for resp in reports:
+        cited = set()
+        parts: List[str] = []
+        for sent in resp.get_sentences_with_citations():
+            parts.append(sent.text or "")
+            for shard in (sent.citations or []):
+                cited.add(shard)
+        records.append((resp.metadata.run_id, resp.metadata.topic_id, frozenset(cited)))
+        candidate_texts.append(_clean(" ".join(parts)))
+        docs = resp.documents or {}
+        for shard in cited:
+            if shard not in shard_text:
+                doc = docs.get(shard)
+                if doc is not None:
+                    shard_text[shard] = _clean(doc.get_document_text())
+
+    shard_nouns: dict = {}
+    for doc, sid in nlp.pipe(((t, sid) for sid, t in shard_text.items()),
+                             as_tuples=True, batch_size=batch_size, n_process=nproc):
+        shard_nouns[sid] = _noun_lemmas(doc, include_propn)
+    shard_text.clear()
+
+    cand_nouns: dict = {}
+    for doc, i in nlp.pipe(((txt, i) for i, txt in enumerate(candidate_texts)),
+                           as_tuples=True, batch_size=batch_size, n_process=nproc):
+        cand_nouns[i] = _noun_lemmas(doc, include_propn)
+
+    scores: Dict[Tuple[str, str], Optional[Tuple[float, float, float]]] = {}
+    for i, (run, topic, cited) in enumerate(records):
+        hn: set = set()
+        for shard in cited:
+            hn |= shard_nouns.get(shard, frozenset())
+        sn = cand_nouns.get(i, frozenset())
+        scores[(run, topic)] = _prf(sn, hn) if (hn and sn) else None
+    return scores
+
+
+# =============================================================================
 # Specs
 # =============================================================================
 
+# LLM-judged measures plus the deterministic concept-F1 measures.
 BONSAI_SPEC = LeaderboardSpec(measures=(
     MeasureSpec("RELEVANCE", description="LLM-judged relevance score (0.0-1.0)"),
     MeasureSpec("COMPLETENESS", description="How completely the response addresses the query (0.0-1.0)"),
+    *CONCEPT_MEASURES,
 ))
 
 
@@ -188,6 +308,10 @@ class BonsaiLeaderboardJudge:
         nugget_banks: Optional[NuggetBanksProtocol] = None,
         qrels: Optional[Qrels] = None,
         on_missing_evals: str = "fix_aggregate",
+        spacy_model: str = "en_core_web_lg",
+        include_propn: bool = True,
+        nproc: int = 1,
+        batch_size: int = 128,
         filebase: str = "default",
         outdir: Path = Path("."),
         **kwargs: Any,
@@ -197,6 +321,10 @@ class BonsaiLeaderboardJudge:
         backend = _make_backend(llm_config)
 
         responses_list = list(rag_responses)
+
+        # deterministic concept-F1 (no LLM) computed once for all reports
+        cscores = concept_scores(responses_list, spacy_model=spacy_model,
+                                 include_propn=include_propn, nproc=nproc, batch_size=batch_size)
         requests: List[MinimaLlmRequest] = []
         for i, response in enumerate(responses_list):
             query = topic_titles.get(response.metadata.topic_id, "")
@@ -223,10 +351,17 @@ class BonsaiLeaderboardJudge:
         builder = LeaderboardBuilder(BONSAI_SPEC)
         for response, result in zip(responses_list, llm_results):
             relevance, completeness = self._parse_scores(result)
+            values: Dict[str, float] = {"RELEVANCE": relevance, "COMPLETENESS": completeness}
+            prf = cscores.get((response.metadata.run_id, response.metadata.topic_id))
+            if prf is not None:   # omit concept keys when either concept set was empty
+                p, r, f1 = prf
+                values["CONCEPT_PRECISION"] = p
+                values["CONCEPT_RECALL"] = r
+                values["CONCEPT_F1"] = f1
             builder.add(
                 run_id=response.metadata.run_id,
                 topic_id=response.metadata.topic_id,
-                values={"RELEVANCE": relevance, "COMPLETENESS": completeness},
+                values=values,
             )
 
         leaderboard = builder.build(
