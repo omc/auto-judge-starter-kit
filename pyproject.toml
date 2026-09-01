@@ -30,6 +30,7 @@ dependencies = [
     "autojudge-base>=0.4.0",
     "openai>=1.0",
     "tira>=0.0.100",
+    "spacy>=3.7,<4",  # concept-F1 (bonsai_judge); model installed via `spacy download` in Dockerfile
 ]
 
 [project.optional-dependencies]

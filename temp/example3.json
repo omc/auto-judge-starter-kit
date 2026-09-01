@@ -1,0 +1,57 @@
+{
+    "metadata": { "team_id": "teamA", "run_id": "run1", "topic_id": "leaf" },
+    "responses": [
+        {
+            "text": "Leaves change color in fall because of a green pigment called chlorophyll.",
+            "citations": ["Chlorophyll"]
+        },
+        {
+            "text": "When days get shorter and cooler, trees stop making chlorophyll.",
+            "citations": ["Autumn_leaf_color"]
+        },
+        {
+            "text": "Without the green, other colors like yellow and orange can show through.",
+            "citations": ["Carotenoid"]
+        },
+        {
+            "text": "Red colors come from sugars trapped in the leaves.",
+            "citations": ["Anthocyanin"]
+        },
+        {
+            "text": "The tree will be fine - it drops leaves to save water for winter.",
+            "citations": ["Deciduous"]
+        }
+    ],
+    "documents": {
+        "Chlorophyll": {
+            "id": "Chlorophyll",
+            "text": "Chlorophyll is a green pigment found in plants that absorbs light energy for photosynthesis. It gives leaves their green color during spring and summer.",
+            "title": "Chlorophyll",
+            "url": "https://en.wikipedia.org/wiki/Chlorophyll"
+        },
+        "Autumn_leaf_color": {
+            "id": "Autumn_leaf_color",
+            "text": "Autumn leaf color is a phenomenon that affects the green leaves of many trees, causing them to change color. As daylight decreases in autumn, chlorophyll production slows.",
+            "title": "Autumn leaf color",
+            "url": "https://en.wikipedia.org/wiki/Autumn_leaf_color"
+        },
+        "Carotenoid": {
+            "id": "Carotenoid",
+            "text": "Carotenoids are yellow, orange, and red pigments present in leaves throughout the year. They become visible when chlorophyll breaks down in autumn.",
+            "title": "Carotenoid",
+            "url": "https://en.wikipedia.org/wiki/Carotenoid"
+        },
+        "Anthocyanin": {
+            "id": "Anthocyanin",
+            "text": "Anthocyanins are red pigments produced in leaves during autumn when sugars become trapped. They create the bright red and purple colors seen in some trees.",
+            "title": "Anthocyanin",
+            "url": "https://en.wikipedia.org/wiki/Anthocyanin"
+        },
+        "Deciduous": {
+            "id": "Deciduous",
+            "text": "Deciduous trees shed their leaves annually as a strategy to conserve water and survive winter. The tree stores nutrients and enters dormancy.",
+            "title": "Deciduous",
+            "url": "https://en.wikipedia.org/wiki/Deciduous"
+        }
+    }
+}

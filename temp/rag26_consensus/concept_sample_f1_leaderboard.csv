@@ -1,0 +1,4 @@
+run,mean_f1,mean_precision,mean_recall,n_topics,n_skipped
+alex,0.1409,0.9693,0.0772,118,1
+alton,0.1000,0.9547,0.0533,119,0
+adela,0.0636,0.9808,0.0330,119,0
