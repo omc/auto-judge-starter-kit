@@ -1,0 +1,8 @@
+run,team,precision,ungrounded_rate,private_ung_rate,pct_ungrounded_private,n_topics,top_private_ung_concepts
+june,T300,0.7547,0.2453,0.0694,0.2961,40,mode|hindsight|posture|hybrid|buy|analyst|quarter|book|machine|wrong|mismatch|pipeline|call|framing|argument|leaf|standing|judgement|re|anecdote|pass|style|flagship|defender|edge
+april,T448,0.8359,0.1641,0.0665,0.4265,40,short‑term|near‑term|low‑cost|long‑term|nutrition|trade‑off|micro|modelling|moderate|equity|funder|follow‑up|peer‑to‑peer|system‑level|train|reviewer|auditability|seizure|human‑in‑the‑loop|day‑to‑day|micro‑grant|year‑0|year‑1|lpn→rn|responder
+paula,T907,0.9041,0.0959,0.0258,0.1522,35,enneagram|4|wedding|dress|historian|sshm|iceland|business|nichd|units|fetal|ppb|debate|critic|cyberclaim|pleat|odour|framing
+brad,T175,0.9984,0.0016,0.0014,0.15,40,problems|scientists|designing|decades|messages|make|✔
+rene,T047,0.9998,0.0002,0.0002,0.025,40,eboot
+hana,T300,0.7676,0.2324,0.0,0.0,40,
+nina,T949,0.8945,0.1055,0.0,0.0,40,
