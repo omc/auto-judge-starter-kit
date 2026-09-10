@@ -15,3 +15,9 @@ results/
 
 # Fetched evaluation data (fetch_pilot_dataset.sh); never committed
 /local-data/
+data/rag*
+temp/rag25/
+temp/ragtime25/
+temp/rag26_consensus/shard_cache/
+temp/rag26_consensus/~*
+temp/rag26_slice/

@@ -167,6 +167,7 @@ def main():
 
     # ---- cross ----
     per_run = defaultdict(lambda: {"prec": [], "ung": [], "pu": [], "pu_of_ung": [],
+                                   "redundancy": [], "eff_docs": [], "cites": [],
                                    "examples": Counter()})
     detail_rows = []
     for (run, topic), cset in cited.items():
@@ -174,10 +175,22 @@ def main():
         if not sn:
             continue
         hn = set()
+        doc_sizes = []                             # concept counts of each cited doc
         for shard in cset:
-            hn |= shard_nouns.get(shard, frozenset())
+            dn = shard_nouns.get(shard)
+            if dn:
+                hn |= dn
+                doc_sizes.append(len(dn))
         if not hn:
             continue
+        # source diversity of the cited set (from cached concept sets; no extra inference):
+        #   redundancy    = 1 - |union| / sum(|doc|)   0=disjoint docs, ->1=near-duplicates
+        #   effective_docs= |union| / mean(|doc|)       "doc-equivalents" of unique concept mass
+        sum_sizes = sum(doc_sizes)
+        hn_size = len(hn)
+        redundancy = 1.0 - hn_size / sum_sizes if sum_sizes else 0.0
+        effective_docs = (hn_size / (sum_sizes / len(doc_sizes))
+                          if doc_sizes and sum_sizes else 0.0)
         ungrounded = sn - hn                       # precision false positives
         private_ung = {c for c in ungrounded if df[topic][c] == 1}
         s = per_run[run]
@@ -185,12 +198,18 @@ def main():
         s["ung"].append(len(ungrounded) / len(sn))
         s["pu"].append(len(private_ung) / len(sn))
         s["pu_of_ung"].append(len(private_ung) / len(ungrounded) if ungrounded else 0.0)
+        s["redundancy"].append(redundancy)
+        s["eff_docs"].append(effective_docs)
+        s["cites"].append(len(cset))
         for c in private_ung:
             s["examples"][c] += 1
         if args.out_csv:
             detail_rows.append({
                 "run": run, "team": run_team[run], "topic": topic,
                 "n_answer_concepts": len(sn), "n_cited_docs": len(cset),
+                # source diversity of the cited set (see above)
+                "hn_size": hn_size, "redundancy": round(redundancy, 4),
+                "effective_docs": round(effective_docs, 4),
                 "precision": round(len(sn & hn) / len(sn), 4),
                 "ungrounded_rate": round(len(ungrounded) / len(sn), 4),
                 "private_ung_rate": round(len(private_ung) / len(sn), 4),
@@ -208,13 +227,15 @@ def main():
     print("  ungrounded  = 1 - precision  (concept in answer, absent from cited docs)")
     print("  private_ung = ungrounded AND stated by NO other run  <- hallucination candidate")
     print("  %ung_priv   = share of a run's ungrounded concepts that are private\n")
-    print(f"  {'run':<8}{'team':<7}{'prec':>7}{'ungrnd':>8}{'priv_ung':>9}{'%ung_priv':>10}{'topics':>7}")
+    print(f"  {'run':<8}{'team':<7}{'prec':>7}{'ungrnd':>8}{'priv_ung':>9}{'%ung_priv':>10}"
+          f"{'cites':>7}{'redund':>8}{'eff_dc':>8}{'topics':>7}")
     rows = sorted(per_run.items(), key=lambda kv: -statistics.mean(kv[1]["pu"]))
     for run, s in rows:
         print(f"  {run:<8}{run_team[run]:<7}"
               f"{statistics.mean(s['prec']):>7.3f}{statistics.mean(s['ung']):>8.3f}"
               f"{statistics.mean(s['pu']):>9.3f}{statistics.mean(s['pu_of_ung']):>10.3f}"
-              f"{len(s['prec']):>7}")
+              f"{statistics.mean(s['cites']):>7.1f}{statistics.mean(s['redundancy']):>8.3f}"
+              f"{statistics.mean(s['eff_docs']):>8.2f}{len(s['prec']):>7}")
 
     def ranked_examples(counter, n):
         # deterministic: count desc, then concept asc (most_common ties are insertion-order)
@@ -235,13 +256,17 @@ def main():
         with open(f"{OUT}/hallucination_by_run.csv", "w", newline="") as f:
             w = csv.writer(f)
             w.writerow(["run", "team", "precision", "ungrounded_rate", "private_ung_rate",
-                        "pct_ungrounded_private", "n_topics", "top_private_ung_concepts"])
+                        "pct_ungrounded_private", "avg_cites", "redundancy", "effective_docs",
+                        "n_topics", "top_private_ung_concepts"])
             for run, s in rows:
                 w.writerow([run, run_team[run],
                             round(statistics.mean(s["prec"]), 4),
                             round(statistics.mean(s["ung"]), 4),
                             round(statistics.mean(s["pu"]), 4),
                             round(statistics.mean(s["pu_of_ung"]), 4),
+                            round(statistics.mean(s["cites"]), 2),
+                            round(statistics.mean(s["redundancy"]), 4),
+                            round(statistics.mean(s["eff_docs"]), 4),
                             len(s["prec"]),
                             "|".join(c for c, _ in ranked_examples(s["examples"], 25))])
         print(f"\nCSVs: {OUT}/hallucination_by_run_topic.csv  hallucination_by_run.csv")
