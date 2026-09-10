@@ -1,0 +1,90 @@
+# BonsaiPairwiseJudge — batched pairwise summary comparison tournament
+#
+# Judge-only workflow: no nuggets, no qrels. For each topic every team-run's
+# summary is compared head-to-head against every OTHER team's runs, both
+# orderings, and points are tallied into a win-rate + Bradley-Terry leaderboard.
+#
+# Submit path is pluggable (judge_settings.submit_mode):
+#   openrouter (default) - OpenRouter Batch API (/api/beta/batches, inline requests,
+#                          ~50% token discount, 24h window). For OpenRouter endpoints.
+#   live                 - realtime concurrent HTTP (full price; works anywhere).
+#   parasail             - minima's OpenAI file-upload batch (Parasail/OpenAI-style).
+# Requires an llm_config with cache_dir set (defaults to judges/bonsai_judge/.cache/
+# pairwise if unset) so reruns resume and nothing is paid for twice. On OpenRouter the
+# ':batch' model suffix (e.g. google/gemini-2.5-flash-lite:batch) is a BATCH-ONLY
+# variant -- it is required for the batch endpoint and 404s on realtime calls, so the
+# 'live'/'parasail' submit modes cannot be used with it. Keep model + max_tokens +
+# temperature FIXED across stages (they are part of the cache key).
+#
+# STAGE the rollout (all stages share one cache):
+#   pilot:  auto-judge run --workflow workflow.pairwise.yml --variant pilot   ...
+#   scale:  auto-judge run --workflow workflow.pairwise.yml --variant scale   ...
+#   full:   auto-judge run --workflow workflow.pairwise.yml                    ...
+
+judge_class: "judges.bonsai_judge.pairwise:BonsaiPairwiseJudge"
+
+# Lifecycle — judge only
+create_nuggets: false
+create_qrels: false
+judge: true
+judge_uses_nuggets: false
+judge_uses_qrels: false
+augment_report: false
+
+uses_llm: true
+
+settings:
+  filebase: "bonsai_pairwise"
+
+judge_settings:
+  on_missing_evals: "fix_aggregate"
+  submit_mode: "openrouter"       # openrouter | live | parasail
+  direction: "ordered"            # ordered = N*(N-1); single = each pair once (~half)
+  live_max_outstanding: 48        # realtime concurrency (submit_mode=live)
+  live_rpm: 0                     # realtime pacing, 0 = unlimited
+  temperature: 0.0
+  max_tokens: 8            # room for a single 'A'/'B' token; KEEP FIXED across
+                           # stages (it is part of the cache key).
+  topics_per_batch: 20     # topic-group size per submit session (bounds memory,
+                           # gives durable per-group progress).
+  max_requests_per_batch: 5000    # OpenRouter hard cap: a batch may hold <=5,000 requests.
+  max_inflight_requests: 20000    # OpenRouter hard cap: <=20,000 in-flight requests/entity.
+                                  # submit() throttles to this and defers the rest; re-run
+                                  # (or the poller) drips more as batches drain.
+  poll_interval_s: 30.0
+  # Decoupled batch flow (OpenRouter's window is up to 24h, so don't babysit):
+  #   wait: false (default) -> submit batches + one harvest pass, then exit. If any
+  #     batch is still in flight, it exits WITHOUT scoring (clean "NOT READY" message,
+  #     status in <out>/<filebase>.pairwise/harvest_status.json). Re-run the SAME
+  #     command later to harvest more; it scores automatically once all batches finish.
+  #     Nothing is resubmitted (state files dedup). Ideal for cron or manual re-runs.
+  #   wait: true -> block and poll until all batches finish (bounded by poll_timeout_min
+  #     or max_poll_hours). Only for short jobs; a long babysitter process can be killed.
+  wait: false
+  poll_timeout_min: 0.0           # cap for wait=true (0 => 24h)
+  # max_topics / max_runs: unset = full run. Overridden by variants below.
+
+variants:
+  # 1 topic (~6.4k comparisons) — validate prompt, parsing, cost, cache behavior.
+  pilot:
+    judge_settings:
+      max_topics: 1
+      topics_per_batch: 1
+
+  # 5 topics (~32k comparisons) — confirm before committing to the full run.
+  scale:
+    judge_settings:
+      max_topics: 5
+      topics_per_batch: 5
+
+  # FULL run, realtime, single-direction: all 119 topics, each cross-team pair judged
+  # once (~352k calls). Realtime because OpenRouter's batch tier (5k/20k caps, ~10h/wave)
+  # can't meet a next-day deadline. Full price (~2x batch); resumable via the disk cache
+  # (re-run to retry any failed/missing calls). One model per run.
+  full:
+    judge_settings:
+      submit_mode: "live"
+      direction: "single"
+      topics_per_batch: 20
+      live_max_outstanding: 48
+      live_rpm: 0

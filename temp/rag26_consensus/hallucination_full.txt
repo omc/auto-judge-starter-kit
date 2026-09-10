@@ -1,2 +1,262 @@
-answers=9877 (all runs), selected=['adela', 'alex', 'alton', 'alvin', 'andre', 'anika', 'annie', 'april', 'ari', 'ariel', 'arlen', 'arlo', 'aron', 'brad', 'brian', 'carlo', 'carmen', 'chris', 'conor', 'damon', 'darcy', 'daria', 'deena', 'eden', 'edith', 'eva', 'eve', 'finn', 'gabe', 'geoff', 'gia', 'gilda', 'gwen', 'hana', 'henry', 'hilda', 'isaac', 'jamie', 'jason', 'jeff', 'jon', 'june', 'kane', 'karl', 'lars', 'laura', 'leon', 'linda', 'lloyd', 'luca', 'marco', 'maya', 'miles', 'nell', 'nina', 'nola', 'omar', 'opal', 'oscar', 'pablo', 'paris', 'pat', 'paula', 'reid', 'rene', 'rick', 'rita', 'ryan', 'sara', 'saul', 'sid', 'sofia', 'sonia', 'steve', 'tania', 'tara', 'todd', 'vince', 'will', 'xavi', 'yara', 'zara', 'zora'], unique cited docs to tag=61151
-  answers tagged
+answers=9877 (all runs), selected=['adela', 'alex', 'alton', 'alvin', 'andre', 'anika', 'annie', 'april', 'ari', 'ariel', 'arlen', 'arlo', 'aron', 'brad', 'brian', 'carlo', 'carmen', 'chris', 'conor', 'damon', 'darcy', 'daria', 'deena', 'eden', 'edith', 'eva', 'eve', 'finn', 'gabe', 'geoff', 'gia', 'gilda', 'gwen', 'hana', 'henry', 'hilda', 'isaac', 'jamie', 'jason', 'jeff', 'jon', 'june', 'kane', 'karl', 'lars', 'laura', 'leon', 'linda', 'lloyd', 'luca', 'marco', 'maya', 'miles', 'nell', 'nina', 'nola', 'omar', 'opal', 'oscar', 'pablo', 'paris', 'pat', 'paula', 'reid', 'rene', 'rick', 'rita', 'ryan', 'sara', 'saul', 'sid', 'sofia', 'sonia', 'steve', 'tania', 'tara', 'todd', 'vince', 'will', 'xavi', 'yara', 'zara', 'zora'], uncached docs to tag=61151
+  [answers] 3000/9877  34/s  elapsed 1.5m  eta 3.4m
+  [answers] 6000/9877  30/s  elapsed 3.3m  eta 2.2m
+  [answers] 9000/9877  29/s  elapsed 5.2m  eta 0.5m
+  [answers] 9877/9877  28/s  elapsed 5.8m  eta 0.0m
+  [docs adela (1/83)] 4670/4670  5/s  elapsed 16.2m  eta 0.0m
+  [docs alex (2/83)] 1633/1633  9/s  elapsed 3.0m  eta 0.0m
+  [docs alton (3/83)] 2160/2160  8/s  elapsed 4.2m  eta 0.0m
+  [docs alvin (4/83)] 823/823  18/s  elapsed 0.8m  eta 0.0m
+  [docs andre (5/83)] 754/754  14/s  elapsed 0.9m  eta 0.0m
+  [docs anika (6/83)] 913/913  5/s  elapsed 2.8m  eta 0.0m
+  [docs annie (7/83)] 143/143  5/s  elapsed 0.5m  eta 0.0m
+  [docs april (8/83)] 650/650  4/s  elapsed 2.9m  eta 0.0m
+  [docs ari (9/83)] 1373/1373  6/s  elapsed 3.6m  eta 0.0m
+  [docs ariel (10/83)] 2298/2298  5/s  elapsed 7.5m  eta 0.0m
+  [docs arlen (11/83)] 418/418  2/s  elapsed 3.9m  eta 0.0m
+  [docs arlo (12/83)] 88/88  11/s  elapsed 0.1m  eta 0.0m
+  [docs aron (13/83)] 92/92  2/s  elapsed 0.8m  eta 0.0m
+  [docs brad (14/83)] 664/664  4/s  elapsed 2.9m  eta 0.0m
+  [docs brian (15/83)] 54/54  2/s  elapsed 0.6m  eta 0.0m
+  [docs carlo (16/83)] 10/10  3/s  elapsed 0.1m  eta 0.0m
+  [docs carmen (17/83)] 2472/2472  5/s  elapsed 8.5m  eta 0.0m
+  [docs chris (18/83)] 81/81  2/s  elapsed 0.7m  eta 0.0m
+  [docs conor (19/83)] 83/83  2/s  elapsed 0.6m  eta 0.0m
+  [docs damon (20/83)] 1711/1711  11/s  elapsed 2.6m  eta 0.0m
+  [docs darcy (21/83)] 946/946  8/s  elapsed 2.0m  eta 0.0m
+  [docs daria (22/83)] 356/356  13/s  elapsed 0.5m  eta 0.0m
+  [docs deena (23/83)] 90/90  3/s  elapsed 0.4m  eta 0.0m
+  [docs eden (24/83)] 3473/3473  14/s  elapsed 4.0m  eta 0.0m
+  [docs edith (25/83)] 1782/1782  7/s  elapsed 4.5m  eta 0.0m
+  [docs eva (26/83)] 41/41  2/s  elapsed 0.3m  eta 0.0m
+  [docs eve (27/83)] 814/814  16/s  elapsed 0.9m  eta 0.0m
+  [docs finn (28/83)] 3499/3499  17/s  elapsed 3.4m  eta 0.0m
+  [docs gabe (29/83)] 700/700  7/s  elapsed 1.7m  eta 0.0m
+  [docs geoff (30/83)] 2/2  2/s  elapsed 0.0m  eta 0.0m
+  [docs gia (31/83)] 151/151  5/s  elapsed 0.5m  eta 0.0m
+  [docs gilda (32/83)] 450/450  8/s  elapsed 0.9m  eta 0.0m
+  [docs gwen (33/83)] 783/783  5/s  elapsed 2.7m  eta 0.0m
+  [docs hana (34/83)] 581/581  14/s  elapsed 0.7m  eta 0.0m
+  [docs henry (35/83)] 1889/1889  7/s  elapsed 4.2m  eta 0.0m
+  [docs isaac (37/83)] 216/216  15/s  elapsed 0.2m  eta 0.0m
+  [docs jamie (38/83)] 1846/1846  31/s  elapsed 1.0m  eta 0.0m
+  [docs jason (39/83)] 186/186  3/s  elapsed 0.9m  eta 0.0m
+  [docs jeff (40/83)] 11/11  1/s  elapsed 0.1m  eta 0.0m
+  [docs jon (41/83)] 1021/1021  29/s  elapsed 0.6m  eta 0.0m
+  [docs june (42/83)] 723/723  23/s  elapsed 0.5m  eta 0.0m
+  [docs kane (43/83)] 176/176  4/s  elapsed 0.7m  eta 0.0m
+  [docs karl (44/83)] 157/157  5/s  elapsed 0.6m  eta 0.0m
+  [docs lars (45/83)] 1613/1613  7/s  elapsed 3.9m  eta 0.0m
+  [docs leon (47/83)] 225/225  25/s  elapsed 0.2m  eta 0.0m
+  [docs linda (48/83)] 35/35  6/s  elapsed 0.1m  eta 0.0m
+  [docs lloyd (49/83)] 688/688  7/s  elapsed 1.6m  eta 0.0m
+  [docs luca (50/83)] 194/194  14/s  elapsed 0.2m  eta 0.0m
+  [docs marco (51/83)] 232/232  5/s  elapsed 0.8m  eta 0.0m
+  [docs maya (52/83)] 431/431  5/s  elapsed 1.4m  eta 0.0m
+  [docs miles (53/83)] 1026/1026  1/s  elapsed 20.1m  eta 0.0m
+  [docs nell (54/83)] 316/316  0/s  elapsed 16.2m  eta 0.0m
+  [docs nina (55/83)] 167/167  25/s  elapsed 0.1m  eta 0.0m
+  [docs nola (56/83)] 90/90  11/s  elapsed 0.1m  eta 0.0m
+  [docs omar (57/83)] 747/747  1/s  elapsed 23.3m  eta 0.0m
+  [docs opal (58/83)] 3/3  2/s  elapsed 0.0m  eta 0.0m
+  [docs oscar (59/83)] 177/177  7/s  elapsed 0.4m  eta 0.0m
+  [docs pablo (60/83)] 1000/1000  8/s  elapsed 2.1m  eta 0.0m
+  [docs paris (61/83)] 1748/1748  10/s  elapsed 3.0m  eta 0.0m
+  [docs pat (62/83)] 693/693  6/s  elapsed 1.9m  eta 0.0m
+  [docs paula (63/83)] 33/33  4/s  elapsed 0.1m  eta 0.0m
+  [docs reid (64/83)] 135/135  4/s  elapsed 0.6m  eta 0.0m
+  [docs rick (66/83)] 293/293  16/s  elapsed 0.3m  eta 0.0m
+  [docs rita (67/83)] 267/267  17/s  elapsed 0.3m  eta 0.0m
+  [docs sara (69/83)] 951/951  10/s  elapsed 1.6m  eta 0.0m
+  [docs saul (70/83)] 393/393  5/s  elapsed 1.3m  eta 0.0m
+  [docs sid (71/83)] 2348/2348  8/s  elapsed 5.0m  eta 0.0m
+  [docs sofia (72/83)] 433/433  3/s  elapsed 2.2m  eta 0.0m
+  [docs sonia (73/83)] 114/114  2/s  elapsed 1.3m  eta 0.0m
+  [docs tara (76/83)] 1874/1874  20/s  elapsed 1.6m  eta 0.0m
+  [docs todd (77/83)] 160/160  16/s  elapsed 0.2m  eta 0.0m
+  [docs vince (78/83)] 717/717  6/s  elapsed 2.0m  eta 0.0m
+  [docs will (79/83)] 166/166  13/s  elapsed 0.2m  eta 0.0m
+  [docs xavi (80/83)] 178/178  12/s  elapsed 0.2m  eta 0.0m
+  [docs yara (81/83)] 1292/1292  3/s  elapsed 8.5m  eta 0.0m
+  [docs zara (82/83)] 1428/1428  20/s  elapsed 1.2m  eta 0.0m
+  [docs zora (83/83)] 1/1  1/s  elapsed 0.0m  eta 0.0m
+
+==========================================================================
+HALLUCINATION CROSS  (first 119 topics; df over all 83 runs)
+==========================================================================
+  precision   = answer concepts grounded in cited docs
+  ungrounded  = 1 - precision  (concept in answer, absent from cited docs)
+  private_ung = ungrounded AND stated by NO other run  <- hallucination candidate
+  %ung_priv   = share of a run's ungrounded concepts that are private
+
+  run     team      prec  ungrnd priv_ung %ung_priv  cites  redund  eff_dc topics
+  june    T300     0.762   0.238    0.070     0.305   13.0   0.441    7.23    119
+  april   T448     0.833   0.167    0.069     0.427   22.1   0.566    9.10    119
+  anika   T086     0.785   0.215    0.068     0.319   10.3   0.391    6.21    119
+  oscar   T086     0.785   0.215    0.066     0.312   10.9   0.378    6.62    119
+  gilda   T086     0.788   0.212    0.065     0.311   10.8   0.392    6.51    119
+  nell    T614     0.725   0.275    0.065     0.267    7.0   0.320    4.15    101
+  pablo   T086     0.835   0.165    0.059     0.361   31.5   0.600   12.16    119
+  ari     T569     0.849   0.151    0.059     0.386   13.9   0.410    8.09    119
+  henry   T086     0.830   0.170    0.059     0.353   29.4   0.566   12.49    119
+  miles   T086     0.839   0.161    0.057     0.358   32.0   0.597   12.61    119
+  annie   T907     0.800   0.200    0.052     0.173    1.9   0.111    1.63    118
+  kane    T066     0.833   0.167    0.047     0.305    7.7   0.391    4.56    118
+  isaac   T047     0.841   0.159    0.042     0.283   13.8   0.458    6.59    119
+  damon   T047     0.827   0.173    0.042     0.280   18.3   0.449    9.19    118
+  steve   T047     0.842   0.158    0.040     0.268   12.0   0.428    6.17    119
+  eve     T341     0.801   0.199    0.036     0.190   14.4   0.467    7.39    119
+  jamie   T300     0.865   0.135    0.036     0.269   24.8   0.549   10.95    119
+  paula   T907     0.871   0.129    0.036     0.146    2.4   0.174    1.87    105
+  carmen  T569     0.888   0.112    0.033     0.290   27.7   0.492   13.79    119
+  yara    T649     0.891   0.109    0.033     0.338   17.8   0.430    9.78    119
+  carlo   T907     0.783   0.217    0.033     0.116    1.2   0.023    1.10     73
+  tania   T047     0.868   0.132    0.032     0.286   15.4   0.413    8.37    118
+  sara    T569     0.879   0.121    0.029     0.267   15.9   0.413    8.94    119
+  ariel   T569     0.874   0.126    0.029     0.239   24.7   0.498   12.02    119
+  edith   T569     0.878   0.122    0.028     0.245   25.8   0.500   12.51    119
+  omar    T086     0.928   0.072    0.027     0.398   22.0   0.516   10.49    119
+  lars    T569     0.884   0.116    0.027     0.232   27.9   0.508   13.30    119
+  jason   T448     0.911   0.089    0.027     0.335   25.5   0.580   10.20    119
+  linda   T656     0.825   0.175    0.023     0.133    3.5   0.234    2.60    119
+  rick    T267     0.795   0.205    0.021     0.108    9.9   0.373    6.10    119
+  brian   T656     0.828   0.172    0.019     0.117    2.5   0.179    1.96    119
+  darcy   T569     0.860   0.140    0.017     0.123   13.6   0.405    7.82    119
+  xavi    T300     0.743   0.257    0.016     0.066   10.4   0.370    6.26    119
+  tara    T341     0.949   0.051    0.016     0.337   35.7   0.633   12.86    119
+  eden    T736     0.895   0.105    0.016     0.165   41.4   0.619   15.56    119
+  todd    T736     0.909   0.091    0.015     0.178   54.0   0.651   18.50    119
+  rita    T736     0.920   0.080    0.015     0.194   68.2   0.677   21.58    119
+  saul    T267     0.883   0.117    0.015     0.143   15.5   0.502    7.56    119
+  arlen   T410     0.920   0.080    0.015     0.182   12.1   0.520    5.69    119
+  hilda   T047     0.912   0.088    0.015     0.187   13.6   0.394    7.76    118
+  finn    T736     0.922   0.078    0.014     0.193   68.5   0.678   21.56    119
+  luca    T300     0.779   0.221    0.014     0.067   12.0   0.405    7.01    119
+  zara    T736     0.941   0.059    0.014     0.271   21.5   0.543    9.61    119
+  sid     T149     0.958   0.042    0.014     0.342   46.9   0.639   16.42    119
+  reid    T410     0.905   0.095    0.013     0.154   11.8   0.504    5.72    119
+  sofia   T578     0.971   0.029    0.013     0.449   23.2   0.588    9.33    119
+  daria   T445     0.912   0.088    0.013     0.162    6.9   0.339    4.49    119
+  gwen    T448     0.979   0.021    0.012     0.294   38.5   0.647   13.09    119
+  laura   T047     0.902   0.098    0.011     0.119   12.8   0.387    7.43    118
+  vince   T507     0.979   0.021    0.011     0.467   27.3   0.644    9.63    119
+  sonia   T410     0.923   0.077    0.011     0.159   11.6   0.512    5.52    119
+  ryan    T047     0.914   0.086    0.011     0.130   10.3   0.404    5.70    119
+  lloyd   T820     0.950   0.050    0.011     0.236   16.5   0.527    7.66    119
+  pat     T445     0.894   0.106    0.010     0.105   15.0   0.471    7.31    119
+  gia     T182     0.936   0.064    0.010     0.158    5.4   0.327    3.53    119
+  gabe    T175     0.953   0.047    0.009     0.184   22.2   0.520    9.88    119
+  alton   T175     0.955   0.045    0.009     0.213   22.5   0.537    9.84    119
+  arlo    T047     0.923   0.077    0.008     0.096   10.7   0.410    5.83    119
+  paris   T149     0.951   0.049    0.008     0.192   23.8   0.543   10.55    119
+  adela   T448     0.981   0.019    0.008     0.401   39.5   0.656   13.35    119
+  zora    T768     0.951   0.049    0.006     0.100    7.0   0.413    4.02    119
+  karl    T448     0.981   0.019    0.006     0.329   28.7   0.604   10.78    119
+  andre   T712     0.939   0.061    0.005     0.087    8.7   0.405    5.14    119
+  will    T706     0.962   0.038    0.005     0.145   19.2   0.555    8.01    118
+  alex    T706     0.969   0.031    0.004     0.161   17.3   0.541    7.47    118
+  nola    T949     0.891   0.109    0.004     0.024   10.1   0.366    6.25    119
+  alvin   T047     0.928   0.072    0.004     0.063    9.8   0.392    5.50    119
+  eva     T768     0.967   0.033    0.004     0.133    7.1   0.422    4.04    119
+  aron    T768     0.954   0.046    0.004     0.101    6.4   0.397    3.74    119
+  maya    T712     0.952   0.048    0.004     0.087    9.1   0.410    5.33    119
+  marco   T448     0.988   0.012    0.003     0.222   35.6   0.642   12.41    119
+  conor   T768     0.960   0.040    0.003     0.073    7.0   0.399    4.14    119
+  chris   T768     0.963   0.037    0.003     0.079    7.0   0.419    4.00    119
+  jon     T949     0.897   0.103    0.003     0.026   13.4   0.404    7.72    119
+  geoff   T768     0.958   0.042    0.003     0.080    6.3   0.370    3.90    119
+  jeff    T768     0.963   0.037    0.003     0.093    7.1   0.416    4.00    119
+  opal    T768     0.957   0.043    0.002     0.064    6.7   0.400    3.95    119
+  deena   T768     0.959   0.041    0.002     0.045    7.6   0.429    4.26    119
+  brad    T175     0.998   0.002    0.001     0.139   12.7   0.499    6.33    119
+  rene    T047     1.000   0.000    0.000     0.025    4.6   0.256    3.34    119
+  hana    T300     0.777   0.223    0.000     0.000   11.7   0.398    6.87    119
+  leon    T949     0.897   0.103    0.000     0.000   12.6   0.394    7.43    119
+  nina    T949     0.899   0.101    0.000     0.000   11.9   0.391    7.04    119
+
+--- Top private-ungrounded concepts per run (freq across its topics) ---
+  june    [T300]: hindsight(23), posture(13), mode(12), ceiling(6), argument(5), asymmetry(5), floor(5), framing(5), hybrid(5), quarter(5), version(5), anecdote(4)
+  april   [T448]: near‑term(11), short‑term(8), long‑term(7), high‑risk(5), follow‑up(4), low‑cost(4), medium‑term(4), trade‑off(4), checklist(3), comms(3), experiment(3), improve(3)
+  anika   [T086]: c1(6), short‑term(5), c4(4), real‑time(4), small‑scale(4), spike(4), sum(4), bulk(3), c3(3), double‑digit(3), downside(3), high‑quality(3)
+  oscar   [T086]: fourth(6), c1(5), inference(5), c4(4), hinge(4), parallel(4), bulk(3), c10(3), c3(3), c9(3), decision‑making(3), formulation(3)
+  gilda   [T086]: c2(6), balance(4), c1(4), c3(4), high‑risk(4), one‑third(4), real‑world(4), ambition(3), architecture(3), cross‑functional(3), extension(3), inference(3)
+  nell    [T614]: *(25), conclusion(8), :*(7), n(7), instance(6), n6(6), narrative(5), programs(5), recommendations(5), regular(5), systems(5), advancements(4)
+  pablo   [T086]: c1(5), large‑scale(5), fourth(4), low‑cost(4), sixth(4), built‑in(3), c2(3), c3(3), c4(3), c8(3), high‑risk(3), long‑term(3)
+  ari     [T569]: real‑time(3), three‑year(3), door‑to‑door(2), high‑performance(2), k.(2), labour‑right(2), late‑night(2), over‑reliance(2), property‑tax(2), state‑run(2), +(1), .net‑centric(1)
+  henry   [T086]: c1(5), c2(5), decision‑making(5), c4(4), long‑term(4), strand(4), c3(3), large‑scale(3), medium‑term(3), one‑third(3), real‑world(3), roadmap(3)
+  miles   [T086]: large‑scale(7), c2(5), c4(4), long‑term(4), strand(4), c1(3), c5(3), c8(3), high‑quality(3), inference(3), on‑site(3), plain‑language(3)
+  annie   [T907]: narrative(2), next(2), 1990(1), added(1), aes-256(1), apostolic(1), aquabounty(1), aquadvantage(1), archive.org(1), armenian(1), arterys(1), artificial(1)
+  kane    [T066]: framing(21), concrete(10), scratch(9), caution(7), caveat(7), flag(7), illustration(6), sourcing(6), specific(6), afterthought(5), characterization(4), compounding(4)
+  isaac   [T047]: ask(14), highlights(12), mention(12), details(11), outline(11), highlight(9), explore(8), overview(6), examine(5), doc(4), passage(4), piece(4)
+  damon   [T047]: highlight(22), ask(19), mention(11), details(10), highlights(9), outline(8), passage(6), duplicate(5), discusse(4), doc(4), present(4), budgeting(3)
+  steve   [T047]: shape(9), item(7), logic(7), worry(6), appeal(5), arithmetic(5), direction(5), front(5), instrument(5), pairing(5), picture(5), ask(4)
+  eve     [T341]: abstract(5), permit(5), substitute(5), suit(5), avoidance(4), leverage(4), afterthought(3), break(3), correction(3), interruption(3), match(3), preserve(3)
+  jamie   [T300]: comparative(7), practical(7), tradeoffs(7), considerations(6), #(5), risks(5), historical(4), long(4), alternatives(3), criteria(3), illustration(3), limits(3)
+  paula   [T907]: +20(1), 4(1), actions(1), agencies(1), asia(1), assembly(1), association(1), automobile(1), briefing(1), business(1), carbon(1), centric(1)
+  carmen  [T569]: causation(7), counsel(4), appropriation(3), excess(3), guarantee(3), jurisdiction(3), machinery(3), precedent(3), quotation(3), workday(3), accounting(2), attrition(2)
+  yara    [T649]: notebook(38), denominator(7), arrear(4), comparator(4), handoff(4), capture(3), forecast(3), ladder(3), pause(3), permit(3), redesign(3), reject(3)
+  carlo   [T907]: hr(2), 1st(1), a&m(1), academy(1), acquisition(1), administration(1), aires(1), awakens(1), biology(1), breakthrough(1), buenos(1), ci(1)
+  tania   [T047]: framing(5), land(5), worry(5), ambition(4), verdict(4), arithmetic(3), bite(3), cluster(3), concrete(3), counterweight(3), cut(3), damage(3)
+  sara    [T569]: profile(3), attestation(2), attitude(2), degradation(2), documentation(2), headache(2), inflection(2), logic(2), lower(2), nyc(2), open(2), patch(2)
+  ariel   [T569]: reversal(3), approval(2), assurance(2), audit(2), audits(2), bypass(2), calendar(2), chronology(2), contingent(2), contracting(2), cure(2), cutoff(2)
+  edith   [T569]: interruption(3), label(3), staging(3), acquisition(2), after(2), attrition(2), biomarker(2), causation(2), centimetre(2), centre(2), clearance(2), convert(2)
+  omar    [T086]: fix(8), reviewer(5), companion(4), payoff(4), analyst(3), flag(3), logic(3), trace(3), afterthought(2), analogue(2), angle(2), asymmetry(2)
+  lars    [T569]: repair(3), shortcut(3), anchoring(2), decoration(2), escape(2), governing(2), headline(2), hierarchy(2), inspection(2), label(2), ladder(2), migration(2)
+  jason   [T448]: high‑profile(4), commentator(3), dislocation(3), backlash(2), commentary(2), contingent(2), cue(2), defensibility(2), denote(2), flexibility(2), funder(2), harm(2)
+  linda   [T656]: assertion(6), a6(2), 6th(1), a11(1), a7(1), abstract(1), adventure(1), agent-1(1), agent-2(1), authoritarianism(1), circumstance(1), comfort(1)
+  rick    [T267]: credential(3), separation(3), surrender(3), banking(2), do(2), equivalent(2), follow(2), handling(2), independence(2), license(2), opacity(2), preservation(2)
+  brian   [T656]: assertion(6), a0(1), a5(1), a6(1), adaptability(1), assistance(1), behavior(1), bergsjon(1), biotechnology(1), breakdown(1), caretaker(1), centeredness(1)
+  darcy   [T569]: corpus(17), checking(2), notification(2), preparation(2), rationale(2), stop(2), 0.3(1(1), \((1,2,3)\(1), \((1,5,9)\(1), \((2,3,4)\(1), \(1,2,\ldot(1), \(2^km\(1)
+  xavi    [T300]: beneficiary(3), deprivation(3), assumption(2), attrition(2), breach(2), continuity(2), cutoff(2), dispatch(2), duplication(2), expansion(2), interruption(2), label(2)
+  tara    [T341]: mention(5), advise(3), caveat(3), frame(2), legality(2), monitor(2), ngo(2), orphan(2), prioritize(2), relocation(2), strictness(2), vulnerability(2)
+  eden    [T736]: judge(4), pair(4), covering(3), recording(3), responsiveness(3), suit(3), treat(3), warrant(3), afterthought(2), causal(2), comparator(2), contingent(2)
+  todd    [T736]: dispersal(3), require(3), avoidance(2), contradiction(2), deficit(2), drill(2), financing(2), illustrate(2), impede(2), insecurity(2), interruption(2), modeling(2)
+  rita    [T736]: treat(4), judge(3), require(3), add(2), after(2), amplification(2), bargain(2), causation(2), closeness(2), confirmation(2), controlling(2), favor(2)
+  saul    [T267]: alarmism(2), dismissal(2), hybrid(2), tradeoff(2), viewpoint(2), --loss(target(1), --w₁--\(1), --w₂--(1), 0–30(1), a<ₜ(1), abandonment(1), accomplice(1)
+  arlen   [T410]: discretion(2), elevation(2), formula(2), helper(2), qualification(2), relative(2), reopening(2), sensitivity(2), 0.25/$1.25(1), 8×7b(1), accelerator(1), acting(1)
+  hilda   [T047]: eighty‑one(2), interrelationship(2), pre‑existing(2), 1970(1), 96fa6899ea(1), acceleration(1), advice‑giving(1), age‑old(1), air‑filtration(1), air‑traffic‑control(1), alertness(1), all‑girls(1)
+  finn    [T736]: compare(5), require(4), assess(3), flag(3), applicability(2), complacency(2), compound(2), covering(2), endpoint(2), farmworker(2), financing(2), governing(2)
+  luca    [T300]: priorities(5), #(3), construction(2), costs(2), damage(2), demonstration(2), enrichment(2), incident(2), lake(2), ,n(c−2),r(n(c−1),nc;2);c−1(1), ,nc;c)≤r(n1,(1), 0,1,(1)
+  zara    [T736]: adherence(4), accessibility(3), alignment(3), entity(3), manner(3), necessity(3), attempt(2), cessation(2), imperative(2), interdependence(2), participant(2), predictability(2)
+  sid     [T149]: catalog(3), verdict(3), accommodation(2), approximation(2), benchmark(2), paramount(2), persistence(2), replication(2), safeguard(2), -162(1), 5–13(1), 600–900(1)
+  reid    [T410]: calculation(2), label(2), precision(2), roster(2), substitute(2), thesis(2), tradeoff(2), 100,000–105,000(1), 8–16(1), abolition(1), absence(1), after(1)
+  sofia   [T578]: strategies(5), effects(3), outcomes(3), aging(2), considerations(2), excerpt(2), immediate(2), mixture(2), objection(2), opening(2), purchase(2), require(2)
+  daria   [T445]: citation(3), aging(2), combat(2), constraint(2), disconnect(2), fragmentation(2), impracticality(2), prohibition(2), viability(2), '(1), 11:00am(1), 18–9(1)
+  gwen    [T448]: 0/1(1), 8)(1), abolition(1), absorption(1), abstract(1), acuman(1), aldi使用精益员工模型，以较少员工运营商店，降低成本(1), aldi通过区域农场采购肉类，减少运输成本，从而提供廉价牛肉(1), allocate(1), ante(1), assessor(1), authority(1)
+  laura   [T047]: proportion(7), compare(6), cover(3), play(3), provide(3), address(2), analogy(2), formation(2), influence(2), manifest(2), severity(2), 1990(1)
+  vince   [T507]: acronym(2), corporation(2), critique(2), pain(2), reuse(2), 17th(1), 7–10(1), accomplish(1), accreditor(1), accumulation(1), address(1), advocate(1)
+  sonia   [T410]: outset(3), builder(2), editorial(2), overcrowding(2), 0.10e(1), 2m+1(1), accounting(1), affirming(1), affordability(1), ageing(1), agreement(1), all(1)
+  ryan    [T047]: play(6), proportion(5), offer(3), stance(3), aid(2), drawback(2), exhibit(2), hinder(2), improve(2), prevalence(2), type(2), '(1)
+  lloyd   [T820]: base(2), complement(2), desk(2), detachment(2), frameworks(2), hardship(2), hispanic(2), mirror(2), proxy(2), standing(2), strategies(2), 're(1)
+  pat     [T445]: decentralization(2), abandonment(1), abdication(1), afterthought(1), airport(1), anomaly(1), antiquity(1), argument(1), arthur(1), articles(1), awareness(1), betrayal(1)
+  gia     [T182]: :*(2), breakthrough(2), 26th(1), 5th(1), acquisition(1), affordability(1), billion(1), bing(1), breeding(1), brunt(1), commissions(1), comprehension(1)
+  gabe    [T175]: centric(2), intersection(2), observation(2), refinement(2), standpoint(2), adjustment(1), adversary(1), advertising(1), agility(1), amplification(1), andreessen(1), annual(1)
+  alton   [T175]: bypass(2), contingent(2), cutting(2), highlight(2), hinge(2), 7–70(1), 87.5%—and(1), accounting(1), accusation(1), act(1), activism(1), adjustment(1)
+  arlo    [T047]: 0‑to‑5(1), 40‑question(1), absence(1), achievement(1), activity"—persist(1), adoption(1), ai‑driven(1), alteration(1), ame1‑subtype(1), announcement(1), anti‑american(1), attractiveness(1)
+  paris   [T149]: tradeoff(4), merit(2), organizing(2), rebuilding(2), 200n(1), acidified(1), acknowledgment(1), adviser(1), afterthought(1), aging(1), alerting(1), appearance(1)
+  adela   [T448]: adopter(2), metaphor(2), pillar(2), 's(1), 1k(1), abnormality(1), addictiveness(1), analyst(1), approvability(1), armada(1), borrowing(1), cadet(1)
+  zora    [T768]: actor(1), advocacy(1), alienation(1), apodments'—tiny(1), backsliding(1), bravery(1), bustle(1), cancellation(1), cleansing(1), combat(1), conflict(1), contention(1)
+  karl    [T448]: making(2), '(1), 1.4b(1), 1860(1), ability(1), absence(1), acceleration(1), accuracy(1), admission(1), advertiser(1), analysability(1), analyst(1)
+  andre   [T712]: interplay(3), globalization(2), means(2), account(1), activist(1), adaptability(1), adoption(1), affair(1), analytic(1), arrival(1), attempt(1), brunt(1)
+  will    [T706]: abuse(1), adaptation(1), adjustment(1), affiliation(1), alignment(1), availability(1), closure(1), cohesion(1), colaborativopr(1), commentator(1), compatibility(1), confusion(1)
+  alex    [T706]: openness(2), '(1), abolition(1), accusation(1), adjunct(1), airstrike(1), angeles(1), assessment(1), atmosphere(1), avoidance(1), bagging(1), blocking(1)
+  nola    [T949]: blue(1), chord(1), connecting(1), contexts(1), contrast(1), copper(1), demonstration(1), disregard(1), dive(1), drag(1), drive(1), drop(1)
+  alvin   [T047]: 1,25‑dihydroxycholecalciferol(1), accordance(1), acknowledgment(1), alignment(1), attainment(1), at‑risk(1), auto‑repair(1), backdrop(1), blocking(1), ceiling(1), climate‑mitigation(1), compromise(1)
+  eva     [T768]: arbitration(1), arrive(1), assumption(1), cleaning(1), cold(1), critic(1), destination(1), endurance(1), establishment(1), feeding(1), filling(1), imperative(1)
+  aron    [T768]: acts(1), ailment(1), alie(1), ally(1), appropriateness(1), billion(1), boats(1), bud(1), decrease(1), ease(1), elimination(1), enactment(1)
+  maya    [T712]: adaptability(1), administrative(1), aspect(1), bank(1), comment(1), companies(1), complexity(1), criticism(1), drawback(1), emphasis(1), enhancement(1), evasion(1)
+  marco   [T448]: customization(2), adaptation(1), add(1), belief(1), blackout(1), blur(1), brick(1), bridging(1), briefing(1), brunt(1), conjunction(1), continuation(1)
+  conor   [T768]: administrators(1), attempt(1), bruising(1), build(1), burden(1), certified(1), cessation(1), commitment(1), deterrent(1), disconnection(1), dishonesty(1), documenting(1)
+  chris   [T768]: '(1), accessibility(1), attribute(1), credit(1), delegate(1), destabilization(1), diving(1), dominance(1), escort(1), fictional(1), flip(1), fluency(1)
+  jon     [T949]: 1860(1), 80(1), a^(i-1(1), attempt(1), barcoding(1), c(n-1(1), composition(1), context(1), doubling(1), encodec(1), examination(1), hz(1)
+  geoff   [T768]: accusation(1), appointment(1), artistry(1), backstory(1), barbarism(1), blueprint(1), contributor(1), craft(1), designation(1), distribution(1), downsampling(1), drawback(1)
+  jeff    [T768]: strengthening(2), allowance(1), annoyance(1), breach(1), calling(1), centric(1), curricula(1), eagerness(1), firing(1), increment(1), interpretation(1), legwork(1)
+  opal    [T768]: contention(2), necessity(2), accrual(1), combat(1), departure(1), flow'—a(1), footing(1), fragmentation(1), happiness(1), installation(1), jumbotrons(1), navigation(1)
+  deena   [T768]: alpha(1), alpha^{n-2(1), angiogram(1), collapse(1), cruelty(1), escape(1), fly(1), hurdle(1), instability(1), mountains(1), mutandis(1), obligation(1)
+  brad    [T175]: 3.0034.004(1), choices(1), communities(1), convene(1), cθ360(1), decades(1), designing(1), excellent(1), he(1), juristic(1), make(1), messages(1)
+  rene    [T047]: bo(1), eboot(1), sounding(1)
+  hana    [T300]: 
+  leon    [T949]: 
+  nina    [T949]: 
+
+CSVs: temp/rag26_consensus/hallucination_by_run_topic.csv  hallucination_by_run.csv
