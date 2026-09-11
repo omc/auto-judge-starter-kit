@@ -1,0 +1,267 @@
+globs: ['/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/adela', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/alex', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/alton', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/alvin', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/andre', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/anika', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/annie', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/april', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/ari', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/ariel', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/arlen', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/arlo', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/aron', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/brad', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/brian', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/carlo', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/carmen', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/chris', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/conor', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/damon', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/darcy', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/daria', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/deena', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/eden', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/edith', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/eva', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/eve', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/finn', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/gabe', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/geoff', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/gia', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/gilda', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/gwen', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/hana', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/henry', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/hilda', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/isaac', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/jamie', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/jason', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/jeff', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/jon', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/june', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/kane', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/karl', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/lars', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/laura', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/leon', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/linda', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/lloyd', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/luca', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/marco', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/maya', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/miles', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/nell', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/nina', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/nola', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/omar', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/opal', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/oscar', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/pablo', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/paris', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/pat', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/paula', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/reid', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/rene', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/rick', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/rita', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/ryan', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/sara', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/saul', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/sid', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/sofia', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/sonia', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/steve', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/tania', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/tara', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/todd', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/vince', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/will', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/xavi', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/yara', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/zara', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/zora']
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/adela
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/alex
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/alton
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/alvin
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/andre
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/anika
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/annie
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/april
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/ari
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/ariel
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/arlen
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/arlo
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/aron
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/brad
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/brian
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/carlo
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/carmen
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/chris
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/conor
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/damon
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/darcy
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/daria
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/deena
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/eden
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/edith
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/eva
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/eve
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/finn
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/gabe
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/geoff
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/gia
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/gilda
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/gwen
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/hana
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/henry
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/hilda
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/isaac
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/jamie
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/jason
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/jeff
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/jon
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/june
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/kane
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/karl
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/lars
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/laura
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/leon
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/linda
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/lloyd
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/luca
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/marco
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/maya
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/miles
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/nell
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/nina
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/nola
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/omar
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/opal
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/oscar
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/pablo
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/paris
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/pat
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/paula
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/reid
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/rene
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/rick
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/rita
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/ryan
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/sara
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/saul
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/sid
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/sofia
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/sonia
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/steve
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/tania
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/tara
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/todd
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/vince
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/will
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/xavi
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/yara
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/zara
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/zora
+Loaded workflow: create_nuggets=False, judge=True
+Loaded: judge_class=judges.bonsai_judge.pairwise:BonsaiPairwiseJudge
+
+=== Running configuration: pilot ===
+Nugget output: output-pairwise/bonsai_pairwise
+Judge output: output-pairwise/bonsai_pairwise
+[judge_runner] Config saved to: output-pairwise/bonsai_pairwise.config.yml
+[judge_runner] judge settings: {'filebase': 'output-pairwise/bonsai_pairwise', 'on_missing_evals': 'fix_aggregate', 'submit_mode': 'openrouter', 'temperature': 0.0, 'max_tokens': 8, 'topics_per_batch': 1, 'max_requests_per_batch': 5000, 'poll_interval_s': 30.0, 'max_topics': 1, 'outdir': PosixPath('output-pairwise')}
+[pairwise] dropped 39 empty summaries (no text to compare)
+[pairwise] 1 topics -> 6,446 ordered cross-team comparisons
+Prompt cache: ./cache/minima_llm.db
+[pairwise] submit_mode=openrouter model=google/gemini-3.5-flash-lite:batch
+[openrouter] 2 active (0m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (1m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (1m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (2m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (2m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (3m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (3m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (4m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (4m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (5m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (5m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (6m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (6m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (7m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (7m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (8m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (8m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (9m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (9m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (10m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (10m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (11m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (11m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (12m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (12m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (13m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (13m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (14m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (14m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (15m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (15m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (16m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (16m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (17m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (17m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (18m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (18m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (19m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (19m) - c0:in_progress, c1:in_progress
+[openrouter] chunk 1 status transient error (1/30): <urlopen error [Errno 8] nodename nor servname provided, or not known>
+[openrouter] 2 active (35m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (36m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (40m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (40m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (41m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (41m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (42m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (42m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (43m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (43m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (44m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (44m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (45m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (45m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (46m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (46m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (47m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (47m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (48m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (48m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (49m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (50m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (50m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (51m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (51m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (52m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (52m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (53m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (53m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (54m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (54m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (55m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (55m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (56m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (56m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (57m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (57m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (58m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (58m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (59m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (59m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (60m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (60m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (61m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (61m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (62m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (62m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (63m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (63m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (64m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (64m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (65m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (65m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (66m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (66m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (67m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (67m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (68m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (68m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (69m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (69m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (70m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (70m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (71m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (71m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (72m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (72m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (73m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (73m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (74m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (74m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (75m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (75m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (76m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (76m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (77m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (77m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (78m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (79m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (79m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (80m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (80m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (81m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (81m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (82m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (82m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (83m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (83m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (84m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (84m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (85m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (85m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (86m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (86m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (87m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (87m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (88m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (88m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (89m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (89m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (90m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (90m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (91m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (91m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (92m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (92m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (93m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (93m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (94m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (94m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (95m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (95m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (96m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (96m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (97m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (97m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (98m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (98m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (99m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (99m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (100m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (100m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (101m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (101m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (102m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (102m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (103m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (103m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (104m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (105m) - c0:in_progress, c1:in_progress
+[openrouter] 2 active (105m) - c0:in_progress, c1:in_progress

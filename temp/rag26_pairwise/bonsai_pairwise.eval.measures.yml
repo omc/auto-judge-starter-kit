@@ -1,0 +1,15 @@
+measures:
+- name: PAIRWISE_WINRATE
+  dtype: float
+  description: 'Fraction of ordered cross-team pairwise comparisons this run won for
+    the topic (points / comparisons played). Primary metric: unlike raw wins it is
+    comparable across runs whose opponent counts differ because same-team pairs are
+    excluded.'
+- name: PAIRWISE_WINS
+  dtype: int
+  description: Raw count of pairwise comparisons won by this run for the topic (1
+    point per chosen comparison).
+- name: PAIRWISE_GAMES
+  dtype: int
+  description: Number of ordered cross-team comparisons this run participated in for
+    the topic (as either A or B). Denominator of PAIRWISE_WINRATE.

@@ -1,0 +1,6 @@
+Prompt cache: ./cache/minima_llm.db
+[openrouter] chunk 0 completed: 5000 ok, 0 failed
+bonsai_pairwise-g0: ready=True {'chunks': 2, 'terminal': 2, 'completed': 5000, 'failed': 0, 'pending': 0}
+
+OVERALL: READY -> re-run the judge to score
+  totals: {'chunks': 2, 'completed': 5000, 'failed': 0, 'pending': 0, 'terminal': 2}
