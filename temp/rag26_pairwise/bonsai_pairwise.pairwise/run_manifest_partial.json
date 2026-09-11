@@ -1,0 +1,14 @@
+{
+  "PARTIAL": true,
+  "model": "google/gemini-3.5-flash-lite",
+  "topics_complete": 78,
+  "topics_total": 119,
+  "coverage_threshold": 0.99,
+  "comparisons_scored": 249420,
+  "valid": 249419,
+  "invalid": 1,
+  "usage_input_tokens": 496998369,
+  "usage_output_tokens": 249422,
+  "nominal_cost_scored": 74.86,
+  "note": "single-direction, randomized A/B; scored over complete topics only; excludes topics whose calls were incomplete (budget wall)."
+}

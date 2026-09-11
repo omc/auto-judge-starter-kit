@@ -1,0 +1,31 @@
+name: full
+create_nuggets: false
+create_qrels: false
+judge: true
+llm_model: google/gemini-3.5-flash-lite:batch
+timestamp: '2026-09-10T22:11:45.409810+00:00'
+git:
+  commit: ce71d0bcdc3aabf25c0edb039abcb2fdc03255e5
+  dirty: 'false'
+  remote: git@github.com:omc/auto-judge-starter-kit.git
+settings:
+  filebase: bonsai_pairwise
+nugget_settings:
+  filebase: bonsai_pairwise
+judge_settings:
+  filebase: bonsai_pairwise
+  on_missing_evals: fix_aggregate
+  submit_mode: live
+  direction: single
+  live_max_outstanding: 48
+  live_rpm: 0
+  temperature: 0.0
+  max_tokens: 8
+  topics_per_batch: 20
+  max_requests_per_batch: 5000
+  max_inflight_requests: 20000
+  poll_interval_s: 30.0
+  wait: false
+  poll_timeout_min: 0.0
+qrels_settings:
+  filebase: bonsai_pairwise

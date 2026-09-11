@@ -1,0 +1,174 @@
+globs: ['/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/adela', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/alex', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/alton', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/alvin', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/andre', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/anika', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/annie', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/april', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/ari', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/ariel', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/arlen', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/arlo', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/aron', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/brad', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/brian', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/carlo', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/carmen', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/chris', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/conor', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/damon', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/darcy', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/daria', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/deena', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/eden', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/edith', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/eva', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/eve', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/finn', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/gabe', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/geoff', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/gia', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/gilda', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/gwen', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/hana', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/henry', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/hilda', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/isaac', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/jamie', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/jason', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/jeff', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/jon', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/june', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/kane', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/karl', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/lars', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/laura', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/leon', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/linda', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/lloyd', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/luca', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/marco', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/maya', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/miles', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/nell', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/nina', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/nola', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/omar', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/opal', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/oscar', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/pablo', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/paris', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/pat', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/paula', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/reid', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/rene', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/rick', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/rita', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/ryan', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/sara', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/saul', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/sid', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/sofia', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/sonia', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/steve', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/tania', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/tara', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/todd', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/vince', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/will', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/xavi', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/yara', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/zara', '/Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/zora']
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/adela
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/alex
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/alton
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/alvin
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/andre
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/anika
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/annie
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/april
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/ari
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/ariel
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/arlen
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/arlo
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/aron
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/brad
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/brian
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/carlo
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/carmen
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/chris
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/conor
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/damon
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/darcy
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/daria
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/deena
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/eden
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/edith
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/eva
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/eve
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/finn
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/gabe
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/geoff
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/gia
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/gilda
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/gwen
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/hana
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/henry
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/hilda
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/isaac
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/jamie
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/jason
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/jeff
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/jon
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/june
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/kane
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/karl
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/lars
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/laura
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/leon
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/linda
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/lloyd
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/luca
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/marco
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/maya
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/miles
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/nell
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/nina
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/nola
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/omar
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/opal
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/oscar
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/pablo
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/paris
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/pat
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/paula
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/reid
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/rene
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/rick
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/rita
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/ryan
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/sara
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/saul
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/sid
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/sofia
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/sonia
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/steve
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/tania
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/tara
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/todd
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/vince
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/will
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/xavi
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/yara
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/zara
+Loading report from /Users/max/projects/bonsai-auto-judge/data/rag26/runs/generation/zora
+Loaded workflow: create_nuggets=False, judge=True
+Loaded: judge_class=judges.bonsai_judge.pairwise:BonsaiPairwiseJudge
+
+=== Running configuration: scale ===
+Nugget output: output-pairwise/bonsai_pairwise
+Judge output: output-pairwise/bonsai_pairwise
+[judge_runner] Config saved to: output-pairwise/bonsai_pairwise.config.yml
+[judge_runner] judge settings: {'filebase': 'output-pairwise/bonsai_pairwise', 'on_missing_evals': 'fix_aggregate', 'submit_mode': 'openrouter', 'temperature': 0.0, 'max_tokens': 8, 'topics_per_batch': 5, 'max_requests_per_batch': 5000, 'poll_interval_s': 30.0, 'wait': False, 'poll_timeout_min': 0.0, 'max_topics': 5, 'outdir': PosixPath('output-pairwise')}
+[pairwise] dropped 39 empty summaries (no text to compare)
+[pairwise] 5 topics -> 32,070 ordered cross-team comparisons
+Prompt cache: ./cache/minima_llm.db
+[pairwise] submit_mode=openrouter model=google/gemini-3.5-flash-lite:batch wait=False
+[openrouter] created batch chunk 1/5: batch-1789046609-wvl1QVTPN5GolwiTQrAK (5000 reqs)
+[openrouter] created batch chunk 2/5: batch-1789046618-stKomjU13YR7NyEmS02Q (5000 reqs)
+[openrouter] created batch chunk 3/5: batch-1789046626-IpdY9ItzKexoSutzOhgc (5000 reqs)
+Traceback (most recent call last):
+  File "/Users/max/projects/bonsai-auto-judge/judges/bonsai_judge/openrouter_batch.py", line 106, in _http
+    with urllib.request.urlopen(req, timeout=self.cfg.timeout_s) as resp:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nix/store/pc0b9rdj23vk341iar69n6lfms2s2mcw-python3-3.12.12/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nix/store/pc0b9rdj23vk341iar69n6lfms2s2mcw-python3-3.12.12/lib/python3.12/urllib/request.py", line 521, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/nix/store/pc0b9rdj23vk341iar69n6lfms2s2mcw-python3-3.12.12/lib/python3.12/urllib/request.py", line 630, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/nix/store/pc0b9rdj23vk341iar69n6lfms2s2mcw-python3-3.12.12/lib/python3.12/urllib/request.py", line 559, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nix/store/pc0b9rdj23vk341iar69n6lfms2s2mcw-python3-3.12.12/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/nix/store/pc0b9rdj23vk341iar69n6lfms2s2mcw-python3-3.12.12/lib/python3.12/urllib/request.py", line 639, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 429: Too Many Requests
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/max/projects/bonsai-auto-judge/.venv/bin/auto-judge", line 10, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/Users/max/projects/bonsai-auto-judge/.venv/lib/python3.12/site-packages/click/core.py", line 1569, in __call__
+    return self.main(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/max/projects/bonsai-auto-judge/.venv/lib/python3.12/site-packages/click/core.py", line 1490, in main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "/Users/max/projects/bonsai-auto-judge/.venv/lib/python3.12/site-packages/click/core.py", line 1970, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/max/projects/bonsai-auto-judge/.venv/lib/python3.12/site-packages/click/core.py", line 1353, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/max/projects/bonsai-auto-judge/.venv/lib/python3.12/site-packages/click/core.py", line 907, in invoke
+    return callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/max/projects/bonsai-auto-judge/.venv/lib/python3.12/site-packages/autojudge_base/_commands/_run.py", line 63, in run_workflow
+    execute_run_workflow(
+  File "/Users/max/projects/bonsai-auto-judge/.venv/lib/python3.12/site-packages/autojudge_base/click_plus.py", line 624, in execute_run_workflow
+    run_judge(
+  File "/Users/max/projects/bonsai-auto-judge/.venv/lib/python3.12/site-packages/autojudge_base/judge_runner.py", line 342, in run_judge
+    leaderboard = _leaderboard_judge.judge(
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/max/projects/bonsai-auto-judge/judges/bonsai_judge/pairwise.py", line 197, in judge
+    records, all_ready = asyncio.run(self._run(
+                         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/nix/store/pc0b9rdj23vk341iar69n6lfms2s2mcw-python3-3.12.12/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/nix/store/pc0b9rdj23vk341iar69n6lfms2s2mcw-python3-3.12.12/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/nix/store/pc0b9rdj23vk341iar69n6lfms2s2mcw-python3-3.12.12/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/Users/max/projects/bonsai-auto-judge/judges/bonsai_judge/pairwise.py", line 289, in _run
+    sub = orb.submit(list(zip(reqs, keys)))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/max/projects/bonsai-auto-judge/judges/bonsai_judge/openrouter_batch.py", line 231, in submit
+    bid = self._create(chunk)
+          ^^^^^^^^^^^^^^^^^^^
+  File "/Users/max/projects/bonsai-auto-judge/judges/bonsai_judge/openrouter_batch.py", line 113, in _create
+    resp = self._transport("POST", self.batches_url, self._create_payload(chunk), self._headers())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/max/projects/bonsai-auto-judge/judges/bonsai_judge/openrouter_batch.py", line 110, in _http
+    raise RuntimeError(f"HTTP {e.code} from {method} {url}: {txt[:500]}")
+RuntimeError: HTTP 429 from POST https://openrouter.ai/api/beta/batches: {"error":{"message":"This entity has 20,000 in-flight batch requests and this batch adds 5,000, exceeding the 20,000 limit. Wait for existing batches to finish and retry.","code":429}}
