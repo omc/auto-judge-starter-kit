@@ -1,0 +1,39 @@
+# JudgeJev — judge-only workflow (no nuggets, no JEV calls)
+#
+# Scores an existing qrels file, trec_eval-style: no LLM/JEV calls here at all --
+# JevLeaderboardJudge is a deterministic function of (responses, qrels). Requires a
+# qrels file already produced by workflow.qrels_only.yml (or workflow.yml), passed via
+# --qrels-input. Default qrels filename is "{filebase}.qrels.txt" under that earlier
+# run's --out-dir.
+#
+# --qrels-input is unconditionally joined as `out_dir / qrels_input` (see
+# click_plus.py / judge_runner.py) before being loaded. pathlib only drops the
+# out_dir side when qrels_input is ABSOLUTE -- a relative path that already
+# includes the output directory gets prefixed a second time and silently resolves
+# to a file that doesn't exist (qrels stays None and judge() raises). Use an
+# absolute path, as below, or a bare filename relative to THIS run's --out-dir.
+#
+#   QRELS="$(pwd)/output-kiddie-jev/judge_jev.qrels.txt"
+#   auto-judge run --workflow judges/judge_jev/workflow.judge_only.yml \
+#       --rag-responses data/kiddie/runs/repgen/ \
+#       --rag-topics data/kiddie/topics/kiddie-topics.jsonl \
+#       --qrels-input "$QRELS" \
+#       --out-dir ./output-kiddie-jev/
+
+judge_class: "judges.judge_jev.judge_jev:JevLeaderboardJudge"
+
+create_nuggets: false
+create_qrels: false
+judge: true
+judge_uses_nuggets: false
+judge_uses_qrels: true
+augment_report: false
+
+uses_llm: false    # judge() makes no LLM/JEV calls; it only reads --qrels-input
+
+settings:
+  filebase: "judge_jev"
+
+judge_settings:
+  on_missing_evals: "fix_aggregate"
+  relevance_threshold_grade: 3

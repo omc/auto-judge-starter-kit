@@ -1,0 +1,36 @@
+# JudgeJev — qrels-only workflow (no nuggets, no leaderboard judge)
+#
+# Only JevQrelsCreator runs: one Noul call per unique cited document to
+# {jev_base_url}/v1/systemone using the llm_config api_key (OPENAI_API_KEY).
+# OPENAI_BASE_URL / OPENAI_MODEL are not used by this workflow.
+#
+# Produces "{filebase}.qrels.txt" under --out-dir (plus the .qrels_scores.jsonl
+# sidecar with raw probabilities). Feed that file to workflow.judge_only.yml's
+# --qrels-input to score runs against it without any further JEV calls.
+#
+#   auto-judge run --workflow judges/judge_jev/workflow.qrels_only.yml \
+#       --rag-responses data/kiddie/runs/repgen/ \
+#       --rag-topics data/kiddie/topics/kiddie-topics.jsonl \
+#       --out-dir ./output-kiddie-jev/
+
+qrels_class: "judges.judge_jev.judge_jev:JevQrelsCreator"
+
+create_nuggets: false
+create_qrels: true
+judge: false
+qrels_uses_nuggets: false
+augment_report: false
+
+uses_llm: true
+
+settings:
+  filebase: "judge_jev"
+
+qrels_settings:
+  grade_range: [0, 3]
+  jev_model: "typesafe/jev-1.13"
+  jev_base_url: "https://openrouter.ai/api"
+  max_doc_chars: 24000
+  concurrency: 16
+  timeout_s: 60
+  max_retries: 4
