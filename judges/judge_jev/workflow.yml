@@ -1,0 +1,51 @@
+# JudgeJev Workflow Configuration
+#
+# Nuggets are a template placeholder (no LLM). JevQrelsCreator asks JEV (a
+# typed-decision model, NOT a chat model) one Noul question per unique cited
+# document -- "is this citation relevant to the topic?" -- called directly at
+# {jev_base_url}/v1/systemone using the llm_config api_key (OpenRouter key), and
+# quantizes the probability into an integer qrels grade.
+#
+# JevLeaderboardJudge then scores each response's citations against those qrels the
+# way trec_eval scores a run against a qrels file: num_ret/num_rel/num_rel_ret, map
+# (AP), recip_rank, P_5/R_5/ndcg_cut_5, bpref. It makes NO JEV or LLM calls itself --
+# it is a deterministic function of (responses, qrels).
+
+nugget_class: "judges.judge_jev.judge_jev:JevNuggetCreator"
+qrels_class: "judges.judge_jev.judge_jev:JevQrelsCreator"
+judge_class: "judges.judge_jev.judge_jev:JevLeaderboardJudge"
+
+# Lifecycle flags
+create_nuggets: true
+create_qrels: true
+judge: true
+
+# Data flow
+nugget_depends_on_responses: true
+judge_uses_nuggets: true
+judge_uses_qrels: true
+qrels_uses_nuggets: true
+
+force_recreate_nuggets: false
+force_recreate_qrels: false
+augment_report: false
+
+settings:
+  filebase: "judge_jev"
+
+nugget_settings:
+  questions_per_topic: 3
+
+qrels_settings:
+  grade_range: [0, 3]
+  jev_model: "typesafe/jev-1.13"          # or "~typesafe/jev-latest"
+  jev_base_url: "https://openrouter.ai/api"
+  max_doc_chars: 24000                    # JEV context is 32k tokens; truncate long docs
+  concurrency: 16
+  timeout_s: 60
+  max_retries: 4
+  # cache_dir: ".cache/jev"               # default: judges/judge_jev/.cache
+
+judge_settings:
+  on_missing_evals: "fix_aggregate"
+  relevance_threshold_grade: 3            # qrels grade >= this counts as "relevant" (grade_range is 0-3)
