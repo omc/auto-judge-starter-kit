@@ -1,0 +1,3 @@
+[padding] 4608 calls: 48 targets x 6 variants x <= 8 opponents x 2 slots
+Prompt cache: ./cache/minima_llm.db
+[padding] wrote temp/jev_probes/padding_noul.jsonl: 0 errors, $0.5468

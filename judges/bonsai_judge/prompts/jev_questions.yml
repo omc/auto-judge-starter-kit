@@ -1,0 +1,171 @@
+# Jev Choice questions for BonsaiJevPairwiseJudge.
+#
+# State sent with every question: {query, summary_a, summary_b}. Each question is a
+# Choice over A/B; Jev's P(A) is the score. Several questions can be asked in ONE
+# request (Jev bills input tokens, dominated by the state), and they are answered
+# independently. Question text is part of the cache key -- edits re-ask everything.
+
+# Control: the original prompt, unchanged (same id + text => reuses pilot cache when
+# asked alone).
+better_summary:
+  type: choice
+  instructions: >-
+    You are a subject matter expert. Two RAG summaries (summary_a and summary_b)
+    were generated for the query. Which summary better satisfies the information
+    need of the query, considering relevance, completeness, and how well its
+    claims are grounded?
+  criteria:
+    A: summary_a better satisfies the information need of the query.
+    B: summary_b better satisfies the information need of the query.
+
+# Hypothesis: the judge rewards volume. Say explicitly that length is not quality,
+# name what padding looks like, and break ties toward concision.
+length_neutral:
+  type: choice
+  instructions: >-
+    Two answers (summary_a and summary_b) were written for the user's query.
+    Judge quality, not quantity: a longer or more detailed answer is NOT better
+    unless the extra content gives the user something they need. Content that is
+    generic, repeated, off-topic, or not specific to the user's situation earns no
+    credit and makes an answer worse by burying the useful parts. If both answers
+    serve the user equally well, prefer the more concise one. Which answer is
+    better for this user?
+  criteria:
+    A: summary_a serves the user better, judged on substance rather than length.
+    B: summary_b serves the user better, judged on substance rather than length.
+
+# Hypothesis: length partly tracks real completeness on multi-part queries. Credit
+# coverage of what was ASKED, not total volume, so a long answer only wins by
+# answering more of the actual sub-questions.
+needs_coverage:
+  type: choice
+  instructions: >-
+    The query asks for several specific things (explicit questions, requested
+    comparisons, priorities, tradeoffs, measures, warnings). Consider each thing
+    the user asked for and whether each answer (summary_a, summary_b) addresses it
+    directly with specific, actionable content tailored to the user's situation.
+    Only content that answers something the user asked counts; general background
+    and filler count for nothing however much there is. Which answer directly
+    addresses more of what the user asked, and addresses it better?
+  criteria:
+    A: summary_a directly answers more of the user's specific requests, and answers them better.
+    B: summary_b directly answers more of the user's specific requests, and answers them better.
+
+# Hypothesis: a precision view is the counterweight to recall/volume. Judge the
+# PROPORTION of good content, which a longer answer cannot win by padding.
+precision:
+  type: choice
+  instructions: >-
+    Compare the two answers (summary_a and summary_b) statement by statement.
+    For each answer, consider what proportion of its statements are on-topic for
+    the query, specific rather than generic, non-redundant, and plausible as
+    accurate, well-supported claims. Judge the proportion, not the total number of
+    good statements: an answer cannot win by being longer. Which answer has the
+    higher proportion of relevant, specific, trustworthy content?
+  criteria:
+    A: summary_a has the higher proportion of relevant, specific, trustworthy statements.
+    B: summary_b has the higher proportion of relevant, specific, trustworthy statements.
+
+# ---------------------------------------------------------------------------
+# Instruction-following probes (diagnostics, NOT quality questions). Each has a
+# known expected relation, testing whether Jev reads the question text at all.
+# ---------------------------------------------------------------------------
+
+# Objective, checkable against word counts. If Jev reads the instruction, accuracy
+# should be high; if P(A shorter) ~= 1 - P(A better), it is answering "quality".
+shorter:
+  type: choice
+  instructions: >-
+    Ignore quality entirely. Which of the two answers (summary_a or summary_b)
+    is shorter, i.e. contains fewer words?
+  criteria:
+    A: summary_a is shorter (fewer words) than summary_b.
+    B: summary_b is shorter (fewer words) than summary_a.
+
+# Negation of better_summary. Expected: P(A) ~= 1 - P_better_summary(A).
+worse_summary:
+  type: choice
+  instructions: >-
+    You are a subject matter expert. Two RAG summaries (summary_a and summary_b)
+    were generated for the query. Which summary WORSE satisfies the information
+    need of the query, considering relevance, completeness, and how well its
+    claims are grounded?
+  criteria:
+    A: summary_a worse satisfies the information need of the query.
+    B: summary_b worse satisfies the information need of the query.
+
+# better_summary with the option descriptions swapped between labels. Expected:
+# P(A) ~= 1 - P_better_summary(A). If P(A) ~= P_better_summary(A) instead, Jev is
+# keying on label/slot, not on the criteria text.
+swapped_labels:
+  type: choice
+  instructions: >-
+    You are a subject matter expert. Two RAG summaries (summary_a and summary_b)
+    were generated for the query. Which summary better satisfies the information
+    need of the query, considering relevance, completeness, and how well its
+    claims are grounded?
+  criteria:
+    A: summary_b better satisfies the information need of the query.
+    B: summary_a better satisfies the information need of the query.
+
+# ---------------------------------------------------------------------------
+# Noul (yes/no) formulation: a single P(yes) instead of a choice between options.
+# x_* keys are local metadata, stripped before sending (see load_questions).
+# x_polarity: which summary a "yes" favours. P(A better) = P(yes) for 'a',
+# 1 - P(yes) for 'b'.
+# ---------------------------------------------------------------------------
+
+# Primary Noul: is summary_a better than summary_b?
+noul_a_better:
+  type: noul
+  x_polarity: a
+  instructions: >-
+    You are a subject matter expert. Two RAG summaries (summary_a and summary_b)
+    were generated for the query. Does summary_a satisfy the information need of
+    the query better than summary_b does, considering relevance, completeness, and
+    how well its claims are grounded?
+  criteria:
+    "true": summary_a satisfies the information need of the query better than summary_b.
+    "false": summary_a does not satisfy the information need of the query better than summary_b.
+
+# Mirror, asked in the same request: is summary_b better than summary_a? With no
+# yes/no bias, P_yes(a_better) + P_yes(b_better) ~= 1.
+noul_b_better:
+  type: noul
+  x_polarity: b
+  instructions: >-
+    You are a subject matter expert. Two RAG summaries (summary_a and summary_b)
+    were generated for the query. Does summary_b satisfy the information need of
+    the query better than summary_a does, considering relevance, completeness, and
+    how well its claims are grounded?
+  criteria:
+    "true": summary_b satisfies the information need of the query better than summary_a.
+    "false": summary_b does not satisfy the information need of the query better than summary_a.
+
+# ---------------------------------------------------------------------------
+# Noul instruction-following probes (diagnostics, NOT quality questions).
+# ---------------------------------------------------------------------------
+
+# Negation of noul_a_better. Expected on decisive pairs: P_yes(worse) ~= 1 - P_yes(better).
+# On ties both should be 'no' (neither is better nor worse), so the relation breaks there.
+noul_a_worse:
+  type: noul
+  x_polarity: b
+  instructions: >-
+    You are a subject matter expert. Two RAG summaries (summary_a and summary_b)
+    were generated for the query. Does summary_a satisfy the information need of
+    the query worse than summary_b does, considering relevance, completeness, and
+    how well its claims are grounded?
+  criteria:
+    "true": summary_a satisfies the information need of the query worse than summary_b.
+    "false": summary_a does not satisfy the information need of the query worse than summary_b.
+
+# Objective, checkable against word counts.
+noul_a_shorter:
+  type: noul
+  instructions: >-
+    Ignore quality entirely. Is summary_a shorter than summary_b, i.e. does it
+    contain fewer words?
+  criteria:
+    "true": summary_a contains fewer words than summary_b.
+    "false": summary_a does not contain fewer words than summary_b.

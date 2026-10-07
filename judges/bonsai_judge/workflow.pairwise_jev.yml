@@ -1,0 +1,104 @@
+# BonsaiJevPairwiseJudge — probabilistic pairwise summary tournament judged by
+# TypeSafe's Jev decision model (typesafe/jev-1.13) via OpenRouter's Decisions API.
+#
+# Each cross-team pair is one Jev Choice question (A/B). Jev returns P(A better);
+# that probability is the score (expected wins), not the argmax. Bradley-Terry is
+# fit on the same fractional outcomes.
+#
+# Requires OPENAI_BASE_URL=https://openrouter.ai/api/v1 and an OpenRouter key.
+# `model` OVERRIDES OPENAI_MODEL (Jev is not a chat model). OpenRouter-only: this
+# judge will not run on TIRA's endpoint.
+#
+# Cache key = (endpoint, model, state, question). Pinning jev-1.13 keeps it stable;
+# editing QUESTION in pairwise_jev.py re-asks everything.
+#
+#   smoke:  auto-judge run --workflow judges/bonsai_judge/workflow.pairwise_jev.yml --variant smoke ...
+#   pilot:  auto-judge run --workflow judges/bonsai_judge/workflow.pairwise_jev.yml --variant pilot ...
+#   full:   auto-judge run --workflow judges/bonsai_judge/workflow.pairwise_jev.yml --variant full  ...
+
+judge_class: "judges.bonsai_judge.pairwise_jev:BonsaiJevPairwiseJudge"
+
+create_nuggets: false
+create_qrels: false
+judge: true
+judge_uses_nuggets: false
+judge_uses_qrels: false
+augment_report: false
+
+uses_llm: true
+
+settings:
+  filebase: "bonsai_pairwise_jev"
+
+judge_settings:
+  on_missing_evals: "fix_aggregate"
+  model: "typesafe/jev-1.13"
+  # Jev Choice questions from prompts/jev_questions.yml, all asked in ONE request per
+  # comparison. primary_question (default: first) drives the eval leaderboard; every
+  # question gets tables under <filebase>.pairwise/q_<id>/.
+  questions: ["better_summary"]
+  # mirror: two Noul questions ("is A better?" polarity a, "is B better?" polarity b).
+  # Adds a virtual question 'mirror' = mean of their P(A better), made primary unless
+  # primary_question is set. 'no' to both (P(yes) < tie_threshold) flags a tie.
+  # Identical summary text is always a tie: P = 0.5, no API call.
+  # mirror: ["noul_a_better", "noul_b_better"]
+  tie_threshold: 0.5
+  direction: "single"           # single: each cross-team pair once, hashed A/B
+                                # orientation. ordered: both orientations (2x cost),
+                                # pairs.csv then measures position bias directly.
+  max_outstanding: 32           # concurrent Decisions calls
+  max_attempts: 8               # per call, on 429/5xx/network errors
+  topics_per_batch: 20
+
+variants:
+  # 2 topics x 6 runs — near-free plumbing check.
+  smoke:
+    judge_settings:
+      max_topics: 2
+      max_runs: 6
+      topics_per_batch: 2
+
+  # 1 topic, both orientations — measures position bias + real $/comparison
+  # before committing to the full run.
+  pilot:
+    judge_settings:
+      max_topics: 1
+      topics_per_batch: 1
+      direction: "ordered"
+
+  # Prompt comparison: 4 questions per request, 3 topics, each pair once.
+  # better_summary is the control (re-asked => also a test-retest check vs pilot).
+  prompts:
+    judge_settings:
+      max_topics: 3
+      topics_per_batch: 3
+      questions: ["better_summary", "length_neutral", "needs_coverage", "precision"]
+
+  # Instruction-following probes (same 3 topics): does Jev read the question text?
+  instruction_check:
+    judge_settings:
+      max_topics: 3
+      topics_per_batch: 3
+      questions: ["better_summary", "shorter", "worse_summary", "swapped_labels"]
+
+  # Noul formulation on the Choice pilot topic, both orientations. noul_b_better is
+  # the mirror question (asked in the same request) to measure yes/no bias.
+  noul_pilot:
+    judge_settings:
+      max_topics: 1
+      topics_per_batch: 1
+      direction: "ordered"
+      questions: ["noul_a_better", "noul_b_better"]
+      mirror: ["noul_a_better", "noul_b_better"]   # primary = virtual 'mirror' score
+
+  # Noul instruction-following probes (same 3 topics as instruction_check).
+  noul_instruction_check:
+    judge_settings:
+      max_topics: 3
+      topics_per_batch: 3
+      questions: ["noul_a_better", "noul_b_better", "noul_a_worse", "noul_a_shorter"]
+      mirror: ["noul_a_better", "noul_b_better"]
+
+  full:
+    judge_settings:
+      topics_per_batch: 20

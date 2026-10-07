@@ -1,0 +1,16 @@
+judge=noul invalid=0
+tie flags (both 'no'): 19 / 4608
+targets=48 calls=4608 | mean P(slot A wins)=0.518
+
+variant         words x  P(win)      dP            95% CI  targets dP>0  dP>+.05  dP<-.05
+original           1.00   0.327  +0.000 [+0.000,+0.000]       0/48           0        0
+pad_repeat         1.53   0.280  -0.048 [-0.055,-0.040]       1/48           0       21
+pad_generic        1.51   0.231  -0.097 [-0.114,-0.081]       0/48           0       36
+pad_offtopic       1.53   0.136  -0.191 [-0.213,-0.170]       0/48           0       48
+pad_relevant       1.53   0.487  +0.160 [+0.144,+0.176]      48/48          46        0
+truncate           0.66   0.246  -0.082 [-0.098,-0.067]       2/48           0       36
+
+per topic dP:
+  rag2026-0: pad_repeat=-0.033  pad_generic=-0.055  pad_offtopic=-0.188  pad_relevant=+0.173  truncate=-0.069
+  rag2026-1: pad_repeat=-0.037  pad_generic=-0.076  pad_offtopic=-0.184  pad_relevant=+0.175  truncate=-0.069
+  rag2026-10: pad_repeat=-0.073  pad_generic=-0.159  pad_offtopic=-0.202  pad_relevant=+0.132  truncate=-0.107

@@ -1,0 +1,6 @@
+== determinism ==
+determinism_rag2026-100_mirror_pass1.jsonl: n=3223 identical=0.408 mean|dp|=0.0045 p95|dp|=0.015 max|dp|=0.050 argmax flips=8 (0.248%) mean|dconf|=0.0000 served={'typesafe/jev-1.13-20260917'}
+  largest changes: [('rag2026-100|steve|opal', 0.49, 0.44), ('rag2026-100|brad|isaac', 0.425, 0.47), ('rag2026-100|paris|kane', 0.49, 0.45), ('rag2026-100|maya|arlo', 0.63, 0.59), ('rag2026-100|vince|nell', 0.575, 0.61)]
+  raw noul_a_better: identical=0.586 mean|dp|=0.0051 max=0.050
+  raw noul_b_better: identical=0.579 mean|dp|=0.0052 max=0.060
+  tie flag: pass1=6 pass2=6 changed=4

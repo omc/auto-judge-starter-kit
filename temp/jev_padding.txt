@@ -1,0 +1,14 @@
+targets=48 calls=4608 | mean P(slot A wins)=0.507
+
+variant         words x  P(win)      dP            95% CI  targets dP>0  dP>+.05  dP<-.05
+original           1.00   0.279  +0.000 [+0.000,+0.000]       0/48           0        0
+pad_repeat         1.53   0.228  -0.050 [-0.060,-0.041]       1/48           0       19
+pad_generic        1.51   0.190  -0.089 [-0.107,-0.073]       0/48           0       33
+pad_offtopic       1.53   0.085  -0.194 [-0.220,-0.168]       0/48           0       46
+pad_relevant       1.53   0.462  +0.183 [+0.164,+0.202]      48/48          46        0
+truncate           0.66   0.192  -0.087 [-0.104,-0.071]       2/48           0       36
+
+per topic dP:
+  rag2026-0: pad_repeat=-0.033  pad_generic=-0.047  pad_offtopic=-0.193  pad_relevant=+0.195  truncate=-0.075
+  rag2026-1: pad_repeat=-0.037  pad_generic=-0.067  pad_offtopic=-0.164  pad_relevant=+0.208  truncate=-0.076
+  rag2026-10: pad_repeat=-0.081  pad_generic=-0.153  pad_offtopic=-0.225  pad_relevant=+0.147  truncate=-0.109
