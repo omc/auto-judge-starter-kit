@@ -102,3 +102,16 @@ variants:
   full:
     judge_settings:
       topics_per_batch: 20
+
+  # FULL run, mirrored Noul (recommended protocol, FINDINGS Section 11.2): all topics,
+  # both orientations, score = mirror average of "is A better?" / "is B better?".
+  # Same questions/model as noul_pilot => its cached rag2026-0 answers are reused.
+  # ~703.5k calls, ~$75 estimated (budget ~$85), ~10.5 h at 32 concurrency.
+  # Check the OpenRouter key's spend limit first. Resumable: re-run the same command
+  # to retry anything missing; completed calls are served from the cache.
+  full_noul:
+    judge_settings:
+      topics_per_batch: 20
+      direction: "ordered"
+      questions: ["noul_a_better", "noul_b_better"]
+      mirror: ["noul_a_better", "noul_b_better"]

@@ -1024,8 +1024,16 @@ fit on the orientation-averaged probability per pair.
 The judge supports Noul questions (`x_polarity` metadata, raw answers stored as
 `raw_p`). It also computes the mirror average as the primary score when `mirror:` is set,
 flags near-ties, and scores identical-text pairs as 0.5 without a call (Section 10.8).
-The `noul_pilot` and `noul_instruction_check` variants use it. A `full` variant with
-`mirror:` and `direction: ordered` has not been added yet.
+The `noul_pilot` and `noul_instruction_check` variants use it, and so does
+**`full_noul`**, the full-run variant for the recommended protocol: all topics, both
+orientations, scored by the mirror average. On one topic it replayed the pilot's cached
+answers with 0 new calls.
+
+```bash
+auto-judge run --workflow judges/bonsai_judge/workflow.pairwise_jev.yml --variant full_noul \
+  --rag-responses data/rag26/runs/generation/ \
+  --rag-topics data/rag26/topics/trec_rag_2026_queries.jsonl --out-dir ./output-pairwise-jev-full-noul/
+```
 
 ### 11.3 Threats to validity
 
