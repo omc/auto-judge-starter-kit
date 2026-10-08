@@ -2,7 +2,7 @@
 
 **Status:** working notes for the team and raw material for a TREC paper. Pilot-scale
 results (1–3 topics per experiment). No full Jev run yet. All numbers here come from
-runs in this repository between 2026-09-10 and 2026-10-07. Section 12 gives the
+runs in this repository between 2026-09-10 and 2026-10-08. Section 12 gives the
 command and output file behind each table.
 
 **One-paragraph summary.** We built a pairwise "tournament" judge for TREC RAG 2026
@@ -28,7 +28,8 @@ has four properties that matter for the method:
    Asking "is A better than B?" and "is B better than A?" in one request and averaging
    gives P = 0.52 on identical summaries (Choice: 0.80). It halves the slot-A advantage
    on close pairs, never saturates, and gives the same ranking as Choice (ρ = 0.999) at
-   about the same cost (Section 10).
+   about the same cost. Under the determinism, instruction and padding probes it
+   matches or improves on Choice (Section 10).
 
 Our starting hypothesis that the Gemini judge was mainly rewarding length is **not
 supported** by the controlled tests so far. It is not ruled out either: subtle,
@@ -768,9 +769,208 @@ the Section 6.5 row, which comes from the 3-topic single-orientation run.
    run-level length correlation is unchanged (about 0.53).
 6. **It costs about the same.** The mirror question adds about 5% per call, because the
    summaries dominate the input.
+7. **It holds up under the same probes as Choice** (Section 10.9). It is at least as
+   deterministic, follows negation and the length question as well or better, and gives
+   the same padding results. The one weak point is the tie flag, which is not reliable
+   on real pairs (Section 10.9.4).
 
-**Not yet tested with Noul:** determinism, the padding test, and topics other than
-rag2026-0. The Section 8.1 determinism result is for Choice.
+### 10.8 Mirror scoring in the judge: ties and duplicates
+
+The mirror average is now built into `BonsaiJevPairwiseJudge`, so the leaderboard can
+use it directly. It is enabled per workflow with
+`mirror: ["noul_a_better", "noul_b_better"]`.
+
+- **Mirror score.** This adds a scored question, `mirror`, defined as
+  (P(A better | noul_a_better) + P(A better | noul_b_better)) / 2 =
+  (yA + 1 − yB) / 2. It becomes the primary (leaderboard) score unless
+  `primary_question` overrides it. Its tables are written to `q_mirror/` alongside the
+  per-question tables.
+- **Validation.** The judge checks that `mirror` names exactly one polarity-a and one
+  polarity-b Noul question taken from `questions`.
+- **Tie flag.** A comparison is flagged `tie` when both raw P(yes) values are below
+  `tie_threshold` (default 0.5), and `both_yes` when both are above it.
+  - Ties still count as games and are scored by the mirror average (about 0.5).
+  - Reported as the `PAIRWISE_TIE_RATE` leaderboard measure, `ties` and `tie_rate`
+    columns in `leaderboard_overall.csv`, and `n_ties` / `n_both_yes` in
+    `run_manifest.json`.
+- **Duplicate check.** If summary_a and summary_b are identical text, no request is
+  sent. Every question, including `mirror`, gets P = 0.5. The comparison is flagged
+  `tie` and recorded with `result: "duplicate"` (`n_duplicate_ties` in the manifest).
+- **Draws in diagnostics.** In the analysis scripts an exact P = 0.5 now counts as a
+  draw, never as a B win and never as a winner flip. Before, `P > 0.5` was used, which
+  silently counted 0.5 as a B win. The leaderboard was unaffected because it is
+  fractional.
+
+**Verification.**
+
+- **Cache replay of the Noul pilot (rag2026-0, 6,446 comparisons).**
+  - 0 new API calls.
+  - The judge's `mirror` values match (yA + 1 − yB) / 2 for every comparison (0
+    mismatches).
+  - `mirror` is the primary score.
+  - It reports 33 ties and 29 both-yes, matching Section 10.2.
+  - Top of the mirror leaderboard: carmen 0.886, lars 0.861, edith 0.856.
+- **Duplicate test on a kiddie copy** in which run4 (team `teamDUP`) is a copy of run1:
+  - The 2 identical-text comparisons (both orders of run1 vs run4 on one topic) were
+    skipped and scored 0.5. 6 API calls were made for the rest ($0.0003).
+  - run1 and run4 get identical win rates (0.5692) and tie rates (2/6).
+- **rag26 has no cross-team identical summaries** (0 of 380,443 pairs), so the
+  duplicate check does not change any rag26 result. It guards other datasets and saves
+  calls there.
+- **Regression.** Reports for the earlier Jev and Gemini padding runs reproduce
+  byte-identically after the script changes. pytest shows the same 3 failures as
+  before (template README title and `autojudge-base` version pins), none from this
+  judge.
+
+### 10.9 Noul probe results
+
+These are the probes from Sections 7–9, re-run with mirrored Noul. Each is compared with
+the Choice result.
+
+#### 10.9.1 Determinism
+
+**Setup:** rag2026-100, the same 3,223 single-orientation pairs as Section 8.1, both
+Noul questions per request. Two sequential passes with byte-identical payloads, cache
+bypassed. Cost $0.32 per pass, 0 errors. Snapshot served: `jev-1.13-20260917`.
+
+| Metric | Choice `better_summary` (8.1) | Noul `noul_a_better` (raw) | Noul `noul_b_better` (raw) | **Noul mirror** |
+| --- | --- | --- | --- | --- |
+| Probability exactly identical | 75.6% | 58.6% | 57.9% | 40.8% |
+| Mean \|ΔP\| | 0.0043 | 0.0051 | 0.0052 | **0.0045** |
+| p95 \|ΔP\| | 0.020 | — | — | **0.015** |
+| Max \|ΔP\| | 0.090 | 0.050 | 0.060 | **0.050** |
+| Winner flips | 11 (0.34%) | — | — | **8 (0.25%)** |
+
+- **Each Noul answer jitters slightly more often than Choice, but by less.** Exact
+  repeats are 58–59%, against Choice's 75.6%, but the maximum change is 0.05–0.06
+  against 0.09.
+- **Averaging the two adds the jitter of both** (40.8% exactly identical) but halves it
+  (mean |ΔP| 0.0045).
+- **Net effect:** the mirror score's 95th-percentile and maximum changes are smaller
+  than Choice's, and fewer winners flip.
+- **Largest mirror changes:** 0.49→0.44, 0.425→0.47, 0.49→0.45, 0.63→0.59,
+  0.575→0.61. All are in close pairs.
+- **Cross-bundle retest.** On rag2026-0, the Noul questions were asked once in a
+  2-question request (Section 10 pilot) and once in a 4-question request (10.9.2).
+  - `noul_a_better`: 60.2% identical, mean |ΔP| 0.0047, max 0.070, winner agrees 99.4%.
+  - `noul_b_better`: 61.4% identical, mean |ΔP| 0.0046, max 0.060, winner agrees 99.5%.
+  - Mirror: mean |ΔP| 0.0041; the winner flips in 4 of 3,223 pairs.
+  - So, as with Choice (6.6), asking other questions in the same request does not
+    measurably change the answers.
+
+#### 10.9.2 Instruction following
+
+**Setup:** rag2026-0, -1 and -10, single orientation, 9,589 comparisons (9,209 calls),
+4 Noul questions per request: the mirror pair plus two probes, verbatim in 13.3. Cost
+$1.04, 0 errors.
+
+- `noul_a_worse`: "Does summary_a satisfy the information need … worse than
+  summary_b?" This is the negation of `noul_a_better`. On decisive pairs we expect
+  P_yes(worse) ≈ 1 − P_yes(A better) ≈ P_yes(B better). On true ties all three answers
+  should be "no".
+- `noul_a_shorter`: "Is summary_a shorter, i.e. does it contain fewer words?" The
+  answer can be checked against true word counts.
+
+**The mirror pair re-asked in the larger bundle (3 topics).**
+
+| Metric | Value |
+| --- | --- |
+| yA + yB: mean | 0.989 |
+| yA + yB within [0.9, 1.1] | 97.7% |
+| Both "no" / both "yes" | 40 / 66 (0.42% / 0.69%) |
+| Pearson(yA, 1 − yB) | 0.996 |
+
+**Negation (`noul_a_worse`).**
+
+| Metric | Noul (this run) | Choice `worse_summary` (7.1) |
+| --- | --- | --- |
+| Pearson with the expected value | 0.994 (with 1 − yA); 0.987 (with yB) | 0.975 |
+| Mean \|P − expected\| | 0.025 (vs 1 − yA); 0.039 (vs yB) | 0.054 |
+| Winner inverted, all pairs | 96.9% | 95.5% |
+| Winner inverted, decisive pairs | **100%** (\|mirror − 0.5\| > 0.4, n = 4,337) | 99.6% (n = 7,613) |
+
+- **Near-ties** (|mirror − 0.5| ≤ 0.1, n = 732): mean yA 0.508, yB 0.499, yW 0.471. Only
+  10 of these pairs get "no" to all three questions.
+
+**Length (`noul_a_shorter`).**
+
+| Length ratio | n | Noul accuracy | Noul mean P(correct) | Choice `shorter` accuracy (7.1) |
+| --- | --- | --- | --- | --- |
+| All | 9,569 | **87.2%** | 0.802 | 85.8% |
+| < 1.25× | 2,698 | 63.4% | 0.584 | 61.1% |
+| 1.25–2× | 3,092 | 92.3% | 0.800 | 90.1% |
+| ≥ 2× | 3,779 | **100.0%** | 0.958 | 99.9% |
+
+- Spearman(P_yes(shorter), log(len_a / len_b)) = −0.946 (Choice: −0.945).
+- **Quality still leaks into the length question.** Spearman(P_yes(shorter), mirror
+  P(A better)) = −0.719 (Choice: −0.675). In the 2,726 conflict pairs, where the truly
+  shorter summary is also judged better, the length question follows length 69.3% of
+  the time and inverse quality 30.7% (Choice: 67.2% / 32.8%). The same caveat as 7.1
+  applies: these pairs skew toward similar lengths.
+
+**Finding:** Noul follows negation and the objective length question at least as
+closely as Choice does. The same quality-leak caveat applies.
+
+#### 10.9.3 Padding test
+
+**Setup:** identical items to Section 9: 48 mid-ranked targets on rag2026-0, -1 and -10,
+8 opponents each, 6 variants, both orientations, 4,608 calls. The score is the mirror
+average. Cost $0.55, 0 errors.
+
+| Variant | Length vs original | Noul P(win) | **Noul ΔP** [95% CI] | Noul targets improved | Choice Jev ΔP (9.2) | Gemini ΔP (9.2) |
+| --- | --- | --- | --- | --- | --- | --- |
+| original | 1.00× | 0.327 | — | — | — | — |
+| pad_repeat | 1.53× | 0.280 | **−0.048** [−0.055, −0.040] | 1/48 | −0.050 | −0.171 |
+| pad_generic | 1.51× | 0.231 | **−0.097** [−0.114, −0.081] | 0/48 | −0.089 | −0.161 |
+| pad_offtopic | 1.53× | 0.136 | **−0.191** [−0.213, −0.170] | 0/48 | −0.194 | −0.224 |
+| pad_relevant | 1.53× | 0.487 | **+0.160** [+0.144, +0.176] | 48/48 | +0.183 | +0.016 |
+| truncate | 0.66× | 0.246 | **−0.082** [−0.098, −0.067] | 2/48 | −0.087 | −0.107 |
+
+Noul ΔP by topic:
+
+| Topic | pad_repeat | pad_generic | pad_offtopic | pad_relevant | truncate |
+| --- | --- | --- | --- | --- | --- |
+| rag2026-0 | −0.033 | −0.055 | −0.188 | +0.173 | −0.069 |
+| rag2026-1 | −0.037 | −0.076 | −0.184 | +0.175 | −0.069 |
+| rag2026-10 | −0.073 | −0.159 | −0.202 | +0.132 | −0.107 |
+
+- **Mirrored Noul rewards content, not length, just as Choice does.** Every effect has
+  the same direction, and the sizes are within about 0.02 of Choice (pad_relevant +0.160
+  against +0.183). All 3 topics agree.
+- **Baseline P(win) is higher** (0.327 against 0.279), because mirror-averaged
+  probabilities are compressed toward 0.5 (10.3).
+- **Slot bias is still present before averaging.** With both orientations averaged,
+  slot A wins 0.518 of the time (Choice 0.507, Gemini 0.476). This matches the small
+  constant slot-A offset of the mirror estimator (10.5). Judging both orders cancels it
+  in ΔP.
+- The tie flag fired on 19 of 4,608 calls (0.4%).
+
+#### 10.9.4 How reliable is the tie flag?
+
+We measured how many comparisons the flag catches at different thresholds, using the
+instruction-check run (9,589 comparisons) and the two determinism passes:
+
+| `tie_threshold` | Flagged (instruction run) | Of those, `noul_a_worse` also "no" | Flagged in determinism pass 1 / pass 2 / both |
+| --- | --- | --- | --- |
+| 0.50 (default) | 40 (0.42%) | 10 / 40 | 6 / 6 / 4 |
+| 0.45 | 7 (0.07%) | 0 / 7 | 0 / 0 / 0 |
+| 0.40 | 0 | — | 0 / 0 / 0 |
+| 0.35 | 0 | — | 0 / 0 / 0 |
+
+- **Jev almost never answers a clear "no" to both questions on real, different
+  summaries.** At the default threshold the flag catches borderline pairs whose two
+  answers both sit just under 0.5 (for flagged pairs, the mean P_yes(worse) is 0.550).
+  It does not catch pairs Jev judges equal: only 10 of 40 also get "no" to "is A
+  worse?".
+- **The flag is unstable.** Across two identical determinism passes, 2 of the 6 flags
+  in each pass did not recur in the other.
+- **A clear "no" to both happens only for identical text** (10.1: 0.15 / 0.10). The
+  duplicate check now handles that without calling Jev.
+- **Scoring is unaffected.** The mirror average puts every flagged pair near 0.5 either
+  way.
+- **Recommendation:** treat `tie` and `PAIRWISE_TIE_RATE` as a *near-tie / borderline*
+  diagnostic, not as a substantive tie rate. Do not report per-run tie rates as a
+  finding. Duplicate-text ties (`result: "duplicate"`) are the only exact ties.
 
 ---
 
@@ -782,9 +982,9 @@ rag2026-0. The Section 8.1 determinism result is for Choice.
 | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | RQ1 Jev vs Gemini agreement                    | High. ρ = 0.973 on rag2026-0 and 0.955–0.976 across 3 topics. Both judges have the same top teams.                                                                                                   |
 | RQ2 Do probabilities matter?                   | Barely, for ranking: soft and binary win rates have ρ = 0.997–0.999 for both Choice (56% saturated) and Noul (never saturated, 0.02–0.98). Without ground truth we cannot say whether probabilities improve accuracy. |
-| RQ3 Length bias                                | Not for crude padding, for either judge; both penalise uninformative additions. The natural length correlation (ρ about 0.5) is consistent with coverage. Subtle on-topic verbosity is untested.     |
-| RQ4 Instruction following / prompt sensitivity | Jev follows negation and option relabelling at ≥ 99.6% on decisive pairs. Rewording the quality question changes 4–5% of pair decisions but not the ranking (ρ ≥ 0.97).                              |
-| RQ5 Reliability                                | Near-deterministic (75.6% identical, 0.34% flips). Choice has a strong first-slot bias on ties (identical summaries give P(A) = 0.80) that drives close-pair outcomes. A mirrored Noul pair gives 0.52 on ties and halves the close-pair slot advantage (0.58 → 0.54). Probabilities are uncalibrated in both forms. |
+| RQ3 Length bias                                | Not for crude padding, for either judge or either Jev question form; all penalise uninformative additions. The natural length correlation (ρ about 0.5) is consistent with coverage. Subtle on-topic verbosity is untested.     |
+| RQ4 Instruction following / prompt sensitivity | Jev follows negation and option relabelling at ≥ 99.6% on decisive pairs for Choice, and follows negation at 100% for Noul. Rewording the quality question changes 4–5% of pair decisions but not the ranking (ρ ≥ 0.97). |
+| RQ5 Reliability                                | Near-deterministic: Choice has 75.6% identical answers and 0.34% winner flips; the Noul mirror has mean |ΔP| 0.0045, max 0.05 and 0.25% flips. Choice has a strong first-slot bias on ties (identical summaries give P(A) = 0.80) that drives close-pair outcomes. A mirrored Noul pair gives 0.52 on ties and halves the close-pair slot advantage (0.58 → 0.54). Probabilities are uncalibrated in both forms. |
 
 ### 11.2 Recommended protocol for a full Jev run
 
@@ -821,11 +1021,11 @@ rag2026-0. The Section 8.1 determinism result is for Choice.
 separate games. For win rate this is equivalent to averaging. BT should be changed to
 fit on the orientation-averaged probability per pair.
 
-The judge supports Noul questions: `x_polarity` metadata, raw answers stored as
-`raw_p`, and a `noul_pilot` variant. However, the primary score uses one question's
-P(A better). The mirror average is computed only in
-`temp/jev_noul_compare.py`, so a mirrored-Noul full run needs that combination moved
-into the judge's scorer first.
+The judge supports Noul questions (`x_polarity` metadata, raw answers stored as
+`raw_p`). It also computes the mirror average as the primary score when `mirror:` is set,
+flags near-ties, and scores identical-text pairs as 0.5 without a call (Section 10.8).
+The `noul_pilot` and `noul_instruction_check` variants use it. A `full` variant with
+`mirror:` and `direction: ordered` has not been added yet.
 
 ### 11.3 Threats to validity
 
@@ -871,8 +1071,10 @@ into the judge's scorer first.
 6. **Length-controlled scoring.** Fit BT with a log-length-ratio covariate,
    logit P(i ≻ j) = s_i − s_j + β·log(len_i/len_j), and report β per judge as a
    summary statistic of length dependence. This uses existing data at no API cost.
-7. **Noul under the other probes.** Determinism and the padding test have been run with
-   Choice only.
+7. **Noul under the other probes.** Done (Section 10.9): mirrored Noul matches or
+   improves on Choice for determinism, instruction following and padding. Still open: a
+   Noul prompt-variant study (Section 6 equivalent), and whether a clear "no" to both
+   questions ever occurs for summaries that differ but are equally good.
 
 ### 11.5 Cost summary of this study
 
@@ -889,7 +1091,11 @@ into the judge's scorer first.
 | Padding test, Gemini                        | 4,608 | $3.29       |
 | Noul pilot (rag2026-0, both orientations, 2 questions) | 5,978 | $0.62 |
 | Identical summaries, Noul (2 questions × 248) | 496 | $0.05 |
-| **Total**                                   |       | **≈ $7.89** |
+| Noul instruction probes (3 topics × 4 questions) | 9,209 | $1.04 |
+| Noul determinism (rag2026-100, 2 passes × 2 questions) | 6,446 | $0.64 |
+| Padding test, Noul mirror | 4,608 | $0.55 |
+| Duplicate-check test (kiddie copy) | 6 | $0.0003 |
+| **Total**                                   |       | **≈ $10.11** |
 
 For reference, the partial Gemini tournament (78/119 topics, single orientation) cost
 about $149.
@@ -913,6 +1119,8 @@ Load it with `set -a; source ./.env; set +a`.
 | 8.3     | inline analysis of `output-pairwise-jev/bonsai_pairwise_jev.pairwise/pairs.csv` (columns `p_x_fwd`, `p_x_rev`)                                                                                                                                                                                                            | —                                                                             |
 | 9       | `python temp/jev_padding.py run [--judge gemini]` then `report [--judge gemini]` (`dry` previews)                                                                                                                                                                                                                         | `temp/jev_probes/padding{,_gemini}.jsonl`, `temp/jev_padding{,_gemini}.txt`   |
 | 10 | same `auto-judge run`, `--variant noul_pilot --out-dir ./output-pairwise-jev-noul/`, then `python temp/jev_noul_compare.py output-pairwise-jev-noul/bonsai_pairwise_jev.pairwise/comparisons.jsonl output-pairwise-jev/bonsai_pairwise_jev.pairwise/comparisons.jsonl temp/rag26_pairwise/bonsai_pairwise.pairwise/comparisons.jsonl`; ties: `python temp/jev_probes.py identical --question noul_a_better` (and `noul_b_better`), then `report --question …` | `output-pairwise-jev-noul/`, `temp/jev_noul_compare.txt`, `temp/jev_probes/identical_noul_{a,b}_better.jsonl`; log `temp/jev_noul_pilot.log` |
+| 10.8 | cache replay: same `auto-judge run` with `--variant noul_pilot` (now with `mirror:`); duplicate test: a kiddie copy with one run duplicated under another team, `--variant noul_pilot -J max_topics=2` | `output-pairwise-jev-noul/bonsai_pairwise_jev.pairwise/{q_mirror,leaderboard_overall.csv,run_manifest.json}` |
+| 10.9 | `bash temp/run_noul_probes.sh` (runs `--variant noul_instruction_check --out-dir ./output-pairwise-jev-noul-icheck/`, `python temp/jev_probes.py determinism --topic rag2026-100 --question mirror`, `python temp/jev_padding.py run --judge noul`); then `python temp/jev_noul_instruction_check.py output-pairwise-jev-noul-icheck/bonsai_pairwise_jev.pairwise/comparisons.jsonl output-pairwise-jev-noul/bonsai_pairwise_jev.pairwise/comparisons.jsonl`, `python temp/jev_probes.py report --question mirror`, `python temp/jev_padding.py report --judge noul` | `temp/jev_noul_instruction_check.txt`, `temp/jev_noul_determinism.txt`, `temp/jev_padding_noul.txt`; raw `temp/jev_probes/determinism_rag2026-100_mirror_pass{1,2}.jsonl`, `temp/jev_probes/padding_noul.jsonl`; logs `temp/jev_noul_{icheck,determinism,padding}.log` |
 
 Gemini baseline comparisons: `temp/rag26_pairwise/bonsai_pairwise.pairwise/comparisons.jsonl`
 (run 2026-09-10; see `HANDOFF-rag26-pairwise-judge.md`).
@@ -1025,6 +1233,18 @@ Response (per question): `{"type": "choice", "choice": "A", "confidence": 0.84, 
 - _instructions:_ You are a subject matter expert. Two RAG summaries (summary_a and summary_b) were generated for the query. Does summary_b satisfy the information need of the query better than summary_a does, considering relevance, completeness, and how well its claims are grounded?
 - _true:_ summary_b satisfies the information need of the query better than summary_a.
 - _false:_ summary_b does not satisfy the information need of the query better than summary_a.
+
+**noul_a_worse** (Noul probe, negation of noul_a_better)
+
+- _instructions:_ You are a subject matter expert. Two RAG summaries (summary_a and summary_b) were generated for the query. Does summary_a satisfy the information need of the query worse than summary_b does, considering relevance, completeness, and how well its claims are grounded?
+- _true:_ summary_a satisfies the information need of the query worse than summary_b.
+- _false:_ summary_a does not satisfy the information need of the query worse than summary_b.
+
+**noul_a_shorter** (Noul probe, objective)
+
+- _instructions:_ Ignore quality entirely. Is summary_a shorter than summary_b, i.e. does it contain fewer words?
+- _true:_ summary_a contains fewer words than summary_b.
+- _false:_ summary_a does not contain fewer words than summary_b.
 
 `x_*` keys are local metadata and are stripped before the request is sent. The Noul
 response shape is `{"type": "noul", "noul": 0.96}`.
