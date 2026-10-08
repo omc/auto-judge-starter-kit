@@ -1,0 +1,38 @@
+matched comparisons 2048 (broad 2048, narrow 2048) | topics ['2041', '2046']
+
+== 2041 (n=1024) ==
+pair           P(longer) broad  narrow   shift       DiD vs better [95% CI] rho len broad  narrow rank broad~narrow  tie% b/n
+better                   0.572   0.561  -0.011                            —         0.181   0.162             0.878  4.6/ 8.9
+appropriate              0.555   0.548  -0.007    +0.0036 [+0.0023,+0.0050]         0.127   0.074             0.891  3.8/ 8.4
+proportionate            0.574   0.539  -0.035    -0.0237 [-0.0267,-0.0208]         0.193   0.014             0.819  4.3/16.3
+
+== 2046 (n=1024) ==
+pair           P(longer) broad  narrow   shift       DiD vs better [95% CI] rho len broad  narrow rank broad~narrow  tie% b/n
+better                   0.541   0.475  -0.066                            —         0.104  -0.051             0.874  6.2/ 4.4
+appropriate              0.527   0.452  -0.075    -0.0090 [-0.0113,-0.0066]         0.067  -0.216             0.829  6.0/ 2.9
+proportionate            0.545   0.438  -0.107    -0.0407 [-0.0453,-0.0364]         0.112  -0.282             0.758  5.2/ 5.5
+
+== pooled (n=2048) ==
+pair           P(longer) broad  narrow   shift       DiD vs better [95% CI] rho len broad  narrow rank broad~narrow  tie% b/n
+better                   0.557   0.518  -0.039                            —         0.143   0.055             0.876  5.4/ 6.6
+appropriate              0.541   0.500  -0.041    -0.0027 [-0.0041,-0.0013]         0.097  -0.071             0.860  4.9/ 5.7
+proportionate            0.559   0.489  -0.071    -0.0322 [-0.0350,-0.0296]         0.152  -0.134             0.789  4.7/10.9
+
+broad  appropriate   vs better: mean diff -0.0048 | mean |diff| 0.0207 | winner differs 2.197%
+broad  proportionate vs better: mean diff +0.0043 | mean |diff| 0.0145 | winner differs 1.465%
+narrow appropriate   vs better: mean diff -0.0115 | mean |diff| 0.0275 | winner differs 4.541%
+narrow proportionate vs better: mean diff -0.0089 | mean |diff| 0.0405 | winner differs 6.299%
+
+top 6 per topic and framing (win rate, words):
+  2041 broad  better        lori(0.87,699w), marie(0.85,686w), alice(0.85,704w), alyssa(0.84,710w), kurt(0.76,759w), lila(0.75,475w)
+  2041 broad  appropriate   lori(0.86,699w), marie(0.84,686w), alice(0.83,704w), alyssa(0.83,710w), lila(0.74,475w), kurt(0.74,759w)
+  2041 broad  proportionate lori(0.88,699w), alice(0.86,704w), marie(0.86,686w), alyssa(0.85,710w), jada(0.75,710w), lila(0.73,475w)
+  2041 narrow better        marie(0.83,686w), lori(0.82,699w), alice(0.78,704w), alyssa(0.78,710w), alana(0.76,462w), jada(0.69,710w)
+  2041 narrow appropriate   marie(0.82,686w), lori(0.81,699w), alice(0.78,704w), alana(0.78,462w), alyssa(0.77,710w), lena(0.70,194w)
+  2041 narrow proportionate marie(0.79,686w), lori(0.76,699w), alana(0.76,462w), alyssa(0.74,710w), alice(0.74,704w), lena(0.73,194w)
+  2046 broad  better        alice(0.92,701w), marie(0.91,698w), lori(0.91,742w), kurt(0.84,826w), alyssa(0.81,693w), bree(0.80,554w)
+  2046 broad  appropriate   alice(0.92,701w), lori(0.91,742w), marie(0.91,698w), kurt(0.83,826w), alyssa(0.82,693w), bree(0.79,554w)
+  2046 broad  proportionate alice(0.93,701w), marie(0.92,698w), lori(0.92,742w), kurt(0.83,826w), alyssa(0.82,693w), bree(0.81,554w)
+  2046 narrow better        lori(0.86,742w), alice(0.85,701w), marie(0.84,698w), alyssa(0.82,693w), joyce(0.80,477w), susan(0.79,449w)
+  2046 narrow appropriate   lori(0.86,742w), alice(0.84,701w), alyssa(0.83,693w), marie(0.82,698w), joyce(0.78,477w), susan(0.76,449w)
+  2046 narrow proportionate lori(0.83,742w), alyssa(0.81,693w), alice(0.78,701w), marie(0.76,698w), susan(0.75,449w), joyce(0.75,477w)

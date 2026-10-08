@@ -36,8 +36,8 @@ has four properties that matter for the method:
    the tie bias, and rejection of crude padding. Two do not:
    - Longer summaries no longer win (P(longer) ≈ 0.47, ρ ≈ −0.1).
    - Close real pairs no longer favour slot A.
-   Both were properties of rag26, not of the judges. Gemini also now *penalises* added
-   relevant content.
+     Both were properties of rag26, not of the judges. Gemini also now _penalises_ added
+     relevant content.
 
 Our starting hypothesis that the Gemini judge was mainly rewarding length is **not
 supported** by the controlled tests so far, and on ragtime26 neither judge favours longer
@@ -638,28 +638,28 @@ less position-biased probabilities.
 
 Three ways to estimate P(summary_a better) from the raw P(yes) values, written yA and yB:
 
-| Estimator | Formula | Notes |
-| --- | --- | --- |
-| `noul_a` | yA | "is A better?" alone |
-| `mirror` | (yA + 1 − yB) / 2 | averages with the mirror question |
-| `ratio` | yA / (yA + yB) | relative preference |
-| `choice` | Choice `better_summary` P(A) | reference, from Section 4 |
+| Estimator | Formula                      | Notes                             |
+| --------- | ---------------------------- | --------------------------------- |
+| `noul_a`  | yA                           | "is A better?" alone              |
+| `mirror`  | (yA + 1 − yB) / 2            | averages with the mirror question |
+| `ratio`   | yA / (yA + yB)               | relative preference               |
+| `choice`  | Choice `better_summary` P(A) | reference, from Section 4         |
 
 ### 10.1 Identical summaries
 
-| Question (248 self-comparisons, 3 topics) | Mean (median) P(yes) | P(yes) > 0.5 | Per topic: mean (sd) | Distribution by decile, 0.0–1.0 |
-| --- | --- | --- | --- | --- |
-| `noul_a_better` | 0.151 (0.150) | 0/248 | rag2026-0: 0.143 (0.029); -1: 0.149 (0.032); -10: 0.160 (0.041) | 6, 215, 27, 0, 0, 0, 0, 0, 0, 0 |
-| `noul_b_better` | 0.103 (0.100) | 0/248 | rag2026-0: 0.099 (0.023); -1: 0.103 (0.028); -10: 0.105 (0.026) | 108, 140, 0, 0, 0, 0, 0, 0, 0, 0 |
+| Question (248 self-comparisons, 3 topics) | Mean (median) P(yes) | P(yes) > 0.5 | Per topic: mean (sd)                                            | Distribution by decile, 0.0–1.0  |
+| ----------------------------------------- | -------------------- | ------------ | --------------------------------------------------------------- | -------------------------------- |
+| `noul_a_better`                           | 0.151 (0.150)        | 0/248        | rag2026-0: 0.143 (0.029); -1: 0.149 (0.032); -10: 0.160 (0.041) | 6, 215, 27, 0, 0, 0, 0, 0, 0, 0  |
+| `noul_b_better`                           | 0.103 (0.100)        | 0/248        | rag2026-0: 0.099 (0.023); -1: 0.103 (0.028); -10: 0.105 (0.026) | 108, 140, 0, 0, 0, 0, 0, 0, 0, 0 |
 
 Implied P(summary_a better) on ties:
 
-| Estimator | P(A better) on identical summaries (ideal 0.5) |
-| --- | --- |
-| choice (Section 8.2) | **0.799** |
-| noul_a | **0.151** |
-| mirror | **0.524** |
-| ratio | 0.595 |
+| Estimator            | P(A better) on identical summaries (ideal 0.5) |
+| -------------------- | ---------------------------------------------- |
+| choice (Section 8.2) | **0.799**                                      |
+| noul_a               | **0.151**                                      |
+| mirror               | **0.524**                                      |
+| ratio                | 0.595                                          |
 
 - **For identical summaries Jev answers "no" to both questions.** That is logically
   correct: neither summary is better than the other.
@@ -672,15 +672,15 @@ Implied P(summary_a better) on ties:
 
 ### 10.2 Consistency of the two Noul answers on real pairs
 
-| Metric | Value |
-| --- | --- |
-| Mean yA / mean yB | 0.503 / 0.479 |
-| yA + yB: mean (median) | 0.983 (0.990) |
-| yA + yB within [0.9, 1.1] | 97.1% (2.8% below 0.9; 0.1% above 1.1) |
-| Both "no" (both < 0.5) | 33 comparisons (0.5%) |
-| Both "yes" (both > 0.5) | 29 comparisons (0.4%) |
-| Pearson(yA, 1 − yB) | 0.996 |
-| Winner agrees between `noul_a` and Choice | 99.1% |
+| Metric                                    | Value                                  |
+| ----------------------------------------- | -------------------------------------- |
+| Mean yA / mean yB                         | 0.503 / 0.479                          |
+| yA + yB: mean (median)                    | 0.983 (0.990)                          |
+| yA + yB within [0.9, 1.1]                 | 97.1% (2.8% below 0.9; 0.1% above 1.1) |
+| Both "no" (both < 0.5)                    | 33 comparisons (0.5%)                  |
+| Both "yes" (both > 0.5)                   | 29 comparisons (0.4%)                  |
+| Pearson(yA, 1 − yB)                       | 0.996                                  |
+| Winner agrees between `noul_a` and Choice | 99.1%                                  |
 
 - On real, non-identical pairs the two Noul answers are almost exact complements, so
   there is no meaningful yes-bias.
@@ -690,17 +690,17 @@ Implied P(summary_a better) on ties:
 
 `noul_a_better` raw P(yes), compared with Choice on the same 6,446 comparisons:
 
-| P range | Noul | Choice (Section 4.3) |
-| --- | --- | --- |
-| [0.00, 0.01) | 0 | 1,834 |
-| [0.01, 0.10) | 1,631 | 801 |
-| [0.10, 0.25) | 941 | 259 |
-| [0.25, 0.40) | 379 | 164 |
-| [0.40, 0.60) | 415 | 195 |
-| [0.60, 0.75) | 469 | 217 |
-| [0.75, 0.90) | 950 | 303 |
-| [0.90, 0.99) | 1,661 | 521 |
-| [0.99, 1.00] | 0 | 2,152 |
+| P range      | Noul  | Choice (Section 4.3) |
+| ------------ | ----- | -------------------- |
+| [0.00, 0.01) | 0     | 1,834                |
+| [0.01, 0.10) | 1,631 | 801                  |
+| [0.10, 0.25) | 941   | 259                  |
+| [0.25, 0.40) | 379   | 164                  |
+| [0.40, 0.60) | 415   | 195                  |
+| [0.60, 0.75) | 469   | 217                  |
+| [0.75, 0.90) | 950   | 303                  |
+| [0.90, 0.99) | 1,661 | 521                  |
+| [0.99, 1.00] | 0     | 2,152                |
 
 - Noul never returns exactly 0 or 1. Its range is 0.02–0.98 (yB: 0.01–0.98), with 97
   distinct values.
@@ -717,11 +717,11 @@ Pairs judged in both orientations: 3,223. "Swap" columns describe how P changes 
 the two summaries are swapped.
 
 | Estimator | Mean P(A) | Exactly 0/1 | Share in [0.4, 0.6] | Mean swap \|ΔP\| | Winner flips on swap | P(slot A wins) | Probability vs binary ranking ρ | ρ vs Choice | ρ vs Gemini | P(longer wins) | ρ(win rate, words) |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| choice | 0.505 | 0.562 | 0.032 | 0.042 | 0.044 | 0.505 | 0.9988 | 1.000 | 0.973 | 0.694 | 0.524 |
-| noul_a | 0.503 | 0.000 | 0.070 | 0.042 | 0.042 | 0.503 | 0.9973 | 0.999 | 0.970 | 0.669 | 0.532 |
-| mirror | 0.512 | 0.000 | 0.063 | 0.036 | 0.037 | 0.512 | 0.9979 | 0.999 | 0.970 | 0.669 | 0.531 |
-| ratio | 0.514 | 0.000 | 0.063 | 0.038 | 0.037 | 0.514 | 0.9985 | 0.999 | 0.968 | 0.671 | 0.533 |
+| --------- | --------- | ----------- | ------------------- | ---------------- | -------------------- | -------------- | ------------------------------- | ----------- | ----------- | -------------- | ------------------ |
+| choice    | 0.505     | 0.562       | 0.032               | 0.042            | 0.044                | 0.505          | 0.9988                          | 1.000       | 0.973       | 0.694          | 0.524              |
+| noul_a    | 0.503     | 0.000       | 0.070               | 0.042            | 0.042                | 0.503          | 0.9973                          | 0.999       | 0.970       | 0.669          | 0.532              |
+| mirror    | 0.512     | 0.000       | 0.063               | 0.036            | 0.037                | 0.512          | 0.9979                          | 0.999       | 0.970       | 0.669          | 0.531              |
+| ratio     | 0.514     | 0.000       | 0.063               | 0.038            | 0.037                | 0.514          | 0.9985                          | 0.999       | 0.968       | 0.671          | 0.533              |
 
 Ranking agreement between estimators, after averaging both orientations: Spearman
 **0.999–1.000** for every pair of estimators.
@@ -736,12 +736,12 @@ mean P(slot A wins) / winner-flip rate when swapped. Group boundaries are the sa
 in Section 8.3. The groups hold different pairs for each estimator, because Noul
 spreads probabilities differently from Choice.
 
-| Estimator | 0.00–0.05 | 0.05–0.25 | 0.25–0.40 | **0.40–0.60** | 0.60–0.75 | 0.75–0.95 | 0.95–1.00 |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| choice | 1360 / 0.500 / 0.00 | 239 / 0.507 / 0.00 | 107 / 0.527 / 0.29 | **111 / 0.582 / 0.78** | 98 / 0.531 / 0.23 | 217 / 0.507 / 0.00 | 1091 / 0.500 / 0.00 |
-| noul_a | 410 / 0.498 / 0.00 | 1033 / 0.498 / 0.00 | 203 / 0.510 / 0.00 | **221 / 0.538 / 0.60** | 207 / 0.510 / 0.01 | 832 / 0.502 / 0.00 | 317 / 0.498 / 0.00 |
-| mirror | 424 / 0.504 / 0.00 | 1027 / 0.508 / 0.00 | 200 / 0.526 / 0.00 | **220 / 0.542 / 0.54** | 195 / 0.521 / 0.01 | 851 / 0.511 / 0.00 | 306 / 0.504 / 0.00 |
-| ratio | 528 / 0.503 / 0.00 | 934 / 0.511 / 0.00 | 194 / 0.528 / 0.01 | **213 / 0.545 / 0.55** | 191 / 0.524 / 0.01 | 793 / 0.514 / 0.00 | 370 / 0.504 / 0.00 |
+| Estimator | 0.00–0.05           | 0.05–0.25           | 0.25–0.40          | **0.40–0.60**          | 0.60–0.75          | 0.75–0.95          | 0.95–1.00           |
+| --------- | ------------------- | ------------------- | ------------------ | ---------------------- | ------------------ | ------------------ | ------------------- |
+| choice    | 1360 / 0.500 / 0.00 | 239 / 0.507 / 0.00  | 107 / 0.527 / 0.29 | **111 / 0.582 / 0.78** | 98 / 0.531 / 0.23  | 217 / 0.507 / 0.00 | 1091 / 0.500 / 0.00 |
+| noul_a    | 410 / 0.498 / 0.00  | 1033 / 0.498 / 0.00 | 203 / 0.510 / 0.00 | **221 / 0.538 / 0.60** | 207 / 0.510 / 0.01 | 832 / 0.502 / 0.00 | 317 / 0.498 / 0.00  |
+| mirror    | 424 / 0.504 / 0.00  | 1027 / 0.508 / 0.00 | 200 / 0.526 / 0.00 | **220 / 0.542 / 0.54** | 195 / 0.521 / 0.01 | 851 / 0.511 / 0.00 | 306 / 0.504 / 0.00  |
+| ratio     | 528 / 0.503 / 0.00  | 934 / 0.511 / 0.00  | 194 / 0.528 / 0.01 | **213 / 0.545 / 0.55** | 191 / 0.524 / 0.01 | 793 / 0.514 / 0.00 | 370 / 0.504 / 0.00  |
 
 - **In close pairs (0.4–0.6) Noul cuts the slot-A advantage roughly in half:** from
   0.582 to 0.538–0.545.
@@ -755,12 +755,12 @@ spreads probabilities differently from Choice.
 
 ### 10.6 Top 8 on rag2026-0 (win rate, words)
 
-| Estimator | Top 8 |
-| --- | --- |
-| choice | carmen (0.97, 1020), edith (0.94, 863), lars (0.93, 869), ariel (0.92, 896), yara (0.92, 1000), xavi (0.91, 760), hana (0.91, 760), todd (0.90, 1024) |
-| noul_a | carmen (0.88, 1020), lars (0.86, 869), edith (0.85, 863), ariel (0.84, 896), yara (0.84, 1000), hana (0.84, 760), xavi (0.84, 760), todd (0.84, 1024) |
-| mirror | carmen (0.89, 1020), lars (0.86, 869), edith (0.86, 863), ariel (0.85, 896), yara (0.84, 1000), hana (0.84, 760), xavi (0.84, 760), todd (0.84, 1024) |
-| ratio | carmen (0.88, 1020), lars (0.86, 869), edith (0.86, 863), ariel (0.85, 896), rita (0.84, 1020), todd (0.84, 1024), yara (0.84, 1000), hana (0.84, 760) |
+| Estimator | Top 8                                                                                                                                                  |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| choice    | carmen (0.97, 1020), edith (0.94, 863), lars (0.93, 869), ariel (0.92, 896), yara (0.92, 1000), xavi (0.91, 760), hana (0.91, 760), todd (0.90, 1024)  |
+| noul_a    | carmen (0.88, 1020), lars (0.86, 869), edith (0.85, 863), ariel (0.84, 896), yara (0.84, 1000), hana (0.84, 760), xavi (0.84, 760), todd (0.84, 1024)  |
+| mirror    | carmen (0.89, 1020), lars (0.86, 869), edith (0.86, 863), ariel (0.85, 896), yara (0.84, 1000), hana (0.84, 760), xavi (0.84, 760), todd (0.84, 1024)  |
+| ratio     | carmen (0.88, 1020), lars (0.86, 869), edith (0.86, 863), ariel (0.85, 896), rita (0.84, 1020), todd (0.84, 1024), yara (0.84, 1000), hana (0.84, 760) |
 
 The choice row here is orientation-averaged on this topic, so it differs slightly from
 the Section 6.5 row, which comes from the 3-topic single-orientation run.
@@ -851,13 +851,13 @@ the Choice result.
 Noul questions per request. Two sequential passes with byte-identical payloads, cache
 bypassed. Cost $0.32 per pass, 0 errors. Snapshot served: `jev-1.13-20260917`.
 
-| Metric | Choice `better_summary` (8.1) | Noul `noul_a_better` (raw) | Noul `noul_b_better` (raw) | **Noul mirror** |
-| --- | --- | --- | --- | --- |
-| Probability exactly identical | 75.6% | 58.6% | 57.9% | 40.8% |
-| Mean \|ΔP\| | 0.0043 | 0.0051 | 0.0052 | **0.0045** |
-| p95 \|ΔP\| | 0.020 | — | — | **0.015** |
-| Max \|ΔP\| | 0.090 | 0.050 | 0.060 | **0.050** |
-| Winner flips | 4 (0.12%) | — | — | **8 (0.25%)** |
+| Metric                        | Choice `better_summary` (8.1) | Noul `noul_a_better` (raw) | Noul `noul_b_better` (raw) | **Noul mirror** |
+| ----------------------------- | ----------------------------- | -------------------------- | -------------------------- | --------------- |
+| Probability exactly identical | 75.6%                         | 58.6%                      | 57.9%                      | 40.8%           |
+| Mean \|ΔP\|                   | 0.0043                        | 0.0051                     | 0.0052                     | **0.0045**      |
+| p95 \|ΔP\|                    | 0.020                         | —                          | —                          | **0.015**       |
+| Max \|ΔP\|                    | 0.090                         | 0.050                      | 0.060                      | **0.050**       |
+| Winner flips                  | 4 (0.12%)                     | —                          | —                          | **8 (0.25%)**   |
 
 - **Each Noul answer jitters slightly more often than Choice, but by less.** Exact
   repeats are 58–59%, against Choice's 75.6%, but the maximum change is 0.05–0.06
@@ -867,7 +867,7 @@ bypassed. Cost $0.32 per pass, 0 errors. Snapshot served: `jev-1.13-20260917`.
 - **Net effect:** the mirror score's 95th-percentile and maximum changes are smaller
   than Choice's, but **more winners flip**: 8 against 4. Its scores sit closer to 0.5,
   so the same jitter crosses 0.5 more often.
-  - *Correction:* an earlier version of this section compared against the Choice flip
+  - _Correction:_ an earlier version of this section compared against the Choice flip
     count under the old rule (11, 0.34%, counting 0.5 as a B win) and concluded that the
     mirror flips less. That was wrong.
   - ragtime26 confirms the ordering: Choice 0.59% against mirror 1.07% (Section 11.6).
@@ -896,33 +896,33 @@ $1.00, 0 errors.
 
 **The mirror pair re-asked in the larger bundle (3 topics).**
 
-| Metric | Value |
-| --- | --- |
-| yA + yB: mean | 0.989 |
-| yA + yB within [0.9, 1.1] | 97.7% |
-| Both "no" / both "yes" | 40 / 66 (0.42% / 0.69%) |
-| Pearson(yA, 1 − yB) | 0.996 |
+| Metric                    | Value                   |
+| ------------------------- | ----------------------- |
+| yA + yB: mean             | 0.989                   |
+| yA + yB within [0.9, 1.1] | 97.7%                   |
+| Both "no" / both "yes"    | 40 / 66 (0.42% / 0.69%) |
+| Pearson(yA, 1 − yB)       | 0.996                   |
 
 **Negation (`noul_a_worse`).**
 
-| Metric | Noul (this run) | Choice `worse_summary` (7.1) |
-| --- | --- | --- |
-| Pearson with the expected value | 0.994 (with 1 − yA); 0.987 (with yB) | 0.975 |
-| Mean \|P − expected\| | 0.025 (vs 1 − yA); 0.039 (vs yB) | 0.054 |
-| Winner inverted, all pairs | 96.9% | 95.5% |
-| Winner inverted, decisive pairs | **100%** (\|mirror − 0.5\| > 0.4, n = 4,337) | 99.6% (n = 7,613) |
+| Metric                          | Noul (this run)                              | Choice `worse_summary` (7.1) |
+| ------------------------------- | -------------------------------------------- | ---------------------------- |
+| Pearson with the expected value | 0.994 (with 1 − yA); 0.987 (with yB)         | 0.975                        |
+| Mean \|P − expected\|           | 0.025 (vs 1 − yA); 0.039 (vs yB)             | 0.054                        |
+| Winner inverted, all pairs      | 96.9%                                        | 95.5%                        |
+| Winner inverted, decisive pairs | **100%** (\|mirror − 0.5\| > 0.4, n = 4,337) | 99.6% (n = 7,613)            |
 
 - **Near-ties** (|mirror − 0.5| ≤ 0.1, n = 732): mean yA 0.508, yB 0.499, yW 0.471. Only
   10 of these pairs get "no" to all three questions.
 
 **Length (`noul_a_shorter`).**
 
-| Length ratio | n | Noul accuracy | Noul mean P(correct) | Choice `shorter` accuracy (7.1) |
-| --- | --- | --- | --- | --- |
-| All | 9,569 | **87.2%** | 0.802 | 85.8% |
-| < 1.25× | 2,698 | 63.4% | 0.584 | 61.1% |
-| 1.25–2× | 3,092 | 92.3% | 0.800 | 90.1% |
-| ≥ 2× | 3,779 | **100.0%** | 0.958 | 99.9% |
+| Length ratio | n     | Noul accuracy | Noul mean P(correct) | Choice `shorter` accuracy (7.1) |
+| ------------ | ----- | ------------- | -------------------- | ------------------------------- |
+| All          | 9,569 | **87.2%**     | 0.802                | 85.8%                           |
+| < 1.25×      | 2,698 | 63.4%         | 0.584                | 61.1%                           |
+| 1.25–2×      | 3,092 | 92.3%         | 0.800                | 90.1%                           |
+| ≥ 2×         | 3,779 | **100.0%**    | 0.958                | 99.9%                           |
 
 - Spearman(P_yes(shorter), log(len_a / len_b)) = −0.946 (Choice: −0.945).
 - **Quality still leaks into the length question.** Spearman(P_yes(shorter), mirror
@@ -940,22 +940,22 @@ closely as Choice does. The same quality-leak caveat applies.
 8 opponents each, 6 variants, both orientations, 4,608 calls. The score is the mirror
 average. Cost $0.55, 0 errors.
 
-| Variant | Length vs original | Noul P(win) | **Noul ΔP** [95% CI] | Noul targets improved | Choice Jev ΔP (9.2) | Gemini ΔP (9.2) |
-| --- | --- | --- | --- | --- | --- | --- |
-| original | 1.00× | 0.327 | — | — | — | — |
-| pad_repeat | 1.53× | 0.280 | **−0.048** [−0.055, −0.040] | 1/48 | −0.050 | −0.171 |
-| pad_generic | 1.51× | 0.231 | **−0.097** [−0.114, −0.081] | 0/48 | −0.089 | −0.161 |
-| pad_offtopic | 1.53× | 0.136 | **−0.191** [−0.213, −0.170] | 0/48 | −0.194 | −0.224 |
-| pad_relevant | 1.53× | 0.487 | **+0.160** [+0.144, +0.176] | 48/48 | +0.183 | +0.016 |
-| truncate | 0.66× | 0.246 | **−0.082** [−0.098, −0.067] | 2/48 | −0.087 | −0.107 |
+| Variant      | Length vs original | Noul P(win) | **Noul ΔP** [95% CI]        | Noul targets improved | Choice Jev ΔP (9.2) | Gemini ΔP (9.2) |
+| ------------ | ------------------ | ----------- | --------------------------- | --------------------- | ------------------- | --------------- |
+| original     | 1.00×              | 0.327       | —                           | —                     | —                   | —               |
+| pad_repeat   | 1.53×              | 0.280       | **−0.048** [−0.055, −0.040] | 1/48                  | −0.050              | −0.171          |
+| pad_generic  | 1.51×              | 0.231       | **−0.097** [−0.114, −0.081] | 0/48                  | −0.089              | −0.161          |
+| pad_offtopic | 1.53×              | 0.136       | **−0.191** [−0.213, −0.170] | 0/48                  | −0.194              | −0.224          |
+| pad_relevant | 1.53×              | 0.487       | **+0.160** [+0.144, +0.176] | 48/48                 | +0.183              | +0.016          |
+| truncate     | 0.66×              | 0.246       | **−0.082** [−0.098, −0.067] | 2/48                  | −0.087              | −0.107          |
 
 Noul ΔP by topic:
 
-| Topic | pad_repeat | pad_generic | pad_offtopic | pad_relevant | truncate |
-| --- | --- | --- | --- | --- | --- |
-| rag2026-0 | −0.033 | −0.055 | −0.188 | +0.173 | −0.069 |
-| rag2026-1 | −0.037 | −0.076 | −0.184 | +0.175 | −0.069 |
-| rag2026-10 | −0.073 | −0.159 | −0.202 | +0.132 | −0.107 |
+| Topic      | pad_repeat | pad_generic | pad_offtopic | pad_relevant | truncate |
+| ---------- | ---------- | ----------- | ------------ | ------------ | -------- |
+| rag2026-0  | −0.033     | −0.055      | −0.188       | +0.173       | −0.069   |
+| rag2026-1  | −0.037     | −0.076      | −0.184       | +0.175       | −0.069   |
+| rag2026-10 | −0.073     | −0.159      | −0.202       | +0.132       | −0.107   |
 
 - **Mirrored Noul rewards content, not length, just as Choice does.** Every effect has
   the same direction, and the sizes are within about 0.02 of Choice (pad_relevant +0.160
@@ -974,11 +974,11 @@ We measured how many comparisons the flag catches at different thresholds, using
 instruction-check run (9,589 comparisons) and the two determinism passes:
 
 | `tie_threshold` | Flagged (instruction run) | Of those, `noul_a_worse` also "no" | Flagged in determinism pass 1 / pass 2 / both |
-| --- | --- | --- | --- |
-| 0.50 (default) | 40 (0.42%) | 10 / 40 | 6 / 6 / 4 |
-| 0.45 | 7 (0.07%) | 0 / 7 | 0 / 0 / 0 |
-| 0.40 | 0 | — | 0 / 0 / 0 |
-| 0.35 | 0 | — | 0 / 0 / 0 |
+| --------------- | ------------------------- | ---------------------------------- | --------------------------------------------- |
+| 0.50 (default)  | 40 (0.42%)                | 10 / 40                            | 6 / 6 / 4                                     |
+| 0.45            | 7 (0.07%)                 | 0 / 7                              | 0 / 0 / 0                                     |
+| 0.40            | 0                         | —                                  | 0 / 0 / 0                                     |
+| 0.35            | 0                         | —                                  | 0 / 0 / 0                                     |
 
 - **Jev almost never answers a clear "no" to both questions on real, different
   summaries.** At the default threshold the flag catches borderline pairs whose two
@@ -991,7 +991,7 @@ instruction-check run (9,589 comparisons) and the two determinism passes:
   duplicate check now handles that without calling Jev.
 - **Scoring is unaffected.** The mirror average puts every flagged pair near 0.5 either
   way.
-- **Recommendation:** treat `tie` and `PAIRWISE_TIE_RATE` as a *near-tie / borderline*
+- **Recommendation:** treat `tie` and `PAIRWISE_TIE_RATE` as a _near-tie / borderline_
   diagnostic, not as a substantive tie rate. Do not report per-run tie rates as a
   finding. Duplicate-text ties (`result: "duplicate"`) are the only exact ties.
 
@@ -1008,14 +1008,14 @@ AutoJudge dataset.
 
 ragtime26, task `repgen` (`data/ragtime26/runs/repgen/`):
 
-| Property | rag26 (generation) | ragtime26 (repgen) |
-| --- | --- | --- |
-| Runs / teams / topics | 83 / 25 / 119 | 49 / 10 / 103 |
-| Reports (non-empty) | 9,875 (9,836) | 5,047 (5,041) |
-| Cross-team pairs per topic, single / ordered | about 3,200 / 6,400 | 1,024 / 2,048 |
-| Full tournament, ordered (unique calls) | 760,886 (703,536) | 210,418 (196,958) |
-| Report length, median (pilot topic range) | 679 words (rag2026-0: 65–1,024) | 602 words (2000: 235–857) |
-| Topic text | `title` only: a long, multi-part question | short `title` (a label) + `problem_statement` + `background`, about 118 words |
+| Property                                     | rag26 (generation)                        | ragtime26 (repgen)                                                            |
+| -------------------------------------------- | ----------------------------------------- | ----------------------------------------------------------------------------- |
+| Runs / teams / topics                        | 83 / 25 / 119                             | 49 / 10 / 103                                                                 |
+| Reports (non-empty)                          | 9,875 (9,836)                             | 5,047 (5,041)                                                                 |
+| Cross-team pairs per topic, single / ordered | about 3,200 / 6,400                       | 1,024 / 2,048                                                                 |
+| Full tournament, ordered (unique calls)      | 760,886 (703,536)                         | 210,418 (196,958)                                                             |
+| Report length, median (pilot topic range)    | 679 words (rag2026-0: 65–1,024)           | 602 words (2000: 235–857)                                                     |
+| Topic text                                   | `title` only: a long, multi-part question | short `title` (a label) + `problem_statement` + `background`, about 118 words |
 
 **Topic text.** On ragtime the title is just a label, for example "Anti-vaping
 Legislation"; the actual request is in `problem_statement` and `background`. Both judges
@@ -1033,13 +1033,13 @@ and 3,223 of 3,223 rag26 Gemini cache keys still hit.
 variants, questions, scripts and parameters. Only the dataset is switched, via
 `JEV_DATASET=ragtime26` (`temp/jev_dataset.py`).
 
-| rag26 | ragtime26 | Used for |
-| --- | --- | --- |
-| rag2026-0 | 2000 | pilots (Choice, Noul), both orientations |
-| rag2026-0, -1, -10 | 2000, 2001, 2002 | prompt variants, instruction probes, identical summaries, padding |
-| rag2026-100 | 2003 | determinism (uncached) |
-| rag2026-50 | 2050 | off-topic padding source |
-| existing Gemini run | **new** Gemini run on 2000–2002 (original prompt, single orientation, 3,072 comparisons) | agreement and length baseline |
+| rag26               | ragtime26                                                                                | Used for                                                          |
+| ------------------- | ---------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| rag2026-0           | 2000                                                                                     | pilots (Choice, Noul), both orientations                          |
+| rag2026-0, -1, -10  | 2000, 2001, 2002                                                                         | prompt variants, instruction probes, identical summaries, padding |
+| rag2026-100         | 2003                                                                                     | determinism (uncached)                                            |
+| rag2026-50          | 2050                                                                                     | off-topic padding source                                          |
+| existing Gemini run | **new** Gemini run on 2000–2002 (original prompt, single orientation, 3,072 comparisons) | agreement and length baseline                                     |
 
 All 14 steps of `temp/run_ragtime26_suite.sh` finished with 0 errors and 0 invalid
 answers. Cost: $1.29 for the Jev runs, $3.93 for the probes and padding (including
@@ -1049,16 +1049,16 @@ ragtime; Gemini cost $0.000541 per comparison.
 
 ### 11.2 Pilot: distribution, agreement, position (Choice, topic 2000)
 
-| Metric | rag26 (4.x) | ragtime26 |
-| --- | --- | --- |
-| Valid | 6,446 / 6,446 | 2,048 / 2,048 |
-| Exactly 0 or 1 | 56.2% | **24.4%** |
-| Decisive (P < 0.25 or > 0.75) | 90.7% | 78.7% |
-| In [0.25, 0.75] / in [0.4, 0.6] | 9.3% / 3.2% | 21.3% / 8.5% |
-| Mean decisiveness \|2P − 1\| | 0.890 | 0.751 |
-| Probability vs binary win-rate ranking ρ | 0.9988 | 0.9961 |
-| Swap: mean \|ΔP\| (median) | 0.042 (0.000) | 0.046 (0.020) |
-| Winner flips on swap | 4.4% | 3.9% |
+| Metric                                      | rag26 (4.x)   | ragtime26         |
+| ------------------------------------------- | ------------- | ----------------- |
+| Valid                                       | 6,446 / 6,446 | 2,048 / 2,048     |
+| Exactly 0 or 1                              | 56.2%         | **24.4%**         |
+| Decisive (P < 0.25 or > 0.75)               | 90.7%         | 78.7%             |
+| In [0.25, 0.75] / in [0.4, 0.6]             | 9.3% / 3.2%   | 21.3% / 8.5%      |
+| Mean decisiveness \|2P − 1\|                | 0.890         | 0.751             |
+| Probability vs binary win-rate ranking ρ    | 0.9988        | 0.9961            |
+| Swap: mean \|ΔP\| (median)                  | 0.042 (0.000) | 0.046 (0.020)     |
+| Winner flips on swap                        | 4.4%          | 3.9%              |
 | Jev vs Gemini win rates: Spearman / Kendall | 0.973 / 0.868 | **0.949 / 0.815** |
 
 Choice P(A) distribution on topic 2000, by range: [0, 0.01) 286; [0.01, 0.10) 333;
@@ -1083,21 +1083,21 @@ Saturation, however, depends on the dataset: Jev is much less certain on ragtime
 
 Natural comparisons on the pilot topic (2000):
 
-| Judge | P(longer wins) | Ratio < 1.25× | 1.25–2× | ≥ 2× | ρ(win rate, words) |
-| --- | --- | --- | --- | --- | --- |
-| Jev Choice (both orientations) | **0.480** | 0.386 | 0.629 | 0.438 | **−0.077** |
-| Gemini (single orientation) | **0.455** | 0.366 | 0.603 | 0.407 | **−0.157** |
-| *rag26, Jev (rag2026-0)* | *0.694* | *0.546* | *0.617* | *0.844* | *0.524* |
-| *rag26, Gemini (rag2026-0)* | *0.662* | *0.520* | *0.571* | *0.817* | *0.436* |
+| Judge                          | P(longer wins) | Ratio < 1.25× | 1.25–2× | ≥ 2×    | ρ(win rate, words) |
+| ------------------------------ | -------------- | ------------- | ------- | ------- | ------------------ |
+| Jev Choice (both orientations) | **0.480**      | 0.386         | 0.629   | 0.438   | **−0.077**         |
+| Gemini (single orientation)    | **0.455**      | 0.366         | 0.603   | 0.407   | **−0.157**         |
+| _rag26, Jev (rag2026-0)_       | _0.694_        | _0.546_       | _0.617_ | _0.844_ | _0.524_            |
+| _rag26, Gemini (rag2026-0)_    | _0.662_        | _0.520_       | _0.571_ | _0.817_ | _0.436_            |
 
 Prompt variants, pooled over 2000–2002:
 
-| Question | P(longer) | < 1.25× | 1.25–2× | ≥ 2× | ρ(win rate, words) | Exactly 0/1 | Decisiveness |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| better_summary | 0.476 | 0.440 | 0.482 | 0.508 | −0.137 | 0.243 | 0.783 |
-| length_neutral | 0.445 | 0.440 | 0.446 | 0.449 | −0.209 | 0.277 | 0.775 |
-| needs_coverage | 0.489 | 0.447 | 0.492 | 0.535 | −0.075 | 0.317 | 0.786 |
-| precision | 0.425 | 0.424 | 0.429 | 0.423 | −0.262 | 0.213 | 0.776 |
+| Question       | P(longer) | < 1.25× | 1.25–2× | ≥ 2×  | ρ(win rate, words) | Exactly 0/1 | Decisiveness |
+| -------------- | --------- | ------- | ------- | ----- | ------------------ | ----------- | ------------ |
+| better_summary | 0.476     | 0.440   | 0.482   | 0.508 | −0.137             | 0.243       | 0.783        |
+| length_neutral | 0.445     | 0.440   | 0.446   | 0.449 | −0.209             | 0.277       | 0.775        |
+| needs_coverage | 0.489     | 0.447   | 0.492   | 0.535 | −0.075             | 0.317       | 0.786        |
+| precision      | 0.425     | 0.424   | 0.429   | 0.423 | −0.262             | 0.213       | 0.776        |
 
 **Finding: the rag26 length correlation does not replicate.**
 
@@ -1116,13 +1116,13 @@ Prompt variants, pooled over 2000–2002:
 
 ### 11.4 Prompt variants
 
-| | rag26 | ragtime26 |
-| --- | --- | --- |
-| Ranking agreement between questions (Spearman, mean over 3 topics) | 0.971–0.993 | **0.909–0.974** |
-| Argmax agreement with control, all pairs | 0.950–0.971 | 0.926–0.942 |
-| Argmax agreement with control, near-equal length | 0.958–0.961 | 0.937–0.961 (n = 1,021) |
-| Agreement with Gemini, per question | 0.955–0.976 | 0.915–0.946 |
-| Control re-asked in the 4-question bundle vs pilot: identical / mean \|ΔP\| / argmax agree | 76.4% / 0.0042 / 99.7% | 49.0% / 0.0109 / 98.8% |
+|                                                                                            | rag26                  | ragtime26               |
+| ------------------------------------------------------------------------------------------ | ---------------------- | ----------------------- |
+| Ranking agreement between questions (Spearman, mean over 3 topics)                         | 0.971–0.993            | **0.909–0.974**         |
+| Argmax agreement with control, all pairs                                                   | 0.950–0.971            | 0.926–0.942             |
+| Argmax agreement with control, near-equal length                                           | 0.958–0.961            | 0.937–0.961 (n = 1,021) |
+| Agreement with Gemini, per question                                                        | 0.955–0.976            | 0.915–0.946             |
+| Control re-asked in the 4-question bundle vs pilot: identical / mean \|ΔP\| / argmax agree | 76.4% / 0.0042 / 99.7% | 49.0% / 0.0109 / 98.8%  |
 
 Ragtime ranking agreement in detail: better_summary vs length_neutral 0.971, vs
 needs_coverage 0.970, vs precision 0.960; length_neutral vs needs_coverage 0.951, vs
@@ -1139,19 +1139,19 @@ agree at 0.909.
 
 ### 11.5 Instruction-following probes
 
-| Probe | rag26 | ragtime26 |
-| --- | --- | --- |
-| Choice `worse_summary`: Pearson with 1 − P_control | 0.975 | 0.939 |
-| … inverted, all pairs / decisive pairs | 95.5% / 99.6% | 90.6% / **98.3%** (n = 1,993) |
-| Choice `swapped_labels`: Pearson / inverted on decisive pairs | 0.976 / 100% | 0.967 / **99.9%** |
-| Coin-flip control pairs (0.4–0.6): mean P(A) under worse / swapped | 0.390 / 0.384 | 0.341 / 0.379 (n = 222) |
-| Choice `shorter`: accuracy all / < 1.25× / 1.25–2× / ≥ 2× | 85.8 / 61.1 / 90.1 / 99.9% | 80.1 / 58.2 / 84.8 / 99.0% |
-| … Spearman with log length ratio | −0.945 | −0.872 |
-| … Spearman with P(A better), the quality leak | −0.675 | **−0.154** |
-| … conflict pairs: follows length / inverse quality | 67.2% / 32.8% (n = 2,765) | 74.7% / 25.3% (n = 1,581) |
-| Noul `noul_a_worse`: Pearson with 1 − yA / inverted on decisive pairs | 0.994 / 100% | 0.993 / **100%** (n = 513) |
-| Noul `noul_a_shorter`: accuracy all / < 1.25× / 1.25–2× / ≥ 2× | 87.2 / 63.4 / 92.3 / 100% | 81.3 / 58.9 / 86.9 / 99.4% |
-| … Spearman with mirror P(A better) | −0.719 | −0.154 |
+| Probe                                                                 | rag26                      | ragtime26                     |
+| --------------------------------------------------------------------- | -------------------------- | ----------------------------- |
+| Choice `worse_summary`: Pearson with 1 − P_control                    | 0.975                      | 0.939                         |
+| … inverted, all pairs / decisive pairs                                | 95.5% / 99.6%              | 90.6% / **98.3%** (n = 1,993) |
+| Choice `swapped_labels`: Pearson / inverted on decisive pairs         | 0.976 / 100%               | 0.967 / **99.9%**             |
+| Coin-flip control pairs (0.4–0.6): mean P(A) under worse / swapped    | 0.390 / 0.384              | 0.341 / 0.379 (n = 222)       |
+| Choice `shorter`: accuracy all / < 1.25× / 1.25–2× / ≥ 2×             | 85.8 / 61.1 / 90.1 / 99.9% | 80.1 / 58.2 / 84.8 / 99.0%    |
+| … Spearman with log length ratio                                      | −0.945                     | −0.872                        |
+| … Spearman with P(A better), the quality leak                         | −0.675                     | **−0.154**                    |
+| … conflict pairs: follows length / inverse quality                    | 67.2% / 32.8% (n = 2,765)  | 74.7% / 25.3% (n = 1,581)     |
+| Noul `noul_a_worse`: Pearson with 1 − yA / inverted on decisive pairs | 0.994 / 100%               | 0.993 / **100%** (n = 513)    |
+| Noul `noul_a_shorter`: accuracy all / < 1.25× / 1.25–2× / ≥ 2×        | 87.2 / 63.4 / 92.3 / 100%  | 81.3 / 58.9 / 86.9 / 99.4%    |
+| … Spearman with mirror P(A better)                                    | −0.719                     | −0.154                        |
 
 **Findings.**
 
@@ -1171,14 +1171,14 @@ Determinism: two sequential passes with byte-identical payloads, single orientat
 rag26 topic rag2026-100 (3,223 pairs); ragtime topic 2003 (1,024 pairs). Winner flips
 count P = 0.5 as a draw.
 
-| Metric | Choice rag26 | Choice ragtime | Noul mirror rag26 | Noul mirror ragtime |
-| --- | --- | --- | --- | --- |
-| Exactly identical | 75.6% | 49.2% | 40.8% | 25.4% |
-| Mean \|ΔP\| | 0.0043 | 0.0096 | 0.0045 | 0.0071 |
-| p95 / max \|ΔP\| | 0.020 / 0.090 | 0.040 / 0.090 | 0.015 / 0.050 | 0.020 / 0.100 |
-| Winner flips | 4 (0.12%) | 6 (0.59%) | 8 (0.25%) | 11 (1.07%) |
-| Raw Noul answers (yA / yB): identical, mean \|ΔP\| | — | — | 58.6 / 57.9%, 0.0051 / 0.0052 | 41.4 / 42.1%, 0.0080 / 0.0082 |
-| Tie flag, pass 1 / pass 2 / changed | — | — | 6 / 6 / 4 | 24 / 21 / 9 |
+| Metric                                             | Choice rag26  | Choice ragtime | Noul mirror rag26             | Noul mirror ragtime           |
+| -------------------------------------------------- | ------------- | -------------- | ----------------------------- | ----------------------------- |
+| Exactly identical                                  | 75.6%         | 49.2%          | 40.8%                         | 25.4%                         |
+| Mean \|ΔP\|                                        | 0.0043        | 0.0096         | 0.0045                        | 0.0071                        |
+| p95 / max \|ΔP\|                                   | 0.020 / 0.090 | 0.040 / 0.090  | 0.015 / 0.050                 | 0.020 / 0.100                 |
+| Winner flips                                       | 4 (0.12%)     | 6 (0.59%)      | 8 (0.25%)                     | 11 (1.07%)                    |
+| Raw Noul answers (yA / yB): identical, mean \|ΔP\| | —             | —              | 58.6 / 57.9%, 0.0051 / 0.0052 | 41.4 / 42.1%, 0.0080 / 0.0082 |
+| Tie flag, pass 1 / pass 2 / changed                | —             | —              | 6 / 6 / 4                     | 24 / 21 / 9                   |
 
 Cross-bundle retest of the Noul pair on the pilot topic (2-question pilot vs 4-question
 instruction run):
@@ -1192,11 +1192,11 @@ instruction run):
 Identical summaries (each run's report judged against itself; rag26 248 calls, ragtime
 147):
 
-| Question | rag26 | ragtime26 |
-| --- | --- | --- |
-| Choice `better_summary`: mean P(A), answers of A | 0.799, 248/248 | **0.785, 147/147** (per topic 0.736 / 0.833 / 0.787) |
-| Noul `noul_a_better` / `noul_b_better`: mean P(yes) | 0.151 / 0.103 | 0.163 / 0.101 |
-| Implied mirror P(A better) on ties | 0.524 | 0.531 |
+| Question                                            | rag26          | ragtime26                                            |
+| --------------------------------------------------- | -------------- | ---------------------------------------------------- |
+| Choice `better_summary`: mean P(A), answers of A    | 0.799, 248/248 | **0.785, 147/147** (per topic 0.736 / 0.833 / 0.787) |
+| Noul `noul_a_better` / `noul_b_better`: mean P(yes) | 0.151 / 0.103  | 0.163 / 0.101                                        |
+| Implied mirror P(A better) on ties                  | 0.524          | 0.531                                                |
 
 **Findings.**
 
@@ -1216,12 +1216,12 @@ Identical summaries (each run's report judged against itself; rag26 248 calls, r
 Each cell: number of pairs / mean P(slot A wins) / winner-flip rate when swapped. Groups
 are by orientation-averaged P(x better).
 
-| Estimator | Dataset | 0.05–0.25 | 0.25–0.40 | **0.40–0.60** | 0.60–0.75 | 0.75–0.95 | All pairs: P(slot A wins) |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| choice | rag26 | 239 / 0.507 / 0.00 | 107 / 0.527 / 0.29 | **111 / 0.582 / 0.78** | 98 / 0.531 / 0.23 | 217 / 0.507 / 0.00 | 0.505 |
-| choice | ragtime26 | 141 / 0.486 / 0.00 | 56 / 0.482 / 0.04 | **86 / 0.491 / 0.43** | 67 / 0.493 / 0.01 | 207 / 0.483 / 0.00 | 0.491 |
-| mirror | rag26 | 1027 / 0.508 / 0.00 | 200 / 0.526 / 0.00 | **220 / 0.542 / 0.54** | 195 / 0.521 / 0.01 | 851 / 0.511 / 0.00 | 0.512 |
-| mirror | ragtime26 | 254 / 0.504 / 0.00 | 133 / 0.513 / 0.00 | **145 / 0.520 / 0.28** | 203 / 0.511 / 0.00 | 289 / 0.502 / 0.00 | 0.508 |
+| Estimator | Dataset   | 0.05–0.25           | 0.25–0.40          | **0.40–0.60**          | 0.60–0.75          | 0.75–0.95          | All pairs: P(slot A wins) |
+| --------- | --------- | ------------------- | ------------------ | ---------------------- | ------------------ | ------------------ | ------------------------- |
+| choice    | rag26     | 239 / 0.507 / 0.00  | 107 / 0.527 / 0.29 | **111 / 0.582 / 0.78** | 98 / 0.531 / 0.23  | 217 / 0.507 / 0.00 | 0.505                     |
+| choice    | ragtime26 | 141 / 0.486 / 0.00  | 56 / 0.482 / 0.04  | **86 / 0.491 / 0.43**  | 67 / 0.493 / 0.01  | 207 / 0.483 / 0.00 | 0.491                     |
+| mirror    | rag26     | 1027 / 0.508 / 0.00 | 200 / 0.526 / 0.00 | **220 / 0.542 / 0.54** | 195 / 0.521 / 0.01 | 851 / 0.511 / 0.00 | 0.512                     |
+| mirror    | ragtime26 | 254 / 0.504 / 0.00  | 133 / 0.513 / 0.00 | **145 / 0.520 / 0.28** | 203 / 0.511 / 0.00 | 289 / 0.502 / 0.00 | 0.508                     |
 
 **Finding: the close-pair slot-A bias does not replicate for Choice.**
 
@@ -1237,18 +1237,18 @@ are by orientation-averaged P(x better).
 
 ### 11.8 Noul formulation
 
-| Metric | rag26 (10.x) | ragtime26 |
-| --- | --- | --- |
-| Raw yA + yB: mean / within [0.9, 1.1] | 0.983 / 97.1% | **0.928 / 81.5%** (18.5% below 0.9) |
-| Pearson(yA, 1 − yB) | 0.996 | 0.993 |
-| "No" to both questions (pilot / 3-topic instruction run) | 0.5% / 0.42% | **4.3% / 2.1%** |
-| "Yes" to both questions (pilot / instruction run) | 0.4% / 0.69% | 0% / 1.6% |
-| Winner agrees between `noul_a` and Choice | 99.1% | 97.3% |
-| Mirror: exactly 0/1, decisive, in [0.4, 0.6] | 0%, 81%, 6.3% (339 distinct values) | 0%, **54%**, 13.9% (266 distinct values) |
-| Mirror vs Choice ranking ρ (orientation-averaged) | 0.999 | 0.998 |
-| Mirror vs Gemini (pilot topic): Spearman / Kendall | 0.970 / 0.860 | 0.955 / 0.832 |
-| Mirror swap: mean \|ΔP\| / flips | 0.036 / 3.7% | 0.033 / 4.0% |
-| Top mirror win rate | 0.886 (carmen) | 0.779 (kurt) |
+| Metric                                                   | rag26 (10.x)                        | ragtime26                                |
+| -------------------------------------------------------- | ----------------------------------- | ---------------------------------------- |
+| Raw yA + yB: mean / within [0.9, 1.1]                    | 0.983 / 97.1%                       | **0.928 / 81.5%** (18.5% below 0.9)      |
+| Pearson(yA, 1 − yB)                                      | 0.996                               | 0.993                                    |
+| "No" to both questions (pilot / 3-topic instruction run) | 0.5% / 0.42%                        | **4.3% / 2.1%**                          |
+| "Yes" to both questions (pilot / instruction run)        | 0.4% / 0.69%                        | 0% / 1.6%                                |
+| Winner agrees between `noul_a` and Choice                | 99.1%                               | 97.3%                                    |
+| Mirror: exactly 0/1, decisive, in [0.4, 0.6]             | 0%, 81%, 6.3% (339 distinct values) | 0%, **54%**, 13.9% (266 distinct values) |
+| Mirror vs Choice ranking ρ (orientation-averaged)        | 0.999                               | 0.998                                    |
+| Mirror vs Gemini (pilot topic): Spearman / Kendall       | 0.970 / 0.860                       | 0.955 / 0.832                            |
+| Mirror swap: mean \|ΔP\| / flips                         | 0.036 / 3.7%                        | 0.033 / 4.0%                             |
+| Top mirror win rate                                      | 0.886 (carmen)                      | 0.779 (kurt)                             |
 
 **Findings.**
 
@@ -1267,14 +1267,14 @@ Same design as Section 9: 16 mid-ranked targets per topic on 2000–2002 (48 tar
 opponents, 6 variants, both orientations, 4,608 calls per judge. ΔP is relative to the
 unmodified original, with 95% bootstrap CIs over targets.
 
-| Variant | Jev Choice: rag26 → **ragtime26** [95% CI] | Noul mirror: rag26 → **ragtime26** [95% CI] | Gemini: rag26 → **ragtime26** [95% CI] |
-| --- | --- | --- | --- |
-| original, P(win) | 0.279 → 0.362 | 0.327 → 0.412 | 0.281 → 0.368 |
-| pad_repeat | −0.050 → **−0.105** [−0.124, −0.088] | −0.048 → **−0.087** [−0.100, −0.076] | −0.171 → **−0.203** [−0.249, −0.160] |
-| pad_generic | −0.089 → **−0.174** [−0.196, −0.152] | −0.097 → **−0.156** [−0.172, −0.141] | −0.161 → **−0.186** [−0.224, −0.150] |
-| pad_offtopic | −0.194 → **−0.279** [−0.312, −0.246] | −0.191 → **−0.274** [−0.298, −0.251] | −0.224 → **−0.294** [−0.352, −0.238] |
-| pad_relevant | +0.183 → **+0.094** [+0.072, +0.115] | +0.160 → **+0.072** [+0.056, +0.087] | +0.016 → **−0.104** [−0.146, −0.065] |
-| truncate | −0.087 → **−0.117** [−0.137, −0.097] | −0.082 → **−0.099** [−0.113, −0.085] | −0.107 → **−0.152** [−0.195, −0.113] |
+| Variant          | Jev Choice: rag26 → **ragtime26** [95% CI] | Noul mirror: rag26 → **ragtime26** [95% CI] | Gemini: rag26 → **ragtime26** [95% CI] |
+| ---------------- | ------------------------------------------ | ------------------------------------------- | -------------------------------------- |
+| original, P(win) | 0.279 → 0.362                              | 0.327 → 0.412                               | 0.281 → 0.368                          |
+| pad_repeat       | −0.050 → **−0.105** [−0.124, −0.088]       | −0.048 → **−0.087** [−0.100, −0.076]        | −0.171 → **−0.203** [−0.249, −0.160]   |
+| pad_generic      | −0.089 → **−0.174** [−0.196, −0.152]       | −0.097 → **−0.156** [−0.172, −0.141]        | −0.161 → **−0.186** [−0.224, −0.150]   |
+| pad_offtopic     | −0.194 → **−0.279** [−0.312, −0.246]       | −0.191 → **−0.274** [−0.298, −0.251]        | −0.224 → **−0.294** [−0.352, −0.238]   |
+| pad_relevant     | +0.183 → **+0.094** [+0.072, +0.115]       | +0.160 → **+0.072** [+0.056, +0.087]        | +0.016 → **−0.104** [−0.146, −0.065]   |
+| truncate         | −0.087 → **−0.117** [−0.137, −0.097]       | −0.082 → **−0.099** [−0.113, −0.085]        | −0.107 → **−0.152** [−0.195, −0.113]   |
 
 Targets improved on ragtime (Jev / Noul / Gemini):
 
@@ -1289,17 +1289,17 @@ Noul tie flag fired on 66 of 4,608 calls (1.4%).
 
 ΔP by ragtime topic:
 
-| Topic | Judge | pad_repeat | pad_generic | pad_offtopic | pad_relevant | truncate |
-| --- | --- | --- | --- | --- | --- | --- |
-| 2000 | Jev | −0.111 | −0.140 | −0.227 | +0.049 | −0.131 |
-| 2000 | Noul | −0.090 | −0.129 | −0.229 | +0.035 | −0.105 |
-| 2000 | Gemini | −0.223 | −0.191 | −0.309 | −0.109 | −0.234 |
-| 2001 | Jev | −0.096 | −0.169 | −0.275 | +0.100 | −0.097 |
-| 2001 | Noul | −0.078 | −0.144 | −0.268 | +0.076 | −0.087 |
-| 2001 | Gemini | −0.164 | −0.160 | −0.246 | −0.105 | −0.086 |
-| 2002 | Jev | −0.110 | −0.214 | −0.334 | +0.132 | −0.123 |
-| 2002 | Noul | −0.094 | −0.196 | −0.325 | +0.104 | −0.106 |
-| 2002 | Gemini | −0.223 | −0.207 | −0.328 | −0.098 | −0.137 |
+| Topic | Judge  | pad_repeat | pad_generic | pad_offtopic | pad_relevant | truncate |
+| ----- | ------ | ---------- | ----------- | ------------ | ------------ | -------- |
+| 2000  | Jev    | −0.111     | −0.140      | −0.227       | +0.049       | −0.131   |
+| 2000  | Noul   | −0.090     | −0.129      | −0.229       | +0.035       | −0.105   |
+| 2000  | Gemini | −0.223     | −0.191      | −0.309       | −0.109       | −0.234   |
+| 2001  | Jev    | −0.096     | −0.169      | −0.275       | +0.100       | −0.097   |
+| 2001  | Noul   | −0.078     | −0.144      | −0.268       | +0.076       | −0.087   |
+| 2001  | Gemini | −0.164     | −0.160      | −0.246       | −0.105       | −0.086   |
+| 2002  | Jev    | −0.110     | −0.214      | −0.334       | +0.132       | −0.123   |
+| 2002  | Noul   | −0.094     | −0.196      | −0.325       | +0.104       | −0.106   |
+| 2002  | Gemini | −0.223     | −0.207      | −0.328       | −0.098       | −0.137   |
 
 **Findings.**
 
@@ -1318,24 +1318,24 @@ Noul tie flag fired on 66 of 4,608 calls (1.4%).
 
 ### 11.10 What generalises
 
-| Finding (rag26) | ragtime26 | Status |
-| --- | --- | --- |
-| Jev and Gemini rank runs nearly identically | ρ 0.949–0.955 (pilot), 0.915–0.946 (3 topics) | **Generalises**, slightly weaker |
-| Probabilistic and binary scoring give the same ranking | ρ 0.996 (Choice), 0.993 (mirror) | **Generalises** |
-| Jev's probabilities are mostly saturated | 24% exactly 0/1 (rag26 56%) | **Dataset-dependent** |
-| Ranking is robust to question wording | inter-question ρ 0.91–0.97 | **Generalises**, more sensitive |
-| Jev follows negation and option relabelling | ≥ 98.3% on decisive pairs | **Generalises** |
-| Longer summaries win (P ≈ 0.69, ρ ≈ 0.5) | P ≈ 0.46–0.48, ρ ≈ −0.08 to −0.16 | **Does not generalise**: property of rag26 |
-| Judges reject crude padding (content, not length) | larger penalties, every target | **Generalises**, stronger |
-| Jev credits relevant added content | +0.094 / +0.072 | **Generalises**, weaker |
-| Gemini does not credit relevant padding | now significantly negative | **Generalises**, stronger |
-| Choice tie bias: identical inputs get P(A) ≈ 0.8 | 0.785, every pair slot A | **Generalises** |
-| Close real pairs favour slot A (0.58) | 0.49 | **Does not generalise** |
-| Mirrored Noul maps ties to about 0.5 | 0.531 | **Generalises** |
-| Mirrored Noul reduces close-pair slot bias | Choice has none to reduce on ragtime; mirror keeps 0.52 | **Dataset-dependent** |
-| Jev is near-deterministic | about 2× noisier; flips ≤ 1.1% | **Generalises**, noisier |
-| Mirror score is at least as repeatable as Choice | it flips more on both datasets | **Corrected**: Choice flips less |
-| Noul answers are near-complementary; ties rare | sum 0.93, both "no" 2–4% | **Dataset-dependent** |
+| Finding (rag26)                                        | ragtime26                                               | Status                                     |
+| ------------------------------------------------------ | ------------------------------------------------------- | ------------------------------------------ |
+| Jev and Gemini rank runs nearly identically            | ρ 0.949–0.955 (pilot), 0.915–0.946 (3 topics)           | **Generalises**, slightly weaker           |
+| Probabilistic and binary scoring give the same ranking | ρ 0.996 (Choice), 0.993 (mirror)                        | **Generalises**                            |
+| Jev's probabilities are mostly saturated               | 24% exactly 0/1 (rag26 56%)                             | **Dataset-dependent**                      |
+| Ranking is robust to question wording                  | inter-question ρ 0.91–0.97                              | **Generalises**, more sensitive            |
+| Jev follows negation and option relabelling            | ≥ 98.3% on decisive pairs                               | **Generalises**                            |
+| Longer summaries win (P ≈ 0.69, ρ ≈ 0.5)               | P ≈ 0.46–0.48, ρ ≈ −0.08 to −0.16                       | **Does not generalise**: property of rag26 |
+| Judges reject crude padding (content, not length)      | larger penalties, every target                          | **Generalises**, stronger                  |
+| Jev credits relevant added content                     | +0.094 / +0.072                                         | **Generalises**, weaker                    |
+| Gemini does not credit relevant padding                | now significantly negative                              | **Generalises**, stronger                  |
+| Choice tie bias: identical inputs get P(A) ≈ 0.8       | 0.785, every pair slot A                                | **Generalises**                            |
+| Close real pairs favour slot A (0.58)                  | 0.49                                                    | **Does not generalise**                    |
+| Mirrored Noul maps ties to about 0.5                   | 0.531                                                   | **Generalises**                            |
+| Mirrored Noul reduces close-pair slot bias             | Choice has none to reduce on ragtime; mirror keeps 0.52 | **Dataset-dependent**                      |
+| Jev is near-deterministic                              | about 2× noisier; flips ≤ 1.1%                          | **Generalises**, noisier                   |
+| Mirror score is at least as repeatable as Choice       | it flips more on both datasets                          | **Corrected**: Choice flips less           |
+| Noul answers are near-complementary; ties rare         | sum 0.93, both "no" 2–4%                                | **Dataset-dependent**                      |
 
 ---
 
@@ -1343,13 +1343,13 @@ Noul tie flag fired on 66 of 4,608 calls (1.4%).
 
 ### 12.1 Answers to the research questions
 
-| RQ                                             | Answer (pilot scale)                                                                                                                                                                                 |
-| ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| RQ1 Jev vs Gemini agreement                    | High. ρ = 0.973 on rag2026-0 and 0.955–0.976 across 3 topics. Both judges have the same top teams.                                                                                                   |
-| RQ2 Do probabilities matter?                   | Barely, for ranking: soft and binary win rates have ρ = 0.997–0.999 for both Choice (56% saturated) and Noul (never saturated, 0.02–0.98). Without ground truth we cannot say whether probabilities improve accuracy. |
-| RQ3 Length bias                                | Not for crude padding, for either judge or either Jev question form; all penalise uninformative additions. The rag26 length correlation (ρ about 0.5) is consistent with coverage and does not replicate on ragtime26 (ρ ≈ −0.1). Subtle on-topic verbosity is untested.     |
-| RQ4 Instruction following / prompt sensitivity | Jev follows negation and option relabelling at ≥ 99.6% on decisive pairs for Choice, and follows negation at 100% for Noul. Rewording the quality question changes 4–5% of pair decisions but not the ranking (ρ ≥ 0.97). |
-| RQ5 Reliability                                | Near-deterministic: on rag26 Choice has 75.6% identical answers and 0.12% winner flips, and the Noul mirror 0.25% flips (mean |ΔP| 0.0045). ragtime26 is about 2× noisier (0.59% / 1.07% flips). Choice has a strong first-slot bias on ties on both datasets (identical summaries give P(A) ≈ 0.79). On rag26 it drives close-pair outcomes; on ragtime26 it does not (11.7). A mirrored Noul pair gives 0.52 on ties and halves the close-pair slot advantage (0.58 → 0.54). Probabilities are uncalibrated in both forms. |
+| RQ                                             | Answer (pilot scale)                                                                                                                                                                                                                                                     |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| RQ1 Jev vs Gemini agreement                    | High. ρ = 0.973 on rag2026-0 and 0.955–0.976 across 3 topics. Both judges have the same top teams.                                                                                                                                                                       |
+| RQ2 Do probabilities matter?                   | Barely, for ranking: soft and binary win rates have ρ = 0.997–0.999 for both Choice (56% saturated) and Noul (never saturated, 0.02–0.98). Without ground truth we cannot say whether probabilities improve accuracy.                                                    |
+| RQ3 Length bias                                | Not for crude padding, for either judge or either Jev question form; all penalise uninformative additions. The rag26 length correlation (ρ about 0.5) is consistent with coverage and does not replicate on ragtime26 (ρ ≈ −0.1). Subtle on-topic verbosity is untested. |
+| RQ4 Instruction following / prompt sensitivity | Jev follows negation and option relabelling at ≥ 99.6% on decisive pairs for Choice, and follows negation at 100% for Noul. Rewording the quality question changes 4–5% of pair decisions but not the ranking (ρ ≥ 0.97).                                                |
+| RQ5 Reliability                                | Near-deterministic: on rag26 Choice has 75.6% identical answers and 0.12% winner flips, and the Noul mirror 0.25% flips (mean                                                                                                                                            | ΔP  | 0.0045). ragtime26 is about 2× noisier (0.59% / 1.07% flips). Choice has a strong first-slot bias on ties on both datasets (identical summaries give P(A) ≈ 0.79). On rag26 it drives close-pair outcomes; on ragtime26 it does not (11.7). A mirrored Noul pair gives 0.52 on ties and halves the close-pair slot advantage (0.58 → 0.54). Probabilities are uncalibrated in both forms. |
 
 ### 12.2 Recommended protocol for a full Jev run
 
@@ -1366,7 +1366,7 @@ Noul tie flag fired on 66 of 4,608 calls (1.4%).
        topics against 1,378 on rag2026-0. A naive calls × pilot-rate estimate gives $68.
      - ragtime26: $0.1980 for 1,970 calls; 196,958 calls; 1,236 words per call against
        1,363 on topic 2000. Naive estimate $20.
-     - *Correction:* earlier estimates ($75 for rag26) used a pilot cost that counted
+     - _Correction:_ earlier estimates ($75 for rag26) used a pilot cost that counted
        requests shared by several comparisons more than once ($0.6192 instead of
        $0.5775).
    - **Single orientation: about $35 (rag26) and $9 (ragtime26).**
@@ -1382,7 +1382,7 @@ Noul tie flag fired on 66 of 4,608 calls (1.4%).
      correct on ties on both datasets and graded probabilities. It reduced close-pair
      slot bias on rag26, but it flips more winners between identical requests than
      Choice, and on ragtime26 Choice had no close-pair bias for it to reduce (11.7).
-   - **Choice** (`better_summary`): equally good for *ranking* (ρ ≥ 0.998 between
+   - **Choice** (`better_summary`): equally good for _ranking_ (ρ ≥ 0.998 between
      them on both datasets) and slightly more repeatable.
    - With both orientations averaged, either form is defensible. Prefer mirrored Noul
      if per-pair probabilities or ties will be analysed or reported; prefer Choice for
@@ -1464,30 +1464,30 @@ auto-judge run --workflow judges/bonsai_judge/workflow.pairwise_jev.yml --varian
 
 ### 12.5 Cost summary of this study
 
-| Item                                        | Calls | Cost        |
-| ------------------------------------------- | ----- | ----------- |
-| Jev Router smoke test (kiddie)              | 12    | $0.003      |
-| Jev smoke test (kiddie)                     | 12    | $0.0003     |
-| Jev pilot (rag2026-0, both orientations)    | 5,978 | $0.55       |
-| Prompt variants (3 topics × 4 questions)    | 9,209 | $1.08       |
-| Instruction probes (3 topics × 4 questions) | 9,209 | $1.01       |
-| Determinism (rag2026-100, 2 passes)         | 6,446 | $0.61       |
-| Identical summaries                         | 248   | $0.02       |
-| Padding test, Jev                           | 4,608 | $0.53       |
-| Padding test, Gemini                        | 4,608 | $3.29       |
-| Noul pilot (rag2026-0, both orientations, 2 questions) | 5,978 | $0.58 |
-| Identical summaries, Noul (2 questions × 248) | 496 | $0.05 |
-| Noul instruction probes (3 topics × 4 questions) | 9,209 | $1.00 |
-| Noul determinism (rag2026-100, 2 passes × 2 questions) | 6,446 | $0.64 |
-| Padding test, Noul mirror | 4,608 | $0.55 |
-| Duplicate-check test (kiddie copy) | 6 | $0.0003 |
-| **Subtotal, rag26 study**                   |       | **≈ $9.91** |
-| ragtime26: Jev runs (Choice and Noul pilots, prompts, both instruction checks) | 12,691 | $1.29 |
-| ragtime26: identical summaries (Choice and Noul) and determinism (Choice and mirror) | 4,537 | $0.39 |
-| ragtime26: padding (Jev, Noul, Gemini) | 13,824 | $3.54 |
-| ragtime26: Gemini pairwise (2000–2002, single orientation) | 3,072 | $1.66 |
-| **Subtotal, ragtime26 replication**         |       | **≈ $6.89** |
-| **Total**                                   |       | **≈ $16.79** |
+| Item                                                                                 | Calls  | Cost         |
+| ------------------------------------------------------------------------------------ | ------ | ------------ |
+| Jev Router smoke test (kiddie)                                                       | 12     | $0.003       |
+| Jev smoke test (kiddie)                                                              | 12     | $0.0003      |
+| Jev pilot (rag2026-0, both orientations)                                             | 5,978  | $0.55        |
+| Prompt variants (3 topics × 4 questions)                                             | 9,209  | $1.08        |
+| Instruction probes (3 topics × 4 questions)                                          | 9,209  | $1.01        |
+| Determinism (rag2026-100, 2 passes)                                                  | 6,446  | $0.61        |
+| Identical summaries                                                                  | 248    | $0.02        |
+| Padding test, Jev                                                                    | 4,608  | $0.53        |
+| Padding test, Gemini                                                                 | 4,608  | $3.29        |
+| Noul pilot (rag2026-0, both orientations, 2 questions)                               | 5,978  | $0.58        |
+| Identical summaries, Noul (2 questions × 248)                                        | 496    | $0.05        |
+| Noul instruction probes (3 topics × 4 questions)                                     | 9,209  | $1.00        |
+| Noul determinism (rag2026-100, 2 passes × 2 questions)                               | 6,446  | $0.64        |
+| Padding test, Noul mirror                                                            | 4,608  | $0.55        |
+| Duplicate-check test (kiddie copy)                                                   | 6      | $0.0003      |
+| **Subtotal, rag26 study**                                                            |        | **≈ $9.91**  |
+| ragtime26: Jev runs (Choice and Noul pilots, prompts, both instruction checks)       | 12,691 | $1.29        |
+| ragtime26: identical summaries (Choice and Noul) and determinism (Choice and mirror) | 4,537  | $0.39        |
+| ragtime26: padding (Jev, Noul, Gemini)                                               | 13,824 | $3.54        |
+| ragtime26: Gemini pairwise (2000–2002, single orientation)                           | 3,072  | $1.66        |
+| **Subtotal, ragtime26 replication**                                                  |        | **≈ $6.89**  |
+| **Total**                                                                            |        | **≈ $16.79** |
 
 Jev costs count each actual call once. Earlier versions of this table summed per
 comparison, which counted requests shared by several comparisons more than once and
@@ -1523,19 +1523,19 @@ Environment: `.env` provides `OPENAI_BASE_URL=https://openrouter.ai/api/v1`,
 `OPENAI_API_KEY` (OpenRouter), `OPENAI_MODEL` (Gemini slug), and `CACHE_DIR=./cache`.
 Load it with `set -a; source ./.env; set +a`.
 
-| Section | Command                                                                                                                                                                                                                                                                                                                   | Output                                                                        |
-| ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| 4       | `auto-judge run --workflow judges/bonsai_judge/workflow.pairwise_jev.yml --variant pilot --rag-responses data/rag26/runs/generation/ --rag-topics data/rag26/topics/trec_rag_2026_queries.jsonl --out-dir ./output-pairwise-jev/`                                                                                         | `output-pairwise-jev/bonsai_pairwise_jev.pairwise/`; log `temp/jev_pilot.log` |
-| 5       | `python temp/jev_length_bias.py <comparisons.jsonl> [topic]`                                                                                                                                                                                                                                                              | stdout                                                                        |
-| 6       | same, `--variant prompts --out-dir ./output-pairwise-jev-prompts/`, then `python temp/jev_prompt_compare.py output-pairwise-jev-prompts/bonsai_pairwise_jev.pairwise/comparisons.jsonl output-pairwise-jev/bonsai_pairwise_jev.pairwise/comparisons.jsonl temp/rag26_pairwise/bonsai_pairwise.pairwise/comparisons.jsonl` | `temp/jev_prompt_compare.txt`                                                 |
-| 7       | same, `--variant instruction_check --out-dir ./output-pairwise-jev-icheck/`, then `python temp/jev_instruction_check.py output-pairwise-jev-icheck/bonsai_pairwise_jev.pairwise/comparisons.jsonl`                                                                                                                        | `temp/jev_instruction_check.txt`                                              |
-| 8.1     | `python temp/jev_probes.py determinism --topic rag2026-100` then `python temp/jev_probes.py report`                                                                                                                                                                                                                       | `temp/jev_probes/determinism_rag2026-100_pass{1,2}.jsonl`                     |
-| 8.2     | `python temp/jev_probes.py identical` then `report`                                                                                                                                                                                                                                                                       | `temp/jev_probes/identical.jsonl`                                             |
-| 8.3     | inline analysis of `output-pairwise-jev/bonsai_pairwise_jev.pairwise/pairs.csv` (columns `p_x_fwd`, `p_x_rev`)                                                                                                                                                                                                            | —                                                                             |
-| 9       | `python temp/jev_padding.py run [--judge gemini]` then `report [--judge gemini]` (`dry` previews)                                                                                                                                                                                                                         | `temp/jev_probes/padding{,_gemini}.jsonl`, `temp/jev_padding{,_gemini}.txt`   |
-| 10 | same `auto-judge run`, `--variant noul_pilot --out-dir ./output-pairwise-jev-noul/`, then `python temp/jev_noul_compare.py output-pairwise-jev-noul/bonsai_pairwise_jev.pairwise/comparisons.jsonl output-pairwise-jev/bonsai_pairwise_jev.pairwise/comparisons.jsonl temp/rag26_pairwise/bonsai_pairwise.pairwise/comparisons.jsonl`; ties: `python temp/jev_probes.py identical --question noul_a_better` (and `noul_b_better`), then `report --question …` | `output-pairwise-jev-noul/`, `temp/jev_noul_compare.txt`, `temp/jev_probes/identical_noul_{a,b}_better.jsonl`; log `temp/jev_noul_pilot.log` |
-| 10.8 | cache replay: same `auto-judge run` with `--variant noul_pilot` (now with `mirror:`); duplicate test: a kiddie copy with one run duplicated under another team, `--variant noul_pilot -J max_topics=2` | `output-pairwise-jev-noul/bonsai_pairwise_jev.pairwise/{q_mirror,leaderboard_overall.csv,run_manifest.json}` |
-| 10.9 | `bash temp/run_noul_probes.sh` (runs `--variant noul_instruction_check --out-dir ./output-pairwise-jev-noul-icheck/`, `python temp/jev_probes.py determinism --topic rag2026-100 --question mirror`, `python temp/jev_padding.py run --judge noul`); then `python temp/jev_noul_instruction_check.py output-pairwise-jev-noul-icheck/bonsai_pairwise_jev.pairwise/comparisons.jsonl output-pairwise-jev-noul/bonsai_pairwise_jev.pairwise/comparisons.jsonl`, `python temp/jev_probes.py report --question mirror`, `python temp/jev_padding.py report --judge noul` | `temp/jev_noul_instruction_check.txt`, `temp/jev_noul_determinism.txt`, `temp/jev_padding_noul.txt`; raw `temp/jev_probes/determinism_rag2026-100_mirror_pass{1,2}.jsonl`, `temp/jev_probes/padding_noul.jsonl`; logs `temp/jev_noul_{icheck,determinism,padding}.log` |
+| Section | Command                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Output                                                                                                                                                                                                                                                                 |
+| ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 4       | `auto-judge run --workflow judges/bonsai_judge/workflow.pairwise_jev.yml --variant pilot --rag-responses data/rag26/runs/generation/ --rag-topics data/rag26/topics/trec_rag_2026_queries.jsonl --out-dir ./output-pairwise-jev/`                                                                                                                                                                                                                                                                                                                                    | `output-pairwise-jev/bonsai_pairwise_jev.pairwise/`; log `temp/jev_pilot.log`                                                                                                                                                                                          |
+| 5       | `python temp/jev_length_bias.py <comparisons.jsonl> [topic]`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | stdout                                                                                                                                                                                                                                                                 |
+| 6       | same, `--variant prompts --out-dir ./output-pairwise-jev-prompts/`, then `python temp/jev_prompt_compare.py output-pairwise-jev-prompts/bonsai_pairwise_jev.pairwise/comparisons.jsonl output-pairwise-jev/bonsai_pairwise_jev.pairwise/comparisons.jsonl temp/rag26_pairwise/bonsai_pairwise.pairwise/comparisons.jsonl`                                                                                                                                                                                                                                            | `temp/jev_prompt_compare.txt`                                                                                                                                                                                                                                          |
+| 7       | same, `--variant instruction_check --out-dir ./output-pairwise-jev-icheck/`, then `python temp/jev_instruction_check.py output-pairwise-jev-icheck/bonsai_pairwise_jev.pairwise/comparisons.jsonl`                                                                                                                                                                                                                                                                                                                                                                   | `temp/jev_instruction_check.txt`                                                                                                                                                                                                                                       |
+| 8.1     | `python temp/jev_probes.py determinism --topic rag2026-100` then `python temp/jev_probes.py report`                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | `temp/jev_probes/determinism_rag2026-100_pass{1,2}.jsonl`                                                                                                                                                                                                              |
+| 8.2     | `python temp/jev_probes.py identical` then `report`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | `temp/jev_probes/identical.jsonl`                                                                                                                                                                                                                                      |
+| 8.3     | inline analysis of `output-pairwise-jev/bonsai_pairwise_jev.pairwise/pairs.csv` (columns `p_x_fwd`, `p_x_rev`)                                                                                                                                                                                                                                                                                                                                                                                                                                                       | —                                                                                                                                                                                                                                                                      |
+| 9       | `python temp/jev_padding.py run [--judge gemini]` then `report [--judge gemini]` (`dry` previews)                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | `temp/jev_probes/padding{,_gemini}.jsonl`, `temp/jev_padding{,_gemini}.txt`                                                                                                                                                                                            |
+| 10      | same `auto-judge run`, `--variant noul_pilot --out-dir ./output-pairwise-jev-noul/`, then `python temp/jev_noul_compare.py output-pairwise-jev-noul/bonsai_pairwise_jev.pairwise/comparisons.jsonl output-pairwise-jev/bonsai_pairwise_jev.pairwise/comparisons.jsonl temp/rag26_pairwise/bonsai_pairwise.pairwise/comparisons.jsonl`; ties: `python temp/jev_probes.py identical --question noul_a_better` (and `noul_b_better`), then `report --question …`                                                                                                        | `output-pairwise-jev-noul/`, `temp/jev_noul_compare.txt`, `temp/jev_probes/identical_noul_{a,b}_better.jsonl`; log `temp/jev_noul_pilot.log`                                                                                                                           |
+| 10.8    | cache replay: same `auto-judge run` with `--variant noul_pilot` (now with `mirror:`); duplicate test: a kiddie copy with one run duplicated under another team, `--variant noul_pilot -J max_topics=2`                                                                                                                                                                                                                                                                                                                                                               | `output-pairwise-jev-noul/bonsai_pairwise_jev.pairwise/{q_mirror,leaderboard_overall.csv,run_manifest.json}`                                                                                                                                                           |
+| 10.9    | `bash temp/run_noul_probes.sh` (runs `--variant noul_instruction_check --out-dir ./output-pairwise-jev-noul-icheck/`, `python temp/jev_probes.py determinism --topic rag2026-100 --question mirror`, `python temp/jev_padding.py run --judge noul`); then `python temp/jev_noul_instruction_check.py output-pairwise-jev-noul-icheck/bonsai_pairwise_jev.pairwise/comparisons.jsonl output-pairwise-jev-noul/bonsai_pairwise_jev.pairwise/comparisons.jsonl`, `python temp/jev_probes.py report --question mirror`, `python temp/jev_padding.py report --judge noul` | `temp/jev_noul_instruction_check.txt`, `temp/jev_noul_determinism.txt`, `temp/jev_padding_noul.txt`; raw `temp/jev_probes/determinism_rag2026-100_mirror_pass{1,2}.jsonl`, `temp/jev_probes/padding_noul.jsonl`; logs `temp/jev_noul_{icheck,determinism,padding}.log` |
 
 Gemini baseline comparisons: `temp/rag26_pairwise/bonsai_pairwise.pairwise/comparisons.jsonl`
 (run 2026-09-10; see `HANDOFF-rag26-pairwise-judge.md`).

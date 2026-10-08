@@ -1,0 +1,15 @@
+topic 2000 | ordered comparisons 2048 | words median 706 min 235 max 857
+
+pair          yA+yB  both-no both-yes decisive [.4,.6] P(longer)  <1.25x  1.25-2x   >=2x rho len P(slotA)
+better        0.927    0.046    0.000    0.537   0.141     0.478   0.416    0.580  0.445  -0.088    0.508
+appropriate   0.926    0.048    0.000    0.552   0.131     0.468   0.411    0.571  0.425  -0.151    0.502
+
+per-comparison: Pearson(better, appropriate) 0.997 | mean |diff| 0.017 | winner differs 0.018
+mean shift toward the longer summary (appropriate - better): -0.0097 | Spearman(shift_A, log len ratio) -0.518
+run ranking: Spearman(better, appropriate) 0.9933
+largest rank moves (better rank -> appropriate rank, words): piper 18->24 (762w), katie 22->26 (751w), faye 44->47 (857w), jesse 15->12 (358w), adair 40->42 (856w), alyssa 6->4 (680w), avery 23->21 (386w), diana 13->15 (706w)
+winrate change vs words: Spearman(appropriate - better, words) -0.654
+top 8 better      : kurt(0.78,741w), briar(0.77,641w), marie(0.77,710w), kent(0.76,634w), alice(0.76,732w), alyssa(0.75,680w), joyce(0.74,732w), alana(0.74,642w)
+top 8 appropriate : marie(0.78,710w), kurt(0.78,741w), briar(0.78,641w), alyssa(0.77,680w), kent(0.77,634w), alice(0.76,732w), alana(0.75,642w), lori(0.74,714w)
+vs Gemini (better): Spearman 0.954
+vs Gemini (appropriate): Spearman 0.962

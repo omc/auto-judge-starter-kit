@@ -1,0 +1,85 @@
+Loaded workflow: create_nuggets=False, judge=True
+Loaded: judge_class=judges.bonsai_judge.pairwise_jev:BonsaiJevPairwiseJudge
+Limited topics mode: filebase changed to tmp-bonsai_pairwise_jev
+
+=== Running configuration: noul_proportionate_test ===
+Nugget output: output-prop-ragtime26-narrow/tmp-bonsai_pairwise_jev
+Judge output: output-prop-ragtime26-narrow/tmp-bonsai_pairwise_jev
+[judge_runner] Filtered to explicit topics: ['2041', '2046']
+[judge_runner] Config saved to: output-prop-ragtime26-narrow/tmp-bonsai_pairwise_jev.config.yml
+[judge_runner] judge settings: {'filebase': 'output-prop-ragtime26-narrow/tmp-bonsai_pairwise_jev', 'on_missing_evals': 'fix_aggregate', 'model': 'typesafe/jev-1.13', 'questions': ['noul_a_better', 'noul_b_better', 'noul_a_appropriate', 'noul_b_appropriate', 'noul_a_proportionate', 'noul_b_proportionate'], 'tie_threshold': 0.5, 'direction': 'single', 'max_outstanding': 32, 'max_attempts': 8, 'topics_per_batch': 2, 'mirror': ['noul_a_proportionate', 'noul_b_proportionate'], 'outdir': PosixPath('output-prop-ragtime26-narrow')}
+globs: ['/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/adair', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/aimee', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/alana', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/alice', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/alyssa', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/avery', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/bree', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/briar', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/david', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/debra', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/devin', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/diana', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/dina', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/eliza', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/ella', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/esme', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/ezra', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/faye', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/flynn', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/grace', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/hans', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/harvey', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/ilan', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/jace', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/jada', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/jane', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/jesse', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/joe', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/jose', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/joyce', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/katie', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/keith', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/kent', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/kurt', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/lena', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/lila', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/loren', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/lori', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/mae', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/mara', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/marcy', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/marie', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/mario', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/mina', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/piper', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/polly', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/rory', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/susan', '/Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/tess']
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/adair
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/aimee
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/alana
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/alice
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/alyssa
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/avery
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/bree
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/briar
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/david
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/debra
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/devin
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/diana
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/dina
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/eliza
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/ella
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/esme
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/ezra
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/faye
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/flynn
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/grace
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/hans
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/harvey
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/ilan
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/jace
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/jada
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/jane
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/jesse
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/joe
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/jose
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/joyce
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/katie
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/keith
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/kent
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/kurt
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/lena
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/lila
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/loren
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/lori
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/mae
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/mara
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/marcy
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/marie
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/mario
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/mina
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/piper
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/polly
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/rory
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/susan
+Loading report from /Users/max/projects/bonsai-auto-judge/data/ragtime26/runs/repgen/tess
+[jev] 2 topics -> 2,048 cross-team comparisons (direction=single)
+Prompt cache: ./cache/minima_llm.db
+[jev] model=typesafe/jev-1.13 url=https://openrouter.ai/api/alpha/decisions questions=['noul_a_better', 'noul_b_better', 'noul_a_appropriate', 'noul_b_appropriate', 'noul_a_proportionate', 'noul_b_proportionate'] max_outstanding=32[judge_runner] Leaderboard saved to: output-prop-ragtime26-narrow/tmp-bonsai_pairwise_jev.eval.txt (format=ir_measures)
+[judge_runner] Measures spec saved to: output-prop-ragtime26-narrow/tmp-bonsai_pairwise_jev.eval.measures.yml
+Done configuration: noul_proportionate_test
+
+All configurations complete.
+
+[jev] group 1: 500/2,012 calls (0.3m)
+[jev] group 1: 1,000/2,012 calls (0.6m)
+[jev] group 1: 1,500/2,012 calls (1.1m)
+[jev] group 1: 2,000/2,012 calls (1.8m)
+[jev] group 1/1 (2 topics): 2,012 new calls, 2,048/2,048 valid, 0 identical-text ties (1.8m elapsed)
+Synchronizing cache at ./cache.
+Cache synched.
+[jev] noul_a_better: 2,048 valid / 0 malformed / 0 missing | mean P(A)=0.4799 | ties 223 (dup 0) both-yes 5 | cost $0.2119 | served ['typesafe/jev-1.13-20260917']
+[jev] noul_b_better: 2,048 valid / 0 malformed / 0 missing | mean P(A)=0.5334 | ties 223 (dup 0) both-yes 5 | cost $0.2119 | served ['typesafe/jev-1.13-20260917']
+[jev] noul_a_appropriate: 2,048 valid / 0 malformed / 0 missing | mean P(A)=0.4706 | ties 223 (dup 0) both-yes 5 | cost $0.2119 | served ['typesafe/jev-1.13-20260917']
+[jev] noul_b_appropriate: 2,048 valid / 0 malformed / 0 missing | mean P(A)=0.5197 | ties 223 (dup 0) both-yes 5 | cost $0.2119 | served ['typesafe/jev-1.13-20260917']
+[jev] noul_a_proportionate: 2,048 valid / 0 malformed / 0 missing | mean P(A)=0.4568 | ties 223 (dup 0) both-yes 5 | cost $0.2119 | served ['typesafe/jev-1.13-20260917']
+[jev] noul_b_proportionate: 2,048 valid / 0 malformed / 0 missing | mean P(A)=0.5387 | ties 223 (dup 0) both-yes 5 | cost $0.2119 | served ['typesafe/jev-1.13-20260917']
+[jev] mirror: 2,048 valid / 0 malformed / 0 missing | mean P(A)=0.4977 | ties 223 (dup 0) both-yes 5 | cost $0.2119 | served ['typesafe/jev-1.13-20260917']
+[jev] primary question: mirror
+[jev] artifacts in output-prop-ragtime26-narrow/tmp-bonsai_pairwise_jev.pairwise
+Writing leaderboard to /Users/max/projects/bonsai-auto-judge/output-prop-ragtime26-narrow/tmp-bonsai_pairwise_jev.eval.txt

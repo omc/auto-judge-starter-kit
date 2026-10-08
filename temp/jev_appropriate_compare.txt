@@ -1,0 +1,15 @@
+topic rag2026-0 | ordered comparisons 6446 | words median 679 min 65 max 1024
+
+pair          yA+yB  both-no both-yes decisive [.4,.6] P(longer)  <1.25x  1.25-2x   >=2x rho len P(slotA)
+better        0.982    0.005    0.004    0.810   0.063     0.669   0.537    0.599  0.803   0.531    0.512
+appropriate   0.983    0.009    0.003    0.798   0.074     0.653   0.529    0.584  0.783   0.494    0.503
+
+per-comparison: Pearson(better, appropriate) 0.996 | mean |diff| 0.020 | winner differs 0.019
+mean shift toward the longer summary (appropriate - better): -0.0152 | Spearman(shift_A, log len ratio) -0.674
+run ranking: Spearman(better, appropriate) 0.9955
+largest rank moves (better rank -> appropriate rank, words): finn 11->19 (1024w), darcy 13->7 (674w), eden 10->16 (1023w), rita 8->14 (1020w), alex 45->50 (679w), adela 54->58 (652w), carlo 76->72 (71w), eve 15->11 (973w)
+winrate change vs words: Spearman(appropriate - better, words) -0.756
+top 8 better      : carmen(0.89,1020w), lars(0.86,869w), edith(0.86,863w), ariel(0.85,896w), yara(0.84,1000w), xavi(0.84,760w), hana(0.84,760w), rita(0.84,1020w)
+top 8 appropriate : carmen(0.88,1020w), lars(0.86,869w), edith(0.86,863w), ariel(0.85,896w), hana(0.84,760w), xavi(0.84,760w), darcy(0.83,674w), yara(0.83,1000w)
+vs Gemini (better): Spearman 0.970
+vs Gemini (appropriate): Spearman 0.980

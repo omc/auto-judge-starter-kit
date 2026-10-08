@@ -1,0 +1,38 @@
+matched comparisons 6366 (broad 6366, narrow 6366) | topics ['rag2026-1', 'rag2026-107']
+
+== rag2026-1 (n=3223) ==
+pair           P(longer) broad  narrow   shift       DiD vs better [95% CI] rho len broad  narrow rank broad~narrow  tie% b/n
+better                   0.670   0.627  -0.043                            —         0.556   0.412             0.940  0.2/ 3.0
+appropriate              0.650   0.603  -0.047    -0.0034 [-0.0045,-0.0024]         0.505   0.342             0.916  0.5/ 3.5
+proportionate            0.674   0.597  -0.076    -0.0330 [-0.0349,-0.0312]         0.572   0.332             0.899  0.4/ 7.6
+
+== rag2026-107 (n=3143) ==
+pair           P(longer) broad  narrow   shift       DiD vs better [95% CI] rho len broad  narrow rank broad~narrow  tie% b/n
+better                   0.621   0.615  -0.006                            —         0.412   0.409             0.996  0.8/ 1.3
+appropriate              0.597   0.591  -0.007    -0.0008 [-0.0013,-0.0004]         0.338   0.330             0.996  1.2/ 1.6
+proportionate            0.607   0.583  -0.024    -0.0180 [-0.0190,-0.0170]         0.370   0.301             0.990  1.0/ 2.5
+
+== pooled (n=6366) ==
+pair           P(longer) broad  narrow   shift       DiD vs better [95% CI] rho len broad  narrow rank broad~narrow  tie% b/n
+better                   0.646   0.621  -0.025                            —         0.484   0.410             0.968  0.5/ 2.2
+appropriate              0.624   0.597  -0.027    -0.0022 [-0.0027,-0.0016]         0.421   0.336             0.956  0.8/ 2.6
+proportionate            0.641   0.590  -0.050    -0.0256 [-0.0267,-0.0245]         0.471   0.317             0.945  0.7/ 5.1
+
+broad  appropriate   vs better: mean diff -0.0060 | mean |diff| 0.0266 | winner differs 2.435%
+broad  proportionate vs better: mean diff +0.0048 | mean |diff| 0.0172 | winner differs 1.587%
+narrow appropriate   vs better: mean diff -0.0089 | mean |diff| 0.0294 | winner differs 3.173%
+narrow proportionate vs better: mean diff -0.0078 | mean |diff| 0.0390 | winner differs 3.409%
+
+top 6 per topic and framing (win rate, words):
+  rag2026-1 broad  better        xavi(0.87,924w), hana(0.86,924w), carmen(0.86,961w), todd(0.85,1004w), lars(0.85,865w), finn(0.83,1010w)
+  rag2026-1 broad  appropriate   xavi(0.86,924w), carmen(0.86,961w), hana(0.86,924w), lars(0.85,865w), todd(0.83,1004w), yara(0.82,708w)
+  rag2026-1 broad  proportionate xavi(0.86,924w), hana(0.85,924w), carmen(0.85,961w), lars(0.84,865w), todd(0.83,1004w), yara(0.82,708w)
+  rag2026-1 narrow better        finn(0.89,1010w), todd(0.89,1004w), rita(0.88,1004w), eden(0.88,1003w), carmen(0.87,961w), lars(0.87,865w)
+  rag2026-1 narrow appropriate   lars(0.87,865w), finn(0.87,1010w), carmen(0.87,961w), todd(0.86,1004w), edith(0.86,729w), rita(0.86,1004w)
+  rag2026-1 narrow proportionate lars(0.86,865w), carmen(0.86,961w), edith(0.85,729w), ariel(0.85,658w), finn(0.85,1010w), luca(0.84,729w)
+  rag2026-107 broad  better        carmen(0.89,890w), ariel(0.86,715w), edith(0.86,674w), yara(0.85,689w), lars(0.84,497w), xavi(0.82,521w)
+  rag2026-107 broad  appropriate   carmen(0.87,890w), ariel(0.85,715w), edith(0.85,674w), lars(0.84,497w), yara(0.84,689w), xavi(0.81,521w)
+  rag2026-107 broad  proportionate carmen(0.88,890w), ariel(0.86,715w), edith(0.85,674w), yara(0.85,689w), lars(0.84,497w), xavi(0.83,521w)
+  rag2026-107 narrow better        carmen(0.86,890w), edith(0.83,674w), ariel(0.83,715w), yara(0.83,689w), lars(0.82,497w), finn(0.81,1016w)
+  rag2026-107 narrow appropriate   carmen(0.84,890w), lars(0.83,497w), edith(0.82,674w), ariel(0.82,715w), yara(0.81,689w), xavi(0.79,521w)
+  rag2026-107 narrow proportionate carmen(0.83,890w), lars(0.83,497w), edith(0.82,674w), ariel(0.82,715w), yara(0.82,689w), xavi(0.80,521w)

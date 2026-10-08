@@ -99,6 +99,29 @@ variants:
       questions: ["noul_a_better", "noul_b_better", "noul_a_worse", "noul_a_shorter"]
       mirror: ["noul_a_better", "noul_b_better"]
 
+  # "Appropriate" mirror pair (adds conciseness; depth should match the need) vs the
+  # original "better" pair, asked in the SAME request so every comparison has both.
+  # Pilot topic, both orientations; primary = mirror of the appropriate pair.
+  noul_appropriate_pilot:
+    judge_settings:
+      max_topics: 1
+      topics_per_batch: 1
+      direction: "ordered"
+      questions: ["noul_a_better", "noul_b_better", "noul_a_appropriate", "noul_b_appropriate"]
+      mirror: ["noul_a_appropriate", "noul_b_appropriate"]
+
+  # Depth-adaptivity test: better vs appropriate vs proportionate pairs in ONE request,
+  # each pair once (orientation hashed). Run with --topic on the original topics file
+  # (broad need) and on temp/narrow_topics_<dataset>.jsonl (same request_ids, narrowed
+  # to one sub-question). Primary = mirror of the proportionate pair.
+  noul_proportionate_test:
+    judge_settings:
+      topics_per_batch: 2
+      direction: "single"
+      questions: ["noul_a_better", "noul_b_better", "noul_a_appropriate", "noul_b_appropriate",
+                  "noul_a_proportionate", "noul_b_proportionate"]
+      mirror: ["noul_a_proportionate", "noul_b_proportionate"]
+
   full:
     judge_settings:
       topics_per_batch: 20
