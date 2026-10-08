@@ -1,0 +1,9 @@
+judge_class: "judges.bert_leader.leader_judge:LeaderJudge"
+
+create_nuggets: false
+create_qrels: false
+judge: true
+
+settings:
+  score_path: "C:\\dev\\trec\\scores\\rag-bert-per-topic.json"
+  filebase: "{_name}"
