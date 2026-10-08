@@ -14,6 +14,9 @@ topics = {}
 # Scores keyed by run_id, includes list of mean sims for all topics for summary
 scores = {}
 
+# Track scores per run_id:topic combo to export for external leaderboardgen
+full_scores = {}
+
 # Might fall back to spotify distilibert but we'll see how this performs
 model = SentenceTransformer(
     "sentence-transformers/all-MiniLM-L6-v2",
@@ -46,11 +49,13 @@ def evaluate(topic_key, submissions):
             sims.append(torch.dot(base_embed[0], entry).item())
 
         # Prep array of scores if it doesn't exist yet
-        if s['metadata']['run_id'] not in scores:
-            scores[s['metadata']['run_id']] = []
+        run_id = s['metadata']['run_id']
+        if run_id not in scores:
+            scores[run_id] = []
 
         score = mean(sims) if len(sims) > 0 else 0.0
-        scores[s['metadata']['run_id']].append(score)
+        scores[run_id].append(score)
+        full_scores[f'{run_id}-{topic_key}'] = score
         #print('Result: ', score)
 
 
@@ -98,3 +103,7 @@ print('Final results:')
 print('--------------')
 for key, values in sorted_scores:
     print(f"{key}: {mean(values):.6f}")
+
+# Export full scores
+with open('rag-bert-per-topic.json', 'w') as out:
+    json.dump(full_scores, out)

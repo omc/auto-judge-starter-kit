@@ -6,6 +6,8 @@ A simple BERT approach than can be run offline. The topic is encoded then all se
 ## Setup
 You will need to setup a venv with torch/sentence-transformer + CUDA. See `requirements.txt`.
 
-Drop the script at the top level of the appropriate TREC dataset then run.
+## Generating Scores
+Drop an eval python script at the top level of the appropriate TREC dataset then run each to generate a bank of scores used for leaderboard generation.
 
-
+## Generating Leaderboard
+Update paths in the bash scripts/bert\_leader workflows to point at your local data
