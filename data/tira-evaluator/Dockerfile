@@ -1,4 +1,4 @@
-# docker build -t ghcr.io/trec-auto-judge/auto-judge-code/cli:0.0.4 .
+# docker build -t ghcr.io/trec-auto-judge/auto-judge-code/cli:0.0.5 .
 FROM ghcr.io/trec-auto-judge/auto-judge-code/cli:0.0.3
 
 #RUN pip3 uninstall -y tira \
