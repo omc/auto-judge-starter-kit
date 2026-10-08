@@ -1,0 +1,15 @@
+judge=jev invalid=0
+targets=48 calls=4608 | mean P(slot A wins)=0.494
+
+variant         words x  P(win)      dP            95% CI  targets dP>0  dP>+.05  dP<-.05
+original           1.00   0.362  +0.000 [+0.000,+0.000]       0/48           0        0
+pad_repeat         1.52   0.257  -0.105 [-0.124,-0.088]       0/48           0       43
+pad_generic        1.51   0.188  -0.174 [-0.196,-0.152]       0/48           0       47
+pad_offtopic       1.52   0.084  -0.279 [-0.312,-0.246]       0/48           0       48
+pad_relevant       1.52   0.456  +0.094 [+0.072,+0.115]      42/48          33        1
+truncate           0.66   0.245  -0.117 [-0.137,-0.097]       1/48           0       39
+
+per topic dP:
+  2000: pad_repeat=-0.111  pad_generic=-0.140  pad_offtopic=-0.227  pad_relevant=+0.049  truncate=-0.131
+  2001: pad_repeat=-0.096  pad_generic=-0.169  pad_offtopic=-0.275  pad_relevant=+0.100  truncate=-0.097
+  2002: pad_repeat=-0.110  pad_generic=-0.214  pad_offtopic=-0.334  pad_relevant=+0.132  truncate=-0.123

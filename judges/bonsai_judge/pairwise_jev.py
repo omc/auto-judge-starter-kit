@@ -57,6 +57,7 @@ from .pairwise import (
     Comparison,
     _plan_comparisons,
     _summaries_by_topic,
+    topic_fields,
 )
 
 JEV_MODEL = "typesafe/jev-1.13"
@@ -180,7 +181,8 @@ class BonsaiJevPairwiseJudge(BonsaiPairwiseJudge):
         art = outdir / f"{Path(filebase).name}.pairwise"
         art.mkdir(parents=True, exist_ok=True)
 
-        topic_titles: Dict[str, str] = {t.request_id: (t.title or "") for t in rag_topics}
+        # {query, [problem_statement], [background]} per topic -> merged into Jev's state
+        topic_titles: Dict[str, dict] = {t.request_id: topic_fields(t) for t in rag_topics}
         expected_topic_ids = list(topic_titles.keys())
         summaries = _summaries_by_topic(rag_responses)
 
@@ -259,11 +261,12 @@ class BonsaiJevPairwiseJudge(BonsaiPairwiseJudge):
 
     @staticmethod
     def _state(comp: Comparison, summaries, titles) -> dict:
-        return {
-            "query": titles.get(comp.topic_id, ""),
-            "summary_a": summaries[comp.topic_id][comp.a_run][1],
-            "summary_b": summaries[comp.topic_id][comp.b_run][1],
-        }
+        """titles[topic] is a topic_fields() dict, or a bare title string."""
+        info = titles.get(comp.topic_id, "")
+        state = {"query": info} if isinstance(info, str) else dict(info)
+        state["summary_a"] = summaries[comp.topic_id][comp.a_run][1]
+        state["summary_b"] = summaries[comp.topic_id][comp.b_run][1]
+        return state
 
     @staticmethod
     def _payload(model: str, state: dict, questions: Dict[str, dict]) -> dict:

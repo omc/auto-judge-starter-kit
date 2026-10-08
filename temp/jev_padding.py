@@ -36,19 +36,19 @@ from autojudge_base import load_report
 
 from judges.bonsai_judge.bonsai_judge import _clean
 from judges.bonsai_judge.pairwise_jev import load_questions
-sys_path_hack = None
-import sys
-sys.path.insert(0, str(Path(__file__).parent))
 from jev_probes import ask_all  # noqa: E402
 
-TOPICS = ["rag2026-0", "rag2026-1", "rag2026-10"]
-OFFTOPIC_SOURCE = "rag2026-50"      # far-away topic supplying irrelevant sentences
-PRIOR = Path("output-pairwise-jev-prompts/bonsai_pairwise_jev.pairwise/comparisons.jsonl")
-RUNS = Path("data/rag26/runs/generation")
-TOPIC_FILE = Path("data/rag26/topics/trec_rag_2026_queries.jsonl")
-OUTS = {"jev": Path("temp/jev_probes/padding.jsonl"),
-        "noul": Path("temp/jev_probes/padding_noul.jsonl"),
-        "gemini": Path("temp/jev_probes/padding_gemini.jsonl")}
+import sys
+sys.path.insert(0, str(Path(__file__).parent))
+from jev_dataset import DS, runs_dir, topic_info  # noqa: E402  JEV_DATASET=rag26|ragtime26
+
+TOPICS = DS["probe_topics"]
+OFFTOPIC_SOURCE = DS["offtopic"]    # far-away topic supplying irrelevant sentences
+PRIOR = Path(DS["prior"])           # prompt-variant run: control win-rates pick targets
+RUNS = runs_dir()
+OUTS = {"jev": Path(DS["probes"]) / "padding.jsonl",
+        "noul": Path(DS["probes"]) / "padding_noul.jsonl",
+        "gemini": Path(DS["probes"]) / "padding_gemini.jsonl"}
 N_TARGETS, N_OPPONENTS, PAD = 16, 8, 0.5
 VARIANTS = ["original", "pad_repeat", "pad_generic", "pad_offtopic", "pad_relevant", "truncate"]
 
@@ -142,7 +142,7 @@ def variants(sents, rng, generic_pool, offtopic_pool, relevant_pool):
 
 def build():
     data = load_sentences(set(TOPICS) | {OFFTOPIC_SOURCE})
-    titles = {json.loads(l)["request_id"]: json.loads(l)["title"] for l in open(TOPIC_FILE)}
+    titles = topic_info()   # {query, [problem_statement], [background]} per topic
     wr = control_winrates()
     offtopic_pool = [s for _team, ss in data[OFFTOPIC_SOURCE].values() for s in ss]
     items, meta = [], []
@@ -172,7 +172,7 @@ def build():
                                "target_slot": slot, "target_words": len(text.split()),
                                "orig_words": len(" ".join(sents).split()),
                                "opp_words": len(otext.split()), "target_wr": wr[(t, tgt)]}
-                        items.append((tag, {"query": titles[t], "summary_a": a, "summary_b": b}))
+                        items.append((tag, {**titles[t], "summary_a": a, "summary_b": b}))
     return items
 
 
@@ -180,14 +180,14 @@ async def ask_gemini(items):
     """Original pairwise judge path: chat prompt -> single 'A'/'B' token. Cached."""
     from types import SimpleNamespace
     from minima_llm import MinimaLlmRequest
-    from judges.bonsai_judge.pairwise import _PROMPT_PATH, _render, BonsaiPairwiseJudge
+    from judges.bonsai_judge.pairwise import _PROMPT_PATH, _render, BonsaiPairwiseJudge, topic_query_text
     judge = BonsaiPairwiseJudge()
     backend, cfg = judge._make_backend(SimpleNamespace(raw=None), "live", 48, 0)
     template = _PROMPT_PATH.read_text()
     reqs = [MinimaLlmRequest(
                 request_id=f"pad{i}",
                 messages=[{"role": "user", "content": _render(
-                    template, topic_query=st_["query"],
+                    template, topic_query=topic_query_text(st_),
                     summary_a=st_["summary_a"], summary_b=st_["summary_b"])}],
                 temperature=0.0, max_tokens=8)
             for i, (_tag, st_) in enumerate(items)]

@@ -67,6 +67,26 @@ _PROMPT_PATH = Path(__file__).parent / "prompts" / "pairwise_summary_1.md"
 _VAR_RE = re.compile(r"<%=\s*(\w+)\s*%>")
 
 
+def topic_fields(t: Request) -> Dict[str, str]:
+    """Topic text given to the judges: the title as ``query``, plus ``problem_statement``
+    and ``background`` when the dataset provides them (ragtime topics: the title is just
+    a label, the need is in these fields). rag26 topics are title-only, so their prompts
+    and cache keys are unchanged."""
+    out = {"query": t.title or ""}
+    for k in ("problem_statement", "background"):
+        v = getattr(t, k, None)
+        if v:
+            out[k] = v
+    return out
+
+
+def topic_query_text(fields: Dict[str, str]) -> str:
+    """Single-string form of topic_fields for chat prompts (<%=topic_query%>)."""
+    parts = [fields.get("query", "")] + [fields[k] for k in ("problem_statement", "background")
+                                         if fields.get(k)]
+    return "\n\n".join(p for p in parts if p)
+
+
 def _render(template: str, **vars: str) -> str:
     """Substitute <%=name%> placeholders. Fails fast on an unknown placeholder."""
     def sub(m: "re.Match[str]") -> str:
@@ -181,7 +201,8 @@ class BonsaiPairwiseJudge:
         art = outdir / f"{Path(filebase).name}.pairwise"
         art.mkdir(parents=True, exist_ok=True)
 
-        topic_titles: Dict[str, str] = {t.request_id: (t.title or "") for t in rag_topics}
+        topic_titles: Dict[str, str] = {t.request_id: topic_query_text(topic_fields(t))
+                                        for t in rag_topics}
         expected_topic_ids = list(topic_titles.keys())
 
         summaries = _summaries_by_topic(rag_responses)

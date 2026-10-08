@@ -1,0 +1,3 @@
+[probe] identical: 147 self-comparisons over ['2000', '2001', '2002']
+Prompt cache: ./cache/minima_llm.db
+[probe] wrote temp/jev_probes_ragtime26/identical.jsonl: 147 rows, 0 errors, $0.0130

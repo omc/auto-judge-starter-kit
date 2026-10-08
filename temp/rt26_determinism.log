@@ -1,0 +1,5 @@
+[probe] determinism: 2003, 1024 comparisons x 2 passes
+Prompt cache: ./cache/minima_llm.db
+[probe] wrote temp/jev_probes_ragtime26/determinism_2003_pass1.jsonl: 1024 rows, 0 errors, $0.0861
+Prompt cache: ./cache/minima_llm.db
+[probe] wrote temp/jev_probes_ragtime26/determinism_2003_pass2.jsonl: 1024 rows, 0 errors, $0.0861

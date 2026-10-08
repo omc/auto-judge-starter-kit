@@ -4,10 +4,11 @@ import json, sys, statistics as st
 from collections import defaultdict
 from pathlib import Path
 from scipy.stats import spearmanr
+from jev_dataset import runs_dir  # JEV_DATASET=rag26|ragtime26
 
 def lengths(topic):
     L = {}
-    for f in Path("data/rag26/runs/generation").iterdir():
+    for f in runs_dir().iterdir():
         for line in open(f):
             r = json.loads(line)
             if r["metadata"]["topic_id"] == topic:

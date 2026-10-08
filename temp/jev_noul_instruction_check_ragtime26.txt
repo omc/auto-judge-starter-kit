@@ -1,0 +1,27 @@
+n=3072 topics=['2000', '2001', '2002']
+
+== mirror pair (re-asked in a 4-question bundle) ==
+yA+yB mean 0.974 | within [0.9,1.1] 0.920 | both-no 63 | both-yes 49 | Pearson(yA,1-yB) 0.985
+
+== noul_a_worse: expected yW ~= 1 - yA (negation), i.e. ~= yB ==
+mean yW 0.500 (mean yA 0.496, mean yB 0.478)
+Pearson(yW, 1-yA) 0.993 | Pearson(yW, yB) 0.980 | Pearson(yW, yA) -0.993
+mean |yW-(1-yA)| 0.026 | mean |yW-yB| 0.051
+argmax: 'A worse' agrees with mirror saying B better 0.964
+  on decisive pairs (|mirror-.5|>.4, n=513): 1.000
+  near-ties (|mirror-.5|<=.1, n=394): mean yA 0.498 yB 0.490 yW 0.505 | all three 'no' 6
+  flagged ties (n=63): mean yW 0.550 | yW<.5 6
+
+== noul_a_shorter: accuracy vs word counts ==
+  all      n= 3065 accuracy=0.813 mean P(correct)=0.728
+  <1.25x   n= 1014 accuracy=0.589 mean P(correct)=0.551
+  1.25-2x  n= 1160 accuracy=0.869 mean P(correct)=0.752
+  >=2x     n=  891 accuracy=0.994 mean P(correct)=0.899
+  Spearman(yS, log(len_a/len_b)) = -0.869 (ideal strongly negative)
+  Spearman(yS, mirror P(A better)) = -0.154 (strongly negative => answering quality)
+  conflict pairs (shorter one ALSO judged better), n=1579: follows length 0.758 vs follows inverse-quality 0.242
+
+== test-retest vs noul pilot (same oriented comparison, different question bundle) ==
+  noul_a_better: n=1024 identical=0.428 mean|dp|=0.0083 max=0.050 winner agree=0.981
+  noul_b_better: n=1024 identical=0.416 mean|dp|=0.0086 max=0.070 winner agree=0.988
+  mirror: mean|dp|=0.0074 winner flips=3

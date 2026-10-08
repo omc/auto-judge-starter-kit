@@ -1,0 +1,26 @@
+n=3072
+== 1. shorter: objective accuracy vs word counts ==
+  all      n= 3065 accuracy=0.801  mean P(correct)=0.751
+  <1.25x   n= 1014 accuracy=0.582  mean P(correct)=0.558
+  1.25-2x  n= 1160 accuracy=0.848  mean P(correct)=0.779
+  >=2x     n=  891 accuracy=0.990  mean P(correct)=0.936
+  Spearman(P(A shorter), log(len_a/len_b)) = -0.872  (ideal: strongly negative)
+  Spearman(P(A shorter), P(A better))     = -0.154  (strongly negative => answering quality)
+  argmax matches true-shorter 0.801 | matches 'NOT better' 0.546
+  conflict pairs (shorter one is ALSO judged better), n=1581: follows length 0.747 vs follows inverse-quality 0.253
+
+== worse_summary: expected P(A) = 1 - P_better(A) ==
+  mean P(A)=0.434 (better: 0.492)
+  Pearson with 1-P_better 0.939 | with P_better -0.939
+  mean |P - (1-P_better)| 0.100  |  mean |P - P_better| 0.742
+  argmax = inverted-better 0.906  | = same-as-better 0.097
+  on decisive control pairs (|P_better-.5|>.4, n=1993): inverted 0.983
+  P(A) when better is ~coin flip (0.4-0.6, n=222): 0.341
+
+== swapped_labels: expected P(A) = 1 - P_better(A) ==
+  mean P(A)=0.421 (better: 0.492)
+  Pearson with 1-P_better 0.967 | with P_better -0.967
+  mean |P - (1-P_better)| 0.122  |  mean |P - P_better| 0.675
+  argmax = inverted-better 0.919  | = same-as-better 0.084
+  on decisive control pairs (|P_better-.5|>.4, n=1993): inverted 0.999
+  P(A) when better is ~coin flip (0.4-0.6, n=222): 0.379

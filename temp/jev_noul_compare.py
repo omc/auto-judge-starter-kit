@@ -11,13 +11,14 @@ import json, sys, statistics as st
 from collections import defaultdict
 from pathlib import Path
 from scipy.stats import spearmanr, kendalltau, pearsonr
+from jev_dataset import runs_dir  # JEV_DATASET=rag26|ragtime26
 
 noul = [json.loads(l) for l in open(sys.argv[1])]
 choice = {r["comp_id"]: r for r in map(json.loads, open(sys.argv[2]))}
 noul = [r for r in noul if r["valid"] and r["comp_id"] in choice]
 topic = noul[0]["topic_id"]
 L = {}
-for f in Path("data/rag26/runs/generation").iterdir():
+for f in runs_dir().iterdir():
     for line in open(f):
         r = json.loads(line)
         if r["metadata"]["topic_id"] == topic:

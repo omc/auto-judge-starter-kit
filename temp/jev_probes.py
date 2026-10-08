@@ -25,20 +25,19 @@ from judges.bonsai_judge.pairwise import Comparison, _plan_comparisons, _summari
 from judges.bonsai_judge.pairwise_jev import (
     JEV_MODEL, BonsaiJevPairwiseJudge, _prob_a, decisions_url, load_questions)
 
-OUT = Path("temp/jev_probes")
-RUNS = Path("data/rag26/runs/generation")
-TOPICS = Path("data/rag26/topics/trec_rag_2026_queries.jsonl")
+import sys
+sys.path.insert(0, str(Path(__file__).parent))
+from jev_dataset import DS, runs_dir, topic_info  # noqa: E402  JEV_DATASET=rag26|ragtime26
+
+OUT = Path(DS["probes"])
+RUNS = runs_dir()
 J = BonsaiJevPairwiseJudge()
 
 
 def load(topics):
     reports = [r for f in sorted(RUNS.iterdir()) for r in load_report(f)
                if r.metadata.topic_id in topics]
-    titles = {}
-    for line in open(TOPICS):
-        t = json.loads(line)
-        titles[t["request_id"]] = t.get("title", "")
-    return _summaries_by_topic(reports), titles
+    return _summaries_by_topic(reports), topic_info()   # topic_fields dicts
 
 
 def backend():
@@ -123,8 +122,9 @@ def _identical_name(question):
 def report(question):
     print("== determinism ==")
     for p1 in sorted(OUT.glob("determinism_*_pass1.jsonl")):
-        tagged = question != "better_summary"
-        if tagged != p1.name.endswith(f"_{question}_pass1.jsonl"):
+        # determinism_<topic>[_<question>]_pass1.jsonl; topic ids contain no '_'
+        _topic, _, ftag = p1.name[len("determinism_"):-len("_pass1.jsonl")].partition("_")
+        if ftag != ("" if question == "better_summary" else question):
             continue
         a = {r["comp_id"]: r for r in map(json.loads, open(p1))}
         b = {r["comp_id"]: r for r in map(json.loads, open(str(p1).replace("pass1", "pass2")))}
@@ -175,8 +175,8 @@ def report(question):
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("probe", choices=["determinism", "identical", "report"])
-    ap.add_argument("--topic", default="rag2026-100")
-    ap.add_argument("--topics", nargs="+", default=["rag2026-0", "rag2026-1", "rag2026-10"])
+    ap.add_argument("--topic", default=DS["det_topic"])
+    ap.add_argument("--topics", nargs="+", default=DS["probe_topics"])
     ap.add_argument("--question", default="better_summary")
     a = ap.parse_args()
     {"determinism": lambda: determinism(a.topic, a.question),

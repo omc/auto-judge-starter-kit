@@ -1,0 +1,245 @@
+[padding] 4608 calls: 48 targets x 6 variants x <= 8 opponents x 2 slots
+Prompt cache: ./cache/minima_llm.db
+[padding] gemini model=google/gemini-3.5-flash-lite
+Starting batch: 4608 items | workers=64 max_outstanding=48 rpm=unlimited
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+[   10.0s] done=242/4608 sent=27.3/s recv=20.9/s cached=32 failed=0 eta=3m28s | tok: in=0/s out=0/s (505.1k/210) lat=1.4s
+Server recovered after 12 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+[   20.0s] done=449/4608 sent=19.1/s recv=19.1/s cached=48 failed=0 eta=3m27s | tok: in=37.4k/s out=19/s (879.5k/401) lat=1.7s
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 4 retries. Resuming normal operation.
+[   30.0s] done=666/4608 sent=20.1/s recv=20.1/s cached=64 failed=0 eta=3m16s | tok: in=45.0k/s out=20/s (1.3M/602) lat=1.8s
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 3 retries. Resuming normal operation.
+[   40.0s] done=847/4608 sent=16.5/s recv=16.5/s cached=80 failed=0 eta=3m16s | tok: in=32.8k/s out=16/s (1.7M/767) lat=1.9s
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 5 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+[   50.0s] done=1056/4608 sent=19.3/s recv=19.3/s cached=96 failed=0 eta=3m05s | tok: in=42.6k/s out=19/s (2.1M/960) lat=1.9s
+Server recovered after 2 retries. Resuming normal operation.
+[   60.1s] done=1259/4608 sent=18.7/s recv=18.7/s cached=112 failed=0 eta=2m55s | tok: in=40.5k/s out=18/s (2.5M/1.1k) lat=2.0s
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 8 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+[   70.1s] done=1440/4608 sent=16.5/s recv=16.5/s cached=128 failed=0 eta=2m49s | tok: in=36.8k/s out=16/s (2.9M/1.3k) lat=2.1s
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 2 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 2 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 2 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+[   80.1s] done=1621/4608 sent=16.5/s recv=16.5/s cached=144 failed=0 eta=2m41s | tok: in=33.4k/s out=16/s (3.2M/1.5k) lat=2.1s
+Server recovered after 2 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 2 retries. Resuming normal operation.
+[   90.1s] done=1832/4608 sent=19.5/s recv=19.5/s cached=160 failed=0 eta=2m29s | tok: in=32.8k/s out=19/s (3.5M/1.7k) lat=2.1s
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 2 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 5 retries. Resuming normal operation.
+[  100.1s] done=2008/4608 sent=16.0/s recv=16.0/s cached=176 failed=0 eta=2m21s | tok: in=25.8k/s out=15/s (3.8M/1.8k) lat=2.2s
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 3 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+[  110.1s] done=2191/4608 sent=16.7/s recv=16.7/s cached=192 failed=0 eta=2m13s | tok: in=24.8k/s out=16/s (4.0M/2.0k) lat=2.2s
+Server recovered after 9 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 2 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+[  120.1s] done=2365/4608 sent=15.8/s recv=15.8/s cached=208 failed=0 eta=2m04s | tok: in=26.3k/s out=15/s (4.3M/2.2k) lat=2.2s
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 2 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+[  130.1s] done=2524/4608 sent=15.1/s recv=15.1/s cached=216 failed=0 eta=1m57s | tok: in=26.9k/s out=15/s (4.6M/2.3k) lat=2.2s
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 5 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+[  140.1s] done=2697/4608 sent=15.6/s recv=15.6/s cached=233 failed=0 eta=1m48s | tok: in=32.1k/s out=15/s (4.9M/2.5k) lat=2.2s
+Server recovered after 2 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 2 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+[  150.1s] done=2875/4608 sent=16.2/s recv=16.2/s cached=249 failed=0 eta=1m39s | tok: in=34.9k/s out=16/s (5.2M/2.6k) lat=2.3s
+Server recovered after 2 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 3 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 4 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 2 retries. Resuming normal operation.
+[  160.1s] done=3045/4608 sent=15.4/s recv=15.4/s cached=265 failed=0 eta=1m29s | tok: in=26.3k/s out=15/s (5.5M/2.8k) lat=2.3s
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 2 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+[  170.1s] done=3220/4608 sent=15.9/s recv=15.9/s cached=281 failed=0 eta=1m20s | tok: in=25.0k/s out=15/s (5.7M/2.9k) lat=2.3s
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 3 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+[  180.1s] done=3413/4608 sent=17.7/s recv=17.7/s cached=297 failed=0 eta=1m09s | tok: in=31.1k/s out=17/s (6.1M/3.1k) lat=2.3s
+Server recovered after 10 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+[  190.1s] done=3612/4608 sent=18.3/s recv=18.3/s cached=313 failed=0 eta=57s | tok: in=31.7k/s out=18/s (6.4M/3.3k) lat=2.3s
+Server recovered after 3 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 2 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+[  200.1s] done=3803/4608 sent=17.5/s recv=17.5/s cached=329 failed=0 eta=46s | tok: in=30.4k/s out=17/s (6.7M/3.5k) lat=2.3s
+Server recovered after 6 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+[  210.1s] done=3999/4608 sent=18.0/s recv=18.0/s cached=345 failed=0 eta=35s | tok: in=33.6k/s out=17/s (7.0M/3.7k) lat=2.3s
+Server recovered after 2 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+[  220.1s] done=4214/4608 sent=18.7/s recv=18.7/s cached=373 failed=0 eta=22s | tok: in=37.6k/s out=18/s (7.4M/3.8k) lat=2.3s
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 4 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 2 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 2 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+[  230.1s] done=4432/4608 sent=16.8/s recv=16.8/s cached=423 failed=0 eta=10s | tok: in=34.9k/s out=16/s (7.7M/4.0k) lat=2.3s
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Server overload (HTTP 408). (no rate limit info)
+  Retrying with cooldown=1.0s. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+[  240.1s] done=4599/4608 sent=10.4/s recv=15.9/s cached=431 failed=0 eta=0s | tok: in=34.6k/s out=15/s (8.1M/4.2k) lat=2.3s
+[  250.1s] done=4607/4608 sent=0.0/s recv=0.8/s cached=431 failed=0 eta=0s | tok: in=1.5k/s out=0/s (8.1M/4.2k) lat=2.3s
+Synchronizing cache at ./cache.
+Cache synched.
+[padding] wrote temp/jev_probes_ragtime26/padding_gemini.jsonl: 0 errors, $2.6608

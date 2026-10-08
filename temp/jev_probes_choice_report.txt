@@ -1,0 +1,24 @@
+### rag26 better_summary
+== determinism ==
+determinism_rag2026-100_pass1.jsonl: n=3223 identical=0.756 mean|dp|=0.0043 p95|dp|=0.020 max|dp|=0.090 argmax flips=4 (0.124%) mean|dconf|=0.0086 served={'typesafe/jev-1.13-20260917'}
+  largest changes: [('rag2026-100|sofia|paris', 0.27, 0.36), ('rag2026-100|tania|aron', 0.53, 0.45), ('rag2026-100|sara|pablo', 0.36, 0.44), ('rag2026-100|nell|rene', 0.64, 0.56), ('rag2026-100|reid|rick', 0.78, 0.71)]
+
+== identical summaries (expected P(A)=0.5) ==
+n=248 mean P(A)=0.799 median=0.810 exactly 0.5=0.000 within .45-.55=0.000 P(A)>.9=1 P(A)<.1=0
+mean confidence=0.597 choices: A=248 B=0
+  rag2026-0: mean P(A)=0.820 sd=0.057
+  rag2026-1: mean P(A)=0.790 sd=0.053
+  rag2026-10: mean P(A)=0.785 sd=0.062
+  histogram P(A) by decile: [0, 0, 0, 0, 0, 0, 14, 87, 142, 5]
+### ragtime26 better_summary
+== determinism ==
+determinism_2003_pass1.jsonl: n=1024 identical=0.492 mean|dp|=0.0096 p95|dp|=0.040 max|dp|=0.090 argmax flips=6 (0.586%) mean|dconf|=0.0193 served={'typesafe/jev-1.13-20260917'}
+  largest changes: [('2003|kent|katie', 0.53, 0.62), ('2003|jada|susan', 0.36, 0.28), ('2003|alana|mara', 0.28, 0.21), ('2003|mae|jace', 0.41, 0.48), ('2003|lena|rory', 0.46, 0.4)]
+
+== identical summaries (expected P(A)=0.5) ==
+n=147 mean P(A)=0.785 median=0.780 exactly 0.5=0.000 within .45-.55=0.007 P(A)>.9=3 P(A)<.1=0
+mean confidence=0.570 choices: A=147 B=0
+  2000: mean P(A)=0.736 sd=0.045
+  2001: mean P(A)=0.833 sd=0.071
+  2002: mean P(A)=0.787 sd=0.078
+  histogram P(A) by decile: [0, 0, 0, 0, 0, 1, 16, 63, 55, 12]
