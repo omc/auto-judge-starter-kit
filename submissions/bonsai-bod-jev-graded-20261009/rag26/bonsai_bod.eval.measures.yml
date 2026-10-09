@@ -1,0 +1,21 @@
+measures:
+- name: BOD_MEAN
+  dtype: float
+  description: Primary. Mean over the topic's rubric questions of Jev's expected grade
+    sum_g P(g)*g on the 0-3 scale, divided by 3 (0 = nothing addressed, 1 = every
+    question fully answered).
+- name: BOD_COVERAGE
+  dtype: float
+  description: Fraction of the topic's rubric questions with P(grade >= 2) > 0.5,
+    i.e. at least partially answered.
+- name: BOD_FULL
+  dtype: float
+  description: Fraction of the topic's rubric questions with P(grade = 3) > 0.5, i.e.
+    fully answered.
+- name: BOD_PADDING
+  dtype: float
+  description: Jev's P(yes) that the answer contains substantial off-topic, repeated
+    or generic filler. Diagnostic; higher is worse; not part of BOD_MEAN.
+- name: BOD_QUESTIONS
+  dtype: int
+  description: Number of rubric questions for the topic (0 for an empty report).
