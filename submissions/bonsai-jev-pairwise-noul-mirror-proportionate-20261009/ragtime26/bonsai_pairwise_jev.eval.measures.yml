@@ -1,0 +1,24 @@
+measures:
+- name: PAIRWISE_WINRATE
+  dtype: float
+  description: 'Probability-weighted win rate: sum over this run''s cross-team comparisons
+    of Jev''s P(this summary is better), divided by comparisons played. Primary metric;
+    comparable across runs with different opponent counts.'
+- name: PAIRWISE_EXP_WINS
+  dtype: float
+  description: 'Expected wins for the topic: sum of Jev''s P(this summary is better)
+    over its comparisons (numerator of PAIRWISE_WINRATE).'
+- name: PAIRWISE_GAMES
+  dtype: int
+  description: Number of valid cross-team comparisons this run took part in for the
+    topic (as A or B). Denominator of PAIRWISE_WINRATE.
+- name: PAIRWISE_CONFIDENCE
+  dtype: float
+  description: 'Mean Jev decisiveness |2*P(A)-1| over this run''s comparisons for
+    the topic: 0 = coin flip, 1 = certain. Diagnostic, not a quality score.'
+- name: PAIRWISE_TIE_RATE
+  dtype: float
+  description: 'Fraction of this run''s comparisons for the topic flagged as ties:
+    the two summaries are identical text (scored 0.5, no call), or -- with mirrored
+    Noul questions -- Jev answered ''no'' to both ''is A better?'' and ''is B better?''.
+    Ties still count as games. Diagnostic.'

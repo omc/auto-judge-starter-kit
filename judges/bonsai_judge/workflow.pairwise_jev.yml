@@ -31,7 +31,9 @@ settings:
   filebase: "bonsai_pairwise_jev"
 
 judge_settings:
-  on_missing_evals: "fix_aggregate"
+  on_missing_evals: "default"     # write a row for every (run, topic): empty reports get
+                                  # the measure defaults (win rate 0). TIRA rejects leaderboards
+                                  # with missing (run, topic) entries.
   model: "typesafe/jev-1.13"
   # Jev Choice questions from prompts/jev_questions.yml, all asked in ONE request per
   # comparison. primary_question (default: first) drives the eval leaderboard; every

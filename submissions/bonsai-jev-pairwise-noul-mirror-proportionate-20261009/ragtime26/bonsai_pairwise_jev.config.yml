@@ -1,0 +1,31 @@
+name: full_noul_proportionate
+create_nuggets: false
+create_qrels: false
+judge: true
+llm_model: google/gemini-3.5-flash-lite:batch
+timestamp: '2026-10-09T13:23:00.193420+00:00'
+git:
+  commit: afe2204fc6eae3a32e72bda19139456c29030f7f
+  dirty: 'true'
+  remote: git@github.com:omc/auto-judge-starter-kit.git
+settings:
+  filebase: bonsai_pairwise_jev
+nugget_settings:
+  filebase: bonsai_pairwise_jev
+judge_settings:
+  filebase: bonsai_pairwise_jev
+  on_missing_evals: default
+  model: typesafe/jev-1.13
+  questions:
+  - noul_a_proportionate
+  - noul_b_proportionate
+  tie_threshold: 0.5
+  direction: ordered
+  max_outstanding: 32
+  max_attempts: 8
+  topics_per_batch: 20
+  mirror:
+  - noul_a_proportionate
+  - noul_b_proportionate
+qrels_settings:
+  filebase: bonsai_pairwise_jev
