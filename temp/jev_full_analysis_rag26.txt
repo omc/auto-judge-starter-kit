@@ -1,0 +1,44 @@
+/Users/max/projects/bonsai-auto-judge/temp/jev_full_analysis.py:136: ConstantInputWarning: An input array is constant; the correlation coefficient is not defined.
+  per = [spearmanr([wr_t[(t, x)] for x in runs if (t, x) in wr_t and (t, x) in gwr],
+== rag26: 760,886 valid comparisons, 119 topics, 83 runs, 25 teams ==
+unique calls 703,536 | cost $74.89 ($0.0001065/call) | mean P(A) 0.5177
+P(A) by decile: [159639, 87753, 50266, 37279, 31423, 31470, 34807, 48531, 87927, 191791]
+decisive (<.25|>.75) 0.761 | in [.4,.6] 0.083 | exact 0/1 0.000 | flagged ties 7,009 (0.92%) | both-yes 16,538 (2.17%)
+topic tie rates: median 0.543% | top 5: rag2026-28 6.4%, rag2026-69 5.5%, rag2026-36 5.3%, rag2026-91 5.1%, rag2026-113 3.3%
+
+leaderboard (mean per-topic win rate; 95% bootstrap rank CI over topics):
+   1 carmen   T569   0.8611  rank CI [1,1]
+   2 lars     T569   0.8564  rank CI [2,2]
+   3 edith    T569   0.8456  rank CI [3,5]
+   4 ariel    T569   0.8453  rank CI [3,5]
+   5 hana     T300   0.8429  rank CI [3,5]
+   6 xavi     T300   0.8397  rank CI [6,6]
+   7 luca     T300   0.8295  rank CI [7,7]
+   8 yara     T649   0.8216  rank CI [8,8]
+   9 todd     T736   0.8047  rank CI [9,11]
+  10 eve      T341   0.8029  rank CI [9,12]
+  11 rita     T736   0.8024  rank CI [9,12]
+  12 eden     T736   0.8017  rank CI [10,12]
+  ... 83 paula 0.044, 82 annie 0.048, 81 carlo 0.116
+teams by best run: T569 0.861, T300 0.843, T649 0.822, T736 0.805, T341 0.803, T267 0.794, T410 0.744, T086 0.720, T448 0.707, T149 0.696
+rank-CI width: median 2 | top-10 runs median 1.0
+split-half (topics) Spearman: mean 0.998 [p2.5 0.997, p97.5 0.999]
+per-topic vs overall Spearman: median 0.968 IQR [0.957, 0.976] min 0.886
+
+slot bias: pairs with both orientations 380,443 | P(slot A wins) 0.5177 | winner flips on swap 0.047
+  0.00-0.05:  39,864 / P(slot A) 0.503 / flips 0.00
+  0.05-0.25: 121,925 / P(slot A) 0.513 / flips 0.00
+  0.25-0.40:  30,844 / P(slot A) 0.535 / flips 0.01
+  0.40-0.60:  32,274 / P(slot A) 0.543 / flips 0.53
+  0.60-0.75:  28,606 / P(slot A) 0.537 / flips 0.01
+  0.75-0.95:  98,149 / P(slot A) 0.514 / flips 0.00
+  0.95-1.01:  28,781 / P(slot A) 0.503 / flips 0.00
+
+length: P(longer wins) 0.674 | 1.25-2x 0.620 (n=109,876) | <1.25x 0.513 (n=107,760) | >=2x 0.819 (n=162,240)
+  per-topic Spearman(win rate, words): median 0.562 IQR [0.526, 0.602] | run-level Spearman(board, mean words) 0.585
+
+Gemini: 80 shared topics | overall board Spearman 0.975 Kendall 0.870 | per-topic median 0.957 IQR [0.946, 0.967] min 0.883
+  Gemini top 8: lars(T569), hana(T300), luca(T300), ariel(T569), edith(T569), xavi(T300), carmen(T569), rick(T267)
+  Jev    top 8: carmen(T569), lars(T569), edith(T569), ariel(T569), hana(T300), xavi(T300), luca(T300), yara(T649)
+  top-10 overlap 7/10 | top-20 overlap 18/20
+  largest rank differences (Jev -> Gemini): karl 54->67 (912w), rita 10->22 (1015w), todd 9->20 (1015w), finn 13->23 (1015w), jamie 21->11 (970w), marco 53->63 (949w)

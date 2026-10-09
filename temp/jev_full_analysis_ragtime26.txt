@@ -1,0 +1,42 @@
+== ragtime26: 210,418 valid comparisons, 103 topics, 49 runs, 10 teams ==
+unique calls 196,958 | cost $18.95 ($0.0000962/call) | mean P(A) 0.5083
+P(A) by decile: [17092, 30915, 22310, 17785, 14847, 14319, 16954, 23389, 32803, 20004]
+decisive (<.25|>.75) 0.589 | in [.4,.6] 0.140 | exact 0/1 0.000 | flagged ties 5,435 (2.58%) | both-yes 3,648 (1.73%)
+topic tie rates: median 1.416% | top 5: 2043 26.3%, 2037 12.8%, 2023 12.6%, 2021 12.5%, 2009 10.7%
+
+leaderboard (mean per-topic win rate; 95% bootstrap rank CI over topics):
+   1 marie    T958   0.8093  rank CI [1,2]
+   2 alice    T958   0.8083  rank CI [1,2]
+   3 lori     T958   0.7956  rank CI [3,4]
+   4 alyssa   T958   0.7950  rank CI [3,4]
+   5 briar    T289   0.7127  rank CI [5,9]
+   6 kent     T289   0.7112  rank CI [5,10]
+   7 bree     T706   0.7065  rank CI [5,9]
+   8 dina     T846   0.7035  rank CI [5,11]
+   9 diana    T706   0.7021  rank CI [6,10]
+  10 susan    T706   0.6971  rank CI [7,11]
+  11 joyce    T706   0.6882  rank CI [10,12]
+  12 kurt     T289   0.6770  rank CI [10,13]
+  ... 49 adair 0.091, 48 faye 0.110, 47 hans 0.171
+teams by best run: T958 0.809, T289 0.713, T706 0.706, T846 0.704, T673 0.587, T149 0.575, T768 0.545, T986 0.522, T131 0.497, T047 0.470
+rank-CI width: median 2 | top-10 runs median 4.0
+split-half (topics) Spearman: mean 0.989 [p2.5 0.979, p97.5 0.994]
+per-topic vs overall Spearman: median 0.910 IQR [0.855, 0.930] min 0.592
+
+slot bias: pairs with both orientations 105,209 | P(slot A wins) 0.5083 | winner flips on swap 0.058
+  0.00-0.05:   1,897 / P(slot A) 0.501 / flips 0.00
+  0.05-0.25:  28,171 / P(slot A) 0.504 / flips 0.00
+  0.25-0.40:  13,227 / P(slot A) 0.513 / flips 0.00
+  0.40-0.60:  14,831 / P(slot A) 0.514 / flips 0.40
+  0.60-0.75:  15,313 / P(slot A) 0.512 / flips 0.00
+  0.75-0.95:  30,719 / P(slot A) 0.506 / flips 0.00
+  0.95-1.01:   1,051 / P(slot A) 0.502 / flips 0.00
+
+length: P(longer wins) 0.489 | 1.25-2x 0.498 (n=38,958) | <1.25x 0.431 (n=32,460) | >=2x 0.532 (n=33,647)
+  per-topic Spearman(win rate, words): median -0.082 IQR [-0.193, 0.070] | run-level Spearman(board, mean words) -0.112
+
+Gemini: 3 shared topics | overall board Spearman 0.939 Kendall 0.818 | per-topic median 0.929 IQR [0.917, 0.957] min 0.917
+  Gemini top 8: alyssa(T958), lori(T958), alice(T958), marie(T958), briar(T289), jesse(T768), alana(T289), loren(T768)
+  Jev    top 8: alyssa(T958), marie(T958), briar(T289), lori(T958), alice(T958), kurt(T289), kent(T289), alana(T289)
+  top-10 overlap 6/10 | top-20 overlap 16/20
+  largest rank differences (Jev -> Gemini): loren 20->8 (323w), rory 22->10 (315w), diana 11->20 (535w), dina 12->21 (700w), kent 7->16 (564w), debra 18->26 (614w)

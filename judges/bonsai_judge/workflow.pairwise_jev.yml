@@ -126,7 +126,7 @@ variants:
     judge_settings:
       topics_per_batch: 20
 
-  # FULL run, mirrored Noul (recommended protocol, FINDINGS Section 12.2): all topics,
+  # FULL run, mirrored Noul (recommended protocol, FINDINGS Section 14.2): all topics,
   # both orientations, score = mirror average of "is A better?" / "is B better?".
   # Same questions/model as noul_pilot => its cached rag2026-0 answers are reused.
   # ~703.5k calls, ~$70 estimated (budget ~$80), ~10.5 h at 32 concurrency.
@@ -138,3 +138,13 @@ variants:
       direction: "ordered"
       questions: ["noul_a_better", "noul_b_better"]
       mirror: ["noul_a_better", "noul_b_better"]
+
+  # FULL run with the depth-proportionate mirror pair (adapts to broad vs narrow needs;
+  # ranks like noul_*_better on broad requests). All topics, both orientations.
+  # Estimates: ragtime26 ~197k calls ~$18.5 (~3 h); rag26 ~704k calls ~$72 (~10.5 h).
+  full_noul_proportionate:
+    judge_settings:
+      topics_per_batch: 20
+      direction: "ordered"
+      questions: ["noul_a_proportionate", "noul_b_proportionate"]
+      mirror: ["noul_a_proportionate", "noul_b_proportionate"]

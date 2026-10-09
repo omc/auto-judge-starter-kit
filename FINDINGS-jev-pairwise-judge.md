@@ -2,8 +2,8 @@
 
 **Status:** working notes for the team and raw material for a TREC paper. Pilot-scale
 results (1–3 topics per experiment), replicated on a second dataset, ragtime26
-(Section 11). No full Jev run yet. All numbers here come from
-runs in this repository between 2026-09-10 and 2026-10-08. Section 13 gives the
+(Section 11), plus full tournaments on all topics of both datasets (Section 13). All
+numbers here come from runs in this repository between 2026-09-10 and 2026-10-09. Section 15 gives the
 command and output file behind each table.
 
 **One-paragraph summary.** We built a pairwise "tournament" judge for TREC RAG 2026
@@ -38,6 +38,20 @@ has four properties that matter for the method:
    - Close real pairs no longer favour slot A.
      Both were properties of rag26, not of the judges. Gemini also now _penalises_ added
      relevant content.
+6. **A depth-proportionate prompt adapts to the request (Section 12).**
+   - Adding "conciseness" to the question acts as a uniform length penalty.
+   - An explicit rule ("depth proportionate to what the query asks for: thorough when
+     broad, brief and direct when narrow") judges like the original on broad requests.
+   - When the request is narrowed to one sub-question, it moves 2–4 points further
+     toward shorter answers than the original does, on all 4 test topics.
+7. **Full runs (Section 13).** All topics of both datasets, mirrored proportionate Noul,
+   both orientations: 971,304 comparisons, all valid, $93.84.
+   - The leaderboards are highly stable: split-half reliability 0.998 (rag26) and
+     0.989 (ragtime26).
+   - They agree with Gemini on rag26 at Spearman 0.975 (80 topics).
+   - The length effect stays dataset-specific.
+   - Tie rates turn out to be a stable property of *topics*, replicating across
+     ragtime's 28 duplicated requests.
 
 Our starting hypothesis that the Gemini judge was mainly rewarding length is **not
 supported** by the controlled tests so far, and on ragtime26 neither judge favours longer
@@ -59,9 +73,11 @@ has not been tested yet (Section 9).
 9. [Experiment 6 — Padding test (Jev and Gemini)](#9-experiment-6--padding-test)
 10. [Experiment 7 — Noul (yes/no) formulation](#10-experiment-7--noul-yesno-formulation)
 11. [Experiment 8 — Replication on ragtime26](#11-experiment-8--replication-on-ragtime26)
-12. [Discussion, threats to validity, open questions](#12-discussion)
-13. [Reproduction](#13-reproduction)
-14. [Appendix: prompts and questions verbatim](#14-appendix-prompts-and-questions-verbatim)
+12. [Experiment 9 — Depth-proportionate prompt](#12-experiment-9--depth-proportionate-prompt)
+13. [Full runs: mirrored proportionate Noul on all topics](#13-full-runs-mirrored-proportionate-noul-on-all-topics)
+14. [Discussion, threats to validity, open questions](#14-discussion)
+15. [Reproduction](#15-reproduction)
+16. [Appendix: prompts and questions verbatim](#16-appendix-prompts-and-questions-verbatim)
 
 ---
 
@@ -91,6 +107,8 @@ The research questions that came out of this work:
 - **RQ3** Is either judge biased toward longer summaries independent of content?
 - **RQ4** Does Jev follow the question text, and does rewording the question change outcomes?
 - **RQ5** How reliable are Jev's probabilities (determinism, position bias, calibration on ties)?
+- **RQ6** Can the question make the judge reward depth proportionate to the need, rather
+  than length in either direction?
 
 ---
 
@@ -125,7 +143,7 @@ or internal consistency.
 
 **Topic selection.** The pilots used the lexicographically first topics: rag2026-0, -1,
 -10, and rag2026-100 for the determinism probe. The selection was by sort order, not
-cherry-picked, but it is also not random (see threats, Section 12).
+cherry-picked, but it is also not random (see threats, Section 14).
 
 ---
 
@@ -620,7 +638,7 @@ less position-biased probabilities.
 
 - Same topic and design as the Choice pilot (Section 4): rag2026-0, both orientations,
   6,446 ordered comparisons, 5,978 unique calls.
-- **Two Noul questions in each request**, verbatim in Section 14.3:
+- **Two Noul questions in each request**, verbatim in Section 16.3:
   - `noul_a_better`: "Does summary_a satisfy the information need … better than
     summary_b does …?"
   - `noul_b_better`: the mirror, "Does summary_b … better than summary_a …?"
@@ -884,7 +902,7 @@ bypassed. Cost $0.32 per pass, 0 errors. Snapshot served: `jev-1.13-20260917`.
 #### 10.9.2 Instruction following
 
 **Setup:** rag2026-0, -1 and -10, single orientation, 9,589 comparisons (9,209 calls),
-4 Noul questions per request: the mirror pair plus two probes, verbatim in 14.3. Cost
+4 Noul questions per request: the mirror pair plus two probes, verbatim in 16.3. Cost
 $1.00, 0 errors.
 
 - `noul_a_worse`: "Does summary_a satisfy the information need … worse than
@@ -1232,7 +1250,7 @@ are by orientation-averaged P(x better).
   - The tie bias, 0.8 for slot A on identical inputs, is stable across datasets.
   - How much it leaks into real close pairs depends on the dataset.
 - **So averaging both orientations is the only protection that works on both datasets.**
-  A fixed correction calibrated on ties (open question 12.4 #3) would over-correct
+  A fixed correction calibrated on ties (open question 14.4 #3) would over-correct
   ragtime.
 
 ### 11.8 Noul formulation
@@ -1312,7 +1330,7 @@ Noul tie flag fired on 66 of 4,608 calls (1.4%).
    3 topics negative). On rag26 the effect was null (+0.016). This strengthens the
    hypothesis from 9.3: Gemini penalises spliced or edited text regardless of the
    information it adds, while Jev credits the coverage. Judge splice-free relevant
-   additions (open question 12.4 #2) to confirm.
+   additions (open question 14.4 #2) to confirm.
 4. **Baseline P(win) is higher on ragtime for all judges** (0.36–0.41 against
    0.28–0.33). The mid-ranked targets are closer to their opponents there.
 
@@ -1339,19 +1357,333 @@ Noul tie flag fired on 66 of 4,608 calls (1.4%).
 
 ---
 
-## 12. Discussion
+## 12. Experiment 9 — Depth-proportionate prompt
 
-### 12.1 Answers to the research questions
+**Motivation.** Some information needs require long answers to cover the breadth of the
+topic; others need a short, direct answer. A good judge should reward depth that is
+*proportionate* to the need, rather than always preferring longer or shorter answers.
+The `noul_*_better` pair has no explicit notion of this.
 
-| RQ                                             | Answer (pilot scale)                                                                                                                                                                                                                                                     |
+We tested two new mirrored Noul pairs. Both are verbatim in 16.3.
+
+- **`noul_a_appropriate` / `noul_b_appropriate`.** "Does summary_a satisfy the
+  information need … *more appropriately* than summary_b does, considering relevance,
+  **conciseness**, completeness, and how well its claims are grounded?"
+- **`noul_a_proportionate` / `noul_b_proportionate`.** The `better` question plus an
+  explicit rule: "…considering relevance, completeness, **depth proportionate to what
+  the query asks for (thorough when the query is broad or multi-part, brief and direct
+  when it is narrow)**, and how well its claims are grounded?"
+
+### 12.1 "Appropriate" pilot: adding "conciseness"
+
+**Setup:** pilot topics rag2026-0 and 2000, both orientations. The `better` and
+`appropriate` pairs were asked in the **same request** (4 questions), so every
+comparison has both answers from identical input.
+
+| Metric | rag26 (rag2026-0): better → appropriate | ragtime26 (2000): better → appropriate |
+| --- | --- | --- |
+| P(longer wins) | 0.669 → 0.653 | 0.478 → 0.468 |
+| … ratio ≥ 2× | 0.803 → 0.783 | 0.445 → 0.425 |
+| Spearman(win rate, words) | 0.531 → 0.494 | −0.088 → −0.151 |
+| Mean per-comparison shift toward the longer summary | −0.015 | −0.010 |
+| Spearman(that shift, length ratio) | −0.674 | −0.518 |
+| Winner changes | 1.9% | 1.8% |
+| Run ranking, better vs appropriate | 0.9955 | 0.9933 |
+| Spearman vs Gemini | 0.970 → 0.980 | 0.954 → 0.962 |
+| Tie flag ("no" to both) | 0.5% → 0.9% | 4.6% → 4.8% |
+
+- **"Conciseness" works as a uniform length penalty.** It pushes every comparison
+  slightly toward the shorter summary, with the shift growing with the length gap, on
+  both datasets.
+- **It penalises length even on rag26, where long answers are the complete ones.** The
+  runs that dropped most on rag2026-0 are those at the 1,020-word ceiling: finn 11→19,
+  eden 10→16, rita 8→14. darcy (674 words) rose 13→7.
+- **The effect is real but small.** The winner changes in about 2% of comparisons,
+  against about 0.1% between repeats of the same question.
+- **Agreement with Gemini rises slightly** on both datasets. This does not validate the
+  prompt: neither judge has been checked against human judgments.
+
+### 12.2 Broad vs narrow test
+
+The pilot topics both ask for broad, long-form answers, so they cannot show whether a
+prompt *adapts*. Neither dataset has genuinely narrow needs: every rag26 topic asks for
+an article, essay, guide or report, and every ragtime topic is a report request with the
+same 5,000-character limit. rag24 and rag25 are not available locally.
+
+**Design: a controlled query manipulation.** The *same* report pairs are judged under
+two framings of the request:
+
+- **Broad:** the original topic.
+- **Narrow:** a single sub-question taken from the topic's own text, with no
+  problem statement or background.
+
+All three mirrored pairs (`better`, `appropriate`, `proportionate`) were asked in each
+request, single orientation (hashed, identical across framings), with topics selected
+with `--topic`.
+
+| Dataset | Topic | Narrow question |
+| --- | --- | --- |
+| rag26 | rag2026-1 | "My 72-year-old mother was widowed six weeks ago and has chest tightness. What warning signs should we take seriously?" |
+| rag26 | rag2026-107 | "What single post-395 CE turning point could realistically have ensured the Western Roman Empire's survival?" |
+| ragtime26 | 2041 | "What percentage of Denmark's energy needs are now provided by wind power?" (verbatim from the request) |
+| ragtime26 | 2046 | "What type of grapes are used to make Sherry?" |
+
+**Measure.** For each pair, the change in P(longer wins) from broad to narrow. The key
+number is the **difference-in-differences against `better`** on the same comparisons:
+negative means the pair moves toward shorter answers on the narrow request *more* than
+`better` does, which is the intended behaviour.
+
+| Topic (n) | better: broad → narrow | appropriate: broad → narrow, DiD | **proportionate: broad → narrow, DiD** |
+| --- | --- | --- | --- |
+| rag2026-1 (3,223) | 0.670 → 0.627 | 0.650 → 0.603, −0.003 | 0.674 → 0.597, **−0.033** |
+| rag2026-107 (3,143) | 0.621 → 0.615 | 0.597 → 0.591, −0.001 | 0.607 → 0.583, **−0.018** |
+| 2041 (1,024) | 0.572 → 0.561 | 0.555 → 0.548, +0.004 | 0.574 → 0.539, **−0.024** |
+| 2046 (1,024) | 0.541 → 0.475 | 0.527 → 0.452, −0.009 | 0.545 → 0.438, **−0.041** |
+| **Pooled rag26 / ragtime26** | shift −0.025 / −0.039 | DiD −0.002 / −0.003 | **DiD −0.026 / −0.032** |
+
+| Pooled metric | rag26: better / appropriate / proportionate | ragtime26: better / appropriate / proportionate |
+| --- | --- | --- |
+| Spearman(win rate, words), broad → narrow | 0.48→0.41 / 0.42→0.34 / **0.47→0.32** | 0.14→0.06 / 0.10→−0.07 / **0.15→−0.13** |
+| Run ranking, broad vs narrow | 0.968 / 0.956 / 0.945 | 0.876 / 0.860 / 0.789 |
+| Tie flag, broad → narrow | 0.5→2.2% / 0.8→2.6% / **0.7→5.1%** | 5.4→6.6% / 4.9→5.7% / **4.7→10.9%** |
+| Winner differs from `better` — appropriate: broad / narrow | 2.4% / 3.2% | 2.2% / 4.5% |
+| Winner differs from `better` — proportionate: broad / narrow | 1.6% / 3.4% | 1.5% / 6.3% |
+
+**Findings.**
+
+1. **"Proportionate" adapts to the request; "appropriate" does not.**
+   - Under the broad request, proportionate behaves like `better`: pooled P(longer)
+     0.641 against 0.646 on rag26, and 0.559 against 0.557 on ragtime.
+   - Under the narrow question it moves 2–4 points further toward shorter answers than
+     `better` does, on **all four topics**.
+   - Appropriate's extra shift is about zero and its sign varies by topic: the same
+     uniform length penalty in both framings.
+2. **`better` also responds a little to a narrower request** (−0.025 / −0.039 pooled).
+   The explicit proportionality wording roughly doubles that response.
+3. **Under the narrow framing, the run–length correlation falls the most for
+   proportionate** (rag26 0.47 → 0.32; ragtime 0.15 → −0.13). Its rankings also change
+   most between framings, which is expected of a judge that responds to the request.
+4. **Narrow questions raise the Noul tie rate most for proportionate** (to 5.1% and
+   10.9%). For a one-line question, two full reports are often both "not
+   proportionate", and Jev says "no" to both.
+
+**Caveats.**
+
+- The narrow requests are **synthetic**: the reports were written for the broad
+  request, so this tests whether the judge responds to the request, not performance on
+  real short-answer needs.
+- The bootstrap CIs over comparisons (for example −0.0256 [−0.0267, −0.0245] pooled
+  rag26) are **too narrow**, because comparisons share runs. The stronger evidence is
+  that the direction holds on 4 of 4 topics.
+- The effect is **modest** (2–4 points of P(longer)).
+- On broad requests, proportionate ranks almost exactly like `better` (winner differs
+  1.5–1.6%). On rag26 and ragtime26, which contain only broad requests, the choice
+  barely matters; it would matter on datasets that mix narrow and broad needs.
+- Validate on real narrow needs (for example rag24 or rag25) and against human
+  judgments.
+
+**Decision.** The full runs (Section 13) use the **proportionate** pair. It costs nothing
+on broad requests and behaves correctly when a request is narrow.
+
+**Cost:** the appropriate pilots $0.85 (7,948 calls); the broad/narrow test $1.85
+(16,268 calls, 6 questions per request).
+
+---
+
+## 13. Full runs: mirrored proportionate Noul on all topics
+
+**Setup.**
+
+- Workflow variant `full_noul_proportionate`: questions
+  `noul_a_proportionate` + `noul_b_proportionate`, mirror average as the score, **both
+  orientations**, all topics.
+- ragtime26 ran first, then rag26 (`temp/run_full_proportionate.sh`, under nohup).
+- Snapshot served throughout: `typesafe/jev-1.13-20260917`.
+
+| | ragtime26 | rag26 |
+| --- | --- | --- |
+| Topics / runs / teams | 103 / 49 / 10 | 119 / 83 / 25 |
+| Comparisons (ordered) | 210,418, **all valid**, 0 missing | 760,886, **all valid**, 0 missing |
+| Unique calls | 196,958 | 703,536 |
+| Cost (unique calls) | **$18.95** ($0.0000962/call; estimate $18.5) | **$74.89** ($0.0001065/call; estimate $72) |
+| Wall-clock | 3.0 h (about 18 calls/s) | 11.1 h (about 18 calls/s) |
+
+- The first ragtime26 attempt (about 4,900 calls) was restarted after 8 minutes, only
+  to get unbuffered progress output. Its answers were served from the cache; at most
+  the ≤32 requests in flight were paid twice.
+- The leaderboard is the **mean over topics of each run's per-topic mirror win rate**
+  (every topic weighs equally). It is written to `bonsai_pairwise_jev.eval.txt` as
+  `PAIRWISE_WINRATE` and related measures.
+
+### 13.1 Leaderboards and stability
+
+Rank CIs are 95% bootstraps over topics (500 resamples).
+
+**rag26 (top 12 of 83).**
+
+| Rank | Run | Team | Win rate | Rank CI |
+| --- | --- | --- | --- | --- |
+| 1 | carmen | T569 | 0.8611 | [1, 1] |
+| 2 | lars | T569 | 0.8564 | [2, 2] |
+| 3 | edith | T569 | 0.8456 | [3, 5] |
+| 4 | ariel | T569 | 0.8453 | [3, 5] |
+| 5 | hana | T300 | 0.8429 | [3, 5] |
+| 6 | xavi | T300 | 0.8397 | [6, 6] |
+| 7 | luca | T300 | 0.8295 | [7, 7] |
+| 8 | yara | T649 | 0.8216 | [8, 8] |
+| 9 | todd | T736 | 0.8047 | [9, 11] |
+| 10 | eve | T341 | 0.8029 | [9, 12] |
+| 11 | rita | T736 | 0.8024 | [9, 12] |
+| 12 | eden | T736 | 0.8017 | [10, 12] |
+
+- Bottom: carlo 0.116, annie 0.048, paula 0.044.
+- Teams by best run: T569 0.861, T300 0.843, T649 0.822, T736 0.805, T341 0.803,
+  T267 0.794, T410 0.744, T086 0.720, T448 0.707, T149 0.696.
+
+**ragtime26 (top 12 of 49).**
+
+| Rank | Run | Team | Win rate | Rank CI |
+| --- | --- | --- | --- | --- |
+| 1 | marie | T958 | 0.8093 | [1, 2] |
+| 2 | alice | T958 | 0.8083 | [1, 2] |
+| 3 | lori | T958 | 0.7956 | [3, 4] |
+| 4 | alyssa | T958 | 0.7950 | [3, 4] |
+| 5 | briar | T289 | 0.7127 | [5, 9] |
+| 6 | kent | T289 | 0.7112 | [5, 10] |
+| 7 | bree | T706 | 0.7065 | [5, 9] |
+| 8 | dina | T846 | 0.7035 | [5, 11] |
+| 9 | diana | T706 | 0.7021 | [6, 10] |
+| 10 | susan | T706 | 0.6971 | [7, 11] |
+| 11 | joyce | T706 | 0.6882 | [10, 12] |
+| 12 | kurt | T289 | 0.6770 | [10, 13] |
+
+- Bottom: hans 0.171, faye 0.110, adair 0.091.
+- Teams by best run: T958 0.809, T289 0.713, T706 0.706, T846 0.704, T673 0.587,
+  T149 0.575, T768 0.545, T986 0.522, T131 0.497, T047 0.470.
+
+**Stability.**
+
+| Metric | rag26 | ragtime26 |
+| --- | --- | --- |
+| Split-half reliability over topics (Spearman, 200 random splits) | **0.998** [0.997, 0.999] | **0.989** [0.979, 0.994] |
+| Single topic vs overall leaderboard (Spearman): median [IQR], min | 0.968 [0.957, 0.976], 0.886 | 0.910 [0.855, 0.930], 0.592 |
+| Rank-CI width: all runs / top 10 (median) | 2 / 1 | 2 / 4 |
+
+- **rag26:** the top 8 positions are essentially fixed. T569 occupies ranks 1–4 and
+  T300 ranks 5–7.
+- **ragtime26:** T958's four runs are clearly separated at the top (0.80–0.81). Ranks
+  5–12 form a tight cluster (0.68–0.71) whose order is not well determined.
+
+**Duplicate topics (ragtime26).**
+
+- ragtime26 contains **28 duplicated requests** (56 of its 103 topics). The systems
+  produced *different* reports for each copy: only 2 of about 1,370 reports have
+  identical text.
+- This gives an independent judge-plus-system consistency check. Per-run win rates
+  agree across the two copies at **Spearman median ≈ 0.90** (range 0.832–0.980 over
+  28 pairs).
+
+### 13.2 Agreement with Gemini
+
+| | rag26 | ragtime26 |
+| --- | --- | --- |
+| Shared topics with Gemini judgments | 80 (all topics present in the partial Sept-2026 Gemini run, single orientation; 78 were complete) | 3 (2000–2002) |
+| Overall leaderboard: Spearman / Kendall | **0.975 / 0.870** | 0.939 / 0.818 |
+| Per-topic Spearman: median [IQR], min | 0.957 [0.946, 0.967], 0.883 | 0.929 [0.917, 0.957], 0.917 |
+| Top-10 / top-20 overlap | 7/10, 18/20 | 6/10, 16/20 |
+
+- On rag26 one Gemini topic had constant win rates and is excluded from the per-topic
+  statistics.
+- **Gemini top 8, rag26:** lars, hana, luca, ariel, edith, xavi, carmen (T569/T300),
+  rick (T267).
+- **Gemini top 8, ragtime26:** alyssa, lori, alice, marie (T958), briar (T289), jesse,
+  alana, loren.
+
+**Largest rank differences, Jev → Gemini.**
+
+- **rag26:** rita 10→22, todd 9→20, finn 13→23 (all about 1,015 words), karl 54→67
+  (912 words); in the other direction, jamie 21→11 (970 words).
+- **ragtime26:** loren 20→8 (323 words) and rory 22→10 (315 words) rank much higher
+  with Gemini; diana 11→20 (535 words), dina 12→21 (700 words) and kent 7→16 (564
+  words) rank lower.
+
+**Pattern (hypothesis):** on both datasets the disagreements point to Gemini penalising
+length relative to Jev. That matches the padding tests (9.3, 11.9), where Gemini
+penalised any added text. The ragtime evidence rests on only 3 topics.
+
+### 13.3 Length, slot bias and ties at full scale
+
+| Metric | rag26 | ragtime26 |
+| --- | --- | --- |
+| P(longer wins), orientation-averaged | **0.674** | **0.489** |
+| … < 1.25× / 1.25–2× / ≥ 2× | 0.513 / 0.620 / 0.819 | 0.431 / 0.498 / 0.532 |
+| Per-topic Spearman(win rate, words): median [IQR] | **+0.562** [0.526, 0.602] | **−0.082** [−0.193, 0.070] |
+| Run-level Spearman(leaderboard, mean words) | +0.585 | −0.112 |
+| P(slot A wins): all pairs / close pairs (0.4–0.6) | 0.518 / 0.543 | 0.508 / 0.514 |
+| Winner flips on swap | 4.7% | 5.8% |
+| Decisive (P < 0.25 or P > 0.75) / P in [0.4, 0.6] | 76.1% / 8.3% | 58.9% / 14.0% |
+| Flagged near-ties ("no" to both) / both "yes" | 0.92% / 2.17% | 2.58% / 1.73% |
+| Topic tie rate: median / max | 0.54% / 6.4% (rag2026-28) | 1.42% / 26.3% (2043) |
+
+**Findings.**
+
+1. **The length finding holds at full scale and is dataset-dependent.**
+   - rag26 rewards longer reports, almost entirely in lopsided pairs (0.82 at ≥ 2×);
+     ragtime26 does not (per-topic ρ ≈ −0.08).
+   - The proportionate question does not remove rag26's length effect. That is
+     consistent with rag26's long answers being the more complete ones (Sections 5, 9
+     and 11.3), though human judgments are still needed to confirm it.
+2. **Judging both orientations was necessary.** The mirror estimator keeps a residual
+   slot-A lean (0.543 on rag26 close pairs). Averaging the two orientations cancels it
+   in the win rates; a single-orientation run would have biased rag26's close pairs.
+3. **Ties are a property of topics, not of pairs.**
+   - The per-pair tie flag was unstable (10.9.4), but **topic-level tie rates
+     replicate across duplicate topics** (Spearman 0.816 over 28 duplicate pairs; for
+     example 2009/2013 at 10.7% and 9.7%, 2062/2096 at 6.5% and 6.3%).
+   - The highest tie rates are the two copies of one request ("The Joyce Hatto Scam",
+     2043 and 2023: 26.3% and 12.6%). These have unusually short reports (medians 279
+     and 358 words) and some empty ones.
+   - On ragtime, topic tie rate correlates moderately with shorter reports (Spearman
+     with median words −0.35); on rag26 there is no relation (+0.05).
+   - **Hypothesis:** a high topic tie rate flags topics where most systems failed the
+     request, so Jev judges neither report proportionate. If confirmed, the per-topic
+     tie rate is a useful topic-difficulty or system-failure diagnostic.
+
+### 13.4 Caveats
+
+- **No human judgments yet**, so all of this is agreement, consistency and stability,
+  not accuracy.
+- **The Gemini comparison is limited:** a partial run on 80 rag26 topics (single
+  orientation, binary) and only 3 ragtime topics.
+- **Bradley–Terry** counts each orientation as a separate fractional game, so
+  strengths are on an uncalibrated scale; the leaderboard uses mean per-topic win rate.
+- **The leaderboards are judge outputs on the evaluation set.** They are reported here
+  as results, not used to tune the judge.
+
+**Outputs** (excluded from git, 0.15 GB and 0.5 GB):
+
+- `output-ragtime26-jev-full-prop/` and `output-pairwise-jev-full-prop/`, each with
+  `bonsai_pairwise_jev.eval.txt` and `bonsai_pairwise_jev.pairwise/{comparisons.jsonl,
+  leaderboard_overall.csv, bradley_terry.csv, q_mirror/, run_manifest.json}`.
+- Analysis: `temp/jev_full_analysis.py`, with results in
+  `temp/jev_full_analysis_{rag26,ragtime26}.txt`.
+
+---
+
+## 14. Discussion
+
+### 14.1 Answers to the research questions
+
+| RQ                                             | Answer                                                                                                                                                                                                                                                                         |
 | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| RQ1 Jev vs Gemini agreement                    | High. ρ = 0.973 on rag2026-0 and 0.955–0.976 across 3 topics. Both judges have the same top teams.                                                                                                                                                                       |
+| RQ1 Jev vs Gemini agreement                    | High. ρ = 0.973 on rag2026-0 and 0.955–0.976 across 3 topics; full rag26 run vs Gemini on 80 topics 0.975 (13.2). Both judges have the same top teams.                                                                                                                                                                       |
 | RQ2 Do probabilities matter?                   | Barely, for ranking: soft and binary win rates have ρ = 0.997–0.999 for both Choice (56% saturated) and Noul (never saturated, 0.02–0.98). Without ground truth we cannot say whether probabilities improve accuracy.                                                    |
 | RQ3 Length bias                                | Not for crude padding, for either judge or either Jev question form; all penalise uninformative additions. The rag26 length correlation (ρ about 0.5) is consistent with coverage and does not replicate on ragtime26 (ρ ≈ −0.1). Subtle on-topic verbosity is untested. |
 | RQ4 Instruction following / prompt sensitivity | Jev follows negation and option relabelling at ≥ 99.6% on decisive pairs for Choice, and follows negation at 100% for Noul. Rewording the quality question changes 4–5% of pair decisions but not the ranking (ρ ≥ 0.97).                                                |
-| RQ5 Reliability                                | Near-deterministic: on rag26 Choice has 75.6% identical answers and 0.12% winner flips, and the Noul mirror 0.25% flips (mean                                                                                                                                            | ΔP  | 0.0045). ragtime26 is about 2× noisier (0.59% / 1.07% flips). Choice has a strong first-slot bias on ties on both datasets (identical summaries give P(A) ≈ 0.79). On rag26 it drives close-pair outcomes; on ragtime26 it does not (11.7). A mirrored Noul pair gives 0.52 on ties and halves the close-pair slot advantage (0.58 → 0.54). Probabilities are uncalibrated in both forms. |
+| RQ5 Reliability | Near-deterministic: on rag26 Choice has 75.6% identical answers and 0.12% winner flips, and the Noul mirror 0.25% flips (mean absolute change 0.0045). ragtime26 is about 2× noisier (0.59% / 1.07% flips). Choice has a strong first-slot bias on ties on both datasets (identical summaries give P(A) ≈ 0.79). On rag26 it drives close-pair outcomes; on ragtime26 it does not (11.7). A mirrored Noul pair gives 0.52 on ties and halves the close-pair slot advantage (0.58 → 0.54). Probabilities are uncalibrated in both forms. Full runs: leaderboards have split-half reliability 0.998 / 0.989, and runs agree at about 0.90 across ragtime's duplicated topics (13.1). |
+| RQ6 Depth proportionality | Partly. Adding "conciseness" acts as a uniform length penalty. An explicit proportionality rule matches the original on broad requests and shifts 2–4 points further toward shorter answers when the request is narrowed, on 4 of 4 topics (12.2). This is shown only with synthetic narrow requests, and accuracy is untested. |
 
-### 12.2 Recommended protocol for a full Jev run
+### 14.2 Recommended protocol for a full Jev run
 
 1. **Judge both orientations and average P(x better) per pair.** For the full
    tournament this is 760,886 ordered comparisons, or **703,536 calls** after
@@ -1377,7 +1709,8 @@ Noul tie flag fired on 66 of 4,608 calls (1.4%).
      stopped on that limit (`HANDOFF-rag26-pairwise-judge.md`).
 2. **Use orientation-averaged win rate as the headline metric.** Report BT on a log
    scale, or with regularisation, because saturated outcomes stretch the strengths.
-3. **Choose the question form.**
+3. **Choose the question form.** *Used for the full runs: mirrored proportionate Noul
+   (Section 12), with both orientations averaged.*
    - **Mirrored Noul** (`noul_a_better` + `noul_b_better`, using the mirror average):
      correct on ties on both datasets and graded probabilities. It reduced close-pair
      slot bias on rag26, but it flips more winners between identical requests than
@@ -1392,6 +1725,10 @@ Noul tie flag fired on 66 of 4,608 calls (1.4%).
 4. **Pin `typesafe/jev-1.13` and record the served snapshot.** Cache everything, since
    reproducibility comes from the cache.
 
+**Actual full-run cost** (Section 13): $18.95 for ragtime26 (estimate $18.5) and
+$74.89 for rag26 (estimate $72). That is 3–4% above estimate, because the proportionate
+question text is longer. Throughput was about 18 calls/s.
+
 **Code status.** As of this writing, the scorer counts both orientations of a pair as
 separate games. For win rate this is equivalent to averaging. BT should be changed to
 fit on the orientation-averaged probability per pair.
@@ -1402,7 +1739,9 @@ flags near-ties, and scores identical-text pairs as 0.5 without a call (Section 
 The `noul_pilot` and `noul_instruction_check` variants use it, and so does
 **`full_noul`**, the full-run variant for the recommended protocol: all topics, both
 orientations, scored by the mirror average. On one topic it replayed the pilot's cached
-answers with 0 new calls.
+answers with 0 new calls. The full runs actually used **`full_noul_proportionate`**,
+the same design with the proportionate pair; its runner is
+`temp/run_full_proportionate.sh` (resumable).
 
 ```bash
 auto-judge run --workflow judges/bonsai_judge/workflow.pairwise_jev.yml --variant full_noul \
@@ -1410,10 +1749,13 @@ auto-judge run --workflow judges/bonsai_judge/workflow.pairwise_jev.yml --varian
   --rag-topics data/rag26/topics/trec_rag_2026_queries.jsonl --out-dir ./output-pairwise-jev-full-noul/
 ```
 
-### 12.3 Threats to validity
+### 14.3 Threats to validity
 
 - **No ground truth.** All conclusions are about agreement, consistency and controlled
   sensitivity, not accuracy. Two judges agreeing can share a bias.
+- **Synthetic narrow requests (Section 12).** The proportionality test narrows existing
+  broad topics; the reports were written for the broad request. Neither dataset
+  contains real narrow information needs.
 - **Few topics.** 1–3 topics per experiment, chosen by lexicographic order (rag2026-0,
   -1, -10, -100; ragtime 2000–2003), not at random. The ragtime26 replication
   (Section 11) shows that some effects are dataset-specific: the length correlation
@@ -1438,7 +1780,7 @@ auto-judge run --workflow judges/bonsai_judge/workflow.pairwise_jev.yml --varian
 - **Uncalibrated probabilities.** Any analysis that treats Jev's P as a true win
   probability (for example, expected-score models) inherits the tie bias in 8.2.
 
-### 12.4 Open questions and next experiments
+### 14.4 Open questions and next experiments
 
 1. **On-topic verbosity padding.** Have an LLM rewrite each target to about 1.5× its
    length with no new facts (restatement, hedging, background), then judge with Jev and
@@ -1452,8 +1794,10 @@ auto-judge run --workflow judges/bonsai_judge/workflow.pairwise_jev.yml --varian
    topics?
 4. **Ground truth.** Hand-label about 50–100 pairs, stratified by closeness and length
    ratio, to estimate accuracy and test whether probabilities help on close pairs.
-5. **Full-run comparison.** A full both-orientation Jev run against the completed
-   Gemini leaderboard, with per-topic agreement and the distribution of disagreements.
+5. **Full-run comparison.** Done for Jev (Section 13). Still open: complete the Gemini
+   tournament (41 rag26 topics missing, ragtime26 has only 3) to compare full
+   leaderboards. Also test the observation that disagreements point to Gemini
+   penalising length.
 6. **Length-controlled scoring.** Fit BT with a log-length-ratio covariate,
    logit P(i ≻ j) = s_i − s_j + β·log(len_i/len_j), and report β per judge as a
    summary statistic of length dependence. This uses existing data at no API cost.
@@ -1461,8 +1805,14 @@ auto-judge run --workflow judges/bonsai_judge/workflow.pairwise_jev.yml --varian
    improves on Choice for determinism, instruction following and padding. Still open: a
    Noul prompt-variant study (Section 6 equivalent), and whether a clear "no" to both
    questions ever occurs for summaries that differ but are equally good.
+8. **Proportionality on real narrow needs.** Repeat the Section 12 test on a dataset
+   with genuinely short-answer topics (for example rag24 or rag25), and check against
+   human judgments.
+9. **Topic tie rate as a diagnostic.** Test whether high topic tie rates (13.3) mark
+   topics where most systems failed, for example against retrieval quality, empty or
+   short reports, or eventual human scores.
 
-### 12.5 Cost summary of this study
+### 14.5 Cost summary of this study
 
 | Item                                                                                 | Calls  | Cost         |
 | ------------------------------------------------------------------------------------ | ------ | ------------ |
@@ -1487,7 +1837,17 @@ auto-judge run --workflow judges/bonsai_judge/workflow.pairwise_jev.yml --varian
 | ragtime26: padding (Jev, Noul, Gemini)                                               | 13,824 | $3.54        |
 | ragtime26: Gemini pairwise (2000–2002, single orientation)                           | 3,072  | $1.66        |
 | **Subtotal, ragtime26 replication**                                                  |        | **≈ $6.89**  |
-| **Total**                                                                            |        | **≈ $16.79** |
+| Appropriate pilots (rag2026-0 and 2000, both orientations, 4 questions)              | 7,948  | $0.85        |
+| Broad vs narrow proportionality test (4 topics × 2 framings, 6 questions)            | 16,268 | $1.85        |
+| **Subtotal, experiments**                                                            |        | **≈ $19.49** |
+| Full run, ragtime26 (mirrored proportionate Noul, both orientations)                 | 196,958 | $18.95      |
+| Full run, rag26 (mirrored proportionate Noul, both orientations)                     | 703,536 | $74.89      |
+| **Subtotal, full runs**                                                              |        | **≈ $93.84** |
+| **Total**                                                                            |        | **≈ $113.33** |
+
+The OpenRouter key's usage rose by $93.96 over the full runs, which matches the
+$93.84 computed from per-call `usage.cost` to within the few requests in flight when
+the first ragtime attempt was restarted.
 
 Jev costs count each actual call once. Earlier versions of this table summed per
 comparison, which counted requests shared by several comparisons more than once and
@@ -1498,7 +1858,7 @@ about $149.
 
 ---
 
-## 13. Reproduction
+## 15. Reproduction
 
 **ragtime26 (Section 11):** every rag26 command below also runs on ragtime26 when
 `JEV_DATASET=ragtime26` is set and the ragtime paths are used (`--rag-responses
@@ -1536,6 +1896,9 @@ Load it with `set -a; source ./.env; set +a`.
 | 10      | same `auto-judge run`, `--variant noul_pilot --out-dir ./output-pairwise-jev-noul/`, then `python temp/jev_noul_compare.py output-pairwise-jev-noul/bonsai_pairwise_jev.pairwise/comparisons.jsonl output-pairwise-jev/bonsai_pairwise_jev.pairwise/comparisons.jsonl temp/rag26_pairwise/bonsai_pairwise.pairwise/comparisons.jsonl`; ties: `python temp/jev_probes.py identical --question noul_a_better` (and `noul_b_better`), then `report --question …`                                                                                                        | `output-pairwise-jev-noul/`, `temp/jev_noul_compare.txt`, `temp/jev_probes/identical_noul_{a,b}_better.jsonl`; log `temp/jev_noul_pilot.log`                                                                                                                           |
 | 10.8    | cache replay: same `auto-judge run` with `--variant noul_pilot` (now with `mirror:`); duplicate test: a kiddie copy with one run duplicated under another team, `--variant noul_pilot -J max_topics=2`                                                                                                                                                                                                                                                                                                                                                               | `output-pairwise-jev-noul/bonsai_pairwise_jev.pairwise/{q_mirror,leaderboard_overall.csv,run_manifest.json}`                                                                                                                                                           |
 | 10.9    | `bash temp/run_noul_probes.sh` (runs `--variant noul_instruction_check --out-dir ./output-pairwise-jev-noul-icheck/`, `python temp/jev_probes.py determinism --topic rag2026-100 --question mirror`, `python temp/jev_padding.py run --judge noul`); then `python temp/jev_noul_instruction_check.py output-pairwise-jev-noul-icheck/bonsai_pairwise_jev.pairwise/comparisons.jsonl output-pairwise-jev-noul/bonsai_pairwise_jev.pairwise/comparisons.jsonl`, `python temp/jev_probes.py report --question mirror`, `python temp/jev_padding.py report --judge noul` | `temp/jev_noul_instruction_check.txt`, `temp/jev_noul_determinism.txt`, `temp/jev_padding_noul.txt`; raw `temp/jev_probes/determinism_rag2026-100_mirror_pass{1,2}.jsonl`, `temp/jev_probes/padding_noul.jsonl`; logs `temp/jev_noul_{icheck,determinism,padding}.log` |
+| 12.1 | `auto-judge run … --variant noul_appropriate_pilot` on each dataset (out-dirs `output-pairwise-jev-appropriate/`, `output-ragtime26-jev-appropriate/`), then `JEV_DATASET=<ds> python temp/jev_appropriate_compare.py <comparisons.jsonl> [gemini comparisons]` | `temp/jev_appropriate_compare{,_ragtime26}.txt`; logs `temp/jev_appropriate_{rag26,ragtime26}.log` |
+| 12.2 | `bash temp/run_proportionate_test.sh` (`--variant noul_proportionate_test`, `--topic` filters, original topics vs `temp/narrow_topics_{rag26,ragtime26}.jsonl`), then `JEV_DATASET=<ds> python temp/jev_proportionate_compare.py <broad comparisons> <narrow comparisons>` (artifacts under `output-prop-*/tmp-bonsai_pairwise_jev.pairwise/`) | `temp/jev_proportionate_{rag26,ragtime26}.txt`; logs `temp/prop_*.log` |
+| 13 | `bash temp/run_full_proportionate.sh` (`--variant full_noul_proportionate`; ragtime26 then rag26; resumable), then `JEV_DATASET=<ds> python temp/jev_full_analysis.py <comparisons.jsonl> [gemini comparisons]` | `output-ragtime26-jev-full-prop/`, `output-pairwise-jev-full-prop/` (git-ignored); `temp/jev_full_analysis_{rag26,ragtime26}.txt`; logs `temp/full_prop_*.log`, `temp/full_prop.out` |
 
 Gemini baseline comparisons: `temp/rag26_pairwise/bonsai_pairwise.pairwise/comparisons.jsonl`
 (run 2026-09-10; see `HANDOFF-rag26-pairwise-judge.md`).
@@ -1547,9 +1910,9 @@ files above.
 
 ---
 
-## 14. Appendix: prompts and questions verbatim
+## 16. Appendix: prompts and questions verbatim
 
-### 14.1 Gemini prompt (`judges/bonsai_judge/prompts/pairwise_summary_1.md`)
+### 16.1 Gemini prompt (`judges/bonsai_judge/prompts/pairwise_summary_1.md`)
 
 ```markdown
 # Pairwise Summary Comparison
@@ -1571,7 +1934,7 @@ The query used to find the relevant documents and generate the summary is "<%=to
 Judge which summary better satisfies the information need in the query, considering relevance, completeness, and how well the claims are grounded. Respond with exactly one character and nothing else: `A` if Summary A is better, or `B` if Summary B is better. No explanation, punctuation, or whitespace.
 ```
 
-### 14.2 Jev request shape
+### 16.2 Jev request shape
 
 ```json
 {
@@ -1593,7 +1956,7 @@ Judge which summary better satisfies the information need in the query, consider
 
 Response (per question): `{"type": "choice", "choice": "A", "confidence": 0.84, "probabilities": {"A": 0.92, "B": 0.08}}`.
 
-### 14.3 Jev questions (`judges/bonsai_judge/prompts/jev_questions.yml`)
+### 16.3 Jev questions (`judges/bonsai_judge/prompts/jev_questions.yml`)
 
 **better_summary** (control)
 
@@ -1655,6 +2018,18 @@ Response (per question): `{"type": "choice", "choice": "A", "confidence": 0.84, 
 - _true:_ summary_a satisfies the information need of the query worse than summary_b.
 - _false:_ summary_a does not satisfy the information need of the query worse than summary_b.
 
+**noul_a_appropriate** / **noul_b_appropriate** (Section 12.1; `x_polarity` a / b)
+
+- _instructions:_ You are a subject matter expert. Two RAG summaries (summary_a and summary_b) were generated for the query. Does summary_a [summary_b] satisfy the information need of the query more appropriately than summary_b [summary_a] does, considering relevance, conciseness, completeness, and how well its claims are grounded?
+- _true:_ summary_a [summary_b] satisfies the information need of the query more appropriately than summary_b [summary_a].
+- _false:_ summary_a [summary_b] does not satisfy the information need of the query more appropriately than summary_b [summary_a].
+
+**noul_a_proportionate** / **noul_b_proportionate** (Sections 12.2 and 13; `x_polarity` a / b; used for the full runs)
+
+- _instructions:_ You are a subject matter expert. Two RAG summaries (summary_a and summary_b) were generated for the query. Does summary_a [summary_b] satisfy the information need of the query better than summary_b [summary_a] does, considering relevance, completeness, depth proportionate to what the query asks for (thorough when the query is broad or multi-part, brief and direct when it is narrow), and how well its claims are grounded?
+- _true:_ summary_a [summary_b] satisfies the information need of the query better than summary_b [summary_a], at a depth proportionate to what the query asks for.
+- _false:_ summary_a [summary_b] does not satisfy the information need of the query better than summary_b [summary_a], at a depth proportionate to what the query asks for.
+
 **noul_a_shorter** (Noul probe, objective)
 
 - _instructions:_ Ignore quality entirely. Is summary_a shorter than summary_b, i.e. does it contain fewer words?
@@ -1664,7 +2039,7 @@ Response (per question): `{"type": "choice", "choice": "A", "confidence": 0.84, 
 `x_*` keys are local metadata and are stripped before the request is sent. The Noul
 response shape is `{"type": "noul", "noul": 0.96}`.
 
-### 14.4 Generic filler pool (padding test)
+### 16.4 Generic filler pool (padding test)
 
 20 topic-agnostic sentences, for example: "It is important to consider multiple perspectives
 when approaching this question."; "Every situation is different, so what works in one
