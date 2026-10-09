@@ -2,8 +2,9 @@
 
 **Status:** working notes for the team and raw material for a TREC paper. Pilot-scale
 results (1–3 topics per experiment), replicated on a second dataset, ragtime26
-(Section 11), plus full tournaments on all topics of both datasets (Section 13). All
-numbers here come from runs in this repository between 2026-09-10 and 2026-10-09. Section 15 gives the
+(Section 11), plus full tournaments on all topics of both datasets (Section 13), and a
+bag-of-decisions graded judge developed on the permitted window topics (Section 14). All
+numbers here come from runs in this repository between 2026-09-10 and 2026-10-09. Section 16 gives the
 command and output file behind each table.
 
 **One-paragraph summary.** We built a pairwise "tournament" judge for TREC RAG 2026
@@ -52,6 +53,17 @@ has four properties that matter for the method:
    - The length effect stays dataset-specific.
    - Tie rates turn out to be a stable property of *topics*, replicating across
      ragtime's 28 duplicated requests.
+8. **Bag-of-decisions graded judge (Section 14).** This judge was developed on the
+   permitted window topics only.
+   - Gemini writes a rubric of 5–15 questions per topic from the topic alone.
+   - Jev grades each answer on every question (0–3, anchored), in one request per
+     (run, topic).
+   - Score: the expected grade, Σ P(g)·g / 3, averaged over the topic's questions.
+   - Both full datasets cost **$1.31** (14,879 answers, all graded).
+   - Agreement with the pairwise judge: board Spearman 0.990 on the rag26 window. On the
+     full leaderboards, 0.991 on rag26 and 0.943 on ragtime26.
+   - In the padding test it does not reward uninformative length, and it rewards added
+     relevant content (+0.13).
 
 Our starting hypothesis that the Gemini judge was mainly rewarding length is **not
 supported** by the controlled tests so far, and on ragtime26 neither judge favours longer
@@ -75,9 +87,10 @@ has not been tested yet (Section 9).
 11. [Experiment 8 — Replication on ragtime26](#11-experiment-8--replication-on-ragtime26)
 12. [Experiment 9 — Depth-proportionate prompt](#12-experiment-9--depth-proportionate-prompt)
 13. [Full runs: mirrored proportionate Noul on all topics](#13-full-runs-mirrored-proportionate-noul-on-all-topics)
-14. [Discussion, threats to validity, open questions](#14-discussion)
-15. [Reproduction](#15-reproduction)
-16. [Appendix: prompts and questions verbatim](#16-appendix-prompts-and-questions-verbatim)
+14. [Bag-of-decisions graded judge (BOD)](#14-bag-of-decisions-graded-judge-bod)
+15. [Discussion, threats to validity, open questions](#15-discussion)
+16. [Reproduction](#16-reproduction)
+17. [Appendix: prompts and questions verbatim](#17-appendix-prompts-and-questions-verbatim)
 
 ---
 
@@ -143,7 +156,7 @@ or internal consistency.
 
 **Topic selection.** The pilots used the lexicographically first topics: rag2026-0, -1,
 -10, and rag2026-100 for the determinism probe. The selection was by sort order, not
-cherry-picked, but it is also not random (see threats, Section 14).
+cherry-picked, but it is also not random (see threats, Section 15).
 
 ---
 
@@ -638,7 +651,7 @@ less position-biased probabilities.
 
 - Same topic and design as the Choice pilot (Section 4): rag2026-0, both orientations,
   6,446 ordered comparisons, 5,978 unique calls.
-- **Two Noul questions in each request**, verbatim in Section 16.3:
+- **Two Noul questions in each request**, verbatim in Section 17.3:
   - `noul_a_better`: "Does summary_a satisfy the information need … better than
     summary_b does …?"
   - `noul_b_better`: the mirror, "Does summary_b … better than summary_a …?"
@@ -1670,9 +1683,262 @@ penalised any added text. The ragtime evidence rests on only 3 topics.
 
 ---
 
-## 14. Discussion
+## 14. Bag-of-decisions graded judge (BOD)
 
-### 14.1 Answers to the research questions
+**Data handling.** Unlike the earlier experiments, every development decision for this
+judge was made only on the **permitted window**: the first 10 topics of each topics file
+(rag26 `rag2026-0…9`, ragtime26 `2000…2009`), plus kiddie. Over all topics we
+read only the scored leaderboards (`.eval.txt`), for completeness and reporting
+(Sections 14.6–14.7).
+
+**Idea.** The method adapts the "bag of decisions" reranker [1]. There, an LLM writes 10
+yes/no criteria per query, Jev answers all of them about a document in one request, and
+the score is the sum of P(yes). We change three things:
+
+- **Number of questions:** it varies by topic.
+- **Scale:** each question is graded 0–3, not yes/no.
+- **Scoring:** the per-question grades are stored and the leaderboard is tallied from
+  them afterwards.
+
+Every answer is scored on its own against the topic's rubric, so a topic needs O(runs)
+calls instead of O(runs²) as in the tournament.
+
+[1] https://softwaredoug.com/blog/2026/10/08/bag-of-decisions. The post does not name the
+question-generation model or give costs. Its only evaluation is an NDCG gain over BM25 on
+two e-commerce datasets.
+
+### 14.1 Design
+
+The code is `judges/bonsai_judge/bod.py`, run with `workflow.bod.yml`.
+
+1. **Rubric (nugget creator).**
+   - Gemini 2.5 Flash Lite (temperature 0) writes 5–15 "Does the answer …?" questions per
+     topic, sized to how many distinct parts the information need has. The prompt is
+     verbatim in Section 17.5.
+   - It sees only the topic (query, problem statement, background), never any response
+     (`nugget_depends_on_responses: false`). The rubric is therefore independent of the
+     runs, and readable for every topic under the data policy.
+   - Near-duplicates are removed (token Jaccard ≥ 0.8).
+   - The rubric is saved as the run's nugget banks and reused unchanged by every variant.
+2. **Grading.**
+   - One Jev Decisions request per (run, topic). The state is the topic fields plus the
+     answer.
+   - Each rubric question is a **4-option Choice with anchored grades**:
+     - 0: not addressed
+     - 1: mentioned without substance
+     - 2: partially answered
+     - 3: fully answered with specific, accurate detail
+   - The same request carries one Noul **padding** question: "does the answer contain
+     substantial off-topic, repeated or generic filler?"
+   - Jev bills input tokens, which are dominated by the state, so the number of questions
+     barely changes cost.
+3. **Scoring.**
+   - Each question's score is the **expected grade** Σ_g P(g)·g / 3, using the
+     probabilities rather than the most likely grade.
+   - Grades are written to `<filebase>.bod/grades.jsonl`, one row per question.
+   - The leaderboard is tallied from those rows with no further calls.
+
+| Measure | Definition |
+| --- | --- |
+| `BOD_MEAN` (primary) | mean expected grade over the topic's questions, /3; the overall score is the mean over topics, so topics with more questions don't weigh more |
+| `BOD_COVERAGE` | fraction of questions with P(grade ≥ 2) > 0.5 |
+| `BOD_FULL` | fraction of questions with P(grade = 3) > 0.5 |
+| `BOD_PADDING` | P(yes) on the padding question; diagnostic only, not part of `BOD_MEAN` |
+| `BOD_QUESTIONS` | number of rubric questions |
+
+Empty reports score 0 without a call, as in the other judges.
+
+### 14.2 Smoke test and kiddie
+
+**Does Jev accept a graded Choice?** Yes. We ran the kiddie topic `leaf` with 5
+hand-written questions (`temp/bod_smoke.py`, 4 calls). A Choice with labels `"0"…"3"`
+returns `probabilities` over all four labels, plus `choice` and `confidence`.
+
+| Case | BOD_MEAN | Padding P(yes) |
+| --- | --- | --- |
+| On-topic answer (run1/leaf) | 0.643 | 0.06 |
+| Off-topic answer (run1/cloud, graded on the leaf rubric) | 0.000 (every question P(0) = 1.00) | 0.98 |
+| Same as the first row, grades listed 3→0 | 0.642 (per question \|Δ\| ≤ 0.03) | 0.06 |
+| Shorter answer (run2/leaf) | 0.261 | 0.09 |
+
+The grades match the texts. For example, run2 partly explains the colour change
+(E[g] 2.08), mentions evergreens (1.78), and says nothing about whether the leaves are
+dying, whether the tree is fine, or the cold (≈ 0 each).
+
+**First rubric prompt.** The first version told the generator to include "constraints or
+context stated in the need (audience, situation, goals)". On kiddie that produced
+persona questions, for example "Does the answer acknowledge the child's interest in
+sweet foods and insects?" and "…maintain a gentle and reassuring tone…".
+
+We tightened the prompt: background may only decide *what content* is needed, and no
+questions about acknowledging interests, tone or reading level. Afterwards:
+
+- The kiddie rubrics are all content questions (7–9 per topic instead of 8–11).
+- The kiddie ranking is unchanged.
+- This prompt was settled on kiddie only, before any rag26 or ragtime26 data.
+
+**End to end on kiddie.** 20 answers, 20/20 graded, $0.0015. Against the synthetic
+kiddie truth, Kendall τ = 1.0 for `BOD_MEAN` and `BOD_COVERAGE`, and −1.0 for
+`BOD_PADDING` (run4 is an off-topic hockey text, padding 0.98). Kiddie truth is
+synthetic, so this checks the pipeline, not quality.
+
+### 14.3 rag26 window pilot
+
+- Variant `pilot`: rubrics are generated for all 119 topics, from topic text only (the
+  runner requires a rubric for every topic). Answers are judged on the 10 window topics
+  only.
+- 83 runs × 10 topics = 828 answers, 797 new calls, **$0.09**, 8 seconds.
+- Analysis: `temp/bod_pilot_analysis.py`, which reads per-answer data on window topics
+  only.
+
+| | rag26 window |
+| --- | --- |
+| Questions per topic | 5–13 (mean 9.0) |
+| BOD_MEAN p10 / p50 / p90 | 0.420 / 0.756 / 0.983 |
+| Most likely grade 0 / 1 / 2 / 3 | 8.2% / 9.2% / 40.3% / 42.3% |
+| Max grade probability > 0.9 | 39.8% of questions |
+| \|E[g] − most likely grade\| > 0.25 | 26.9% of questions |
+| Split-half (5 vs 5 topics, 200 splits), Spearman | 0.969 [0.956, 0.979] |
+| Per-topic Spearman(BOD_MEAN, words), median | 0.518 [min 0.396, max 0.724] |
+| Same for the Jev pairwise (mirror) full run | 0.558 |
+| Same for Gemini (7 window topics) | 0.451 |
+| Mean padding P(yes); Spearman(padding, words) median | 0.426; −0.182 |
+| Agreement with Jev pairwise (mirror), board Spearman / Kendall | **0.990** / 0.919 (per-topic median 0.968) |
+| Agreement with Gemini (7 window topics), board Spearman / Kendall | 0.972 / 0.859 (per-topic median 0.938) |
+
+- **Agreement:** on the window, BOD ranks runs almost exactly like the submitted
+  pairwise judge, at about 1/1000 of its cost per topic.
+- **Probabilities:** the expected grade differs meaningfully from the most likely grade
+  on about a quarter of questions, so the probabilities carry information. That is
+  unlike the pairwise Choice judge, where they barely changed the ranking (Section 4.3).
+- **Ceiling:** grade 3 is easy to reach on rag26's title-only topics, which compresses
+  the top of the board.
+
+### 14.4 Padding test (rag26 window)
+
+`temp/bod_padding.py` reuses the Section 9 variants: the same generic pool, off-topic
+sentences from window topic i+5, relevant sentences from the topic's top BOD run of
+another team, and seeded interleaving. Each variant is graded on its own against the
+topic's rubric.
+
+- Targets: 16 interquartile runs per topic × 10 topics = 160 targets × 6 variants.
+- 799 new calls, $0.11.
+- The pass criteria were written into the script before the run:
+  - `BOD_MEAN` should not increase for repeated, generic or off-topic padding
+    (CI upper bound ≤ +0.01).
+  - It should increase for relevant padding and decrease for truncation.
+  - `BOD_PADDING` should increase for the three uninformative variants.
+
+| Variant | Words × | ΔBOD_MEAN | 95% CI | ΔPADDING | 95% CI |
+| --- | --- | --- | --- | --- | --- |
+| pad_repeat | 1.52 | −0.023 | [−0.025, −0.020] | +0.510 | [+0.474, +0.544] |
+| pad_generic | 1.51 | −0.032 | [−0.035, −0.028] | +0.537 | [+0.499, +0.574] |
+| pad_offtopic | 1.53 | −0.043 | [−0.047, −0.039] | +0.574 | [+0.535, +0.612] |
+| pad_relevant | 1.54 | **+0.132** | [+0.121, +0.144] | +0.038 | [+0.021, +0.055] |
+| truncate | 0.67 | **−0.103** | [−0.114, −0.092] | −0.044 | [−0.061, −0.027] |
+
+(Baseline: BOD_MEAN 0.761, padding 0.398. CIs are bootstraps over targets.)
+
+**Every criterion passes, on each of the 10 topics individually.**
+
+- The rubric score does not reward length: uninformative padding lowers it slightly, and
+  only new relevant content raises it.
+- The padding question strongly detects synthetic filler.
+- Its baseline on real answers (≈ 0.40) is unexplained, which is why it stays out of
+  `BOD_MEAN`.
+
+### 14.5 ragtime26 window pilot
+
+- 49 runs × 10 topics = 490 answers, 470 new calls, **$0.05**.
+- **Rubrics:** 6–10 questions per topic, and the background is used as intended. For
+  example, the VA-practitioner ketamine topic (2003) gets questions on protocols,
+  supervision, contraindications and patient selection, and none about acknowledging the
+  user.
+- **Overlap:** some redundancy remains, for example separate questions on "life
+  satisfaction" and "happiness" for 2006.
+
+| | ragtime26 window |
+| --- | --- |
+| BOD_MEAN p10 / p50 / p90 | 0.514 / 0.710 / 0.894 |
+| Most likely grade 0 / 1 / 2 / 3 | 8.4% / 7.8% / 46.4% / 37.5% |
+| \|E[g] − most likely grade\| > 0.25 | 37.7% of questions |
+| Split-half (5 vs 5), Spearman | 0.854 [0.789, 0.914] |
+| Per-topic Spearman(BOD_MEAN, words), median | **−0.120** [min −0.439, max 0.306] |
+| Per-topic Spearman(PADDING, words), median | +0.491 |
+
+- **Length:** as with the pairwise judges (Section 11.3), the length relationship is
+  dataset-specific. On ragtime26 longer answers do not score higher, and they are more
+  often flagged as padded.
+- **Stability:** split-half reliability is lower than on rag26, with fewer runs and more
+  heterogeneous topics.
+- **Not computed:** agreement with the pairwise judges on the ragtime26 window. That
+  window is the confirmation set of the window-only pairwise re-study
+  (`temp/WINDOW_STUDY_PLAN.md`), to be read once after the rag26 decisions are recorded.
+
+### 14.6 Full runs
+
+Variant `full`, run with `temp/run_bod_full.sh`; snapshot `typesafe/jev-1.13-20260917`.
+
+| | ragtime26 | rag26 |
+| --- | --- | --- |
+| Topics / runs | 103 / 49 | 119 / 83 |
+| Rubric questions per topic | 5–11 (mean 7.7) | 5–15 (mean 8.4) |
+| Answers graded | **5,041 / 5,041** | **9,838 / 9,838** |
+| New Jev calls (the rest cached from the pilots) | 4,398 | 8,670 |
+| Wall-clock | 3.0 min | 8.5 min |
+
+- **Cost:** the key's usage rose by **$1.31** for both runs together, including rubric
+  generation. The per-answer cost is ≈ $0.0001, the same as one pairwise call, but
+  there are O(runs) answers per topic instead of O(runs²) comparisons.
+- **Completeness:** both leaderboards have every run × topic × measure.
+- **TIRA:** both pass `tira-cli upload --dry-run`. They are in
+  `submissions/bonsai-bod-jev-graded-20261009/{rag26,ragtime26}/`.
+
+### 14.7 Full leaderboards vs the pairwise submission (reporting only)
+
+This compares the two submitted leaderboards' "all" rows. It was produced for
+information, after both submissions were fixed, and was not used to choose or rank
+submissions.
+
+| | rag26 | ragtime26 |
+| --- | --- | --- |
+| Spearman / Kendall (BOD_MEAN vs PAIRWISE_WINRATE) | 0.991 / 0.929 | 0.943 / 0.827 |
+| Median \|rank change\| | 1 | 2 |
+| Runs moving ≥ 5 / ≥ 10 places | 13 / 2 | 10 / 2 |
+| Largest move | 11 | 21 |
+| Shared top-10 / top-5 | 8 / 4 | 8 / 4 |
+| Same #1 | no | no |
+
+- **rag26:** the full-run agreement matches the window pilot (0.990).
+- **ragtime26:** the judges diverge more. One candidate explanation is the
+  length-dependence difference in 14.5. That is a hypothesis, untested, and without
+  assessments neither leaderboard can be called more accurate.
+
+### 14.8 Findings and caveats
+
+1. **Jev supports graded rubric judging directly.** A 4-option anchored Choice gives
+   usable, order-invariant grade distributions.
+2. **It is cheap.** Both full datasets cost $1.31, against $93.84 for the mirrored
+   pairwise tournament (Section 13).
+3. **It agrees with the pairwise judge on rag26** (ρ ≈ 0.99) **but not as closely on
+   ragtime26** (ρ 0.94). Two near-identical submissions add little independent
+   information on rag26.
+4. **It does not reward uninformative length**, and it rewards added relevant content
+   (14.4).
+5. **Caveats:**
+   - The rubric is generated from the topic alone, so it cannot credit useful content
+     it did not anticipate.
+   - Rubrics vary in granularity: some needs are split into near-duplicate questions.
+   - Grades saturate near 3 on rag26, compressing the top of the board.
+   - The padding diagnostic's baseline on real answers is high and unexplained.
+   - The rubric prompt and grade anchors were fixed on kiddie and not tuned further.
+   - All evaluation of quality awaits the official assessments.
+
+---
+
+## 15. Discussion
+
+### 15.1 Answers to the research questions
 
 | RQ                                             | Answer                                                                                                                                                                                                                                                                         |
 | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -1683,7 +1949,7 @@ penalised any added text. The ragtime evidence rests on only 3 topics.
 | RQ5 Reliability | Near-deterministic: on rag26 Choice has 75.6% identical answers and 0.12% winner flips, and the Noul mirror 0.25% flips (mean absolute change 0.0045). ragtime26 is about 2× noisier (0.59% / 1.07% flips). Choice has a strong first-slot bias on ties on both datasets (identical summaries give P(A) ≈ 0.79). On rag26 it drives close-pair outcomes; on ragtime26 it does not (11.7). A mirrored Noul pair gives 0.52 on ties and halves the close-pair slot advantage (0.58 → 0.54). Probabilities are uncalibrated in both forms. Full runs: leaderboards have split-half reliability 0.998 / 0.989, and runs agree at about 0.90 across ragtime's duplicated topics (13.1). |
 | RQ6 Depth proportionality | Partly. Adding "conciseness" acts as a uniform length penalty. An explicit proportionality rule matches the original on broad requests and shifts 2–4 points further toward shorter answers when the request is narrowed, on 4 of 4 topics (12.2). This is shown only with synthetic narrow requests, and accuracy is untested. |
 
-### 14.2 Recommended protocol for a full Jev run
+### 15.2 Recommended protocol for a full Jev run
 
 1. **Judge both orientations and average P(x better) per pair.** For the full
    tournament this is 760,886 ordered comparisons, or **703,536 calls** after
@@ -1749,7 +2015,7 @@ auto-judge run --workflow judges/bonsai_judge/workflow.pairwise_jev.yml --varian
   --rag-topics data/rag26/topics/trec_rag_2026_queries.jsonl --out-dir ./output-pairwise-jev-full-noul/
 ```
 
-### 14.3 Threats to validity
+### 15.3 Threats to validity
 
 - **No ground truth.** All conclusions are about agreement, consistency and controlled
   sensitivity, not accuracy. Two judges agreeing can share a bias.
@@ -1780,7 +2046,7 @@ auto-judge run --workflow judges/bonsai_judge/workflow.pairwise_jev.yml --varian
 - **Uncalibrated probabilities.** Any analysis that treats Jev's P as a true win
   probability (for example, expected-score models) inherits the tie bias in 8.2.
 
-### 14.4 Open questions and next experiments
+### 15.4 Open questions and next experiments
 
 1. **On-topic verbosity padding.** Have an LLM rewrite each target to about 1.5× its
    length with no new facts (restatement, hedging, background), then judge with Jev and
@@ -1812,7 +2078,7 @@ auto-judge run --workflow judges/bonsai_judge/workflow.pairwise_jev.yml --varian
    topics where most systems failed, for example against retrieval quality, empty or
    short reports, or eventual human scores.
 
-### 14.5 Cost summary of this study
+### 15.5 Cost summary of this study
 
 | Item                                                                                 | Calls  | Cost         |
 | ------------------------------------------------------------------------------------ | ------ | ------------ |
@@ -1843,7 +2109,12 @@ auto-judge run --workflow judges/bonsai_judge/workflow.pairwise_jev.yml --varian
 | Full run, ragtime26 (mirrored proportionate Noul, both orientations)                 | 196,958 | $18.95      |
 | Full run, rag26 (mirrored proportionate Noul, both orientations)                     | 703,536 | $74.89      |
 | **Subtotal, full runs**                                                              |        | **≈ $93.84** |
-| **Total**                                                                            |        | **≈ $113.33** |
+| BOD smoke test and kiddie runs                                                       | 44     | $0.006       |
+| BOD window pilots (rag26 828 answers, ragtime26 490)                                 | 1,267  | $0.14        |
+| BOD padding test (rag26 window)                                                      | 799    | $0.11        |
+| BOD full runs, both datasets (incl. rubric generation; key usage)                    | 13,068 | $1.31        |
+| **Subtotal, BOD (Section 14)**                                                       |        | **≈ $1.57**  |
+| **Total**                                                                            |        | **≈ $114.90** |
 
 The OpenRouter key's usage rose by $93.96 over the full runs, which matches the
 $93.84 computed from per-call `usage.cost` to within the few requests in flight when
@@ -1858,7 +2129,7 @@ about $149.
 
 ---
 
-## 15. Reproduction
+## 16. Reproduction
 
 **ragtime26 (Section 11):** every rag26 command below also runs on ragtime26 when
 `JEV_DATASET=ragtime26` is set and the ragtime paths are used (`--rag-responses
@@ -1898,6 +2169,7 @@ Load it with `set -a; source ./.env; set +a`.
 | 10.9    | `bash temp/run_noul_probes.sh` (runs `--variant noul_instruction_check --out-dir ./output-pairwise-jev-noul-icheck/`, `python temp/jev_probes.py determinism --topic rag2026-100 --question mirror`, `python temp/jev_padding.py run --judge noul`); then `python temp/jev_noul_instruction_check.py output-pairwise-jev-noul-icheck/bonsai_pairwise_jev.pairwise/comparisons.jsonl output-pairwise-jev-noul/bonsai_pairwise_jev.pairwise/comparisons.jsonl`, `python temp/jev_probes.py report --question mirror`, `python temp/jev_padding.py report --judge noul` | `temp/jev_noul_instruction_check.txt`, `temp/jev_noul_determinism.txt`, `temp/jev_padding_noul.txt`; raw `temp/jev_probes/determinism_rag2026-100_mirror_pass{1,2}.jsonl`, `temp/jev_probes/padding_noul.jsonl`; logs `temp/jev_noul_{icheck,determinism,padding}.log` |
 | 12.1 | `auto-judge run … --variant noul_appropriate_pilot` on each dataset (out-dirs `output-pairwise-jev-appropriate/`, `output-ragtime26-jev-appropriate/`), then `JEV_DATASET=<ds> python temp/jev_appropriate_compare.py <comparisons.jsonl> [gemini comparisons]` | `temp/jev_appropriate_compare{,_ragtime26}.txt`; logs `temp/jev_appropriate_{rag26,ragtime26}.log` |
 | 12.2 | `bash temp/run_proportionate_test.sh` (`--variant noul_proportionate_test`, `--topic` filters, original topics vs `temp/narrow_topics_{rag26,ragtime26}.jsonl`), then `JEV_DATASET=<ds> python temp/jev_proportionate_compare.py <broad comparisons> <narrow comparisons>` (artifacts under `output-prop-*/tmp-bonsai_pairwise_jev.pairwise/`) | `temp/jev_proportionate_{rag26,ragtime26}.txt`; logs `temp/prop_*.log` |
+| 14 | smoke: `python temp/bod_smoke.py`; kiddie: `auto-judge run --workflow judges/bonsai_judge/workflow.bod.yml --variant kiddie --rag-responses data/kiddie/runs/repgen/ --rag-topics data/kiddie/topics/kiddie-topics.jsonl --out-dir ./output-kiddie-bod2/`; pilots: same workflow, `--variant pilot`, out-dirs `output-win-{rag26,ragtime26}-bod/`, then `JEV_DATASET=<ds> python temp/bod_pilot_analysis.py output-win-<ds>-bod [jev comparisons] [gemini comparisons]`; padding: `JEV_DATASET=rag26 python temp/bod_padding.py run` then `report`; full: `bash temp/run_bod_full.sh` | `output-win-*-bod/`, `output-full-{rag26,ragtime26}-bod/` (git-ignored); `temp/jev_probes_win_rag26/bod_padding.jsonl`; `submissions/bonsai-bod-jev-graded-20261009/`; logs `temp/bod_*.log` |
 | 13 | `bash temp/run_full_proportionate.sh` (`--variant full_noul_proportionate`; ragtime26 then rag26; resumable), then `JEV_DATASET=<ds> python temp/jev_full_analysis.py <comparisons.jsonl> [gemini comparisons]` | `output-ragtime26-jev-full-prop/`, `output-pairwise-jev-full-prop/` (git-ignored); `temp/jev_full_analysis_{rag26,ragtime26}.txt`; logs `temp/full_prop_*.log`, `temp/full_prop.out` |
 
 Gemini baseline comparisons: `temp/rag26_pairwise/bonsai_pairwise.pairwise/comparisons.jsonl`
@@ -1910,9 +2182,9 @@ files above.
 
 ---
 
-## 16. Appendix: prompts and questions verbatim
+## 17. Appendix: prompts and questions verbatim
 
-### 16.1 Gemini prompt (`judges/bonsai_judge/prompts/pairwise_summary_1.md`)
+### 17.1 Gemini prompt (`judges/bonsai_judge/prompts/pairwise_summary_1.md`)
 
 ```markdown
 # Pairwise Summary Comparison
@@ -1934,7 +2206,7 @@ The query used to find the relevant documents and generate the summary is "<%=to
 Judge which summary better satisfies the information need in the query, considering relevance, completeness, and how well the claims are grounded. Respond with exactly one character and nothing else: `A` if Summary A is better, or `B` if Summary B is better. No explanation, punctuation, or whitespace.
 ```
 
-### 16.2 Jev request shape
+### 17.2 Jev request shape
 
 ```json
 {
@@ -1956,7 +2228,7 @@ Judge which summary better satisfies the information need in the query, consider
 
 Response (per question): `{"type": "choice", "choice": "A", "confidence": 0.84, "probabilities": {"A": 0.92, "B": 0.08}}`.
 
-### 16.3 Jev questions (`judges/bonsai_judge/prompts/jev_questions.yml`)
+### 17.3 Jev questions (`judges/bonsai_judge/prompts/jev_questions.yml`)
 
 **better_summary** (control)
 
@@ -2039,9 +2311,49 @@ Response (per question): `{"type": "choice", "choice": "A", "confidence": 0.84, 
 `x_*` keys are local metadata and are stripped before the request is sent. The Noul
 response shape is `{"type": "noul", "noul": 0.96}`.
 
-### 16.4 Generic filler pool (padding test)
+### 17.4 Generic filler pool (padding test)
 
 20 topic-agnostic sentences, for example: "It is important to consider multiple perspectives
 when approaching this question."; "Every situation is different, so what works in one
 context may not work in another."; "Ultimately, the right choice depends on individual
 circumstances and goals." The full list is `GENERIC` in `temp/jev_padding.py`.
+
+### 17.5 BOD rubric prompt and grade question (`judges/bonsai_judge/prompts/bod_questions.md`, `bod.py`)
+
+Rubric generation (Gemini 2.5 Flash Lite, temperature 0). `<%=topic_query%>` is the query,
+problem statement and background:
+
+````markdown
+You are designing a grading rubric for answers to a user's information need.
+
+<information_need>
+<%=topic_query%>
+</information_need>
+
+Write the questions a careful expert would use to grade how well an answer meets this information need. Each question checks one distinct part of what the user needs to know or do.
+
+Rules:
+- Write between <%=min_questions%> and <%=max_questions%> questions. Use as many as the need has genuinely distinct parts: a narrow, single-fact need gets few questions; a broad, multi-part need gets more. Do not pad the list to reach a number.
+- Each question must be gradable on a scale from "not addressed" to "fully answered with specific detail", so phrase it as "Does the answer ...?" about content, e.g. "Does the answer explain why ...?" or "Does the answer give ...?".
+- Every question must check substantive content: a fact, explanation, step, or piece of advice the user asked for or clearly needs to act on what they asked.
+- Use any background or situation described only to decide WHAT content the user needs (for example, a safety concern makes safety advice necessary). Do not write questions that merely check whether the answer acknowledges, mentions, or relates to the user's interests, hobbies, or feelings.
+- No two questions may check the same thing. Do not ask about tone, reading level, style, length, formatting, or citations.
+- Do not mention any particular source, product, or answer.
+
+Return ONLY a JSON array of strings, one per question, with no other text.
+````
+
+Each rubric question is sent to Jev as:
+
+```json
+{"type": "choice",
+ "instructions": "Grade the answer on this question: <rubric question>",
+ "criteria": {
+   "0": "The answer does not address this question at all.",
+   "1": "The answer mentions this topic but gives no real substance or explanation.",
+   "2": "The answer partially answers this question; important parts are missing or vague.",
+   "3": "The answer fully answers this question with specific, accurate detail."}}
+```
+
+The padding question is a Noul: "Does the answer contain substantial content that is
+off-topic, repeated, or generic filler that does not help with the user's question?"
