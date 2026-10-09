@@ -18,7 +18,7 @@ PERMITTED = ({f"rag2026-{i}" for i in range(10)}
              | {str(2000 + i) for i in range(10)}
              | {"leaf", "cloud", "bee", "earthworms", "hibernation"})          # kiddie
 # topic ids of the 2026 evaluation sets outside the window
-RESTRICTED_RE = re.compile(r"\brag2026-(?:[1-9]\d+)\b|(?<![\w.])\b20(?:1\d|[2-9]\d|10\d)\b(?![\w.])")
+RESTRICTED_RE = re.compile(r"\brag2026-(?:[1-9]\d+)\b|(?<![\w.-])\b20(?:1\d|[2-9]\d|10\d)\b(?![\w.-])")   # not dates
 
 
 def _workflows():
@@ -65,7 +65,7 @@ def test_narrow_topic_files_are_window_only():
 
 
 def test_no_hardcoded_restricted_topics_in_study_code():
-    files = list((REPO / "temp").glob("jev_*.py")) + list((REPO / "temp").glob("run_*.sh"))
+    files = [f for pat in ("jev_*.py", "bod_*.py", "run_*.sh") for f in (REPO / "temp").glob(pat)]
     for f in files:
         for i, line in enumerate(f.read_text().splitlines(), 1):
             code = line.split("#", 1)[0]

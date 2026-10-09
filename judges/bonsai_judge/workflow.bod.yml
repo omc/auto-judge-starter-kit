@@ -1,0 +1,64 @@
+# Bag-of-decisions (BOD) graded judge — see judges/bonsai_judge/bod.py and temp/BOD_PLAN.md.
+#
+# 1. nuggets: Gemini writes 5-15 rubric questions per topic from the TOPIC TEXT ONLY
+#    (nugget_depends_on_responses: false), saved as <filebase>.nuggets.jsonl and reused.
+# 2. judge:   one Jev Decisions request per (run, topic): every rubric question as a
+#    0-3 graded Choice + a Noul padding question.
+# 3. grades:  <filebase>.bod/grades.jsonl; the leaderboard is tallied from it.
+#
+# Requires OPENAI_BASE_URL=https://openrouter.ai/api/v1 and an OpenRouter key. `model`
+# (Jev) and `generator_model` override OPENAI_MODEL.
+#
+#   kiddie: auto-judge run --workflow judges/bonsai_judge/workflow.bod.yml --variant kiddie ...
+#   pilot:  auto-judge run --workflow judges/bonsai_judge/workflow.bod.yml --variant pilot ...
+#   full:   auto-judge run --workflow judges/bonsai_judge/workflow.bod.yml --variant full ...
+
+nugget_class: "judges.bonsai_judge.bod:BodQuestionCreator"
+judge_class: "judges.bonsai_judge.bod:BodJevJudge"
+
+create_nuggets: true
+create_qrels: false
+judge: true
+nugget_depends_on_responses: false   # the rubric never sees any run's answer
+judge_uses_nuggets: true
+judge_uses_qrels: false
+force_recreate_nuggets: false        # reuse the saved rubric (same questions across variants)
+augment_report: false
+
+uses_llm: true
+
+settings:
+  filebase: "bonsai_bod"
+
+nugget_settings:
+  generator_model: "google/gemini-2.5-flash-lite"
+  min_questions: 5
+  max_questions: 15
+  dedupe_jaccard: 0.8
+  temperature: 0.0
+
+judge_settings:
+  on_missing_evals: "default"   # empty reports / failed calls -> measure defaults (0)
+  model: "typesafe/jev-1.13"
+  padding: true                 # BOD_PADDING diagnostic, same request, not in BOD_MEAN
+  threshold: 0.5                # BOD_COVERAGE / BOD_FULL cut-off on P
+  max_outstanding: 32
+  max_attempts: 8
+
+variants:
+  # Development variants judge ONLY permitted topics (data policy, CLAUDE.md): the first 10
+  # of each 2026 topics file plus kiddie.
+  kiddie:
+    nugget_settings:
+      dev_topics: &DEV [rag2026-0, rag2026-1, rag2026-2, rag2026-3, rag2026-4, rag2026-5, rag2026-6, rag2026-7, rag2026-8, rag2026-9, "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", leaf, cloud, bee, earthworms, hibernation]
+    judge_settings:
+      dev_topics: *DEV
+  # The runner requires a rubric for every topic in the topics file, so the pilot generates
+  # one for all topics (topic text only -- topics are readable under the data policy) and
+  # JUDGES only the permitted window.
+  pilot:
+    judge_settings:
+      dev_topics: *DEV
+  # Every topic: the submission run.
+  full:
+    judge_settings: {}

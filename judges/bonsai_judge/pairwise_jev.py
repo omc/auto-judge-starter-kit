@@ -295,9 +295,12 @@ class BonsaiJevPairwiseJudge(BonsaiPairwiseJudge):
 
     # ----- execution -----
 
-    async def _call(self, backend, url, payload, max_attempts) -> Tuple[Optional[dict], str]:
+    async def _call(self, backend, url, payload, max_attempts,
+                    check=None) -> Tuple[Optional[dict], str]:
+        """POST with retry on transient statuses. Returns (response_json, error).
+        check(answer, qid) -> bool validates each answer (default: usable P(A))."""
         qids = list(payload["questions"])
-        """POST with retry on transient statuses. Returns (response_json, error)."""
+        check = check or (lambda a, _q: _prob_a(a) is not None)
         err = ""
         for attempt in range(1, max_attempts + 1):
             try:
@@ -310,7 +313,7 @@ class BonsaiJevPairwiseJudge(BonsaiPairwiseJudge):
                 except Exception as e:
                     return None, f"non-JSON 2xx: {e}"
                 answers = data.get("answers") or {}
-                if any(_prob_a(answers.get(q)) is None for q in qids):
+                if not all(check(answers.get(q), q) for q in qids):
                     return None, f"malformed answer: {raw[:200]!r}"
                 return data, ""
             if status:
