@@ -59,6 +59,7 @@ from .pairwise import (
     _empty_reports,
     _plan_comparisons,
     _summaries_by_topic,
+    select_topics,
     topic_fields,
 )
 
@@ -172,6 +173,7 @@ class BonsaiJevPairwiseJudge(BonsaiPairwiseJudge):
         direction: str = "single",
         max_topics: Optional[int] = None,
         max_runs: Optional[int] = None,
+        dev_topics: Optional[Sequence[str]] = None,   # dev variants: ONLY these topics
         topics_per_batch: int = 20,
         max_outstanding: int = 32,
         max_attempts: int = 8,
@@ -194,10 +196,14 @@ class BonsaiJevPairwiseJudge(BonsaiPairwiseJudge):
             keep = set(sorted({r for tr in summaries.values() for r in tr})[:max_runs])
             summaries = {t: {r: v for r, v in tr.items() if r in keep} for t, tr in summaries.items()}
             empties = [(t, r) for t, r in empties if r in keep]
-        topic_order = sorted(summaries)
-        if max_topics is not None:
-            topic_order = topic_order[:max_topics]
-            empties = [(t, r) for t, r in empties if t in set(topic_order)]
+        topic_order = select_topics(rag_topics, set(summaries) | {t for t, _ in empties},
+                                    dev_topics, max_topics)
+        if dev_topics is not None or max_topics is not None:
+            keep_t = set(topic_order)
+            empties = [(t, r) for t, r in empties if t in keep_t]
+            # leaderboard covers only the judged topics (no zero-filled rows for the rest)
+            expected_topic_ids = [t for t in expected_topic_ids if t in keep_t]
+        topic_order = [t for t in topic_order if t in summaries]   # comparable topics
 
         plan: List[Comparison] = []
         for t in topic_order:

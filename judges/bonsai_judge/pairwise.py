@@ -115,6 +115,32 @@ class Comparison:
         return f"{self.topic_id}|{self.a_run}|{self.b_run}"
 
 
+def select_topics(rag_topics: Sequence[Request], available: Iterable[str],
+                  dev_topics: Optional[Sequence[str]] = None,
+                  max_topics: Optional[int] = None) -> List[str]:
+    """Topics to judge, in TOPICS-FILE order (not sorted order).
+
+    dev_topics: when set, ONLY these topic ids are judged -- development variants
+      (pilots, probes, prompt tests) list the permitted window here (the first 10
+      topics of each evaluation topics file, plus unrestricted datasets such as
+      kiddie), so they can never touch a restricted topic. See CLAUDE.md, data policy.
+    max_topics: then keep the first N. File order matters: sorted order put
+      e.g. rag2026-10 before rag2026-2, i.e. outside the window."""
+    avail = set(available)
+    order = [t.request_id for t in rag_topics if t.request_id in avail]
+    order += sorted(avail - set(order))          # topics missing from the file, if any
+    if dev_topics is not None:
+        allowed = set(dev_topics)
+        order = [t for t in order if t in allowed]
+        if not order:
+            raise ValueError("dev_topics is set, but none of the selected topics is a permitted "
+                             "development topic (restricted topics are refused; development "
+                             "variants only run on the permitted window)")
+    if max_topics is not None:
+        order = order[:max_topics]
+    return order
+
+
 def _summaries_by_topic(reports: Iterable[Report]) -> Dict[str, Dict[str, Tuple[str, str]]]:
     """topic_id -> {run_id: (team_id, summary_text)}. Empty summaries are dropped."""
     out: Dict[str, Dict[str, Tuple[str, str]]] = defaultdict(dict)
@@ -203,6 +229,7 @@ class BonsaiPairwiseJudge:
         topics_per_batch: int = 20,
         max_topics: Optional[int] = None,
         max_runs: Optional[int] = None,
+        dev_topics: Optional[Sequence[str]] = None,   # dev variants: ONLY these topics
         batch_prefix: Optional[str] = None,
         submit_mode: str = "openrouter",       # "openrouter" | "live" | "parasail"
         poll_interval_s: float = 30.0,
@@ -237,10 +264,14 @@ class BonsaiPairwiseJudge:
             keep = set(sorted({r for tr in summaries.values() for r in tr})[:max_runs])
             summaries = {t: {r: v for r, v in tr.items() if r in keep} for t, tr in summaries.items()}
             empties = [(t, r) for t, r in empties if r in keep]
-        topic_order = sorted(summaries)
-        if max_topics is not None:
-            topic_order = topic_order[:max_topics]
-            empties = [(t, r) for t, r in empties if t in set(topic_order)]
+        topic_order = select_topics(rag_topics, set(summaries) | {t for t, _ in empties},
+                                    dev_topics, max_topics)
+        if dev_topics is not None or max_topics is not None:
+            keep_t = set(topic_order)
+            empties = [(t, r) for t, r in empties if t in keep_t]
+            # leaderboard covers only the judged topics (no zero-filled rows for the rest)
+            expected_topic_ids = [t for t in expected_topic_ids if t in keep_t]
+        topic_order = [t for t in topic_order if t in summaries]   # comparable topics
 
         # ---- build the full comparison plan ----
         plan: List[Comparison] = []

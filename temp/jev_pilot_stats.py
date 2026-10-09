@@ -8,10 +8,12 @@ import json, statistics as st, sys
 from collections import defaultdict
 from pathlib import Path
 from scipy.stats import kendalltau, spearmanr
+sys.path.insert(0, str(Path(__file__).parent))
+from jev_dataset import window_records  # noqa: E402  JEV_DATASET=rag26|ragtime26
 
 args = [a for a in sys.argv[1:] if not a.startswith("--")]
 key = "mirror" if "--score" in sys.argv and sys.argv[sys.argv.index("--score") + 1] == "mirror" else None
-recs = [r for r in map(json.loads, open(args[0])) if r["valid"]]
+recs = [r for r in window_records(args[0]) if r["valid"]]   # permitted topics only
 P = (lambda r: r["p"][key]) if key else (lambda r: r["p_a"])
 topic = recs[0]["topic_id"]
 ps = [P(r) for r in recs]
@@ -57,8 +59,7 @@ for lo, hi in [(0, .05), (.05, .25), (.25, .4), (.4, .6), (.6, .75), (.75, .95),
 
 if len(args) > 1 and Path(args[1]).exists():
     gw, gg = defaultdict(int), defaultdict(int)
-    for l in open(args[1]):
-        r = json.loads(l)
+    for r in window_records(args[1]):
         if r["topic_id"] != topic: continue
         gg[r["a_run"]] += 1; gg[r["b_run"]] += 1
         if r["valid"]: gw[r["winner_run"]] += 1

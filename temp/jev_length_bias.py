@@ -4,20 +4,15 @@ import json, sys, statistics as st
 from collections import defaultdict
 from pathlib import Path
 from scipy.stats import spearmanr
-from jev_dataset import runs_dir  # JEV_DATASET=rag26|ragtime26
+from jev_dataset import assert_window, window_records, word_lengths  # JEV_DATASET=rag26|ragtime26
 
 def lengths(topic):
-    L = {}
-    for f in runs_dir().iterdir():
-        for line in open(f):
-            r = json.loads(line)
-            if r["metadata"]["topic_id"] == topic:
-                L[r["metadata"]["run_id"]] = len(" ".join(s["text"] for s in r["responses"]).split())
-    return L
+    return word_lengths({topic})[topic]   # permitted (window) topics only
 
 def analyze(path, topic=None, label=None):
-    recs = [json.loads(l) for l in open(path)]
+    recs = window_records(path)              # permitted topics only
     topic = topic or recs[0]["topic_id"]
+    assert_window([topic])
     recs = [r for r in recs if r["topic_id"] == topic and r.get("valid")]
     L = lengths(topic)
     def pa(r):  # P(A wins): soft for jev, hard for binary judges

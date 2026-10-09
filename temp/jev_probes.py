@@ -7,8 +7,8 @@
 
 Usage:
   set -a; source ./.env; set +a
-  python temp/jev_probes.py determinism --topic rag2026-100
-  python temp/jev_probes.py identical --topics rag2026-0 rag2026-1 rag2026-10
+  python temp/jev_probes.py determinism            # topic: DS det_topic (permitted window)
+  python temp/jev_probes.py identical              # topics: DS probe_topics (permitted window)
   python temp/jev_probes.py report
 """
 import argparse
@@ -27,7 +27,7 @@ from judges.bonsai_judge.pairwise_jev import (
 
 import sys
 sys.path.insert(0, str(Path(__file__).parent))
-from jev_dataset import DS, runs_dir, topic_info  # noqa: E402  JEV_DATASET=rag26|ragtime26
+from jev_dataset import DS, assert_window, in_window, runs_dir, topic_info, window_records  # noqa: E402  JEV_DATASET=rag26|ragtime26
 
 OUT = Path(DS["probes"])
 RUNS = runs_dir()
@@ -35,6 +35,7 @@ J = BonsaiJevPairwiseJudge()
 
 
 def load(topics):
+    assert_window(topics)                     # permitted topics only
     reports = [r for f in sorted(RUNS.iterdir()) for r in load_report(f)
                if r.metadata.topic_id in topics]
     return _summaries_by_topic(reports), topic_info()   # topic_fields dicts
@@ -78,7 +79,7 @@ def write(name, rows):
     print(f"[probe] wrote {OUT/name}: {len(rows)} rows, {errs} errors, ${cost:.4f}")
 
 
-MIRROR = ("noul_a_better", "noul_b_better")
+MIRROR = ("noul_a_proportionate", "noul_b_proportionate")   # the submitted form (full_noul_proportionate)
 
 
 def _score(row, question):
@@ -126,6 +127,8 @@ def report(question):
         _topic, _, ftag = p1.name[len("determinism_"):-len("_pass1.jsonl")].partition("_")
         if ftag != ("" if question == "better_summary" else question):
             continue
+        if not in_window(_topic):
+            print(f"{p1.name}: restricted topic {_topic}; skipped"); continue
         a = {r["comp_id"]: r for r in map(json.loads, open(p1))}
         b = {r["comp_id"]: r for r in map(json.loads, open(str(p1).replace("pass1", "pass2")))}
         pairs = [(_score(a[k], question), _score(b[k], question)) for k in a
@@ -151,7 +154,7 @@ def report(question):
     f = OUT / _identical_name(question)
     if f.exists() and question != "mirror":
         print("\n== identical summaries (expected P(A)=0.5) ==")
-        rows = [r for r in map(json.loads, open(f)) if r["p"][question] is not None]
+        rows = [r for r in window_records(f) if r["p"][question] is not None]
         ps = [r["p"][question] for r in rows]
         print(f"n={len(ps)} mean P(A)={st.mean(ps):.3f} median={st.median(ps):.3f} "
               f"exactly 0.5={sum(p == .5 for p in ps)/len(ps):.3f} "

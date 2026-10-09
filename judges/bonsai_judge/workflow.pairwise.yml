@@ -68,12 +68,16 @@ variants:
   # 1 topic (~6.4k comparisons) — validate prompt, parsing, cost, cache behavior.
   pilot:
     judge_settings:
+      # PERMITTED topics only (data policy, CLAUDE.md): the first 10 of each 2026 topics file
+      # (rag26 rag2026-0..9, ragtime26 2000..2009) plus kiddie. The judge judges ONLY these.
+      dev_topics: &DEV [rag2026-0, rag2026-1, rag2026-2, rag2026-3, rag2026-4, rag2026-5, rag2026-6, rag2026-7, rag2026-8, rag2026-9, "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", leaf, cloud, bee, earthworms, hibernation]
       max_topics: 1
       topics_per_batch: 1
 
   # 5 topics (~32k comparisons) — confirm before committing to the full run.
   scale:
     judge_settings:
+      dev_topics: *DEV
       max_topics: 5
       topics_per_batch: 5
 
@@ -81,6 +85,17 @@ variants:
   # once (~352k calls). Realtime because OpenRouter's batch tier (5k/20k caps, ~10h/wave)
   # can't meet a next-day deadline. Full price (~2x batch); resumable via the disk cache
   # (re-run to retry any failed/missing calls). One model per run.
+  # Development baseline: all 10 permitted topics, realtime, each pair once -- the Gemini
+  # side of Jev-vs-Gemini agreement stats (which must use permitted topics only). Same
+  # settings as `full`, so rag26 topics already judged by the Sept partial run (rag2026-0..6)
+  # are served from cache; only rag2026-7..9 are new.
+  dev:
+    judge_settings:
+      dev_topics: *DEV
+      topics_per_batch: 10
+      submit_mode: "live"
+      direction: "single"
+
   full:
     judge_settings:
       submit_mode: "live"

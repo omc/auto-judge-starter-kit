@@ -40,10 +40,12 @@ from jev_probes import ask_all  # noqa: E402
 
 import sys
 sys.path.insert(0, str(Path(__file__).parent))
-from jev_dataset import DS, runs_dir, topic_info  # noqa: E402  JEV_DATASET=rag26|ragtime26
+from jev_dataset import DS, assert_window, offtopic_for, runs_dir, topic_info, window_records  # noqa: E402  JEV_DATASET=rag26|ragtime26
 
-TOPICS = DS["probe_topics"]
-OFFTOPIC_SOURCE = DS["offtopic"]    # far-away topic supplying irrelevant sentences
+# Padding topics per judge (all permitted): Jev/Noul on all 10 window topics, Gemini on the
+# first 3 (cost). Each topic's off-topic sentences come from offtopic_for(topic), a different
+# window topic.
+TOPICS_FOR = {"jev": DS["probe_topics"], "noul": DS["probe_topics"], "gemini": DS["gemini_padding_topics"]}
 PRIOR = Path(DS["prior"])           # prompt-variant run: control win-rates pick targets
 RUNS = runs_dir()
 OUTS = {"jev": Path(DS["probes"]) / "padding.jsonl",
@@ -77,7 +79,8 @@ GENERIC = [
 
 
 def load_sentences(topics):
-    """{topic: {run: (team, [sentences])}} with the judge's cleaning."""
+    """{topic: {run: (team, [sentences])}} with the judge's cleaning. Permitted topics only."""
+    assert_window(topics)
     out = defaultdict(dict)
     for f in sorted(RUNS.iterdir()):
         for r in load_report(f):
@@ -92,8 +95,7 @@ def load_sentences(topics):
 def control_winrates():
     """Per-topic win-rate under better_summary from the prompt pilot (both slots)."""
     w, g = defaultdict(float), defaultdict(int)
-    for line in open(PRIOR):
-        r = json.loads(line)
+    for r in window_records(PRIOR):
         if not r["valid"]:
             continue
         p, t = r["p"]["better_summary"], r["topic_id"]
@@ -140,13 +142,13 @@ def variants(sents, rng, generic_pool, offtopic_pool, relevant_pool):
     }
 
 
-def build():
-    data = load_sentences(set(TOPICS) | {OFFTOPIC_SOURCE})
+def build(topics):
+    data = load_sentences(set(topics) | {offtopic_for(t) for t in topics})
     titles = topic_info()   # {query, [problem_statement], [background]} per topic
     wr = control_winrates()
-    offtopic_pool = [s for _team, ss in data[OFFTOPIC_SOURCE].values() for s in ss]
     items, meta = [], []
-    for t in TOPICS:
+    for t in topics:
+        offtopic_pool = [s for _team, ss in data[offtopic_for(t)].values() for s in ss]
         ranked = sorted((r for r in data[t] if (t, r) in wr), key=lambda r: -wr[(t, r)])
         mid = [r for r in ranked if 0.25 <= wr[(t, r)] <= 0.75]
         targets = [mid[round(i * (len(mid) - 1) / (N_TARGETS - 1))] for i in range(N_TARGETS)]
@@ -207,7 +209,7 @@ async def ask_gemini(items):
 
 
 def run(judge="jev"):
-    items = build()
+    items = build(TOPICS_FOR[judge])
     n_t = len({(i[0]["topic_id"], i[0]["target"]) for i in items})
     print(f"[padding] {len(items)} calls: {n_t} targets x {len(VARIANTS)} variants x "
           f"<= {N_OPPONENTS} opponents x 2 slots")
@@ -215,9 +217,10 @@ def run(judge="jev"):
         rows = asyncio.run(ask_gemini(items))
     elif judge == "noul":
         # mirrored Noul: score = mean of P(yes A better) and 1 - P(yes B better)
-        rows = asyncio.run(ask_all(items, load_questions(["noul_a_better", "noul_b_better"])))
+        # the SUBMITTED form: mirrored proportionate Noul
+        rows = asyncio.run(ask_all(items, load_questions(["noul_a_proportionate", "noul_b_proportionate"])))
         for r in rows:
-            ya, yb = r["p"]["noul_a_better"], r["p"]["noul_b_better"]
+            ya, yb = r["p"]["noul_a_proportionate"], r["p"]["noul_b_proportionate"]
             r["score"] = None if ya is None or yb is None else (ya + 1 - yb) / 2
             r["tie"] = ya is not None and yb is not None and ya < .5 and yb < .5
     else:
@@ -231,9 +234,12 @@ def run(judge="jev"):
           f"${sum(r['cost'] or 0 for r in rows):.4f}")
 
 
-def report(judge="jev"):
+def report(judge="jev", only_topics=None):
     OUT = OUTS[judge]
-    rows = [json.loads(l) for l in open(OUT)]
+    rows = window_records(OUT)
+    if only_topics:                  # e.g. compare Jev with Gemini on Gemini's 3 topics
+        rows = [r for r in rows if r["topic_id"] in set(only_topics)]
+    TOPICS = sorted({r["topic_id"] for r in rows}, key=DS["window"].index)
     for r in rows:   # 'score' = P(A better) for this judge; older files used better_summary
         r.setdefault("score", r["p"].get("better_summary"))
     print(f"judge={judge} invalid={sum(r['score'] is None for r in rows)}")
@@ -282,12 +288,13 @@ def report(judge="jev"):
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("cmd", choices=["run", "report", "dry"])
+    ap.add_argument("--topics", nargs="+", default=None, help="report: restrict to these topics")
     ap.add_argument("--judge", choices=["jev", "gemini", "noul"], default="jev")
     a = ap.parse_args()
     if a.cmd == "dry":
-        items = build()
+        items = build(TOPICS_FOR[a.judge])
         print(len(items), "calls")
         ex = [i for i in items if i[0]["variant"] == "pad_generic"][0]
         print(ex[0]); print(ex[1]["summary_a"][:1200])
     else:
-        {"run": run, "report": report}[a.cmd](a.judge)
+        run(a.judge) if a.cmd == "run" else report(a.judge, a.topics)

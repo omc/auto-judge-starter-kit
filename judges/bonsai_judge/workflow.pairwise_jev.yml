@@ -56,72 +56,65 @@ variants:
   # 2 topics x 6 runs — near-free plumbing check.
   smoke:
     judge_settings:
+      # PERMITTED topics only (data policy, CLAUDE.md): the first 10 of each 2026 topics file
+      # (rag26 rag2026-0..9, ragtime26 2000..2009) plus kiddie. The judge judges ONLY these.
+      dev_topics: &DEV [rag2026-0, rag2026-1, rag2026-2, rag2026-3, rag2026-4, rag2026-5, rag2026-6, rag2026-7, rag2026-8, rag2026-9, "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", leaf, cloud, bee, earthworms, hibernation]
       max_topics: 2
       max_runs: 6
       topics_per_batch: 2
 
-  # 1 topic, both orientations — measures position bias + real $/comparison
-  # before committing to the full run.
+  # All 10 permitted topics, both orientations — position bias, probability spread,
+  # real $/comparison.
   pilot:
     judge_settings:
-      max_topics: 1
-      topics_per_batch: 1
+      dev_topics: *DEV
+      topics_per_batch: 10      # all 10 permitted topics
       direction: "ordered"
 
-  # Prompt comparison: 4 questions per request, 3 topics, each pair once.
+  # Prompt comparison: 4 questions per request, all 10 permitted topics, each pair once.
   # better_summary is the control (re-asked => also a test-retest check vs pilot).
   prompts:
     judge_settings:
-      max_topics: 3
-      topics_per_batch: 3
+      dev_topics: *DEV
+      topics_per_batch: 10      # all 10 permitted topics
       questions: ["better_summary", "length_neutral", "needs_coverage", "precision"]
 
-  # Instruction-following probes (same 3 topics): does Jev read the question text?
+  # Instruction-following probes (all 10 permitted topics): does Jev read the question text?
   instruction_check:
     judge_settings:
-      max_topics: 3
-      topics_per_batch: 3
+      dev_topics: *DEV
+      topics_per_batch: 10      # all 10 permitted topics
       questions: ["better_summary", "shorter", "worse_summary", "swapped_labels"]
 
-  # Noul formulation on the Choice pilot topic, both orientations. noul_b_better is
+  # Noul formulation on the permitted topics, both orientations. noul_b_better is
   # the mirror question (asked in the same request) to measure yes/no bias.
   noul_pilot:
     judge_settings:
-      max_topics: 1
-      topics_per_batch: 1
+      dev_topics: *DEV
+      topics_per_batch: 10      # all 10 permitted topics
       direction: "ordered"
       questions: ["noul_a_better", "noul_b_better"]
       mirror: ["noul_a_better", "noul_b_better"]   # primary = virtual 'mirror' score
 
-  # Noul instruction-following probes (same 3 topics as instruction_check).
+  # Noul instruction-following probes (all 10 permitted topics).
   noul_instruction_check:
     judge_settings:
-      max_topics: 3
-      topics_per_batch: 3
+      dev_topics: *DEV
+      topics_per_batch: 10      # all 10 permitted topics
       questions: ["noul_a_better", "noul_b_better", "noul_a_worse", "noul_a_shorter"]
       mirror: ["noul_a_better", "noul_b_better"]
 
-  # "Appropriate" mirror pair (adds conciseness; depth should match the need) vs the
-  # original "better" pair, asked in the SAME request so every comparison has both.
-  # Pilot topic, both orientations; primary = mirror of the appropriate pair.
-  noul_appropriate_pilot:
-    judge_settings:
-      max_topics: 1
-      topics_per_batch: 1
-      direction: "ordered"
-      questions: ["noul_a_better", "noul_b_better", "noul_a_appropriate", "noul_b_appropriate"]
-      mirror: ["noul_a_appropriate", "noul_b_appropriate"]
 
-  # Depth-adaptivity test: better vs appropriate vs proportionate pairs in ONE request,
+  # Depth-adaptivity test: better vs proportionate pairs in ONE request,
   # each pair once (orientation hashed). Run with --topic on the original topics file
   # (broad need) and on temp/narrow_topics_<dataset>.jsonl (same request_ids, narrowed
   # to one sub-question). Primary = mirror of the proportionate pair.
   noul_proportionate_test:
     judge_settings:
-      topics_per_batch: 2
+      dev_topics: *DEV
+      topics_per_batch: 10      # all 10 permitted topics
       direction: "single"
-      questions: ["noul_a_better", "noul_b_better", "noul_a_appropriate", "noul_b_appropriate",
-                  "noul_a_proportionate", "noul_b_proportionate"]
+      questions: ["noul_a_better", "noul_b_better", "noul_a_proportionate", "noul_b_proportionate"]
       mirror: ["noul_a_proportionate", "noul_b_proportionate"]
 
   full:

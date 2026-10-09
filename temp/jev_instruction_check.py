@@ -3,14 +3,10 @@ import json, sys, statistics as st, math
 from collections import defaultdict
 from pathlib import Path
 from scipy.stats import spearmanr, pearsonr
-from jev_dataset import runs_dir  # JEV_DATASET=rag26|ragtime26
+from jev_dataset import window_records, word_lengths  # JEV_DATASET=rag26|ragtime26
 
-L = defaultdict(dict)
-for f in runs_dir().iterdir():
-    for line in open(f):
-        r = json.loads(line)
-        L[r["metadata"]["topic_id"]][r["metadata"]["run_id"]] = len(" ".join(s["text"] for s in r["responses"]).split())
-recs = [json.loads(l) for l in open(sys.argv[1])]
+recs = window_records(sys.argv[1])          # permitted topics only
+L = word_lengths({r["topic_id"] for r in recs})
 recs = [r for r in recs if r["valid"]]
 la = lambda r: L[r["topic_id"]][r["a_run"]]
 lb = lambda r: L[r["topic_id"]][r["b_run"]]

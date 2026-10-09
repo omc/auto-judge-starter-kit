@@ -9,15 +9,10 @@ import json, math, statistics as st, sys
 from collections import defaultdict
 from pathlib import Path
 from scipy.stats import pearsonr, spearmanr
-from jev_dataset import runs_dir  # JEV_DATASET=rag26|ragtime26
+from jev_dataset import window_records, word_lengths  # JEV_DATASET=rag26|ragtime26
 
-L = defaultdict(dict)
-for f in runs_dir().iterdir():
-    for line in open(f):
-        r = json.loads(line)
-        L[r["metadata"]["topic_id"]][r["metadata"]["run_id"]] = len(" ".join(s["text"] for s in r["responses"]).split())
-
-recs = [r for r in map(json.loads, open(sys.argv[1])) if r["valid"] and r["result"] == "ok"]
+recs = [r for r in window_records(sys.argv[1]) if r["valid"] and r["result"] == "ok"]  # permitted topics only
+L = word_lengths({r["topic_id"] for r in recs})
 y = lambda r, q: r["raw_p"][q]
 yA = lambda r: y(r, "noul_a_better"); yB = lambda r: y(r, "noul_b_better")
 yW = lambda r: y(r, "noul_a_worse"); yS = lambda r: y(r, "noul_a_shorter")
@@ -67,7 +62,7 @@ if conf:
 
 if len(sys.argv) > 2:
     print("\n== test-retest vs noul pilot (same oriented comparison, different question bundle) ==")
-    old = {r["comp_id"]: r for r in map(json.loads, open(sys.argv[2]))}
+    old = {r["comp_id"]: r for r in window_records(sys.argv[2])}
     for q in ("noul_a_better", "noul_b_better"):
         pr = [(y(r, q), old[r["comp_id"]]["raw_p"][q]) for r in recs if r["comp_id"] in old]
         d = [abs(a - b) for a, b in pr]

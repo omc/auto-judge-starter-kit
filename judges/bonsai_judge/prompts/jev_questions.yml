@@ -143,44 +143,9 @@ noul_b_better:
     "false": summary_b does not satisfy the information need of the query better than summary_a.
 
 # ---------------------------------------------------------------------------
-# Noul (yes/no) formulation with response matching the depth of need:
-# a single P(yes) instead of a choice between options.
-# x_* keys are local metadata, stripped before sending (see load_questions).
-# x_polarity: which summary a "yes" favours. P(A better) = P(yes) for 'a',
-# 1 - P(yes) for 'b'.
-# ---------------------------------------------------------------------------
-
-# Primary Noul: is summary_a more appropriate than summary_b?
-noul_a_appropriate:
-  type: noul
-  x_polarity: a
-  instructions: >-
-    You are a subject matter expert. Two RAG summaries (summary_a and summary_b)
-    were generated for the query. Does summary_a satisfy the information need of
-    the query more appropriately than summary_b does, considering relevance,
-    conciseness, completeness, and how well its claims are grounded?
-  criteria:
-    "true": summary_a satisfies the information need of the query more appropriately than summary_b.
-    "false": summary_a does not satisfy the information need of the query more appropriately than summary_b.
-
-# Mirror, asked in the same request: is summary_b more appropriate than summary_a?
-# With no yes/no bias, P_yes(a_better) + P_yes(b_better) ~= 1.
-noul_b_appropriate:
-  type: noul
-  x_polarity: b
-  instructions: >-
-    You are a subject matter expert. Two RAG summaries (summary_a and summary_b)
-    were generated for the query. Does summary_b satisfy the information need of
-    the query more appropriately than summary_a does, considering relevance,
-    conciseness, completeness, and how well its claims are grounded?
-  criteria:
-    "true": summary_b satisfies the information need of the query more appropriately than summary_a.
-    "false": summary_b does not satisfy the information need of the query more appropriately than summary_a.
-
-# ---------------------------------------------------------------------------
 # Noul (yes/no) formulation with depth PROPORTIONATE to the need: states the
-# trade-off explicitly instead of naming "conciseness" (which Jev applies as a
-# uniform length penalty -- FINDINGS Section 10/11 appropriate-pair pilot).
+# trade-off explicitly instead of naming "conciseness" (an earlier 'appropriate' pair did
+# that and Jev applied it as a uniform length penalty -- FINDINGS Section 12.1; removed).
 # Thorough wins for broad/multi-part needs; brief and direct wins for narrow ones.
 # ---------------------------------------------------------------------------
 

@@ -11,18 +11,13 @@ import json, sys, statistics as st
 from collections import defaultdict
 from pathlib import Path
 from scipy.stats import spearmanr, kendalltau, pearsonr
-from jev_dataset import runs_dir  # JEV_DATASET=rag26|ragtime26
+from jev_dataset import window_records, word_lengths  # JEV_DATASET=rag26|ragtime26
 
-noul = [json.loads(l) for l in open(sys.argv[1])]
-choice = {r["comp_id"]: r for r in map(json.loads, open(sys.argv[2]))}
+noul = window_records(sys.argv[1])          # permitted topics only
+choice = {r["comp_id"]: r for r in window_records(sys.argv[2])}
 noul = [r for r in noul if r["valid"] and r["comp_id"] in choice]
 topic = noul[0]["topic_id"]
-L = {}
-for f in runs_dir().iterdir():
-    for line in open(f):
-        r = json.loads(line)
-        if r["metadata"]["topic_id"] == topic:
-            L[r["metadata"]["run_id"]] = len(" ".join(s["text"] for s in r["responses"]).split())
+L = word_lengths({topic})[topic]
 
 def outcome(p):            # 1 = A wins, 0 = B wins, 0.5 = draw (P exactly 0.5)
     return 1.0 if p > .5 else 0.0 if p < .5 else 0.5
@@ -68,8 +63,7 @@ def hard(est):
     return winrate(lambda r: outcome(est(r)))
 
 gw, gg = defaultdict(int), defaultdict(int)
-for l in open(sys.argv[3]):
-    r = json.loads(l)
+for r in (window_records(sys.argv[3]) if sys.argv[3] != "/dev/null" else []):
     if r["topic_id"] == topic:
         gg[r["a_run"]] += 1; gg[r["b_run"]] += 1
         if r["valid"]: gw[r["winner_run"]] += 1

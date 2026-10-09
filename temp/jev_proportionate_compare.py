@@ -2,7 +2,7 @@
 narrowed one-sub-question request, with three mirrored Noul pairs in each request.
 Usage: JEV_DATASET=rag26|ragtime26 python temp/jev_proportionate_compare.py <broad comparisons.jsonl> <narrow comparisons.jsonl>
 
-For each pair (better / appropriate / proportionate), score = mirror average. "Longer
+For each pair (better / proportionate), score = mirror average. "Longer
 preference" of a comparison = P(the longer summary wins). Reports, per topic and pooled:
   - P(longer) under broad and narrow, and the shift narrow - broad
   - difference-in-differences vs 'better': (pair shift) - (better shift) on the SAME
@@ -15,12 +15,11 @@ from collections import defaultdict
 from pathlib import Path
 from scipy.stats import spearmanr
 sys.path.insert(0, str(Path(__file__).parent))
-from jev_dataset import word_lengths  # noqa: E402
+from jev_dataset import window_records, word_lengths  # noqa: E402
 
 PAIRS = {"better": ("noul_a_better", "noul_b_better"),
-         "appropriate": ("noul_a_appropriate", "noul_b_appropriate"),
          "proportionate": ("noul_a_proportionate", "noul_b_proportionate")}
-load = lambda p: {r["comp_id"]: r for r in map(json.loads, open(p)) if r["valid"] and r["result"] == "ok"}
+load = lambda p: {r["comp_id"]: r for r in window_records(p) if r["valid"] and r["result"] == "ok"}  # permitted topics only
 B, N = load(sys.argv[1]), load(sys.argv[2])
 ids = sorted(set(B) & set(N))
 topics = sorted({B[i]["topic_id"] for i in ids})
@@ -74,7 +73,7 @@ for scope in topics + ["pooled"]:
 # within each framing: how far apart are the pairs?
 for name, R in (("broad", B), ("narrow", N)):
     sel = ids
-    for k in ("appropriate", "proportionate"):
+    for k in ("proportionate",):
         d = [mir(R[i], k) - mir(R[i], "better") for i in sel]
         flips = sum((mir(R[i], k) - .5) * (mir(R[i], "better") - .5) < 0 for i in sel)
         print(f"{name:6} {k:13} vs better: mean diff {st.mean(d):+.4f} | mean |diff| {st.mean(abs(x) for x in d):.4f} "

@@ -4,22 +4,13 @@ import json, sys, statistics as st
 from collections import defaultdict
 from pathlib import Path
 from scipy.stats import spearmanr, kendalltau
-from jev_dataset import runs_dir  # JEV_DATASET=rag26|ragtime26
+from jev_dataset import window_records, word_lengths  # JEV_DATASET=rag26|ragtime26
 
-def lengths():
-    L = defaultdict(dict)
-    for f in runs_dir().iterdir():
-        for line in open(f):
-            r = json.loads(line)
-            L[r["metadata"]["topic_id"]][r["metadata"]["run_id"]] = \
-                len(" ".join(s["text"] for s in r["responses"]).split())
-    return L
-
-recs = [json.loads(l) for l in open(sys.argv[1])]
+recs = window_records(sys.argv[1])          # permitted topics only
 recs = [r for r in recs if r["valid"]]
 Q = list(recs[0]["p"])
 topics = sorted({r["topic_id"] for r in recs})
-L = lengths()
+L = word_lengths(set(topics))
 
 def winrates(rs, get):
     w, g = defaultdict(float), defaultdict(int)
@@ -72,7 +63,7 @@ for q in Q[1:]:
 
 if len(sys.argv) > 2:
     print("\n== test-retest: control vs earlier single-question pilot (same oriented comparison) ==")
-    old = {json.loads(l)["comp_id"]: json.loads(l) for l in open(sys.argv[2])}
+    old = {r["comp_id"]: r for r in window_records(sys.argv[2])}
     pairs = [(r["p"][Q[0]], old[r["comp_id"]]["p_a"]) for r in recs if r["comp_id"] in old]
     d = [abs(a - b) for a, b in pairs]
     print(f"n={len(pairs)} mean|dp|={st.mean(d):.4f} identical={sum(x == 0 for x in d)/len(d):.3f} "
@@ -81,8 +72,7 @@ if len(sys.argv) > 2:
 if len(sys.argv) > 3:
     print("\n== agreement with Gemini binary judge (Spearman of per-topic win-rates) ==")
     gem = defaultdict(list)
-    for l in open(sys.argv[3]):
-        r = json.loads(l)
+    for r in window_records(sys.argv[3]):
         if r["topic_id"] in topics and r["valid"]: gem[r["topic_id"]].append(r)
     for q in Q:
         vals = []
