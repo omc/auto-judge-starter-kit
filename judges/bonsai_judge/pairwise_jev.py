@@ -55,6 +55,8 @@ from .pairwise import (
     DEFAULT_CACHE_DIR,
     BonsaiPairwiseJudge,
     Comparison,
+    _add_empty_rows,
+    _empty_reports,
     _plan_comparisons,
     _summaries_by_topic,
     topic_fields,
@@ -184,14 +186,18 @@ class BonsaiJevPairwiseJudge(BonsaiPairwiseJudge):
         # {query, [problem_statement], [background]} per topic -> merged into Jev's state
         topic_titles: Dict[str, dict] = {t.request_id: topic_fields(t) for t in rag_topics}
         expected_topic_ids = list(topic_titles.keys())
-        summaries = _summaries_by_topic(rag_responses)
+        reports = list(rag_responses)
+        summaries = _summaries_by_topic(reports)
+        empties = _empty_reports(reports)          # scored as zero rows, never compared
 
         if max_runs is not None:
             keep = set(sorted({r for tr in summaries.values() for r in tr})[:max_runs])
             summaries = {t: {r: v for r, v in tr.items() if r in keep} for t, tr in summaries.items()}
+            empties = [(t, r) for t, r in empties if r in keep]
         topic_order = sorted(summaries)
         if max_topics is not None:
             topic_order = topic_order[:max_topics]
+            empties = [(t, r) for t, r in empties if t in set(topic_order)]
 
         plan: List[Comparison] = []
         for t in topic_order:
@@ -199,8 +205,10 @@ class BonsaiJevPairwiseJudge(BonsaiPairwiseJudge):
         print(f"[jev] {len(topic_order)} topics -> {len(plan):,} cross-team "
               f"comparisons (direction={direction})")
         if not plan:
-            return LeaderboardBuilder(JEV_SPEC).build(
-                expected_topic_ids=expected_topic_ids, on_missing=on_missing_evals)
+            print(f"[jev] nothing to compare; {len(empties)} empty-report rows only")
+            builder = LeaderboardBuilder(JEV_SPEC)
+            _add_empty_rows(builder, JEV_SPEC, empties, ())
+            return builder.build(expected_topic_ids=expected_topic_ids, on_missing=on_missing_evals)
 
         qs = load_questions(list(questions))
         self._polarity = question_polarity(list(questions))
@@ -229,7 +237,8 @@ class BonsaiJevPairwiseJudge(BonsaiPairwiseJudge):
         for qid in scored:
             question = qs[qid] if qid in qs else {q: qs[q] for q in self._mirror}
             qlb = self._score_jev(records, qid, question, topic_order, expected_topic_ids,
-                                  on_missing_evals, art / f"q_{qid}", cfg, url, direction)
+                                  on_missing_evals, art / f"q_{qid}", cfg, url, direction,
+                                  empties)
             if qid == primary:
                 lb = qlb
                 # primary's tables also at the top level (same layout as before)
@@ -442,7 +451,7 @@ class BonsaiJevPairwiseJudge(BonsaiPairwiseJudge):
     # ----- scoring -----
 
     def _score_jev(self, records, qid, question, topic_order, expected_topic_ids,
-                   on_missing, art, cfg, url, direction) -> Leaderboard:
+                   on_missing, art, cfg, url, direction, empties=()) -> Leaderboard:
         """Leaderboard + tables for ONE question, from records[*]["p"][qid]."""
         art.mkdir(parents=True, exist_ok=True)
         exp_wins: Dict[Tuple[str, str], float] = defaultdict(float)
@@ -478,6 +487,7 @@ class BonsaiJevPairwiseJudge(BonsaiPairwiseJudge):
                 "PAIRWISE_CONFIDENCE": decisive[(run, t)] / g,
                 "PAIRWISE_TIE_RATE": ties[(run, t)] / g,
             })
+        _add_empty_rows(builder, JEV_SPEC, empties, games)
         leaderboard = builder.build(expected_topic_ids=expected_topic_ids, on_missing=on_missing)
 
         # ---- overall soft win-rate ----

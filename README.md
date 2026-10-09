@@ -1,21 +1,50 @@
-# Auto-Judge Starterkit
+# Bonsai Auto-Judge
 
-A forkable template repository with example Auto-Judge implementations for building custom judges.
+LLM judges for [TREC AutoJudge 2026](https://trec-auto-judge.cs.unh.edu/), built on the
+[auto-judge starter kit](https://github.com/trec-auto-judge/auto-judge-starter-kit). The main
+judge ranks RAG and report-generation runs with a **pairwise tournament** judged by TypeSafe's
+**Jev** decision model, which returns a *probability* that one summary better serves the
+information need, rather than a binary choice.
 
-<p align="center">
-   <img width=120px src="https://trec-auto-judge.cs.unh.edu/media/trec-auto-judge-logo-small.png">
-   <br/>
-   <br/>
-   <a href="https://github.com/trec-auto-judge/auto-judge-starterkit/actions/workflows/tests.yml">
-   <img alt="Tests" src="https://github.com/trec-auto-judge/auto-judge-starterkit/actions/workflows/tests.yml/badge.svg"/>
-   </a>
-   <a href="tests">
-   <img alt="Coverage" src="tests/coverage.svg"/>
-   </a>
-   <br>
-   <a href="https://trec-auto-judge.cs.unh.edu/">Web</a> &nbsp;|&nbsp;
-   <a href="https://trec-auto-judge.cs.unh.edu/TREC_Auto_Judge.pdf">Proposal</a>
-</p>
+## Judges
+
+| Judge | Workflow | What it does |
+|-------|----------|--------------|
+| `BonsaiJevPairwiseJudge` (**submitted**) | `judges/bonsai_judge/workflow.pairwise_jev.yml`, variant `full_noul_proportionate` | Cross-team pairwise tournament. Jev (`typesafe/jev-1.13`, OpenRouter Decisions API) is asked "is summary A better than B?" **and** the mirror "is B better than A?" in one request, with depth proportionate to the need. The mirror average is P(A better). Both orientations are judged and averaged to cancel position bias. Leaderboard: mean per-topic probability-weighted win rate. |
+| `BonsaiPairwiseJudge` | `judges/bonsai_judge/workflow.pairwise.yml` | The same tournament judged by a chat model (Gemini) with a binary `A`/`B` answer. Baseline. |
+| `BonsaiLeaderboardJudge` | `judges/bonsai_judge/workflow.yml` | Per-report concept-F1 (spaCy noun/proper-noun concepts of the summary vs its cited documents) plus LLM-graded relevance and completeness. |
+
+Empty reports are scored, not dropped: every judge writes a row for every (run, topic). For the
+pairwise judges an empty report gets the measure defaults (win rate 0) and is not compared
+against other runs.
+
+**Methods and results:** [`FINDINGS-jev-pairwise-judge.md`](FINDINGS-jev-pairwise-judge.md)
+covers pilots, prompt variants, instruction-following, determinism, position bias and padding
+probes, the ragtime26 replication, the depth-proportionate prompt, and the full rag26 and
+ragtime26 runs.
+
+## Running the submitted judge
+
+```bash
+uv venv && source .venv/bin/activate && uv pip install -e '.[all]'
+export OPENAI_BASE_URL=https://openrouter.ai/api/v1 OPENAI_API_KEY=...  CACHE_DIR=./cache
+
+auto-judge run --workflow judges/bonsai_judge/workflow.pairwise_jev.yml \
+    --variant full_noul_proportionate \
+    --rag-responses <dataset>/runs/<task>/ --rag-topics <dataset>/topics/<topics>.jsonl \
+    --out-dir ./output-<dataset>-jev-full-prop/
+```
+
+- **Endpoint:** the Jev judge requires an OpenRouter endpoint. It uses the `model` setting
+  (`typesafe/jev-1.13`), not `OPENAI_MODEL`.
+- **Cost:** about $0.0001 per call. The full rag26 run is about 704k calls (about $75) and
+  ragtime26 about 197k calls (about $19). Everything is cached, so re-runs are free.
+- **Submission:** leaderboards for rag26 and ragtime26 are in `submissions/`. Validate them
+  with `tira-cli upload --dry-run`.
+
+---
+
+*Everything below is the starter kit's reference documentation, kept for convenience.*
 
 ## Working with restricted evaluation data
 

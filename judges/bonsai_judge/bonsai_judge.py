@@ -325,10 +325,15 @@ class BonsaiLeaderboardJudge:
         # deterministic concept-F1 (no LLM) computed once for all reports
         cscores = concept_scores(responses_list, spacy_model=spacy_model,
                                  include_propn=include_propn, nproc=nproc, batch_size=batch_size)
+        # Empty reports (no text) are scored 0 on every measure without an LLM call.
         requests: List[MinimaLlmRequest] = []
+        req_index: List[int] = []                 # responses_list index of each request
         for i, response in enumerate(responses_list):
             query = topic_titles.get(response.metadata.topic_id, "")
             text = response.get_report_text()
+            if not _clean(text).strip():
+                continue
+            req_index.append(i)
             requests.append(MinimaLlmRequest(
                 request_id=f"judge_{i}",
                 messages=[
@@ -346,18 +351,21 @@ class BonsaiLeaderboardJudge:
                 temperature=0.0,
             ))
 
-        llm_results = asyncio.run(backend.run_batched(requests))
+        llm_results = asyncio.run(backend.run_batched(requests)) if requests else []
+        result_of = dict(zip(req_index, llm_results))
 
         builder = LeaderboardBuilder(BONSAI_SPEC)
-        for response, result in zip(responses_list, llm_results):
+        for i, response in enumerate(responses_list):
+            result = result_of.get(i)             # None for empty reports
             relevance, completeness = self._parse_scores(result)
             values: Dict[str, float] = {"RELEVANCE": relevance, "COMPLETENESS": completeness}
             prf = cscores.get((response.metadata.run_id, response.metadata.topic_id))
-            if prf is not None:   # omit concept keys when either concept set was empty
-                p, r, f1 = prf
-                values["CONCEPT_PRECISION"] = p
-                values["CONCEPT_RECALL"] = r
-                values["CONCEPT_F1"] = f1
+            # Either concept set empty (e.g. an empty report, or no cited text): nothing
+            # is grounded and nothing is covered, so 0 -- every row needs every measure.
+            p, r, f1 = prf if prf is not None else (0.0, 0.0, 0.0)
+            values["CONCEPT_PRECISION"] = p
+            values["CONCEPT_RECALL"] = r
+            values["CONCEPT_F1"] = f1
             builder.add(
                 run_id=response.metadata.run_id,
                 topic_id=response.metadata.topic_id,

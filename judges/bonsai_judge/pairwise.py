@@ -130,6 +130,29 @@ def _summaries_by_topic(reports: Iterable[Report]) -> Dict[str, Dict[str, Tuple[
     return out
 
 
+def _empty_reports(reports: Iterable[Report]) -> List[Tuple[str, str]]:
+    """(topic_id, run_id) of reports with no text after cleaning -- exactly the ones
+    _summaries_by_topic drops. An empty report has nothing to compare, but it must
+    still be scored: judges add an explicit row with the measure defaults (win rate 0),
+    so every run appears for every topic it submitted, even a run whose reports are
+    all empty (TIRA rejects leaderboards with missing (run, topic) entries)."""
+    return sorted((r.metadata.topic_id, r.metadata.run_id) for r in reports
+                  if not _clean(r.get_report_text()).strip())
+
+
+def _add_empty_rows(builder: LeaderboardBuilder, spec: LeaderboardSpec,
+                    empties: Iterable[Tuple[str, str]], seen: Iterable[Tuple[str, str]]) -> int:
+    """Add default-valued rows for empty reports not already scored. Returns count."""
+    seen = set(seen)
+    zero = {m.name: m.default for m in spec.measures}
+    n = 0
+    for topic, run in empties:
+        if (run, topic) not in seen:
+            builder.add(run_id=run, topic_id=topic, values=zero)
+            seen.add((run, topic)); n += 1
+    return n
+
+
 def _plan_comparisons(topic_runs: Dict[str, Tuple[str, str]], topic_id: str,
                       direction: str = "ordered") -> List[Comparison]:
     """Cross-team comparison plan for one topic. Runs sorted by run_id for a
@@ -205,15 +228,19 @@ class BonsaiPairwiseJudge:
                                         for t in rag_topics}
         expected_topic_ids = list(topic_titles.keys())
 
-        summaries = _summaries_by_topic(rag_responses)
+        reports = list(rag_responses)
+        summaries = _summaries_by_topic(reports)
+        empties = _empty_reports(reports)          # scored as zero rows, never compared
 
         # ---- optional staging limits (pilot -> scale -> full) ----
         if max_runs is not None:
             keep = set(sorted({r for tr in summaries.values() for r in tr})[:max_runs])
             summaries = {t: {r: v for r, v in tr.items() if r in keep} for t, tr in summaries.items()}
+            empties = [(t, r) for t, r in empties if r in keep]
         topic_order = sorted(summaries)
         if max_topics is not None:
             topic_order = topic_order[:max_topics]
+            empties = [(t, r) for t, r in empties if t in set(topic_order)]
 
         # ---- build the full comparison plan ----
         plan: List[Comparison] = []
@@ -222,9 +249,10 @@ class BonsaiPairwiseJudge:
         print(f"[pairwise] {len(topic_order)} topics -> {len(plan):,} cross-team "
               f"comparisons (direction={direction})")
         if not plan:
-            print("[pairwise] nothing to compare; emitting empty leaderboard")
-            return LeaderboardBuilder(PAIRWISE_SPEC).build(
-                expected_topic_ids=expected_topic_ids, on_missing=on_missing_evals)
+            print("[pairwise] nothing to compare; emitting empty-report rows only")
+            builder = LeaderboardBuilder(PAIRWISE_SPEC)
+            _add_empty_rows(builder, PAIRWISE_SPEC, empties, ())
+            return builder.build(expected_topic_ids=expected_topic_ids, on_missing=on_missing_evals)
 
         backend, cfg = self._make_backend(
             llm_config, submit_mode, live_max_outstanding, live_rpm)
@@ -257,7 +285,7 @@ class BonsaiPairwiseJudge:
         # ---- all batches terminal -> score + write artifacts ----
         leaderboard = self._score_and_write(
             records, summaries, topic_order, expected_topic_ids,
-            on_missing_evals, art, cfg, temperature, max_tokens, template)
+            on_missing_evals, art, cfg, temperature, max_tokens, template, empties)
         print(f"[pairwise] artifacts in {art}")
         return leaderboard
 
@@ -411,7 +439,8 @@ class BonsaiPairwiseJudge:
     # ----- scoring + artifacts -----
 
     def _score_and_write(self, records, summaries, topic_order, expected_topic_ids,
-                         on_missing, art, cfg, temperature, max_tokens, template) -> Leaderboard:
+                         on_missing, art, cfg, temperature, max_tokens, template,
+                         empties=()) -> Leaderboard:
         wins: Dict[Tuple[str, str], int] = defaultdict(int)     # (run,topic) -> wins
         games: Dict[Tuple[str, str], int] = defaultdict(int)    # (run,topic) -> games
         pair_choice: Dict[Tuple[str, str, str], Dict[str, Optional[str]]] = defaultdict(dict)
@@ -446,6 +475,7 @@ class BonsaiPairwiseJudge:
                 "PAIRWISE_GAMES": g,
             })
             seen.add((run, topic))
+        _add_empty_rows(builder, PAIRWISE_SPEC, empties, seen)
         leaderboard = builder.build(expected_topic_ids=expected_topic_ids, on_missing=on_missing)
 
         # ---- pairs.csv: position-bias / agreement per unordered pair ----
