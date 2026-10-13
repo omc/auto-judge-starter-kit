@@ -1,0 +1,36 @@
+topics ['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009'] | comparisons 10240
+
+== length dependence (pooled over topics) ==
+question         P(longer)  <1.25x  1.25-2x   >=2x rho(wr,len) exact0/1 decisive
+better_summary       0.489   0.439    0.502  0.519      -0.086    0.184    0.757
+length_neutral       0.450   0.436    0.458  0.454      -0.199    0.195    0.742
+needs_coverage       0.499   0.442    0.508  0.539      -0.044    0.243    0.759
+precision            0.439   0.426    0.449  0.440      -0.232    0.182    0.739
+  rho(wr,len) = mean over topics of Spearman(run win-rate, run word count)
+
+== ranking agreement between questions (Spearman of per-topic win-rates, mean over topics) ==
+                 better_summary length_neutral needs_coverage      precision
+better_summary            1.000          0.957          0.944          0.938
+length_neutral            0.957          1.000          0.932          0.948
+needs_coverage            0.944          0.932          1.000          0.852
+precision                 0.938          0.948          0.852          1.000
+
+== pairwise decision agreement with control (argmax agrees, all pairs / near-equal-length pairs) ==
+length_neutral   0.934  0.949 (n_near=2993)
+needs_coverage   0.916  0.907 (n_near=2993)
+precision        0.910  0.931 (n_near=2993)
+
+== test-retest: control vs earlier single-question pilot (same oriented comparison) ==
+n=10240 mean|dp|=0.0095 identical=0.508 argmax agree=0.990
+
+== agreement with Gemini binary judge (Spearman of per-topic win-rates) ==
+better_summary   0.927 over 3 topics
+length_neutral   0.946 over 3 topics
+needs_coverage   0.917 over 3 topics
+precision        0.915 over 3 topics
+
+== top 8 per question, topic 2000 (win-rate, words) ==
+better_summary   kurt(0.91,741), briar(0.89,641), marie(0.88,710), alyssa(0.87,680), kent(0.87,634), alice(0.87,732), alana(0.86,642), joyce(0.83,732)
+length_neutral   kurt(0.91,741), alyssa(0.90,680), briar(0.90,641), marie(0.90,710), kent(0.89,634), alice(0.89,732), alana(0.87,642), lori(0.85,714)
+needs_coverage   marie(0.92,710), alyssa(0.91,680), lori(0.91,714), alice(0.91,732), kurt(0.89,741), kent(0.89,634), briar(0.88,641), alana(0.84,642)
+precision        kurt(0.95,741), briar(0.94,641), kent(0.94,634), alana(0.94,642), marie(0.87,710), alyssa(0.85,680), lori(0.80,714), debra(0.79,728)

@@ -1,0 +1,23 @@
+judge=noul invalid=0
+tie flags (both 'no'): 432 / 15360
+targets=160 calls=15360 | mean P(slot A wins)=0.514
+
+variant         words x  P(win)      dP            95% CI  targets dP>0  dP>+.05  dP<-.05
+original           1.00   0.422  +0.000 [+0.000,+0.000]       0/160          0        0
+pad_repeat         1.53   0.348  -0.074 [-0.080,-0.069]       1/160          0      120
+pad_generic        1.51   0.287  -0.135 [-0.144,-0.125]       1/160          0      153
+pad_offtopic       1.55   0.164  -0.258 [-0.271,-0.245]       0/160          0      160
+pad_relevant       1.53   0.520  +0.098 [+0.088,+0.107]     155/160        122        0
+truncate           0.66   0.344  -0.078 [-0.088,-0.068]      16/160          3      105
+
+per topic dP:
+  2000: pad_repeat=-0.088  pad_generic=-0.132  pad_offtopic=-0.231  pad_relevant=+0.050  truncate=-0.120
+  2001: pad_repeat=-0.083  pad_generic=-0.150  pad_offtopic=-0.256  pad_relevant=+0.067  truncate=-0.078
+  2002: pad_repeat=-0.103  pad_generic=-0.208  pad_offtopic=-0.308  pad_relevant=+0.094  truncate=-0.116
+  2003: pad_repeat=-0.067  pad_generic=-0.104  pad_offtopic=-0.310  pad_relevant=+0.084  truncate=-0.057
+  2004: pad_repeat=-0.047  pad_generic=-0.057  pad_offtopic=-0.179  pad_relevant=+0.109  truncate=-0.036
+  2005: pad_repeat=-0.068  pad_generic=-0.117  pad_offtopic=-0.234  pad_relevant=+0.138  truncate=-0.064
+  2006: pad_repeat=-0.079  pad_generic=-0.148  pad_offtopic=-0.278  pad_relevant=+0.094  truncate=-0.048
+  2007: pad_repeat=-0.084  pad_generic=-0.110  pad_offtopic=-0.245  pad_relevant=+0.106  truncate=-0.063
+  2008: pad_repeat=-0.062  pad_generic=-0.204  pad_offtopic=-0.323  pad_relevant=+0.108  truncate=-0.110
+  2009: pad_repeat=-0.063  pad_generic=-0.120  pad_offtopic=-0.218  pad_relevant=+0.129  truncate=-0.089

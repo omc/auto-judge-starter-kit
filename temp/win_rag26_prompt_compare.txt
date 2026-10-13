@@ -1,0 +1,36 @@
+topics ['rag2026-0', 'rag2026-1', 'rag2026-2', 'rag2026-3', 'rag2026-4', 'rag2026-5', 'rag2026-6', 'rag2026-7', 'rag2026-8', 'rag2026-9'] | comparisons 32070
+
+== length dependence (pooled over topics) ==
+question         P(longer)  <1.25x  1.25-2x   >=2x rho(wr,len) exact0/1 decisive
+better_summary       0.701   0.530    0.632  0.865       0.545    0.500    0.864
+length_neutral       0.669   0.521    0.597  0.821       0.460    0.486    0.856
+needs_coverage       0.701   0.535    0.632  0.863       0.540    0.589    0.883
+precision            0.673   0.525    0.607  0.820       0.474    0.453    0.847
+  rho(wr,len) = mean over topics of Spearman(run win-rate, run word count)
+
+== ranking agreement between questions (Spearman of per-topic win-rates, mean over topics) ==
+                 better_summary length_neutral needs_coverage      precision
+better_summary            1.000          0.984          0.992          0.982
+length_neutral            0.984          1.000          0.984          0.987
+needs_coverage            0.992          0.984          1.000          0.972
+precision                 0.982          0.987          0.972          1.000
+
+== pairwise decision agreement with control (argmax agrees, all pairs / near-equal-length pairs) ==
+length_neutral   0.954  0.955 (n_near=9395)
+needs_coverage   0.967  0.959 (n_near=9395)
+precision        0.951  0.954 (n_near=9395)
+
+== test-retest: control vs earlier single-question pilot (same oriented comparison) ==
+n=32070 mean|dp|=0.0050 identical=0.722 argmax agree=0.995
+
+== agreement with Gemini binary judge (Spearman of per-topic win-rates) ==
+better_summary   0.954 over 10 topics
+length_neutral   0.975 over 10 topics
+needs_coverage   0.959 over 10 topics
+precision        0.953 over 10 topics
+
+== top 8 per question, topic rag2026-0 (win-rate, words) ==
+better_summary   carmen(0.97,1020), edith(0.94,863), lars(0.94,869), xavi(0.93,760), hana(0.93,760), ariel(0.92,896), yara(0.91,1000), rita(0.90,1020)
+length_neutral   edith(0.96,863), carmen(0.96,1020), ariel(0.95,896), lars(0.95,869), xavi(0.94,760), hana(0.93,760), june(0.92,799), luca(0.90,814)
+needs_coverage   edith(0.96,863), lars(0.95,869), carmen(0.94,1020), ariel(0.94,896), xavi(0.94,760), hana(0.93,760), rita(0.90,1020), yara(0.89,1000)
+precision        carmen(0.98,1020), lars(0.95,869), edith(0.95,863), ariel(0.95,896), xavi(0.92,760), hana(0.92,760), yara(0.91,1000), darcy(0.90,674)

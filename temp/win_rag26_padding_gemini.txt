@@ -1,0 +1,15 @@
+judge=gemini invalid=0
+targets=48 calls=4608 | mean P(slot A wins)=0.479
+
+variant         words x  P(win)      dP            95% CI  targets dP>0  dP>+.05  dP<-.05
+original           1.00   0.268  +0.000 [+0.000,+0.000]       0/48           0        0
+pad_repeat         1.53   0.137  -0.132 [-0.160,-0.104]       0/48           0       40
+pad_generic        1.51   0.164  -0.104 [-0.130,-0.079]       1/48           1       37
+pad_offtopic       1.53   0.062  -0.206 [-0.250,-0.165]       0/48           0       42
+pad_relevant       1.54   0.372  +0.104 [+0.070,+0.138]      36/48          36        6
+truncate           0.66   0.190  -0.078 [-0.107,-0.049]       4/48           4       28
+
+per topic dP:
+  rag2026-0: pad_repeat=-0.125  pad_generic=-0.105  pad_offtopic=-0.227  pad_relevant=+0.113  truncate=-0.082
+  rag2026-1: pad_repeat=-0.117  pad_generic=-0.102  pad_offtopic=-0.156  pad_relevant=+0.082  truncate=-0.078
+  rag2026-2: pad_repeat=-0.152  pad_generic=-0.105  pad_offtopic=-0.234  pad_relevant=+0.117  tru

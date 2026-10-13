@@ -1,0 +1,5 @@
+[probe] determinism: rag2026-3, 3223 comparisons x 2 passes
+Prompt cache: ./cache/minima_llm.db
+[probe] wrote temp/jev_probes_win_rag26/determinism_rag2026-3_mirror_pass1.jsonl: 3223 rows, 0 errors, $0.3468
+Prompt cache: ./cache/minima_llm.db
+[probe] wrote temp/jev_probes_win_rag26/determinism_rag2026-3_mirror_pass2.jsonl: 3223 rows, 0 errors, $0.3468

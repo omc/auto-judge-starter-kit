@@ -1,0 +1,11 @@
+== diagnostics on the permitted window only: 2000 .. 2009 ==
+[window] comparisons.jsonl: kept 20,480 records on permitted topics, skipped 189,938 on restricted topics (not read)
+window comparisons 20,480 over 10 topics, 49 runs
+decisive (<.25|>.75) 0.587 | in [.4,.6] 0.134 | near-ties 2.80% | both-yes 1.65%
+split-half over window topics (5 vs 5): Spearman mean 0.948 [p2.5 0.915, p97.5 0.970]
+slot bias: P(slot A wins) 0.5107 | close pairs (.4-.6) 0.523 | winner flips on swap 0.050
+length: P(longer wins) 0.486 | per-topic Spearman(win rate, words) median -0.090
+Gemini agreement on 3 window topics: board Spearman 0.939 Kendall 0.818 | per-topic median 0.929 (n=3)
+[window] comparisons.jsonl: kept 20,480 records on permitted topics, skipped 189,938 on restricted topics (not read)
+decision 3: close pairs n=1376 over 10 topics | P(slot A wins) 0.523 CI [0.514, 0.532]
+  per topic: 2000:0.533(n=141) 2001:0.503(n=116) 2002:0.549(n=143) 2003:0.503(n=177) 2004:0.516(n=118) 2005:0.525(n=109) 2006:0.515(n=115) 2007:0.534(n=131) 2008:0.532(n=137) 2009:0.517(n=189)

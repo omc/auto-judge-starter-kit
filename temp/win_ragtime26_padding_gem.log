@@ -1,0 +1,63 @@
+[padding] 4608 calls: 48 targets x 6 variants x <= 8 opponents x 2 slots
+Prompt cache: ./cache/minima_llm.db
+[padding] gemini model=google/gemini-3.5-flash-lite
+Starting batch: 4608 items | workers=64 max_outstanding=48 rpm=unlimited
+[   10.1s] done=779/4608 sent=28.1/s recv=21.8/s cached=560 failed=0 eta=2m55s | tok: in=0/s out=0/s (515.1k/219) lat=1.7s
+Cannot connect to the LLM endpoint — [Errno 51] Network is unreachable
+  Connection error (not server overload). Retrying, but if it persists check the endpoint URL, network/proxy, and TLS certificates. Press Ctrl-C to abort.
+Server recovered after 2 retries. Resuming normal operation.
+Cannot connect to the LLM endpoint — [Errno 51] Network is unreachable
+  Connection error (not server overload). Retrying, but if it persists check the endpoint URL, network/proxy, and TLS certificates. Press Ctrl-C to abort.
+Server recovered after 2 retries. Resuming normal operation.
+Cannot connect to the LLM endpoint — [Errno 51] Network is unreachable
+  Connection error (not server overload). Retrying, but if it persists check the endpoint URL, network/proxy, and TLS certificates. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+[   20.1s] done=1253/4608 sent=15.4/s recv=15.4/s cached=880 failed=0 eta=3m00s | tok: in=34.9k/s out=15/s (864.1k/373) lat=2.1s
+Cannot connect to the LLM endpoint — [Errno 51] Network is unreachable
+  Connection error (not server overload). Retrying, but if it persists check the endpoint URL, network/proxy, and TLS certificates. Press Ctrl-C to abort.
+Server recovered after 3 retries. Resuming normal operation.
+Cannot connect to the LLM endpoint — [Errno 51] Network is unreachable
+  Connection error (not server overload). Retrying, but if it persists check the endpoint URL, network/proxy, and TLS certificates. Press Ctrl-C to abort.
+Server recovered after 2 retries. Resuming normal operation.
+Cannot connect to the LLM endpoint — [Errno 51] Network is unreachable
+  Connection error (not server overload). Retrying, but if it persists check the endpoint URL, network/proxy, and TLS certificates. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Cannot connect to the LLM endpoint — [Errno 51] Network is unreachable
+  Connection error (not server overload). Retrying, but if it persists check the endpoint URL, network/proxy, and TLS certificates. Press Ctrl-C to abort.
+[   30.1s] done=1809/4608 sent=17.2/s recv=17.2/s cached=1264 failed=0 eta=2m34s | tok: in=39.2k/s out=17/s (1.3M/545) lat=2.2s
+Server recovered after 3 retries. Resuming normal operation.
+Cannot connect to the LLM endpoint — [Errno 51] Network is unreachable
+  Connection error (not server overload). Retrying, but if it persists check the endpoint URL, network/proxy, and TLS certificates. Press Ctrl-C to abort.
+Server recovered after 2 retries. Resuming normal operation.
+Cannot connect to the LLM endpoint — [Errno 51] Network is unreachable
+  Connection error (not server overload). Retrying, but if it persists check the endpoint URL, network/proxy, and TLS certificates. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+[   40.1s] done=2312/4608 sent=18.3/s recv=18.3/s cached=1584 failed=0 eta=2m06s | tok: in=31.9k/s out=18/s (1.6M/728) lat=2.3s
+[   50.1s] done=2896/4608 sent=20.0/s recv=20.0/s cached=1968 failed=0 eta=1m32s | tok: in=40.5k/s out=19/s (2.0M/928) lat=2.2s
+Cannot connect to the LLM endpoint — [Errno 51] Network is unreachable
+  Connection error (not server overload). Retrying, but if it persists check the endpoint URL, network/proxy, and TLS certificates. Press Ctrl-C to abort.
+Server recovered after 3 retries. Resuming normal operation.
+Cannot connect to the LLM endpoint — [Errno 51] Network is unreachable
+  Connection error (not server overload). Retrying, but if it persists check the endpoint URL, network/proxy, and TLS certificates. Press Ctrl-C to abort.
+Server recovered after 2 retries. Resuming normal operation.
+[   60.1s] done=3469/4608 sent=18.9/s recv=18.9/s cached=2352 failed=0 eta=1m01s | tok: in=34.8k/s out=18/s (2.3M/1.1k) lat=2.3s
+Cannot connect to the LLM endpoint — [Errno 51] Network is unreachable
+  Connection error (not server overload). Retrying, but if it persists check the endpoint URL, network/proxy, and TLS certificates. Press Ctrl-C to abort.
+Server recovered after 1 retries. Resuming normal operation.
+Cannot connect to the LLM endpoint — [Errno 51] Network is unreachable
+  Connection error (not server overload). Retrying, but if it persists check the endpoint URL, network/proxy, and TLS certificates. Press Ctrl-C to abort.
+Server recovered after 4 retries. Resuming normal operation.
+Cannot connect to the LLM endpoint — [Errno 51] Network is unreachable
+  Connection error (not server overload). Retrying, but if it persists check the endpoint URL, network/proxy, and TLS certificates. Press Ctrl-C to abort.
+[   70.1s] done=4037/4608 sent=18.4/s recv=18.4/s cached=2736 failed=0 eta=30s | tok: in=35.0k/s out=18/s (2.7M/1.3k) lat=2.2s
+Server recovered after 2 retries. Resuming normal operation.
+Cannot connect to the LLM endpoint — [Errno 51] Network is unreachable
+  Connection error (not server overload). Retrying, but if it persists check the endpoint URL, network/proxy, and TLS certificates. Press Ctrl-C to abort.
+Server recovered after 2 retries. Resuming normal operation.
+Cannot connect to the LLM endpoint — [Errno 51] Network is unreachable
+  Connection error (not server overload). Retrying, but if it persists check the endpoint URL, network/proxy, and TLS certificates. Press Ctrl-C to abort.
+Server recovered after 3 retries. Resuming normal operation.
+[   80.1s] done=4567/4608 sent=17.1/s recv=19.4/s cached=3072 failed=0 eta=2s | tok: in=42.7k/s out=19/s (3.1M/1.5k) lat=2.2s
+Synchronizing cache at ./cache.
+Cache synched.
+[padding] wrote temp/jev_probes_win_ragtime26/padding_gemini.jsonl: 0 errors, $2.6643

@@ -1,0 +1,3 @@
+[window] comparisons.jsonl: kept 64,140 records on permitted topics, skipped 696,746 on restricted topics (not read)
+decision 5: Choice pilot (better_summary, both orientations) vs submitted mirror (full run), 10 window topics, 83 runs: board Spearman 0.998 Kendall 0.975
+  per-topic Spearman: 0.999 0.998 0.997 0.996 0.997 0.998 0.996 0.998 0.998 0.997 | median 0.997

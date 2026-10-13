@@ -1,0 +1,15 @@
+{
+ "label": "output-win-ragtime26-jev/bonsai_pairwise_jev.pairwise/comparisons.jsonl",
+ "topic": "2000",
+ "n": 2048,
+ "P(longer wins)": 0.48,
+ "P(longer) ratio 1.25-2": 0.629,
+ "P(longer) ratio <1.25": 0.386,
+ "P(longer) ratio >=2": 0.438,
+ "spearman(winrate, words)": -0.077,
+ "words median/min/max": [
+  706,
+  235,
+  857
+ ]
+}

@@ -1,0 +1,58 @@
+######## report --question better_summary
+== determinism ==
+
+== identical summaries (expected P(A)=0.5) ==
+n=828 mean P(A)=0.792 median=0.800 exactly 0.5=0.000 within .45-.55=0.001 P(A)>.9=9 P(A)<.1=0
+mean confidence=0.585 choices: A=828 B=0
+  rag2026-0: mean P(A)=0.822 sd=0.057
+  rag2026-1: mean P(A)=0.793 sd=0.051
+  rag2026-2: mean P(A)=0.791 sd=0.065
+  rag2026-3: mean P(A)=0.797 sd=0.052
+  rag2026-4: mean P(A)=0.818 sd=0.059
+  rag2026-5: mean P(A)=0.748 sd=0.061
+  rag2026-6: mean P(A)=0.797 sd=0.059
+  rag2026-7: mean P(A)=0.794 sd=0.060
+  rag2026-8: mean P(A)=0.792 sd=0.066
+  rag2026-9: mean P(A)=0.772 sd=0.061
+  histogram P(A) by decile: [0, 0, 0, 0, 0, 3, 59, 330, 420, 16]
+######## report --question noul_a_proportionate
+== determinism ==
+
+== identical summaries (expected P(A)=0.5) ==
+n=828 mean P(A)=0.177 median=0.170 exactly 0.5=0.000 within .45-.55=0.000 P(A)>.9=0 P(A)<.1=1
+P(yes)>0.5: 0/828  (raw Noul P(yes) shown above)
+  rag2026-0: mean P(A)=0.168 sd=0.033
+  rag2026-1: mean P(A)=0.178 sd=0.036
+  rag2026-2: mean P(A)=0.174 sd=0.030
+  rag2026-3: mean P(A)=0.191 sd=0.040
+  rag2026-4: mean P(A)=0.184 sd=0.037
+  rag2026-5: mean P(A)=0.180 sd=0.036
+  rag2026-6: mean P(A)=0.171 sd=0.035
+  rag2026-7: mean P(A)=0.183 sd=0.038
+  rag2026-8: mean P(A)=0.162 sd=0.034
+  rag2026-9: mean P(A)=0.182 sd=0.040
+  histogram P(A) by decile: [1, 564, 259, 4, 0, 0, 0, 0, 0, 0]
+######## report --question noul_b_proportionate
+== determinism ==
+
+== identical summaries (expected P(A)=0.5) ==
+n=828 mean P(A)=0.108 median=0.100 exactly 0.5=0.000 within .45-.55=0.000 P(A)>.9=0 P(A)<.1=314
+P(yes)>0.5: 0/828  (raw Noul P(yes) shown above)
+  rag2026-0: mean P(A)=0.104 sd=0.023
+  rag2026-1: mean P(A)=0.110 sd=0.027
+  rag2026-2: mean P(A)=0.110 sd=0.026
+  rag2026-3: mean P(A)=0.105 sd=0.023
+  rag2026-4: mean P(A)=0.109 sd=0.028
+  rag2026-5: mean P(A)=0.114 sd=0.029
+  rag2026-6: mean P(A)=0.099 sd=0.023
+  rag2026-7: mean P(A)=0.104 sd=0.030
+  rag2026-8: mean P(A)=0.102 sd=0.026
+  rag2026-9: mean P(A)=0.118 sd=0.034
+  histogram P(A) by decile: [314, 510, 4, 0, 0, 0, 0, 0, 0, 0]
+######## report --question mirror
+== determinism ==
+determinism_rag2026-3_mirror_pass1.jsonl: n=3223 identical=0.391 mean|dp|=0.0049 p95|dp|=0.015 max|dp|=0.050 argmax flips=5 (0.155%) mean|dconf|=0.0000 served={'typesafe/jev-1.13-20260917'}
+  largest changes: [('rag2026-3|sonia|alton', 0.515, 0.565), ('rag2026-3|jon|hilda', 0.44, 0.485), ('rag2026-3|nina|zora', 0.52, 0.56), ('rag2026-3|todd|carmen', 0.59, 0.555), ('rag2026-3|leon|ryan', 0.71, 0.675)]
+  raw noul_a_proportionate: identical=0.576 mean|dp|=0.0054 max=0.060
+  raw noul_b_proportionate: identical=0.554 mean|dp|=0.0057 max=0.050
+  tie flag: pass1=43 pass2=38 changed=17

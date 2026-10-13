@@ -1,0 +1,15 @@
+{
+ "label": "output-win-rag26-jev/bonsai_pairwise_jev.pairwise/comparisons.jsonl",
+ "topic": "rag2026-0",
+ "n": 6446,
+ "P(longer wins)": 0.694,
+ "P(longer) ratio 1.25-2": 0.617,
+ "P(longer) ratio <1.25": 0.546,
+ "P(longer) ratio >=2": 0.844,
+ "spearman(winrate, words)": 0.524,
+ "words median/min/max": [
+  679,
+  65,
+  1024
+ ]
+}

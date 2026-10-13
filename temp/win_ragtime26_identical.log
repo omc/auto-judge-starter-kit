@@ -1,0 +1,9 @@
+[probe] identical: 490 self-comparisons over ['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009']
+Prompt cache: ./cache/minima_llm.db
+[probe] wrote temp/jev_probes_win_ragtime26/identical.jsonl: 490 rows, 0 errors, $0.0410
+[probe] identical: 490 self-comparisons over ['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009']
+Prompt cache: ./cache/minima_llm.db
+[probe] wrote temp/jev_probes_win_ragtime26/identical_noul_a_proportionate.jsonl: 490 rows, 0 errors, $0.0421
+[probe] identical: 490 self-comparisons over ['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009']
+Prompt cache: ./cache/minima_llm.db
+[probe] wrote temp/jev_probes_win_ragtime26/identical_noul_b_proportionate.jsonl: 490 rows, 0 errors, $0.0421

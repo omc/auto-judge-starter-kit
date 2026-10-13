@@ -1,0 +1,88 @@
+rag26 | output-win-rag26-jev | score=p_a | 64,140 comparisons over 10 window topics | unique calls 59,332 $5.77 ($0.0000973/call)
+distribution: exact 0/1 0.498 | decisive (<.25|>.75) 0.885 | [.4,.6] 0.044 | mean P(A) 0.5061 | distinct values 101
+ranking: 83 runs | probabilistic vs binary board Spearman 0.9992
+swap (32,070 pairs in both orientations): mean|dp| 0.046 | winner flips 0.043 | P(slot A wins) 0.5061
+slot bias by closeness of orientation-averaged P (n / P(slot A wins) / flip rate):
+  0.00-0.05: 12,604 / 0.500 / 0.00
+  0.05-0.25:  2,993 / 0.511 / 0.00
+  0.25-0.40:  1,188 / 0.526 / 0.16
+  0.40-0.60:  1,406 / 0.540 / 0.71
+  0.60-0.75:  1,176 / 0.530 / 0.17
+  0.75-0.95:  2,680 / 0.514 / 0.00
+  0.95-1.01: 10,023 / 0.500 / 0.00
+length: P(longer wins) 0.700 | per-topic Spearman(win rate, words) median 0.541 [min 0.475, max 0.664]
+split-half (5 vs 5 topics, 200 splits): Spearman 0.975 [p2.5 0.959, p97.5 0.983]
+top 5: carmen(0.947), lars(0.941), edith(0.934), ariel(0.918), hana(0.916)
+vs Gemini on 10 shared window topics, 83 runs: board Spearman 0.976 Kendall 0.869 | per-topic median 0.957
+
+rag26 | output-pairwise-jev-full-prop | score=p_a | 64,140 comparisons over 10 window topics | unique calls 59,332 $6.33 ($0.0001067/call)
+distribution: exact 0/1 0.000 | decisive (<.25|>.75) 0.772 | [.4,.6] 0.081 | mean P(A) 0.5196 | distinct values 406
+ranking: 83 runs | probabilistic vs binary board Spearman 0.9982
+swap (32,070 pairs in both orientations): mean|dp| 0.046 | winner flips 0.048 | P(slot A wins) 0.5196
+slot bias by closeness of orientation-averaged P (n / P(slot A wins) / flip rate):
+  0.00-0.05:  3,464 / 0.503 / 0.00
+  0.05-0.25: 10,219 / 0.513 / 0.00
+  0.25-0.40:  2,534 / 0.542 / 0.01
+  0.40-0.60:  2,651 / 0.553 / 0.57
+  0.60-0.75:  2,288 / 0.543 / 0.01
+  0.75-0.95:  8,274 / 0.515 / 0.00
+  0.95-1.01:  2,640 / 0.503 / 0.00
+length: P(longer wins) 0.675 | per-topic Spearman(win rate, words) median 0.558 [min 0.488, max 0.686]
+split-half (5 vs 5 topics, 200 splits): Spearman 0.974 [p2.5 0.960, p97.5 0.982]
+top 5: lars(0.859), carmen(0.859), edith(0.852), hana(0.843), ariel(0.842)
+vs Gemini on 10 shared window topics, 83 runs: board Spearman 0.974 Kendall 0.866 | per-topic median 0.952
+
+rag26 | output-win-rag26-jev-prompts | score=better_summary | 32,070 comparisons over 10 window topics | unique calls 30,759 $3.61 ($0.0001175/call)
+distribution: exact 0/1 0.500 | decisive (<.25|>.75) 0.884 | [.4,.6] 0.044 | mean P(A) 0.5029 | distinct values 101
+ranking: 83 runs | probabilistic vs binary board Spearman 0.9993
+swap: single orientation (no pair judged both ways)
+length: P(longer wins) 0.701 | per-topic Spearman(win rate, words) median 0.544 [min 0.480, max 0.661]
+split-half (5 vs 5 topics, 200 splits): Spearman 0.975 [p2.5 0.958, p97.5 0.984]
+top 5: carmen(0.945), lars(0.942), edith(0.933), ariel(0.921), hana(0.918)
+vs Gemini on 10 shared window topics, 83 runs: board Spearman 0.976 Kendall 0.868 | per-topic median 0.955
+
+rag26 | output-win-rag26-jev-prompts | score=length_neutral | 32,070 comparisons over 10 window topics | unique calls 30,759 $3.61 ($0.0001175/call)
+distribution: exact 0/1 0.486 | decisive (<.25|>.75) 0.876 | [.4,.6] 0.049 | mean P(A) 0.4962 | distinct values 101
+ranking: 83 runs | probabilistic vs binary board Spearman 0.9990
+swap: single orientation (no pair judged both ways)
+length: P(longer wins) 0.669 | per-topic Spearman(win rate, words) median 0.460 [min 0.364, max 0.570]
+split-half (5 vs 5 topics, 200 splits): Spearman 0.985 [p2.5 0.979, p97.5 0.990]
+top 5: lars(0.949), edith(0.939), ariel(0.936), hana(0.931), carmen(0.925)
+vs Gemini on 10 shared window topics, 83 runs: board Spearman 0.987 Kendall 0.909 | per-topic median 0.977
+
+rag26 | output-win-rag26-jev-prompts | score=needs_coverage | 32,070 comparisons over 10 window topics | unique calls 30,759 $3.61 ($0.0001175/call)
+distribution: exact 0/1 0.589 | decisive (<.25|>.75) 0.899 | [.4,.6] 0.040 | mean P(A) 0.5117 | distinct values 101
+ranking: 83 runs | probabilistic vs binary board Spearman 0.9993
+swap: single orientation (no pair judged both ways)
+length: P(longer wins) 0.701 | per-topic Spearman(win rate, words) median 0.543 [min 0.459, max 0.683]
+split-half (5 vs 5 topics, 200 splits): Spearman 0.978 [p2.5 0.959, p97.5 0.987]
+top 5: lars(0.943), carmen(0.938), edith(0.935), ariel(0.929), hana(0.920)
+vs Gemini on 10 shared window topics, 83 runs: board Spearman 0.977 Kendall 0.876 | per-topic median 0.959
+
+rag26 | output-win-rag26-jev-prompts | score=precision | 32,070 comparisons over 10 window topics | unique calls 30,759 $3.61 ($0.0001175/call)
+distribution: exact 0/1 0.453 | decisive (<.25|>.75) 0.869 | [.4,.6] 0.051 | mean P(A) 0.4959 | distinct values 101
+ranking: 83 runs | probabilistic vs binary board Spearman 0.9989
+swap: single orientation (no pair judged both ways)
+length: P(longer wins) 0.673 | per-topic Spearman(win rate, words) median 0.468 [min 0.417, max 0.584]
+split-half (5 vs 5 topics, 200 splits): Spearman 0.981 [p2.5 0.972, p97.5 0.988]
+top 5: lars(0.937), carmen(0.930), ariel(0.927), edith(0.925), hana(0.915)
+vs Gemini on 10 shared window topics, 83 runs: board Spearman 0.977 Kendall 0.870 | per-topic median 0.955
+
+rag26 | output-win-rag26-prop-broad | score=noul_a_better | 32,070 comparisons over 10 window topics | unique calls 30,759 $3.55 ($0.0001153/call)
+distribution: exact 0/1 0.000 | decisive (<.25|>.75) 0.760 | [.4,.6] 0.088 | mean P(A) 0.5044 | distinct values 99
+ranking: 83 runs | probabilistic vs binary board Spearman 0.9987
+swap: single orientation (no pair judged both ways)
+length: P(longer wins) 0.672 | per-topic Spearman(win rate, words) median 0.555 [min 0.487, max 0.677]
+split-half (5 vs 5 topics, 200 splits): Spearman 0.974 [p2.5 0.960, p97.5 0.982]
+top 5: lars(0.858), carmen(0.858), edith(0.848), ariel(0.841), hana(0.840)
+vs Gemini on 10 shared window topics, 83 runs: board Spearman 0.973 Kendall 0.860 | per-topic median 0.953
+
+rag26 | output-win-rag26-prop-broad | score=noul_a_proportionate | 32,070 comparisons over 10 window topics | unique calls 30,759 $3.55 ($0.0001153/call)
+distribution: exact 0/1 0.000 | decisive (<.25|>.75) 0.759 | [.4,.6] 0.088 | mean P(A) 0.5144 | distinct values 99
+ranking: 83 runs | probabilistic vs binary board Spearman 0.9989
+swap: single orientation (no pair judged both ways)
+length: P(longer wins) 0.676 | per-topic Spearman(win rate, words) median 0.566 [min 0.492, max 0.688]
+split-half (5 vs 5 topics, 200 splits): Spearman 0.973 [p2.5 0.959, p97.5 0.982]
+top 5: lars(0.857), carmen(0.853), edith(0.845), hana(0.841), ariel(0.839)
+vs Gemini on 10 shared window topics, 83 runs: board Spearman 0.973 Kendall 0.861 | per-topic median 0.952
+

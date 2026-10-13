@@ -1,0 +1,2 @@
+[window] comparisons.jsonl: kept 20,480 records on permitted topics, skipped 189,938 on restricted topics (not read)
+decision 5: Choice vs mirror, 49 runs, board Spearman 0.998 Kendall 0.980 | per-topic median 0.992 min 0.969

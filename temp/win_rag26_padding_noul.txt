@@ -1,0 +1,23 @@
+judge=noul invalid=0
+tie flags (both 'no'): 124 / 15360
+targets=160 calls=15360 | mean P(slot A wins)=0.526
+
+variant         words x  P(win)      dP            95% CI  targets dP>0  dP>+.05  dP<-.05
+original           1.00   0.333  +0.000 [+0.000,+0.000]       0/160          0        0
+pad_repeat         1.53   0.285  -0.048 [-0.053,-0.044]       1/160          0       63
+pad_generic        1.51   0.238  -0.095 [-0.102,-0.088]       0/160          0      135
+pad_offtopic       1.53   0.137  -0.196 [-0.209,-0.183]       0/160          0      159
+pad_relevant       1.53   0.511  +0.179 [+0.170,+0.188]     160/160        159        0
+truncate           0.67   0.252  -0.081 [-0.088,-0.072]       2/160          0      120
+
+per topic dP:
+  rag2026-0: pad_repeat=-0.036  pad_generic=-0.057  pad_offtopic=-0.199  pad_relevant=+0.183  truncate=-0.075
+  rag2026-1: pad_repeat=-0.041  pad_generic=-0.080  pad_offtopic=-0.173  pad_relevant=+0.182  truncate=-0.082
+  rag2026-2: pad_repeat=-0.042  pad_generic=-0.089  pad_offtopic=-0.196  pad_relevant=+0.182  truncate=-0.074
+  rag2026-3: pad_repeat=-0.050  pad_generic=-0.078  pad_offtopic=-0.216  pad_relevant=+0.151  truncate=-0.068
+  rag2026-4: pad_repeat=-0.051  pad_generic=-0.122  pad_offtopic=-0.242  pad_relevant=+0.189  truncate=-0.065
+  rag2026-5: pad_repeat=-0.043  pad_generic=-0.079  pad_offtopic=-0.170  pad_relevant=+0.185  truncate=-0.076
+  rag2026-6: pad_repeat=-0.066  pad_generic=-0.134  pad_offtopic=-0.180  pad_relevant=+0.196  truncate=-0.125
+  rag2026-7: pad_repeat=-0.047  pad_generic=-0.099  pad_offtopic=-0.182  pad_relevant=+0.186  truncate=-0.084
+  rag2026-8: pad_repeat=-0.069  pad_generic=-0.114  pad_offtopic=-0.242  pad_relevant=+0.157  truncate=-0.096
+  rag2026-9: pad_repeat=-0.036  pad_generic=-0.099  pad_offtopic=-0.162  pad_relevant=+0.178  truncate=-0.061

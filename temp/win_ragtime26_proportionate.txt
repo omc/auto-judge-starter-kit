@@ -1,0 +1,101 @@
+matched comparisons 10240 (broad 10240, narrow 10240) | topics ['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009']
+
+== 2000 (n=1024) ==
+pair           P(longer) broad  narrow   shift       DiD vs better [95% CI] rho len broad  narrow rank broad~narrow  tie% b/n
+better                   0.479   0.422  -0.056                            —        -0.089  -0.323             0.689  4.9/ 6.2
+proportionate            0.485   0.420  -0.064    -0.0081 [-0.0099,-0.0061]        -0.057  -0.336             0.684  5.0/ 7.9
+
+== 2001 (n=1024) ==
+pair           P(longer) broad  narrow   shift       DiD vs better [95% CI] rho len broad  narrow rank broad~narrow  tie% b/n
+better                   0.529   0.520  -0.009                            —         0.038   0.033             0.974  0.0/ 0.0
+proportionate            0.522   0.486  -0.036    -0.0273 [-0.0300,-0.0245]         0.026  -0.072             0.958  0.0/ 0.0
+
+== 2002 (n=1024) ==
+pair           P(longer) broad  narrow   shift       DiD vs better [95% CI] rho len broad  narrow rank broad~narrow  tie% b/n
+better                   0.418   0.384  -0.034                            —        -0.375  -0.485             0.854  1.3/ 1.5
+proportionate            0.421   0.372  -0.049    -0.0150 [-0.0175,-0.0125]        -0.358  -0.533             0.827  1.5/ 2.3
+
+== 2003 (n=1024) ==
+pair           P(longer) broad  narrow   shift       DiD vs better [95% CI] rho len broad  narrow rank broad~narrow  tie% b/n
+better                   0.453   0.452  -0.001                            —        -0.187  -0.224             0.949  1.9/ 1.7
+proportionate            0.456   0.439  -0.017    -0.0163 [-0.0186,-0.0139]        -0.165  -0.288             0.917  1.6/ 2.5
+
+== 2004 (n=1024) ==
+pair           P(longer) broad  narrow   shift       DiD vs better [95% CI] rho len broad  narrow rank broad~narrow  tie% b/n
+better                   0.536   0.537  +0.001                            —         0.106   0.131             0.978  2.4/ 1.1
+proportionate            0.541   0.531  -0.010    -0.0112 [-0.0126,-0.0097]         0.124   0.123             0.979  3.4/ 2.0
+
+== 2005 (n=1024) ==
+pair           P(longer) broad  narrow   shift       DiD vs better [95% CI] rho len broad  narrow rank broad~narrow  tie% b/n
+better                   0.506   0.489  -0.017                            —         0.026  -0.038             0.802  2.1/ 1.2
+proportionate            0.507   0.466  -0.042    -0.0247 [-0.0281,-0.0213]         0.029  -0.128             0.797  2.2/ 3.5
+
+== 2006 (n=1024) ==
+pair           P(longer) broad  narrow   shift       DiD vs better [95% CI] rho len broad  narrow rank broad~narrow  tie% b/n
+better                   0.482   0.476  -0.007                            —        -0.112  -0.091             0.900  0.2/ 2.1
+proportionate            0.471   0.449  -0.022    -0.0154 [-0.0184,-0.0124]        -0.142  -0.209             0.870  0.1/ 4.8
+
+== 2007 (n=1024) ==
+pair           P(longer) broad  narrow   shift       DiD vs better [95% CI] rho len broad  narrow rank broad~narrow  tie% b/n
+better                   0.514   0.501  -0.013                            —         0.080   0.008             0.965  3.2/ 3.2
+proportionate            0.514   0.492  -0.022    -0.0095 [-0.0112,-0.0077]         0.084  -0.056             0.942  2.9/ 5.2
+
+== 2008 (n=1024) ==
+pair           P(longer) broad  narrow   shift       DiD vs better [95% CI] rho len broad  narrow rank broad~narrow  tie% b/n
+better                   0.469   0.495  +0.026                            —        -0.172  -0.062             0.822  1.7/ 0.1
+proportionate            0.469   0.484  +0.015    -0.0106 [-0.0130,-0.0083]        -0.178  -0.149             0.800  0.8/ 0.3
+
+== 2009 (n=1024) ==
+pair           P(longer) broad  narrow   shift       DiD vs better [95% CI] rho len broad  narrow rank broad~narrow  tie% b/n
+better                   0.478   0.488  +0.011                            —        -0.174  -0.109             0.957 10.6/ 0.4
+proportionate            0.482   0.472  -0.010    -0.0204 [-0.0230,-0.0179]        -0.155  -0.157             0.958  9.9/ 0.2
+
+== pooled (n=10240) ==
+pair           P(longer) broad  narrow   shift       DiD vs better [95% CI] rho len broad  narrow rank broad~narrow  tie% b/n
+better                   0.486   0.477  -0.010                            —        -0.086  -0.116             0.889  2.8/ 1.7
+proportionate            0.487   0.461  -0.026    -0.0158 [-0.0166,-0.0150]        -0.079  -0.180             0.873  2.7/ 2.9
+
+broad  proportionate vs better: mean diff +0.0015 | mean |diff| 0.0172 | winner differs 1.533%
+narrow proportionate vs better: mean diff -0.0093 | mean |diff| 0.0300 | winner differs 3.213%
+
+top 6 per topic and framing (win rate, words):
+  2000 broad  better        kurt(0.78,741w), briar(0.77,641w), marie(0.77,710w), alyssa(0.76,680w), kent(0.76,634w), alice(0.76,732w)
+  2000 broad  proportionate alice(0.78,732w), marie(0.77,710w), alyssa(0.77,680w), kurt(0.77,741w), briar(0.76,641w), kent(0.75,634w)
+  2000 narrow better        debra(0.82,728w), joyce(0.80,732w), jesse(0.80,358w), jane(0.79,358w), david(0.79,354w), rory(0.78,368w)
+  2000 narrow proportionate debra(0.82,728w), jesse(0.81,358w), jane(0.80,358w), rory(0.79,368w), david(0.79,354w), loren(0.79,367w)
+  2001 broad  better        alice(0.85,685w), marie(0.85,677w), alyssa(0.85,713w), lori(0.79,697w), dina(0.78,759w), briar(0.77,607w)
+  2001 broad  proportionate marie(0.85,677w), alyssa(0.84,713w), alice(0.84,685w), lori(0.78,697w), briar(0.75,607w), dina(0.74,759w)
+  2001 narrow better        dina(0.82,759w), alyssa(0.80,713w), alice(0.77,685w), marie(0.77,677w), briar(0.74,607w), kurt(0.72,805w)
+  2001 narrow proportionate dina(0.78,759w), alyssa(0.77,713w), marie(0.72,677w), briar(0.70,607w), alice(0.70,685w), susan(0.67,468w)
+  2002 broad  better        alyssa(0.82,697w), briar(0.81,681w), kurt(0.81,772w), alana(0.77,415w), marie(0.77,703w), lori(0.76,710w)
+  2002 broad  proportionate alyssa(0.84,697w), briar(0.80,681w), kurt(0.79,772w), marie(0.79,703w), lori(0.78,710w), alana(0.74,415w)
+  2002 narrow better        briar(0.82,681w), alyssa(0.79,697w), alana(0.78,415w), kurt(0.77,772w), kent(0.75,425w), lila(0.71,576w)
+  2002 narrow proportionate briar(0.80,681w), alana(0.76,415w), alyssa(0.76,697w), aimee(0.73,373w), kent(0.72,425w), kurt(0.72,772w)
+  2003 broad  better        dina(0.84,670w), lori(0.84,637w), marie(0.81,640w), alice(0.77,652w), alyssa(0.75,644w), briar(0.71,631w)
+  2003 broad  proportionate lori(0.85,637w), marie(0.83,640w), dina(0.83,670w), alice(0.80,652w), alyssa(0.78,644w), joyce(0.69,472w)
+  2003 narrow better        dina(0.88,670w), lori(0.81,637w), briar(0.79,631w), marie(0.79,640w), alice(0.77,652w), kurt(0.74,703w)
+  2003 narrow proportionate dina(0.86,670w), lori(0.78,637w), briar(0.77,631w), alice(0.76,652w), marie(0.76,640w), kurt(0.72,703w)
+  2004 broad  better        dina(0.83,702w), kent(0.82,553w), lori(0.82,705w), briar(0.82,600w), marie(0.81,677w), alana(0.79,600w)
+  2004 broad  proportionate lori(0.84,705w), kent(0.82,553w), marie(0.82,677w), dina(0.82,702w), briar(0.81,600w), alana(0.79,600w)
+  2004 narrow better        dina(0.85,702w), briar(0.82,600w), kent(0.81,553w), lori(0.80,705w), marie(0.79,677w), alana(0.78,600w)
+  2004 narrow proportionate dina(0.84,702w), briar(0.81,600w), lori(0.80,705w), kent(0.80,553w), marie(0.80,677w), alana(0.77,600w)
+  2005 broad  better        marie(0.87,664w), lori(0.85,681w), alice(0.85,655w), alyssa(0.82,633w), dina(0.82,662w), kent(0.75,649w)
+  2005 broad  proportionate marie(0.88,664w), lori(0.85,681w), alice(0.85,655w), alyssa(0.83,633w), dina(0.81,662w), diana(0.74,630w)
+  2005 narrow better        marie(0.85,664w), dina(0.82,662w), lori(0.82,681w), alice(0.81,655w), lila(0.79,372w), joyce(0.73,523w)
+  2005 narrow proportionate marie(0.80,664w), lila(0.79,372w), dina(0.78,662w), lori(0.77,681w), alice(0.76,655w), lena(0.71,307w)
+  2006 broad  better        kent(0.88,654w), kurt(0.86,780w), briar(0.84,678w), lori(0.78,746w), alana(0.78,394w), alyssa(0.75,734w)
+  2006 broad  proportionate kent(0.86,654w), briar(0.82,678w), kurt(0.82,780w), lori(0.78,746w), alana(0.76,394w), alyssa(0.75,734w)
+  2006 narrow better        kent(0.85,654w), briar(0.80,678w), lori(0.79,746w), alyssa(0.78,734w), piper(0.75,803w), alice(0.73,711w)
+  2006 narrow proportionate kent(0.83,654w), briar(0.78,678w), lori(0.74,746w), alyssa(0.72,734w), david(0.70,304w), piper(0.70,803w)
+  2007 broad  better        dina(0.83,635w), marie(0.79,532w), alyssa(0.77,630w), debra(0.75,522w), alice(0.74,627w), bree(0.71,471w)
+  2007 broad  proportionate dina(0.81,635w), marie(0.81,532w), alyssa(0.79,630w), alice(0.75,627w), debra(0.74,522w), lori(0.72,630w)
+  2007 narrow better        dina(0.86,635w), debra(0.79,522w), marie(0.79,532w), jane(0.75,302w), alice(0.75,627w), alyssa(0.75,630w)
+  2007 narrow proportionate dina(0.85,635w), marie(0.79,532w), debra(0.78,522w), jane(0.76,302w), alyssa(0.75,630w), alice(0.75,627w)
+  2008 broad  better        briar(0.80,611w), kurt(0.80,741w), alyssa(0.79,699w), alice(0.78,693w), kent(0.78,555w), marie(0.77,679w)
+  2008 broad  proportionate alyssa(0.82,699w), alice(0.80,693w), marie(0.79,679w), briar(0.78,611w), kurt(0.78,741w), kent(0.77,555w)
+  2008 narrow better        kent(0.82,555w), kurt(0.82,741w), briar(0.82,611w), alana(0.77,366w), dina(0.76,692w), alice(0.73,693w)
+  2008 narrow proportionate briar(0.80,611w), kurt(0.80,741w), kent(0.80,555w), alana(0.74,366w), dina(0.74,692w), alice(0.71,693w)
+  2009 broad  better        alyssa(0.87,713w), bree(0.81,512w), alice(0.79,699w), marie(0.76,688w), diana(0.76,474w), lori(0.75,680w)
+  2009 broad  proportionate alyssa(0.87,713w), bree(0.81,512w), alice(0.78,699w), lori(0.76,680w), diana(0.76,474w), marie(0.76,688w)
+  2009 narrow better        alyssa(0.86,713w), alice(0.79,699w), dina(0.76,721w), marie(0.73,688w), lori(0.73,680w), bree(0.71,512w)
+  2009 narrow proportionate alyssa(0.83,713w), alice(0.73,699w), dina(0.71,721w), katie(0.69,277w), lori(0.68,680w), bree(0.68,512w)

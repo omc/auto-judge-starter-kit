@@ -1,0 +1,28 @@
+## better_summary
+== determinism ==
+
+== identical summaries (expected P(A)=0.5) ==
+n=490 mean P(A)=0.789 median=0.795 exactly 0.5=0.000 within .45-.55=0.002 P(A)>.9=10 P(A)<.1=0
+mean confidence=0.579 choices: A=490 B=0
+  histogram P(A) by decile: [0, 0, 0, 0, 0, 2, 47, 196, 229, 16]
+## noul_a_proportionate
+== determinism ==
+
+== identical summaries (expected P(A)=0.5) ==
+n=490 mean P(A)=0.184 median=0.180 exactly 0.5=0.000 within .45-.55=0.000 P(A)>.9=0 P(A)<.1=0
+P(yes)>0.5: 0/490  (raw Noul P(yes) shown above)
+  histogram P(A) by decile: [0, 302, 187, 1, 0, 0, 0, 0, 0, 0]
+## noul_b_proportionate
+== determinism ==
+
+== identical summaries (expected P(A)=0.5) ==
+n=490 mean P(A)=0.106 median=0.100 exactly 0.5=0.000 within .45-.55=0.000 P(A)>.9=0 P(A)<.1=159
+P(yes)>0.5: 0/490  (raw Noul P(yes) shown above)
+  histogram P(A) by decile: [159, 330, 1, 0, 0, 0, 0, 0, 0, 0]
+## mirror
+== determinism ==
+determinism_2003_mirror_pass1.jsonl: n=1024 identical=0.240 mean|dp|=0.0067 p95|dp|=0.020 max|dp|=0.040 argmax flips=7 (0.684%) mean|dconf|=0.0000 served={'typesafe/jev-1.13-20260917'}
+  largest changes: [('2003|ella|keith', 0.58, 0.62), ('2003|tess|david', 0.495, 0.53), ('2003|marcy|ezra', 0.495, 0.46), ('2003|lena|diana', 0.495, 0.53), ('2003|alana|hans', 0.55, 0.515)]
+  raw noul_a_proportionate: identical=0.404 mean|dp|=0.0078 max=0.040
+  raw noul_b_proportionate: identical=0.434 mean|dp|=0.0079 max=0.060
+  tie flag: pass1=17 pass2=15 changed=6

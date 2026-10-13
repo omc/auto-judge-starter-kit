@@ -1,0 +1,12 @@
+[pairwise] dropped 2 empty summaries (no text to compare)
+[probe] identical: 828 self-comparisons over ['rag2026-0', 'rag2026-1', 'rag2026-2', 'rag2026-3', 'rag2026-4', 'rag2026-5', 'rag2026-6', 'rag2026-7', 'rag2026-8', 'rag2026-9']
+Prompt cache: ./cache/minima_llm.db
+[probe] wrote temp/jev_probes_win_rag26/identical.jsonl: 828 rows, 0 errors, $0.0801
+[pairwise] dropped 2 empty summaries (no text to compare)
+[probe] identical: 828 self-comparisons over ['rag2026-0', 'rag2026-1', 'rag2026-2', 'rag2026-3', 'rag2026-4', 'rag2026-5', 'rag2026-6', 'rag2026-7', 'rag2026-8', 'rag2026-9']
+Prompt cache: ./cache/minima_llm.db
+[probe] wrote temp/jev_probes_win_rag26/identical_noul_a_proportionate.jsonl: 828 rows, 0 errors, $0.0821
+[pairwise] dropped 2 empty summaries (no text to compare)
+[probe] identical: 828 self-comparisons over ['rag2026-0', 'rag2026-1', 'rag2026-2', 'rag2026-3', 'rag2026-4', 'rag2026-5', 'rag2026-6', 'rag2026-7', 'rag2026-8', 'rag2026-9']
+Prompt cache: ./cache/minima_llm.db
+[probe] wrote temp/jev_probes_win_rag26/identical_noul_b_proportionate.jsonl: 828 rows, 0 errors, $0.0821

@@ -1,0 +1,13 @@
+== diagnostics on the permitted window only: rag2026-0 .. rag2026-9 ==
+[window] comparisons.jsonl: kept 64,140 records on permitted topics, skipped 696,746 on restricted topics (not read)
+window comparisons 64,140 over 10 topics, 83 runs
+decisive (<.25|>.75) 0.772 | in [.4,.6] 0.081 | near-ties 0.84% | both-yes 1.95%
+split-half over window topics (5 vs 5): Spearman mean 0.974 [p2.5 0.960, p97.5 0.982]
+slot bias: P(slot A wins) 0.5196 | close pairs (.4-.6) 0.553 | winner flips on swap 0.048
+length: P(longer wins) 0.675 | per-topic Spearman(win rate, words) median 0.558
+[window] comparisons.jsonl: kept 22,561 records on permitted topics, skipped 233,143 on restricted topics (not read)
+Gemini agreement on 7 window topics: board Spearman 0.973 Kendall 0.865 | per-topic median 0.952 (n=7)
+[window] comparisons.jsonl: kept 64,140 records on permitted topics, skipped 696,746 on restricted topics (not read)
+decision 3: close pairs n=2651 over 10 topics | P(slot A wins) 0.553 topic-bootstrap 95% CI [0.547, 0.559]
+  per topic: 0:0.551(n=227) 1:0.553(n=293) 2:0.563(n=260) 3:0.551(n=255) 4:0.540(n=265) 5:0.572(n=253) 6:0.560(n=290) 7:0.537(n=244) 8:0.549(n=309) 9:0.550(n=255)
+Gemini agreement on 10 window topics: board Spearman 0.974 Kendall 0.866 | per-topic median 0.952 (n=10)

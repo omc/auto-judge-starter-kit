@@ -1,0 +1,101 @@
+matched comparisons 32070 (broad 32070, narrow 32070) | topics ['rag2026-0', 'rag2026-1', 'rag2026-2', 'rag2026-3', 'rag2026-4', 'rag2026-5', 'rag2026-6', 'rag2026-7', 'rag2026-8', 'rag2026-9']
+
+== rag2026-0 (n=3223) ==
+pair           P(longer) broad  narrow   shift       DiD vs better [95% CI] rho len broad  narrow rank broad~narrow  tie% b/n
+better                   0.669   0.661  -0.008                            —         0.532   0.524             0.991  0.4/ 1.6
+proportionate            0.673   0.649  -0.024    -0.0152 [-0.0161,-0.0143]         0.531   0.500             0.988  0.9/ 1.4
+
+== rag2026-1 (n=3223) ==
+pair           P(longer) broad  narrow   shift       DiD vs better [95% CI] rho len broad  narrow rank broad~narrow  tie% b/n
+better                   0.670   0.627  -0.043                            —         0.557   0.413             0.940  0.2/ 2.7
+proportionate            0.674   0.598  -0.076    -0.0328 [-0.0347,-0.0310]         0.570   0.333             0.900  0.4/ 7.6
+
+== rag2026-2 (n=3223) ==
+pair           P(longer) broad  narrow   shift       DiD vs better [95% CI] rho len broad  narrow rank broad~narrow  tie% b/n
+better                   0.685   0.631  -0.054                            —         0.579   0.467             0.950  0.7/ 2.1
+proportionate            0.687   0.597  -0.090    -0.0360 [-0.0377,-0.0342]         0.583   0.392             0.915  1.1/ 2.9
+
+== rag2026-3 (n=3223) ==
+pair           P(longer) broad  narrow   shift       DiD vs better [95% CI] rho len broad  narrow rank broad~narrow  tie% b/n
+better                   0.669   0.656  -0.013                            —         0.557   0.550             0.980  1.7/ 0.7
+proportionate            0.675   0.610  -0.066    -0.0528 [-0.0555,-0.0502]         0.590   0.421             0.933  1.4/ 3.6
+
+== rag2026-4 (n=3223) ==
+pair           P(longer) broad  narrow   shift       DiD vs better [95% CI] rho len broad  narrow rank broad~narrow  tie% b/n
+better                   0.680   0.674  -0.006                            —         0.589   0.638             0.949  0.3/ 0.4
+proportionate            0.679   0.656  -0.023    -0.0167 [-0.0179,-0.0155]         0.583   0.587             0.934  0.7/ 1.2
+
+== rag2026-5 (n=3223) ==
+pair           P(longer) broad  narrow   shift       DiD vs better [95% CI] rho len broad  narrow rank broad~narrow  tie% b/n
+better                   0.664   0.643  -0.020                            —         0.541   0.502             0.989  1.2/ 0.6
+proportionate            0.667   0.624  -0.044    -0.0232 [-0.0245,-0.0221]         0.543   0.437             0.972  1.1/ 0.4
+
+== rag2026-6 (n=3223) ==
+pair           P(longer) broad  narrow   shift       DiD vs better [95% CI] rho len broad  narrow rank broad~narrow  tie% b/n
+better                   0.705   0.647  -0.058                            —         0.675   0.568             0.900  1.7/ 2.0
+proportionate            0.712   0.619  -0.093    -0.0351 [-0.0367,-0.0334]         0.691   0.489             0.848  1.5/ 4.1
+
+== rag2026-7 (n=3143) ==
+pair           P(longer) broad  narrow   shift       DiD vs better [95% CI] rho len broad  narrow rank broad~narrow  tie% b/n
+better                   0.657   0.620  -0.037                            —         0.486   0.448             0.899  0.7/ 6.7
+proportionate            0.658   0.591  -0.068    -0.0304 [-0.0324,-0.0284]         0.489   0.359             0.820  0.6/12.6
+
+== rag2026-8 (n=3143) ==
+pair           P(longer) broad  narrow   shift       DiD vs better [95% CI] rho len broad  narrow rank broad~narrow  tie% b/n
+better                   0.656   0.609  -0.047                            —         0.502   0.378             0.872  0.2/ 3.4
+proportionate            0.659   0.571  -0.088    -0.0408 [-0.0433,-0.0383]         0.505   0.271             0.793  0.3/ 4.4
+
+== rag2026-9 (n=3223) ==
+pair           P(longer) broad  narrow   shift       DiD vs better [95% CI] rho len broad  narrow rank broad~narrow  tie% b/n
+better                   0.669   0.635  -0.034                            —         0.550   0.498             0.970  0.2/ 0.2
+proportionate            0.671   0.603  -0.068    -0.0339 [-0.0359,-0.0319]         0.549   0.413             0.926  0.4/ 0.4
+
+== pooled (n=32070) ==
+pair           P(longer) broad  narrow   shift       DiD vs better [95% CI] rho len broad  narrow rank broad~narrow  tie% b/n
+better                   0.672   0.640  -0.032                            —         0.557   0.499             0.944  0.7/ 2.0
+proportionate            0.676   0.612  -0.064    -0.0317 [-0.0323,-0.0311]         0.563   0.420             0.903  0.8/ 3.8
+
+broad  proportionate vs better: mean diff +0.0045 | mean |diff| 0.0122 | winner differs 0.964%
+narrow proportionate vs better: mean diff -0.0125 | mean |diff| 0.0396 | winner differs 3.573%
+
+top 6 per topic and framing (win rate, words):
+  rag2026-0 broad  better        carmen(0.88,1020w), lars(0.87,869w), edith(0.86,863w), ariel(0.85,896w), hana(0.85,760w), xavi(0.85,760w)
+  rag2026-0 broad  proportionate carmen(0.88,1020w), lars(0.87,869w), edith(0.86,863w), ariel(0.86,896w), hana(0.85,760w), xavi(0.85,760w)
+  rag2026-0 narrow better        carmen(0.87,1020w), lars(0.85,869w), yara(0.84,1000w), ariel(0.84,896w), hana(0.83,760w), xavi(0.83,760w)
+  rag2026-0 narrow proportionate lars(0.85,869w), carmen(0.85,1020w), ariel(0.84,896w), xavi(0.83,760w), yara(0.83,1000w), edith(0.83,863w)
+  rag2026-1 broad  better        xavi(0.87,924w), hana(0.86,924w), carmen(0.86,961w), todd(0.85,1004w), lars(0.85,865w), finn(0.84,1010w)
+  rag2026-1 broad  proportionate xavi(0.86,924w), hana(0.85,924w), carmen(0.85,961w), lars(0.84,865w), todd(0.83,1004w), yara(0.82,708w)
+  rag2026-1 narrow better        finn(0.89,1010w), todd(0.89,1004w), rita(0.88,1004w), eden(0.88,1003w), carmen(0.88,961w), lars(0.87,865w)
+  rag2026-1 narrow proportionate lars(0.86,865w), carmen(0.86,961w), edith(0.85,729w), finn(0.85,1010w), ariel(0.85,658w), luca(0.84,729w)
+  rag2026-2 broad  better        lars(0.88,930w), edith(0.87,1007w), ariel(0.85,810w), yara(0.85,912w), carmen(0.84,939w), eve(0.83,955w)
+  rag2026-2 broad  proportionate lars(0.88,930w), edith(0.87,1007w), ariel(0.85,810w), yara(0.84,912w), carmen(0.84,939w), eve(0.83,955w)
+  rag2026-2 narrow better        edith(0.85,1007w), lars(0.85,930w), eve(0.84,955w), saul(0.83,780w), darcy(0.81,576w), yara(0.81,912w)
+  rag2026-2 narrow proportionate saul(0.83,780w), eve(0.82,955w), lars(0.82,930w), edith(0.82,1007w), darcy(0.81,576w), rick(0.79,625w)
+  rag2026-3 broad  better        eden(0.87,1023w), rita(0.87,1017w), todd(0.86,1024w), finn(0.85,1021w), carmen(0.85,1009w), edith(0.84,777w)
+  rag2026-3 broad  proportionate eden(0.87,1023w), rita(0.86,1017w), todd(0.86,1024w), carmen(0.84,1009w), finn(0.84,1021w), edith(0.84,777w)
+  rag2026-3 narrow better        todd(0.83,1024w), eden(0.82,1023w), lars(0.82,938w), hana(0.82,919w), xavi(0.82,919w), rita(0.82,1017w)
+  rag2026-3 narrow proportionate lars(0.78,938w), june(0.78,743w), darcy(0.77,688w), edith(0.76,777w), luca(0.76,807w), hana(0.75,919w)
+  rag2026-4 broad  better        carmen(0.89,955w), lars(0.87,856w), todd(0.86,1014w), finn(0.85,1019w), xavi(0.85,733w), eden(0.84,1013w)
+  rag2026-4 broad  proportionate carmen(0.89,955w), lars(0.87,856w), todd(0.86,1014w), finn(0.85,1019w), xavi(0.85,733w), edith(0.84,660w)
+  rag2026-4 narrow better        carmen(0.84,955w), yara(0.83,720w), lars(0.82,856w), xavi(0.81,733w), hana(0.81,733w), finn(0.80,1019w)
+  rag2026-4 narrow proportionate carmen(0.80,955w), edith(0.80,660w), yara(0.80,720w), lars(0.79,856w), eve(0.79,1014w), omar(0.78,936w)
+  rag2026-5 broad  better        edith(0.87,851w), xavi(0.86,837w), carmen(0.85,1012w), lars(0.85,813w), ariel(0.85,763w), eve(0.84,966w)
+  rag2026-5 broad  proportionate xavi(0.87,837w), edith(0.87,851w), lars(0.85,813w), ariel(0.85,763w), carmen(0.85,1012w), hana(0.84,926w)
+  rag2026-5 narrow better        xavi(0.86,837w), edith(0.86,851w), ariel(0.83,763w), hana(0.83,926w), carmen(0.83,1012w), lars(0.83,813w)
+  rag2026-5 narrow proportionate xavi(0.85,837w), hana(0.84,926w), edith(0.84,851w), luca(0.83,926w), ariel(0.81,763w), lars(0.81,813w)
+  rag2026-6 broad  better        hana(0.89,1021w), luca(0.89,1021w), lars(0.88,1022w), carmen(0.88,1008w), ariel(0.88,977w), edith(0.86,1001w)
+  rag2026-6 broad  proportionate hana(0.89,1021w), luca(0.89,1021w), lars(0.89,1022w), carmen(0.88,1008w), ariel(0.88,977w), edith(0.87,1001w)
+  rag2026-6 narrow better        lars(0.85,1022w), darcy(0.85,906w), ariel(0.84,977w), hana(0.84,1021w), luca(0.83,1021w), rick(0.81,1017w)
+  rag2026-6 narrow proportionate darcy(0.83,906w), lars(0.82,1022w), ariel(0.80,977w), xavi(0.80,816w), luca(0.79,1021w), hana(0.79,1021w)
+  rag2026-7 broad  better        ariel(0.88,866w), carmen(0.87,996w), lars(0.87,927w), edith(0.86,772w), xavi(0.85,831w), rick(0.84,751w)
+  rag2026-7 broad  proportionate ariel(0.88,866w), lars(0.87,927w), carmen(0.87,996w), edith(0.86,772w), xavi(0.84,831w), hana(0.84,945w)
+  rag2026-7 narrow better        carmen(0.83,996w), luca(0.82,945w), hana(0.82,945w), lars(0.81,927w), xavi(0.81,831w), gilda(0.80,972w)
+  rag2026-7 narrow proportionate gilda(0.81,972w), luca(0.79,945w), sara(0.79,638w), hana(0.79,945w), henry(0.78,876w), jamie(0.78,978w)
+  rag2026-8 broad  better        xavi(0.86,802w), hana(0.86,802w), carmen(0.85,905w), ariel(0.85,779w), lars(0.85,822w), luca(0.84,922w)
+  rag2026-8 broad  proportionate hana(0.86,802w), xavi(0.86,802w), carmen(0.85,905w), lars(0.85,822w), ariel(0.85,779w), luca(0.84,922w)
+  rag2026-8 narrow better        june(0.85,1011w), ariel(0.85,779w), xavi(0.83,802w), hana(0.83,802w), lars(0.82,822w), edith(0.81,888w)
+  rag2026-8 narrow proportionate june(0.81,1011w), ariel(0.80,779w), gabe(0.79,545w), omar(0.78,994w), sara(0.77,652w), jamie(0.77,960w)
+  rag2026-9 broad  better        lars(0.86,971w), edith(0.86,933w), finn(0.86,1011w), ariel(0.85,821w), rita(0.84,1014w), carmen(0.84,824w)
+  rag2026-9 broad  proportionate lars(0.87,971w), edith(0.86,933w), finn(0.85,1011w), ariel(0.85,821w), carmen(0.83,824w), rita(0.83,1014w)
+  rag2026-9 narrow better        ariel(0.81,821w), edith(0.81,933w), lars(0.81,971w), eve(0.80,983w), june(0.78,996w), carmen(0.78,824w)
+  rag2026-9 narrow proportionate ariel(0.77,821w), lloyd(0.77,897w), eve(0.77,983w), lars(0.76,971w), june(0.75,996w), edith(0.75,933w)
