@@ -291,11 +291,9 @@ def grade_rows(topic_id: str, run_id: str, team_id: str, rubric: Sequence[str],
     return rows
 
 
-def tally(rows: Iterable[dict], expected_topic_ids: Sequence[str],
-          empties: Iterable[Tuple[str, str]] = (), on_missing: str = "default",
-          threshold: float = 0.5) -> Leaderboard:
-    """Leaderboard from stored grade rows (no LLM calls). A (run, topic) is scored
-    only if every one of its rubric rows is valid."""
+def bod_values(rows: Iterable[dict], threshold: float = 0.5) -> Dict[Tuple[str, str], dict]:
+    """{(run, topic): BOD measure values} from stored grade rows. A (run, topic) is
+    scored only if every one of its rubric rows is valid."""
     by_rt: Dict[Tuple[str, str], List[dict]] = defaultdict(list)
     pad: Dict[Tuple[str, str], float] = {}
     for r in rows:
@@ -305,21 +303,30 @@ def tally(rows: Iterable[dict], expected_topic_ids: Sequence[str],
                 pad[k] = r["p_yes"]
         else:
             by_rt[k].append(r)
-    builder = LeaderboardBuilder(BOD_SPEC)
-    scored = set()
+    out = {}
     for (run, topic), rs in by_rt.items():
         if not rs or any(r.get("probs") is None for r in rs):
             continue
         n = len(rs)
-        builder.add(run_id=run, topic_id=topic, values={
+        out[(run, topic)] = {
             "BOD_MEAN": sum(r["expected"] for r in rs) / (n * MAX_GRADE),
             "BOD_COVERAGE": sum((r["probs"]["2"] + r["probs"]["3"]) > threshold for r in rs) / n,
             "BOD_FULL": sum(r["probs"]["3"] > threshold for r in rs) / n,
             "BOD_PADDING": pad.get((run, topic), 0.0),
             "BOD_QUESTIONS": n,
-        })
-        scored.add((run, topic))
-    _add_empty_rows(builder, BOD_SPEC, empties, scored)
+        }
+    return out
+
+
+def tally(rows: Iterable[dict], expected_topic_ids: Sequence[str],
+          empties: Iterable[Tuple[str, str]] = (), on_missing: str = "default",
+          threshold: float = 0.5) -> Leaderboard:
+    """Leaderboard from stored grade rows (no LLM calls)."""
+    builder = LeaderboardBuilder(BOD_SPEC)
+    values = bod_values(rows, threshold)
+    for (run, topic), v in values.items():
+        builder.add(run_id=run, topic_id=topic, values=v)
+    _add_empty_rows(builder, BOD_SPEC, empties, values)
     return builder.build(expected_topic_ids=list(expected_topic_ids), on_missing=on_missing)
 
 
@@ -346,6 +353,16 @@ class BodJevJudge:
         outdir: Path = Path("."),
         **kwargs: Any,
     ) -> Leaderboard:
+        rows, expected_topic_ids, empties, _reports = self._grade(
+            rag_responses, rag_topics, llm_config, nugget_banks, model, padding, max_topics,
+            max_runs, dev_topics, max_outstanding, max_attempts, filebase, outdir)
+        return tally(rows, expected_topic_ids, empties, on_missing_evals, threshold)
+
+    def _grade(self, rag_responses, rag_topics, llm_config, nugget_banks, model, padding,
+               max_topics, max_runs, dev_topics, max_outstanding, max_attempts, filebase,
+               outdir):
+        """Grade every in-scope answer (cached Jev calls) and write the .bod artifacts.
+        Returns (grade rows, expected topic ids, empty reports, in-scope reports)."""
         art = Path(outdir) / f"{Path(filebase).name}.bod"
         art.mkdir(parents=True, exist_ok=True)
 
@@ -378,9 +395,12 @@ class BodJevJudge:
         rows, stats = asyncio.run(self._run(helper, backend, cfg.model, url, topic_order,
                                             answers, topic_info, rubrics, padding,
                                             max_outstanding, max_attempts, art))
-        lb = tally(rows, expected_topic_ids, empties, on_missing_evals, threshold)
         self._write_artifacts(rows, stats, art, cfg, url, topic_order, rubrics, padding)
-        return lb
+        keep_t, keep_r = set(topic_order) | {t for t, _ in empties}, {
+            r for tr in answers.values() for r in tr} | {r for _, r in empties}
+        in_scope = [r for r in reports if r.metadata.topic_id in keep_t
+                    and r.metadata.run_id in keep_r]
+        return rows, expected_topic_ids, empties, in_scope
 
     async def _run(self, helper, backend, model, url, topic_order, answers, topic_info,
                    rubrics, padding, max_outstanding, max_attempts, art):

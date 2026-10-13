@@ -1,0 +1,11 @@
+rag26 | 10 window topics, 83 runs, 828 non-empty answers
+C1 pipeline: new Jev calls 0, risk defined 826/828 -> PASS
+C2 not redundant: board rho(GROUNDED, MEAN) 0.992 < 0.99 -> FAIL
+C3 not dominant:  board rho(GROUNDED, MEAN) 0.992 >= 0.70 -> PASS
+C4 reliability: split-half GROUNDED 0.968 vs MEAN 0.969 (>= 0.919) -> PASS
+C5 length: median per-topic rho(score, words) GROUNDED +0.505 vs MEAN +0.523 (|.| <= 0.673) -> PASS
+C6 pool stability: recomputed full-pool board vs judge rho 1.0000 (sanity); half-pool rho min 0.993 mean 0.996 -> PASS
+diag: median per-topic rho(risk, n cited docs) +0.165 | rho(risk, BOD_MEAN) +0.331
+diag: risk mean 0.021 p25 0.000 p50 0.009 p75 0.027 max 1.000 | ungrounded mean 0.104
+diag: mean BOD_GROUNDED / BOD_MEAN 0.703 / 0.718
+ALL CRITERIA FAIL: [2]
