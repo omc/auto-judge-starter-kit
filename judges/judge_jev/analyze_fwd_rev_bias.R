@@ -111,6 +111,23 @@ if (n_failed > 0) {
 }
 graded <- filter(graded, !failed) |> select(-failed)
 
+
+graded %>% 
+  select(topic_id, shard, doc_id, matches('confidence')) %>% 
+  pivot_longer(cols = c(choice_fwd_confidence, choice_rev_confidence, score_fwd_confidence, score_rev_confidence)) %>% 
+  ggplot(aes(value, color = name)) +
+  geom_density()
+
+
+graded %>% 
+  rowwise() %>% 
+  mutate(grade = mean(noul_grade, choice_fwd_grade, choice_rev_grade, score_fwd_grade, score_rev_grade),
+         conf = mean(choice_fwd_confidence, choice_rev_confidence, score_fwd_confidence, score_rev_confidence)) %>% 
+  select(topic_id, shard, doc_id, grade, conf) %>% 
+  ggplot(aes(conf, grade)) +
+  # geom_jitter(alpha = .1)
+  geom_density_2d()
+
 # ---- Reshape into paired fwd/rev long + wide format -------------------------
 #
 # graded_long: one row per (document, question_type, direction) -- for the
@@ -121,7 +138,7 @@ graded <- filter(graded, !failed) |> select(-failed)
 graded_long <- graded |>
   select(topic_id, shard, doc_id,
          choice_fwd = choice_fwd_grade, choice_rev = choice_rev_grade,
-         score_fwd = score_fwd_grade, score_rev = score_rev_grade) |>
+         score_fwd = score_fwd_grade, score_rev = score_rev_grade, noul_grade) |>
   pivot_longer(
     cols = c(choice_fwd, choice_rev, score_fwd, score_rev),
     names_to = c("question_type", "direction"),
@@ -167,17 +184,31 @@ theme_set(theme_minimal(base_size = 12))
 
 # 1. fwd vs rev scatter, with the identity line -- points off the diagonal are
 #    where presentation order changed JEV's answer.
-p_scatter <- ggplot(graded_wide, aes(x = fwd, y = rev, color = topic_id)) +
+p_scatter <- ggplot(graded_wide, aes(x = fwd, y = rev, color = noul_grade)) +
   geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "grey40") +
-  geom_point(alpha = 0.7, size = 2) +
+  geom_point(alpha = 0.1, size = 2) +
   facet_wrap(~question_type) +
   coord_equal(xlim = c(0, GRADE_MAX), ylim = c(0, GRADE_MAX)) +
   labs(
     title = "Forward vs. reverse presentation order",
     subtitle = "Points on the dashed line agree regardless of option/scale order",
-    x = "Grade (forward order)", y = "Grade (reverse order)", color = "Topic"
+    x = "Grade (forward order)", y = "Grade (reverse order)", color = "Noul Grade"
   )
 ggsave(file.path(output_dir, "fwd_vs_rev_scatter.png"), p_scatter, width = 9, height = 5, dpi = 150)
+
+
+graded_long %>% 
+  spread(question_type, grade) %>% 
+ggplot(aes(x = choice, y = score)) +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed", color = "grey40") +
+  geom_point(alpha = 0.1, size = 2) +
+  facet_wrap(~direction) +
+  coord_equal(xlim = c(0, GRADE_MAX), ylim = c(0, GRADE_MAX)) +
+  labs(
+    title = "CHOICE vs. SCORE questions",
+    subtitle = "Scores",
+    x = "Grade (forward order)", y = "Grade (reverse order)", color = "Topic"
+  )
 
 # 2. Bland-Altman: mean grade vs. difference, with limits of agreement.
 #    A non-zero mean difference line is the headline positional-bias signal.
