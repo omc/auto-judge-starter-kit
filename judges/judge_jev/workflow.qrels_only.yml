@@ -1,12 +1,15 @@
 # JudgeJev — qrels-only workflow (no nuggets, no leaderboard judge)
 #
-# Only JevQrelsCreator runs: one Noul call per unique cited document to
+# Only JevQrelsCreator runs: one combined 5-question call (1 Noul + 2 Choice
+# fwd/rev + 2 Score fwd/rev, all on the TREC 0-3 scale) per unique cited document, to
 # {jev_base_url}/v1/systemone using the llm_config api_key (OPENAI_API_KEY).
 # OPENAI_BASE_URL / OPENAI_MODEL are not used by this workflow.
 #
-# Produces "{filebase}.qrels.txt" under --out-dir (plus the .qrels_scores.jsonl
-# sidecar with raw probabilities). Feed that file to workflow.judge_only.yml's
-# --qrels-input to score runs against it without any further JEV calls.
+# Produces "{filebase}.qrels.txt" under --out-dir, plus two sidecars:
+#   .qrels_jev_raw.jsonl    -- every raw per-question answer, untouched
+#   .qrels_scores.jsonl     -- the combined probability + resulting grade per document
+# Feed the .qrels.txt file to workflow.judge_only.yml's --qrels-input to score runs
+# against it without any further JEV calls.
 #
 #   auto-judge run --workflow judges/judge_jev/workflow.qrels_only.yml \
 #       --rag-responses data/kiddie/runs/repgen/ \
@@ -34,3 +37,9 @@ qrels_settings:
   concurrency: 16
   timeout_s: 60
   max_retries: 4
+
+# --variant binary: plain [0,1] relevant/not-relevant qrels instead of graded 0-3.
+variants:
+  binary:
+    qrels_settings:
+      grade_range: [0, 1]

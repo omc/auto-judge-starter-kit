@@ -6,10 +6,15 @@ the way trec_eval scores a run against human qrels -- a deterministic function o
 
 Three modular classes (same protocol as BonsaiJudge):
 - JevNuggetCreator: Generates nugget questions per topic (template placeholder, no LLM)
-- JevQrelsCreator: For every document cited anywhere in rag_responses, asks JEV a Noul
-  (calibrated yes/no) question -- "is this citation relevant to the topic?" -- and
-  quantizes the probability into an integer qrels grade. This is the only stage that
-  calls JEV.
+- JevQrelsCreator: For every document cited anywhere in rag_responses, asks JEV 5
+  relevance questions in ONE request -- 1 Noul (yes/no), 2 Choice on the TREC 0-3
+  scale (forward and reverse option order, to probe positional bias), 2 Score on the
+  same scale (forward and reverse). The raw answers to all 5 are captured verbatim to
+  a sidecar file; create_qrels() then combines them (see combine_to_probability) into
+  one interim qrels grade so the rest of the pipeline keeps working today, without
+  that combination being the only thing kept -- the raw file has everything needed to
+  try a different combination later without re-calling JEV. This is the only class
+  that calls JEV.
 - JevLeaderboardJudge: Treats each response's cited documents (in citation order) as a
   "run" the way trec_eval treats a ranked retrieval list, and scores it against the
   qrels: num_ret/num_rel/num_rel_ret, map (AP), recip_rank, P_k/R_k/ndcg_cut_k, bpref.
@@ -19,8 +24,8 @@ Three modular classes (same protocol as BonsaiJudge):
 JEV (https://openrouter.ai/docs/guides/community/jev) is a typed-decision model, not a
 chat model: it takes a `state` plus typed `questions` and returns probabilities, so
 JevQrelsCreator calls it directly via POST {jev_base_url}/v1/systemone rather than
-through minima. Prompt design follows hevmind.com/writing/jev-as-a-reranker/ (one Noul
-per document, true/false criteria, score = calibrated probability).
+through minima. Noul/Choice/Score request and response shapes are per
+openrouter.ai/docs/guides/community/jev-tutorial.
 """
 
 import hashlib
@@ -110,22 +115,146 @@ JEV_QRELS_SPEC = QrelsSpec[GradeRecord](
 
 
 # =============================================================================
-# JEV client (Noul over /v1/systemone) -- used only by JevQrelsCreator
+# JEV questions -- 1 Noul + 2 Choice (fwd/rev) + 2 Score (fwd/rev), one combined
+# request per document. Used only by JevQrelsCreator.
 # =============================================================================
+#
+# Shapes per openrouter.ai/docs/guides/community/jev-tutorial:
+#   noul:   {"type": "noul",   "instructions": "<question>", "criteria": {"true": ..., "false": ...}}
+#           -> answer: {"type": "noul", "noul": <prob 0-1>}
+#   choice: {"type": "choice", "instructions": "<question>", "criteria": {"<option>": "<description>", ...}}
+#           -> answer: {"type": "choice", "choice": "<option>", "confidence": ..., "probabilities": {"<option>": p, ...}}
+#   score:  {"type": "score",  "instructions": "<question>", "criteria": ["<level0 desc>", "<level1 desc>", ...]}
+#           -> answer: {"type": "score", "score": <weighted index>, "confidence": ..., "probabilities": {"0": p, ...}, "legend": {...}}
+#
+# Choice's criteria is a dict keyed by the option's actual grade label ("0".."3"), so
+# reversing its insertion order changes only the PRESENTATION order the model sees --
+# the response's "probabilities" keys are still the real grade labels, no inversion
+# needed when reading them back. Score's criteria is a plain ARRAY, so the response's
+# "score" is an INDEX into that array: reversing the array means index i now means
+# grade (GRADE_MAX - i), and that inversion IS needed when reading the "rev" answer.
 
-NOUL_QUESTION = "citation_relevant"
+GRADE_DESCRIPTIONS = [
+    "Not relevant: the document does not address what the query asks about.",
+    "Marginally relevant: the document is on-topic but does not directly answer the query.",
+    "Relevant: the document contains information that helps answer the query.",
+    "Highly relevant: the document directly and thoroughly answers the query.",
+]
+GRADE_MAX = len(GRADE_DESCRIPTIONS) - 1   # 3 -- top of this fixed TREC-style elicitation
+                                           # scale. Independent of qrels_settings.grade_range,
+                                           # which only controls the FINAL output scale
+                                           # (see _quantize) after the 5 signals are combined.
 
 NOUL_INSTRUCTIONS = (
     "The cited document `document` is relevant to the `query`: it contains information "
     "that answers or directly addresses what the query asks about."
 )
-# Criteria are folded into the instructions: the documented Noul shape is
-# {"type": "noul", "instructions": ...}.
-NOUL_CRITERIA = (
-    " True: the document contains information that answers the query or directly "
-    "addresses what it asks about. False: the document is only loosely related, on a "
-    "similar topic, or does not address what the query asks."
+NOUL_CRITERIA = {
+    "true": "The document contains information that answers the query or directly "
+            "addresses what it asks about.",
+    "false": "The document is only loosely related, on a similar topic, or does not "
+             "address what the query asks.",
+}
+
+CHOICE_INSTRUCTIONS = (
+    "Choose the relevance level that best describes how well the cited document "
+    "`document` addresses the `query`."
 )
+SCORE_INSTRUCTIONS = (
+    "Rate how relevant the cited document `document` is to the `query`, on the scale "
+    "below."
+)
+
+# Question keys, in the fixed order sent in every request.
+QUESTION_NOUL = "relevant_noul"
+QUESTION_CHOICE_FWD = "relevant_choice_fwd"
+QUESTION_CHOICE_REV = "relevant_choice_rev"
+QUESTION_SCORE_FWD = "relevant_score_fwd"
+QUESTION_SCORE_REV = "relevant_score_rev"
+QUESTION_KEYS = (QUESTION_NOUL, QUESTION_CHOICE_FWD, QUESTION_CHOICE_REV,
+                 QUESTION_SCORE_FWD, QUESTION_SCORE_REV)
+
+QUESTIONS_PAYLOAD: Dict[str, Any] = {
+    QUESTION_NOUL: {
+        "type": "noul",
+        "instructions": NOUL_INSTRUCTIONS,
+        "criteria": NOUL_CRITERIA,
+    },
+    QUESTION_CHOICE_FWD: {
+        "type": "choice",
+        "instructions": CHOICE_INSTRUCTIONS,
+        "criteria": {str(i): d for i, d in enumerate(GRADE_DESCRIPTIONS)},
+    },
+    QUESTION_CHOICE_REV: {
+        "type": "choice",
+        "instructions": CHOICE_INSTRUCTIONS,
+        "criteria": {str(i): GRADE_DESCRIPTIONS[i] for i in reversed(range(len(GRADE_DESCRIPTIONS)))},
+    },
+    QUESTION_SCORE_FWD: {
+        "type": "score",
+        "instructions": SCORE_INSTRUCTIONS,
+        "criteria": list(GRADE_DESCRIPTIONS),
+    },
+    QUESTION_SCORE_REV: {
+        "type": "score",
+        "instructions": SCORE_INSTRUCTIONS,
+        "criteria": list(reversed(GRADE_DESCRIPTIONS)),
+    },
+}
+
+
+def _signal_grade(answers: Dict[str, Any], key: str) -> Optional[float]:
+    """One named sub-answer's value on the canonical 0..GRADE_MAX scale, or None if
+    missing/malformed. Does NOT apply the score_rev index inversion -- the caller
+    does that, since only score (array-indexed) needs it; choice (label-keyed) does not."""
+    a = answers.get(key)
+    if not isinstance(a, dict):
+        return None
+    try:
+        if a.get("type") == "noul":
+            return float(a["noul"]) * GRADE_MAX
+        if a.get("type") == "choice":
+            probs = a.get("probabilities") or {}
+            return sum(float(opt) * float(p) for opt, p in probs.items())
+        if a.get("type") == "score":
+            return float(a["score"])
+    except (KeyError, TypeError, ValueError):
+        return None
+    return None
+
+
+def combine_to_probability(answers: Dict[str, Any]) -> Optional[float]:
+    """Interim default combination of the 5 raw signals into one [0,1] probability,
+    for _quantize() to turn into a final qrels grade.
+
+    This is ONE reasonable way to combine them (simple average, all normalized onto
+    0..GRADE_MAX first) -- not the only one. The raw per-question answers are kept in
+    full in the .qrels_jev_raw.jsonl sidecar precisely so a different combination (or
+    a fwd/rev disagreement -> positional-bias signal) can be tried later without
+    re-calling JEV.
+    """
+    values: List[float] = []
+    v = _signal_grade(answers, QUESTION_NOUL)
+    if v is not None:
+        values.append(v)
+    v = _signal_grade(answers, QUESTION_CHOICE_FWD)
+    if v is not None:
+        values.append(v)
+    v = _signal_grade(answers, QUESTION_CHOICE_REV)
+    if v is not None:
+        values.append(v)   # choice criteria is keyed by grade label -> no inversion
+    v = _signal_grade(answers, QUESTION_SCORE_FWD)
+    if v is not None:
+        values.append(v)
+    v = _signal_grade(answers, QUESTION_SCORE_REV)
+    if v is not None:
+        values.append(GRADE_MAX - v)   # score criteria is a reversed array -> invert the index
+
+    if not values:
+        return None
+    avg_grade = sum(values) / len(values)
+    return max(0.0, min(avg_grade / GRADE_MAX, 1.0))
+
 
 Transport = Callable[[str, Dict[str, Any], Dict[str, str], float], Dict[str, Any]]
 
@@ -138,7 +267,7 @@ def _http_post(url: str, payload: Dict[str, Any], headers: Dict[str, str], timeo
 
 
 class JevClient:
-    """Minimal JEV System One client with retries and an on-disk probability cache."""
+    """Minimal JEV System One client with retries and an on-disk answer cache."""
 
     def __init__(
         self,
@@ -165,30 +294,27 @@ class JevClient:
             self.cache_dir.mkdir(parents=True, exist_ok=True)
 
     def _key(self, query: str, document: str) -> str:
-        blob = json.dumps([self.model, NOUL_INSTRUCTIONS + NOUL_CRITERIA, query, document])
+        blob = json.dumps([self.model, QUESTIONS_PAYLOAD, query, document])
         return hashlib.sha256(blob.encode("utf-8")).hexdigest()
 
-    def _cache_get(self, key: str) -> Optional[float]:
+    def _cache_get(self, key: str) -> Optional[Dict[str, Any]]:
         if self.cache_dir:
             p = self.cache_dir / f"{key}.json"
             if p.exists():
                 try:
-                    return float(json.loads(p.read_text())["noul"])
-                except (ValueError, KeyError, OSError):
+                    return json.loads(p.read_text())
+                except (ValueError, OSError):
                     return None
         return None
 
-    def _cache_put(self, key: str, p: float) -> None:
+    def _cache_put(self, key: str, answers: Dict[str, Any]) -> None:
         if self.cache_dir:
-            (self.cache_dir / f"{key}.json").write_text(json.dumps({"noul": p}))
+            (self.cache_dir / f"{key}.json").write_text(json.dumps(answers))
 
-    @staticmethod
-    def parse(resp: Dict[str, Any]) -> float:
-        ans = resp["answers"][NOUL_QUESTION]
-        return max(0.0, min(float(ans["noul"]), 1.0))
-
-    def score(self, query: str, document: str) -> Optional[float]:
-        """P(document relevant to query), or None if the call failed after retries."""
+    def score_all(self, query: str, document: str) -> Optional[Dict[str, Any]]:
+        """Run all 5 relevance questions against (query, document) in ONE request.
+        Returns the raw `answers` dict (one entry per QUESTION_KEYS), or None if the
+        call failed after retries, or came back missing an expected question."""
         key = self._key(query, document)
         hit = self._cache_get(key)
         if hit is not None:
@@ -196,16 +322,17 @@ class JevClient:
         payload = {
             "model": self.model,
             "state": {"query": query, "document": document},
-            "questions": {NOUL_QUESTION: {
-                "type": "noul",
-                "instructions": NOUL_INSTRUCTIONS + NOUL_CRITERIA,
-            }},
+            "questions": QUESTIONS_PAYLOAD,
         }
         for attempt in range(self.max_retries + 1):
             try:
-                p = self.parse(self._post(self.url, payload, self.headers, self.timeout_s))
-                self._cache_put(key, p)
-                return p
+                resp = self._post(self.url, payload, self.headers, self.timeout_s)
+                answers = resp["answers"]
+                missing = set(QUESTION_KEYS) - set(answers)
+                if missing:
+                    raise KeyError(f"response missing answers: {sorted(missing)}")
+                self._cache_put(key, answers)
+                return answers
             except urllib.error.HTTPError as e:
                 if e.code not in (408, 429) and e.code < 500:
                     print(f"JevClient: HTTP {e.code} (not retrying): {e.read()[:300]!r}")
@@ -215,9 +342,9 @@ class JevClient:
             time.sleep(min(2 ** attempt, 30))
         return None
 
-    def score_many(self, pairs: Sequence[Tuple[str, str]]) -> List[Optional[float]]:
+    def score_all_many(self, pairs: Sequence[Tuple[str, str]]) -> List[Optional[Dict[str, Any]]]:
         with ThreadPoolExecutor(max_workers=self.concurrency) as pool:
-            return list(pool.map(lambda qd: self.score(*qd), pairs))
+            return list(pool.map(lambda qd: self.score_all(*qd), pairs))
 
 
 def _get_api_key(llm_config: LlmConfigProtocol) -> Optional[str]:
@@ -312,9 +439,36 @@ def _quantize(p: float, grade_range: Tuple[int, int]) -> int:
     return max(lo, min(round(lo + p * (hi - lo)), hi))
 
 
+def _write_qrels_raw(
+    pair_index: Dict[Tuple[str, str], int],
+    doc_ids: List[str],
+    answers_list: List[Optional[Dict[str, Any]]],
+    jev_model: str,
+    outdir: Path,
+    filebase: str,
+) -> Path:
+    """Sidecar JSONL, one row per unique cited document, with the FULL raw answer to
+    every one of the 5 questions (noul, choice_fwd/rev, score_fwd/rev) exactly as JEV
+    returned them -- everything combine_to_probability() (or any other combination
+    strategy) needs, without re-calling JEV. `answers` is null if the call failed."""
+    outdir = Path(outdir)
+    outdir.mkdir(parents=True, exist_ok=True)
+    path = outdir / f"{Path(filebase).name}.qrels_jev_raw.jsonl"
+    with path.open("w", encoding="utf-8") as f:
+        for (topic_id, shard), i in pair_index.items():
+            row = {
+                "topic_id": topic_id,
+                "shard": shard,
+                "doc_id": doc_ids[i],
+                "jev_model": jev_model,
+                "answers": answers_list[i],
+            }
+            f.write(json.dumps(row) + "\n")
+    return path
+
+
 def _write_qrels_scores(
     pair_index: Dict[Tuple[str, str], int],
-    pairs: List[Tuple[str, str]],
     doc_ids: List[str],
     probs: List[Optional[float]],
     grade_range: Tuple[int, int],
@@ -322,10 +476,13 @@ def _write_qrels_scores(
     outdir: Path,
     filebase: str,
 ) -> Path:
-    """Sidecar JSONL, one row per unique cited document, recording the raw JEV
-    probability alongside the quantized qrels grade -- everything build_qrels()
-    collapses away. Row: topic_id, shard, doc_id (matches the qrels doc id),
-    jev_probability (null if the call failed), grade (null if failed/omitted)."""
+    """Sidecar JSONL, one row per unique cited document, recording the COMBINED
+    probability (see combine_to_probability -- an average of the 5 raw signals, not
+    any single one of them) alongside the quantized qrels grade -- everything
+    build_qrels() collapses away. Row: topic_id, shard, doc_id (matches the qrels doc
+    id), jev_probability (null if every signal was missing/the call failed), grade
+    (null if failed/omitted). For the untouched per-question answers, see the
+    .qrels_jev_raw.jsonl sidecar from _write_qrels_raw instead."""
     outdir = Path(outdir)
     outdir.mkdir(parents=True, exist_ok=True)
     path = outdir / f"{Path(filebase).name}.qrels_scores.jsonl"
@@ -493,10 +650,15 @@ class JevNuggetCreator:
 class JevQrelsCreator:
     """Creates document-level relevance judgments from JEV citation-relevance calls.
 
-    Every document cited anywhere in rag_responses is asked the same Noul question
-    ("is this citation relevant to the topic?"); its probability is linearly quantized
-    into grade_range. One qrels row per unique cited document (not per response) --
-    documents cited by multiple responses are scored once. This is the only class in
+    Every document cited anywhere in rag_responses gets ONE request asking 5 relevance
+    questions (see QUESTIONS_PAYLOAD) -- 1 Noul, 2 Choice (fwd/rev option order), 2
+    Score (fwd/rev scale order). All 5 raw answers are written verbatim to a
+    .qrels_jev_raw.jsonl sidecar. The qrels grade actually built and returned here
+    uses combine_to_probability()'s interim default (simple average of the 5, mapped
+    onto grade_range) -- a deliberately swappable choice, not the point of this class;
+    the raw sidecar keeps everything needed to try a different combination (e.g.
+    comparing fwd vs rev as a positional-bias signal) without re-calling JEV. One
+    qrels row per unique cited document (not per response). This is the only class in
     the module that calls JEV.
     """
 
@@ -527,17 +689,23 @@ class JevQrelsCreator:
             jev_client = _make_jev_client(llm_config, jev_model, jev_base_url, cache_dir,
                                           timeout_s, max_retries, concurrency)
 
-        print(f"JevQrelsCreator: scoring {len(pairs)} unique cited documents with {jev_client.model}")
-        probs = jev_client.score_many(pairs)
-        failed = sum(p is None for p in probs)
+        print(f"JevQrelsCreator: scoring {len(pairs)} unique cited documents with {jev_client.model} "
+              f"(5 questions per document: 1 noul + 2 choice [fwd/rev] + 2 score [fwd/rev])")
+        answers_list = jev_client.score_all_many(pairs)
+        failed = sum(a is None for a in answers_list)
         if pairs and failed == len(pairs):
             raise RuntimeError("JevQrelsCreator: every JEV call failed; check API key / jev_base_url / model")
         if failed:
             print(f"JevQrelsCreator: WARNING {failed}/{len(pairs)} JEV calls failed; those documents are omitted")
 
-        scores_path = _write_qrels_scores(pair_index, pairs, doc_ids, probs, grade_range,
+        raw_path = _write_qrels_raw(pair_index, doc_ids, answers_list, jev_client.model, outdir, filebase)
+        print(f"JevQrelsCreator: wrote raw 5-question JEV answers to {raw_path}")
+
+        probs = [combine_to_probability(a) if a is not None else None for a in answers_list]
+
+        scores_path = _write_qrels_scores(pair_index, doc_ids, probs, grade_range,
                                           jev_client.model, outdir, filebase)
-        print(f"JevQrelsCreator: wrote per-document JEV probabilities to {scores_path}")
+        print(f"JevQrelsCreator: wrote per-document combined probability + grade to {scores_path}")
 
         grade_records: List[GradeRecord] = []
         for (topic_id, _shard), i in pair_index.items():
@@ -547,7 +715,8 @@ class JevQrelsCreator:
             grade_records.append(GradeRecord(topic_id=topic_id, doc_id=doc_ids[i], grade=_quantize(p, grade_range)))
 
         qrels = build_qrels(records=grade_records, spec=JEV_QRELS_SPEC)
-        print(f"JevQrelsCreator: Created qrels for {len(grade_records)} unique cited documents")
+        print(f"JevQrelsCreator: Created qrels for {len(grade_records)} unique cited documents "
+              f"(interim default: simple average of the 5 signals)")
         return qrels
 
 
