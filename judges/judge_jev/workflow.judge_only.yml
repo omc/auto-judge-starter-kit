@@ -37,3 +37,10 @@ settings:
 judge_settings:
   on_missing_evals: "fix_aggregate"
   relevance_threshold_grade: 3
+
+# --variant binary: match a qrels file built with grade_range [0,1] -- only grade 1
+# counts as relevant. Must agree with whatever grade_range built --qrels-input.
+variants:
+  binary:
+    judge_settings:
+      relevance_threshold_grade: 1

@@ -1,10 +1,14 @@
 # JudgeJev Workflow Configuration
 #
 # Nuggets are a template placeholder (no LLM). JevQrelsCreator asks JEV (a
-# typed-decision model, NOT a chat model) one Noul question per unique cited
-# document -- "is this citation relevant to the topic?" -- called directly at
-# {jev_base_url}/v1/systemone using the llm_config api_key (OpenRouter key), and
-# quantizes the probability into an integer qrels grade.
+# typed-decision model, NOT a chat model) 5 relevance questions per unique cited
+# document, IN ONE REQUEST, at {jev_base_url}/v1/systemone using the llm_config
+# api_key (OpenRouter key): 1 Noul (yes/no), 2 Choice on the TREC 0-3 scale (forward
+# and reverse option order, to probe positional bias), 2 Score on the same scale
+# (forward and reverse). All 5 raw answers are written verbatim to a
+# .qrels_jev_raw.jsonl sidecar; the qrels grade actually built right now is an
+# interim default (simple average of the 5, see combine_to_probability) -- swap in a
+# different combination later by reprocessing that sidecar, no need to re-call JEV.
 #
 # JevLeaderboardJudge then scores each response's citations against those qrels the
 # way trec_eval scores a run against a qrels file: num_ret/num_rel/num_rel_ret, map
@@ -16,15 +20,15 @@ qrels_class: "judges.judge_jev.judge_jev:JevQrelsCreator"
 judge_class: "judges.judge_jev.judge_jev:JevLeaderboardJudge"
 
 # Lifecycle flags
-create_nuggets: true
+create_nuggets: false 
 create_qrels: true
 judge: true
 
 # Data flow
-nugget_depends_on_responses: true
-judge_uses_nuggets: true
+nugget_depends_on_responses: false
+judge_uses_nuggets: false
 judge_uses_qrels: true
-qrels_uses_nuggets: true
+qrels_uses_nuggets: false
 
 force_recreate_nuggets: false
 force_recreate_qrels: false
@@ -49,3 +53,14 @@ qrels_settings:
 judge_settings:
   on_missing_evals: "fix_aggregate"
   relevance_threshold_grade: 3            # qrels grade >= this counts as "relevant" (grade_range is 0-3)
+
+# The grading scale is just these two settings (grade_range quantizes JEV's
+# probability into an integer grade; relevance_threshold_grade decides which grades
+# count as "relevant" for the binary trec_eval measures) -- no code change needed to
+# change it. --variant binary switches to a plain [0,1] relevant/not-relevant scale.
+variants:
+  binary:
+    qrels_settings:
+      grade_range: [0, 1]
+    judge_settings:
+      relevance_threshold_grade: 1
