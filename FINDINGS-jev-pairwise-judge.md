@@ -1,7 +1,7 @@
 # Pairwise Summary Judging with Jev and Gemini on TREC RAG 2026 — Findings
 
 **Status:** working notes for the team and raw material for a TREC paper. Revised
-2026-10-13.
+2026-10-30.
 
 **Data handling.** Every per-comparison result in this document comes from the
 **permitted window**: the first 10 topics of each topics file, in file order.
@@ -20,7 +20,7 @@ to make decisions.
   been withdrawn in full.
 - **Studies redone.** Every study it reported was either redone on the window under a
   plan written before any results existed (Section 4), or is marked here as not re-run.
-- **Sources.** Section 16 gives the command and output file behind each table.
+- **Sources.** Section 17 gives the command and output file behind each table.
 
 **Summary.** We built a pairwise "tournament" judge for TREC 2026 AutoJudge, using
 TypeSafe's **Jev** decision model (`typesafe/jev-1.13`, served via OpenRouter's Decisions
@@ -69,11 +69,17 @@ on the ragtime26 window.
 10. **A bag-of-decisions graded judge (Section 14)** costs $1.31 for both full datasets.
     It agrees with the pairwise judge at ρ = 0.990 on the rag26 window, and it passes
     the padding test.
+11. **BOD × Hallucination Risk (Section 15)** discounts each BOD score by the share of
+    the answer's concepts that are neither in its cited documents nor stated by any
+    other run. It costs nothing extra in API calls. The discount is small (median risk
+    about 1%): ρ 0.993 / 0.975 against BOD on the full rag26 / ragtime26 boards, but it
+    changes the top run on both. It failed its pre-registered "not redundant" criterion
+    on rag26 and was submitted as a distinct judge by team decision.
 
 **Starting hypothesis.** We began by suspecting that the Gemini judge was mainly
 rewarding length. The controlled tests don't support that: both judges penalise
 uninformative length, and on ragtime26 neither favours longer reports. Subtle on-topic
-verbosity is still untested (Section 15.4).
+verbosity is still untested (Section 16.4).
 
 ---
 
@@ -93,9 +99,10 @@ verbosity is still untested (Section 15.4).
 12. [Pre-registered decisions and confirmation](#12-pre-registered-decisions-and-confirmation)
 13. [Full runs: mirrored proportionate Noul on all topics](#13-full-runs-mirrored-proportionate-noul-on-all-topics)
 14. [Bag-of-decisions graded judge (BOD)](#14-bag-of-decisions-graded-judge-bod)
-15. [Discussion, threats to validity, open questions](#15-discussion)
-16. [Reproduction](#16-reproduction)
-17. [Appendix: prompts and questions verbatim](#17-appendix-prompts-and-questions-verbatim)
+15. [BOD × Hallucination Risk (BOD_GROUNDED)](#15-bod--hallucination-risk-bod_grounded)
+16. [Discussion, threats to validity, open questions](#16-discussion)
+17. [Reproduction](#17-reproduction)
+18. [Appendix: prompts and questions verbatim](#18-appendix-prompts-and-questions-verbatim)
 
 ---
 
@@ -164,7 +171,7 @@ experiment instead measures agreement, sensitivity to controlled manipulations, 
 internal consistency.
 
 **The window is not a random sample.** It is fixed by the topics files' order. Results
-may not transfer to the other topics (Section 15.3).
+may not transfer to the other topics (Section 16.3).
 
 ---
 
@@ -175,7 +182,7 @@ may not transfer to the other topics (Section 15.3).
 - **Model:** `google/gemini-3.5-flash-lite` via OpenRouter, temperature 0, `max_tokens`
   8.
 - **Prompt:** `judges/bonsai_judge/prompts/pairwise_summary_1.md` (verbatim in
-  Section 17.1). It contains the query and both summaries and asks for exactly one
+  Section 18.1). It contains the query and both summaries and asks for exactly one
   character, `A` or `B`.
 - **Parsing:** only a bare `A`/`B` is accepted, after stripping non-letters. On the
   window, 32,070 of 32,070 rag26 and 3,072 of 3,072 ragtime26 comparisons parsed.
@@ -195,7 +202,7 @@ may not transfer to the other topics (Section 15.3).
   `typesafe/jev-1.13-20260917`.
 - **Request shape:** Jev is not a chat model. Each request carries a `state` object
   (`{query, [problem_statement], [background], summary_a, summary_b}`) and one or more
-  typed **questions**. The request shape is in Section 17.2 and the questions in 17.3.
+  typed **questions**. The request shape is in Section 18.2 and the questions in 17.3.
   - **Choice** questions have criteria `A` and `B`, and return `probabilities: {A, B}`
     (2 decimals; 101 distinct values seen).
   - **Noul** (yes/no) questions return P(yes).
@@ -499,7 +506,7 @@ Each comparison of one topic (rag2026-3 / 2003) is asked twice with the cache by
 | --- | --- | --- |
 | original | unchanged | — |
 | pad_repeat | +≈50% words: the report's own sentences duplicated | none |
-| pad_generic | +≈50% words: topic-agnostic filler (Section 17.4) | none |
+| pad_generic | +≈50% words: topic-agnostic filler (Section 18.4) | none |
 | pad_offtopic | +≈50% words: sentences from another window topic (topic i+5) | irrelevant |
 | pad_relevant | +≈50% words: unseen sentences from the topic's strongest run of another team | positive control |
 | truncate | last third of sentences removed | less, and shorter |
@@ -555,12 +562,12 @@ Gemini's mean P(slot A wins) is 0.479 on rag26 and 0.466 on ragtime26.
    the 10 topics, and for 315 of 320 targets.
 3. **Gemini penalises any added text on ragtime26, including relevant text.** The
    splice may read as disruption to Gemini, or Gemini may not credit coverage on
-   ragtime's shorter reports; this test can't tell which (Section 15.4).
+   ragtime's shorter reports; this test can't tell which (Section 16.4).
 4. **Gemini penalises repetition more than Jev does.** Jev mostly ignores a repeated
    sentence, and penalises generic and off-topic text strongly.
 
 **Not tested:** subtle, on-topic verbosity, meaning restatement and hedging without new
-facts (Section 15.4).
+facts (Section 16.4).
 
 ---
 
@@ -635,7 +642,7 @@ preferring longer or shorter answers.
 - The *same* report pairs are judged under two framings:
   - **Broad:** the original topic.
   - **Narrow:** one sub-question written from that topic's own text, with no problem
-    statement or background. All 20 are listed in Section 17.6.
+    statement or background. All 20 are listed in Section 18.6.
 - Both mirrored pairs (4 questions) are asked in each request, single orientation
   (hashed, identical across framings), on all 10 window topics.
 - **Measure:** the change in P(longer wins) from broad to narrow. The key number is the
@@ -844,7 +851,7 @@ The code is `judges/bonsai_judge/bod.py`, run with `workflow.bod.yml`.
 1. **Rubric (nugget creator).**
    - Gemini 2.5 Flash Lite (temperature 0) writes 5–15 "Does the answer …?" questions per
      topic, sized to how many distinct parts the information need has. The prompt is
-     verbatim in Section 17.5.
+     verbatim in Section 18.5.
    - It sees only the topic (query, problem statement, background), never any response
      (`nugget_depends_on_responses: false`). The rubric is therefore independent of the
      runs, and readable for every topic under the data policy.
@@ -1066,9 +1073,180 @@ submissions.
 
 ---
 
-## 15. Discussion
+## 15. BOD × Hallucination Risk (BOD_GROUNDED)
 
-### 15.1 Answers to the research questions
+**Data handling.** As in Sections 4 and 14: the definition and pass criteria were written
+before any risk value was computed on 2026 data (`temp/BOD_RISK_PLAN.md`). Per-answer
+values were read on the permitted window only. Over all topics we read only the scored
+leaderboards (`.eval.txt`), for completeness and reporting (15.5).
+
+**Provenance.** The Hallucination Risk definition was first explored in the withdrawn
+all-topic concept analysis (`temp/hallucination_cross.py`). Its definition was fixed from
+that earlier work, not chosen from window results. It is therefore not independent of
+restricted topics, in the same way as the pairwise method (Section 16.3).
+
+**Idea.** BOD rewards answering the rubric. It does not check whether what the answer
+says is supported by the documents it cites. This judge discounts each answer's BOD score
+by the share of its content that is unsupported *and* that no other run produced, the
+strongest lexical signal of a hallucination.
+
+### 15.1 Design
+
+The code is `judges/bonsai_judge/bod_risk.py` (`BodRiskJudge`, a subclass of
+`BodJevJudge`), run with `workflow.bod_risk.yml`.
+
+- **Concepts.** spaCy `en_core_web_lg` NOUN/PROPN lemmas, lowercased, as a set: the same
+  extraction as concept-F1 (`bonsai_judge.py`).
+  - `sn`: the answer's concepts.
+  - `hn`: the union of the concepts of the documents the answer cites.
+  - `df[topic][c]`: the number of runs whose answer for that topic states `c`.
+- **Ungrounded:** `sn − hn`, concepts not in any cited document.
+- **Private-ungrounded:** ungrounded concepts with `df = 1`, stated by no other run.
+  Ungrounded concepts that other runs also state are likely common-knowledge elaboration.
+- **Undefined risk:** no citations, no cited-document text, or no concepts on either side.
+  Such answers get `HALLUC_RISK = 1` (setting `no_support_risk`), i.e. treated as fully
+  unsupported.
+- **Grades:** the BOD grades are reused unchanged: same rubric (byte-identical copy of the
+  BOD submission's nugget banks), same Jev requests, served from the prompt cache.
+
+| Measure | Definition |
+| --- | --- |
+| `BOD_GROUNDED` (primary) | `BOD_MEAN × (1 − HALLUC_RISK)` per answer; overall = mean over topics. No weight, no threshold. |
+| `HALLUC_RISK` | \|private-ungrounded\| / \|sn\|; higher is worse; depends on the pool of runs |
+| `UNGROUNDED_RATE` | \|sn − hn\| / \|sn\| = 1 − CONCEPT_PRECISION; diagnostic |
+| `BOD_MEAN`, `BOD_COVERAGE`, `BOD_FULL`, `BOD_PADDING`, `BOD_QUESTIONS` | as in Section 14.1 |
+
+Empty reports score 0, as in the other judges.
+
+The multiplicative form was chosen to avoid a free parameter. With no ground truth, a
+weight could not be tuned for accuracy, only chosen arbitrarily.
+
+### 15.2 Pre-registered criteria
+
+The six criteria were written before any risk value was computed. rag26's window is the
+development set; ragtime26's is the confirmation set, read once.
+
+1. **Pipeline:** 0 new Jev calls; risk defined for ≥ 99% of non-empty answers.
+2. **Not redundant:** board Spearman(BOD_GROUNDED, BOD_MEAN) < 0.99.
+3. **Not dominant:** the same Spearman ≥ 0.70, so a lexical proxy does not override the
+   graded quality score.
+4. **Reliability:** split-half board Spearman (200 random topic halves) at least
+   BOD_MEAN's minus 0.05.
+5. **Length:** median per-topic |Spearman(score, words)| no more than BOD_MEAN's + 0.15.
+6. **Pool stability:** recomputing `df` with a random half of the other runs removed
+   (20 draws) gives board Spearman ≥ 0.90 against the full pool.
+
+Analysis: `temp/bod_risk_analysis.py`, which reads window topics only.
+
+### 15.3 Window results
+
+| Criterion | rag26 window (development) | ragtime26 window (confirmation) |
+| --- | --- | --- |
+| Runs / answers | 83 / 828 | 49 / 490 |
+| 1 Pipeline | 0 new calls; defined 826/828 — pass | 0 new calls; defined 490/490 — pass |
+| 2 Not redundant | ρ 0.992 — **fail** | ρ 0.984 — pass |
+| 3 Not dominant | ρ 0.992 — pass | ρ 0.984 — pass |
+| 4 Reliability (GROUNDED vs MEAN) | 0.968 vs 0.969 — pass | 0.820 vs 0.854 — pass |
+| 5 Length (GROUNDED vs MEAN) | +0.505 vs +0.523 — pass | −0.163 vs −0.120 — pass |
+| 6 Pool stability, half-pool ρ min / mean | 0.993 / 0.996 — pass | 0.910 / 0.964 — pass |
+
+| Diagnostic | rag26 window | ragtime26 window |
+| --- | --- | --- |
+| HALLUC_RISK mean / median / p75 / max | 0.021 / 0.009 / 0.027 / 1.000 | 0.025 / 0.013 / 0.036 / 0.139 |
+| UNGROUNDED_RATE mean | 0.104 | 0.140 |
+| Median per-topic Spearman(risk, number of cited documents) | +0.165 | +0.131 |
+| Median per-topic Spearman(risk, BOD_MEAN) | +0.331 | +0.347 |
+| Mean BOD_GROUNDED / BOD_MEAN | 0.703 / 0.718 | 0.681 / 0.699 |
+
+(The rag26 maximum of 1.000 is one of the two answers whose risk is undefined.)
+
+- **Small effect.** Roughly four in five unsupported concepts are also stated by some
+  other run (mean risk is about a fifth of the mean ungrounded rate), so the private share
+  is small: median risk about 1%. The discount barely moves the
+  ranking on rag26 (criterion 2 fails) and moves it slightly more on ragtime26, which has
+  fewer runs.
+- **Pool size.** Fewer runs make a concept more likely to be private. On kiddie (4 runs)
+  risk is 27–59% per run. Values are comparable within one dataset only.
+- **No sign of citation gaming.** More cited documents enlarge `hn` and could lower risk
+  mechanically, but on the window risk rises slightly with the number of cited documents.
+- **Risk correlates positively with BOD_MEAN** (+0.33 on both windows). Answers that
+  cover more of the rubric also state more unique, uncited concepts. The discount
+  therefore leans slightly against the stronger answers; whether those concepts are
+  hallucinations or useful detail can't be told without assessments.
+
+**Decision.** Under the pre-registered rule the judge failed criterion 2 on rag26 and
+would not have been submitted. The team decided to submit it anyway, as a distinct judge
+in an iterative process, accepting a near-BOD ranking. ragtime26 was then read once and
+passed all six criteria. The decision is recorded in `temp/BOD_RISK_PLAN.md`.
+
+### 15.4 Full runs
+
+Variant `full`, run with `temp/run_bod_risk_full.sh`.
+
+| | ragtime26 | rag26 |
+| --- | --- | --- |
+| Topics / runs | 103 / 49 | 119 / 83 |
+| Answers graded | 5,041 / 5,041 | 9,838 / 9,838 |
+| New Jev calls | **0** | **0** |
+| Risk defined | 5,033 / 5,041 | 9,791 / 9,838 |
+| Cited documents tagged | 10,394 | 61,151 |
+| Wall-clock (spaCy, single process) | 10 min | 146 min |
+
+- **Cost:** $0 in API calls; all grades came from the BOD prompt cache. The time is
+  spaCy tagging the cited documents.
+- **TIRA:** both pass `tira-cli upload --dry-run`. They are in
+  `submissions/bonsai-bod-risk-jev-20261013/{rag26,ragtime26}/`.
+
+### 15.5 Full leaderboards vs BOD and pairwise (reporting only)
+
+This compares the submitted leaderboards' "all" rows. It was produced for information
+after the submissions were fixed, and was not used to choose or rank submissions.
+
+| | rag26: vs BOD_MEAN | rag26: vs pairwise | ragtime26: vs BOD_MEAN | ragtime26: vs pairwise |
+| --- | --- | --- | --- | --- |
+| Spearman / Kendall | 0.993 / 0.952 | 0.982 / 0.890 | 0.975 / 0.884 | 0.911 / 0.765 |
+| Median \|rank change\| | 1 | 3 | 2 | 4 |
+| Runs moving ≥ 5 / ≥ 10 places | 12 / 1 | 26 / 3 | 6 / 0 | 18 / 2 |
+| Largest move | 11 | 14 | 8 | 24 |
+| Shared top-10 / top-5 | 9 / 4 | 7 / 3 | 9 / 3 | 8 / 2 |
+| Same #1 | no | no | no | no |
+
+Run level, all topics: mean HALLUC_RISK 0.026 (rag26) and 0.029 (ragtime26); mean
+UNGROUNDED_RATE 0.108 and 0.133. Over runs, Spearman(HALLUC_RISK, BOD_MEAN) is +0.28 and
++0.44.
+
+The full-run agreement with BOD matches the window (0.992 / 0.984). The risk term changes
+the #1 run on both datasets, though, so the top of the board is where it matters.
+
+### 15.6 Findings and caveats
+
+1. **The discount is small but not nil.** It changes the top run on both datasets and
+   moves a dozen rag26 runs ≥ 5 places, at no API cost.
+2. **On rag26 it is nearly redundant with BOD** (ρ 0.993). It adds more on ragtime26
+   (ρ 0.975).
+3. **It is reliable and stable** within each dataset: split-half close to BOD's, and
+   half-pool ρ ≥ 0.91.
+4. **Caveats:**
+   - **Lexical proxy.** Concept overlap rewards copying source wording and penalises
+     correct paraphrase or synonyms. It cannot tell a false claim from a true one that
+     the cited documents don't happen to contain.
+   - **Pool-dependent.** A run's risk depends on what other runs wrote; a run's score
+     changes if the pool changes.
+   - **Leans against stronger answers** (positive correlation with BOD_MEAN).
+   - **Undefined risk = 1** penalises the few answers without usable citations fully.
+     This is a policy choice, not a measurement.
+   - **Provenance**: the definition comes from work that used restricted topics (see
+     the top of this section).
+   - **Measure labels:** the submitted `.eval.measures.yml` also keeps BOD_MEAN's
+     "Primary." description from the BOD judge; BOD_GROUNDED is this judge's primary
+     measure.
+   - Accuracy awaits the official assessments.
+
+---
+
+## 16. Discussion
+
+### 16.1 Answers to the research questions
 
 All answers below come from the permitted window only.
 
@@ -1081,7 +1259,7 @@ All answers below come from the permitted window only.
 | RQ5 Reliability | **Mixed.** The mirror is near-deterministic (0.16% / 0.68% winner flips). Choice is strongly slot-A biased on ties (P(A) ≈ 0.79); the mirror is not (0.535 / 0.539). Close-pair position effects remain in both forms, with a dataset-dependent direction for Choice, so both orientations are needed. Split-half reliability on the window is 0.94–0.98. |
 | RQ6 Depth proportionality | **Yes, modestly.** The proportionate wording matches `better` on broad requests, and moves 1–5 points further toward shorter answers when the request is narrowed, on 20 of 20 topics (Section 11). This is shown with synthetic narrow requests only. |
 
-### 15.2 Recommended protocol for a Jev pairwise run
+### 16.2 Recommended protocol for a Jev pairwise run
 
 1. **Judge both orientations and average.**
    - Full tournament: 760,886 (rag26) and 210,418 (ragtime26) ordered comparisons.
@@ -1103,7 +1281,7 @@ All answers below come from the permitted window only.
    - Read per-comparison outputs through a window filter.
    - Write decision criteria before looking at results.
 
-### 15.3 Threats to validity
+### 16.3 Threats to validity
 
 - **No ground truth.** All conclusions are about agreement, consistency and controlled
   sensitivity, not accuracy. Two judges agreeing can share a bias.
@@ -1132,8 +1310,10 @@ All answers below come from the permitted window only.
   - The window study re-tested each of them against criteria written beforehand.
   - Each passed on rag26 and was confirmed on ragtime26.
   - The judges' development history is still not independent of that earlier work.
+  - The Hallucination Risk definition (Section 15) also comes from that earlier work. It
+    was fixed before any window value was computed, but was not re-chosen on the window.
 
-### 15.4 Open questions and next experiments
+### 16.4 Open questions and next experiments
 
 1. **On-topic verbosity padding.** Have an LLM rewrite each target to about 1.5× its
    length with no new facts (restatement, hedging, background), then judge with Jev and
@@ -1149,8 +1329,12 @@ All answers below come from the permitted window only.
    probabilities help on close pairs.
 6. **Length-controlled scoring.** Fit BT with a log-length-ratio covariate and report
    β per judge, using existing window data at no API cost.
+7. **What are the private-ungrounded concepts?** On the window, sample them and label
+   them as hallucination, correct paraphrase, or useful uncited detail. This would show
+   whether the positive correlation of risk with BOD_MEAN (Section 15.3) reflects
+   hallucination or depth.
 
-### 15.5 Cost summary
+### 16.5 Cost summary
 
 | Item | Cost |
 | --- | --- |
@@ -1158,6 +1342,7 @@ All answers below come from the permitted window only.
 | Window study, ragtime26 (Section 4) | $6.82 |
 | Full runs, ragtime26 + rag26 (Section 13) | $93.84 |
 | Bag-of-decisions judge: smoke test, pilots, padding test, full runs (Section 14) | $1.57 |
+| BOD × Hallucination Risk: pilots and full runs, all grades cached (Section 15) | $0.00 |
 | Earlier study, withdrawn (Jev pilots and probes, about $19.49) | — |
 | **Total for the results reported here** | **≈ $127.50** |
 
@@ -1166,7 +1351,7 @@ $149 and is not counted.
 
 ---
 
-## 16. Reproduction
+## 17. Reproduction
 
 **Environment.** `.env` provides:
 
@@ -1216,15 +1401,29 @@ configured topic outside it.
 | Padding | `JEV_DATASET=rag26 python temp/bod_padding.py run`, then `report` |
 | Full runs | `bash temp/run_bod_full.sh` |
 
+**BOD × Hallucination Risk (Section 15).** Plan, criteria and results:
+`temp/BOD_RISK_PLAN.md`. Each run reuses the BOD rubric, copied byte for byte to
+`<out-dir>/bonsai_bod_risk.nuggets.jsonl`, so no questions are regenerated.
+
+| Step | Command | Output |
+| --- | --- | --- |
+| Kiddie | `auto-judge run --workflow judges/bonsai_judge/workflow.bod_risk.yml --variant kiddie --rag-responses data/kiddie/runs/repgen/ --rag-topics data/kiddie/topics/kiddie-topics.jsonl --out-dir ./output-kiddie-bodrisk/` | |
+| Pilots | the same workflow with `--variant pilot` and `--out-dir ./output-win-<ds>-bodrisk/`, then `JEV_DATASET=<ds> python temp/bod_risk_analysis.py output-win-<ds>-bodrisk` | `temp/win_<ds>_bod_risk.txt` |
+| Full runs | `bash temp/run_bod_risk_full.sh` | `output-full-<ds>-bodrisk/`; copies in `submissions/bonsai-bod-risk-jev-20261013/` |
+
+The per-answer risk values are in `<out-dir>/bonsai_bod_risk.bod/risk.jsonl` (numbers
+only, never concepts). For the full runs that file is restricted beyond the window, like
+any per-answer output.
+
 **Caching.** All Jev and Gemini calls are in `cache/minima_llm.db`. The determinism probe
 deliberately bypasses the cache; its raw responses are in the JSONL files under
 `temp/jev_probes_win_<ds>/`.
 
 ---
 
-## 17. Appendix: prompts and questions verbatim
+## 18. Appendix: prompts and questions verbatim
 
-### 17.1 Gemini prompt (`judges/bonsai_judge/prompts/pairwise_summary_1.md`)
+### 18.1 Gemini prompt (`judges/bonsai_judge/prompts/pairwise_summary_1.md`)
 
 ```markdown
 # Pairwise Summary Comparison
@@ -1246,7 +1445,7 @@ The query used to find the relevant documents and generate the summary is "<%=to
 Judge which summary better satisfies the information need in the query, considering relevance, completeness, and how well the claims are grounded. Respond with exactly one character and nothing else: `A` if Summary A is better, or `B` if Summary B is better. No explanation, punctuation, or whitespace.
 ```
 
-### 17.2 Jev request shape
+### 18.2 Jev request shape
 
 ```json
 {
@@ -1268,7 +1467,7 @@ Judge which summary better satisfies the information need in the query, consider
 
 Response (per question): `{"type": "choice", "choice": "A", "confidence": 0.84, "probabilities": {"A": 0.92, "B": 0.08}}`.
 
-### 17.3 Jev questions (`judges/bonsai_judge/prompts/jev_questions.yml`)
+### 18.3 Jev questions (`judges/bonsai_judge/prompts/jev_questions.yml`)
 
 The probe questions (`shorter`, `worse_summary`, `swapped_labels`, `noul_a_worse`,
 `noul_a_shorter`) were used only in instruction-following probes. Those probes have
@@ -1349,14 +1548,14 @@ not been re-run on the permitted window (Section 4).
 `x_*` keys are local metadata and are stripped before the request is sent. The Noul
 response shape is `{"type": "noul", "noul": 0.96}`.
 
-### 17.4 Generic filler pool (padding test)
+### 18.4 Generic filler pool (padding test)
 
 20 topic-agnostic sentences, for example: "It is important to consider multiple perspectives
 when approaching this question."; "Every situation is different, so what works in one
 context may not work in another."; "Ultimately, the right choice depends on individual
 circumstances and goals." The full list is `GENERIC` in `temp/jev_padding.py`.
 
-### 17.5 BOD rubric prompt and grade question (`judges/bonsai_judge/prompts/bod_questions.md`, `bod.py`)
+### 18.5 BOD rubric prompt and grade question (`judges/bonsai_judge/prompts/bod_questions.md`, `bod.py`)
 
 Rubric generation (Gemini 2.5 Flash Lite, temperature 0). `<%=topic_query%>` is the query,
 problem statement and background:
@@ -1396,7 +1595,7 @@ Each rubric question is sent to Jev as:
 The padding question is a Noul: "Does the answer contain substantial content that is
 off-topic, repeated, or generic filler that does not help with the user's question?"
 
-### 17.6 Narrow requests for the broad vs narrow test (Section 11)
+### 18.6 Narrow requests for the broad vs narrow test (Section 11)
 
 Each was written from the topic's own text, and sent as the only topic field (`query`).
 Files: `temp/narrow_topics_{rag26,ragtime26}.jsonl`.
