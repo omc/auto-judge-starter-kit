@@ -1,5 +1,7 @@
 # Pairwise Summary Judging with Jev and Gemini on TREC RAG 2026 — Findings
 
+**Authors:** Max Irwin, Nathan Day, Daniel Worley
+
 **Status:** working notes for the team and raw material for a TREC paper. Revised
 2026-10-30.
 
@@ -24,7 +26,7 @@ make decisions.
 
 **Summary.** We built a pairwise "tournament" judge for TREC 2026 AutoJudge, using
 TypeSafe's **Jev** decision model (`typesafe/jev-1.13`, served via OpenRouter's Decisions
-API). Jev returns a *probability* that summary A is better rather than a binary choice.
+API). Jev returns a _probability_ that summary A is better rather than a binary choice.
 We compared it with our earlier binary pairwise judge built on **Gemini**
 (`google/gemini-3.5-flash-lite`). We developed on the rag26 window and confirmed once
 on the ragtime26 window.
@@ -165,16 +167,16 @@ Research questions:
 TREC 2026 AutoJudge [1] test data, from the TREC 2026 RAG [4] and RAGTIME
 [7] tracks:
 
-| Property | rag26 (`data/rag26/runs/generation/`) | ragtime26 (`data/ragtime26/runs/repgen/`) |
-| --- | --- | --- |
-| Runs / teams / topics | 83 / 25 / 119 | 49 / 10 / 103 |
-| Reports (non-empty) | 9,875 (9,836) | 5,047 (5,041) |
-| Cross-team pairs per topic, single / ordered | about 3,200 / 6,400 | 1,024 / 2,048 |
-| Full tournament, ordered (unique calls) | 760,886 (703,536) | 210,418 (196,958) |
-| Topic text | `title` only: a long, multi-part question | short `title` (a label) + `problem_statement` + `background` |
-| **Permitted window** | rag2026-0 … rag2026-9 | 2000 … 2009 |
-| Window reports: count, median words (range) | 830, 738 (0–1,024) | 490, 562 (30–1,016) |
-| Assessed topics (ground truth) | **0** | **0** |
+| Property                                     | rag26 (`data/rag26/runs/generation/`)     | ragtime26 (`data/ragtime26/runs/repgen/`)                    |
+| -------------------------------------------- | ----------------------------------------- | ------------------------------------------------------------ |
+| Runs / teams / topics                        | 83 / 25 / 119                             | 49 / 10 / 103                                                |
+| Reports (non-empty)                          | 9,875 (9,836)                             | 5,047 (5,041)                                                |
+| Cross-team pairs per topic, single / ordered | about 3,200 / 6,400                       | 1,024 / 2,048                                                |
+| Full tournament, ordered (unique calls)      | 760,886 (703,536)                         | 210,418 (196,958)                                            |
+| Topic text                                   | `title` only: a long, multi-part question | short `title` (a label) + `problem_statement` + `background` |
+| **Permitted window**                         | rag2026-0 … rag2026-9                     | 2000 … 2009                                                  |
+| Window reports: count, median words (range)  | 830, 738 (0–1,024)                        | 490, 562 (30–1,016)                                          |
+| Assessed topics (ground truth)               | **0**                                     | **0**                                                        |
 
 - **Topics are broad, multi-part requests.** For example, rag2026-0 asks a nursing DEI
   council what to prioritise across five named areas, how to think about tradeoffs,
@@ -189,7 +191,7 @@ TREC 2026 AutoJudge [1] test data, from the TREC 2026 RAG [4] and RAGTIME
   - rag26 requests and cache keys are unchanged.
 - **Comparisons are cross-team only.** A team's runs are never compared with each other.
 
-**No ground truth.** Without assessments we cannot measure judge *accuracy*. Every
+**No ground truth.** Without assessments we cannot measure judge _accuracy_. Every
 experiment instead measures agreement, sensitivity to controlled manipulations, or
 internal consistency.
 
@@ -202,8 +204,7 @@ may not transfer to the other topics (Section 16.3).
 
 ### 3.1 Gemini binary judge (baseline)
 
-- **Model:** `google/gemini-3.5-flash-lite` via OpenRouter, temperature 0, `max_tokens`
-  8.
+- **Model:** `google/gemini-3.5-flash-lite` via OpenRouter, temperature 0, `max_tokens` 8.
 - **Prompt:** `judges/bonsai_judge/prompts/pairwise_summary_1.md` (verbatim in
   Section 18.1). It contains the query and both summaries and asks for exactly one
   character, `A` or `B`.
@@ -259,8 +260,8 @@ and run b earns 1 − P(A better).
 
 ### 3.3 Abandoned variant: Jev Router
 
-We first tried OpenRouter's `typesafe/jev-router`. It uses Jev to pick a *chat model and
-reasoning effort* per request; it is not a probabilistic judge.
+We first tried OpenRouter's `typesafe/jev-router`. It uses Jev to pick a _chat model and
+reasoning effort_ per request; it is not a probabilistic judge.
 
 - In a 12-comparison kiddie smoke test it routed to two different chat models.
 - Reasoning tokens were about 92% of the cost for a one-letter answer.
@@ -280,13 +281,13 @@ pre-registration (see [45] for the arguments for and against in NLP):
 - **Default:** the form already used for the full runs (mirrored proportionate Noul,
   both orientations). It changes only if a criterion below fails on rag26.
 
-| # | Decision | Criterion (written beforehand) |
-| --- | --- | --- |
-| 1 | Proportionate vs better wording | Proportionate's broad→narrow shift toward shorter answers, relative to `better` (difference-in-differences), is negative on ≥ 7 of 10 topics, and the pooled value's topic-bootstrap 95% CI excludes 0 |
-| 2 | Ties | Identical summaries score within [0.40, 0.60] |
-| 3 | Orientation | Keep both orientations unless P(slot A wins) on close pairs has a topic-bootstrap CI that includes 0.50 **and** identical summaries score within [0.45, 0.55] |
-| 4 | Padding | Each uninformative padding variant has pooled ΔP < 0, with a CI excluding 0; relevant padding has ΔP > 0 |
-| 5 | Choice vs Noul | Reopened only if the mirror flips > 2% of winners between identical requests, or ranks runs at Spearman < 0.95 against Choice |
+| #   | Decision                        | Criterion (written beforehand)                                                                                                                                                                         |
+| --- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1   | Proportionate vs better wording | Proportionate's broad→narrow shift toward shorter answers, relative to `better` (difference-in-differences), is negative on ≥ 7 of 10 topics, and the pooled value's topic-bootstrap 95% CI excludes 0 |
+| 2   | Ties                            | Identical summaries score within [0.40, 0.60]                                                                                                                                                          |
+| 3   | Orientation                     | Keep both orientations unless P(slot A wins) on close pairs has a topic-bootstrap CI that includes 0.50 **and** identical summaries score within [0.45, 0.55]                                          |
+| 4   | Padding                         | Each uninformative padding variant has pooled ΔP < 0, with a CI excluding 0; relevant padding has ΔP > 0                                                                                               |
+| 5   | Choice vs Noul                  | Reopened only if the mirror flips > 2% of winners between identical requests, or ranks runs at Spearman < 0.95 against Choice                                                                          |
 
 **What was run.** Everything on all 10 window topics, except:
 
@@ -316,17 +317,17 @@ Earlier results on these came partly from restricted topics and are withdrawn. S
 **Budget and spend.** The OpenRouter key had $57.21 left. A guard skipped any step that
 would take the balance below its estimate plus $10.
 
-| Step | rag26 | ragtime26 |
-| --- | --- | --- |
-| Prompt variants (Section 7) | $2.90 | $0.67 |
-| Choice pilot, both orientations (Section 5) | $5.22 | $1.42 |
-| Identical summaries (Section 8) | $0.24 | $0.11 |
-| Determinism, mirror (Section 8) | $0.71 | $0.18 |
-| Padding, mirror (Section 9) | $1.85 | $1.52 |
-| Gemini pairwise on the window (Sections 5–7) | $5.46 | — (existing run) |
-| Gemini padding, 3 topics (Section 9) | $1.91 | $0.96 |
-| Broad vs narrow, 2 framings (Section 11) | $6.98 | $1.96 |
-| **Total** | **$25.27** | **$6.82** |
+| Step                                         | rag26      | ragtime26        |
+| -------------------------------------------- | ---------- | ---------------- |
+| Prompt variants (Section 7)                  | $2.90      | $0.67            |
+| Choice pilot, both orientations (Section 5)  | $5.22      | $1.42            |
+| Identical summaries (Section 8)              | $0.24      | $0.11            |
+| Determinism, mirror (Section 8)              | $0.71      | $0.18            |
+| Padding, mirror (Section 9)                  | $1.85      | $1.52            |
+| Gemini pairwise on the window (Sections 5–7) | $5.46      | — (existing run) |
+| Gemini padding, 3 topics (Section 9)         | $1.91      | $0.96            |
+| Broad vs narrow, 2 framings (Section 11)     | $6.98      | $1.96            |
+| **Total**                                    | **$25.27** | **$6.82**        |
 
 Costs are the change in the key's balance, so cache hits cost nothing. A terminal
 restart interrupted the ragtime26 Choice pilot; it resumed from cache with no call paid
@@ -348,24 +349,24 @@ twice.
 
 ### 5.1 Agreement with Gemini (RQ1) and stability
 
-| Metric | rag26 (10 topics) | ragtime26 |
-| --- | --- | --- |
-| Board Spearman / Kendall vs Gemini | **0.976** / 0.869 | **0.937** / 0.811 (3 topics) |
-| Per-topic Spearman vs Gemini, median | 0.957 | 0.925 |
-| Split-half (5 vs 5 topics, 200 splits), Spearman | 0.975 [0.959, 0.983] | 0.941 [0.908, 0.967] |
-| Top 5 | carmen, lars, edith, ariel, hana | alyssa, marie, dina, lori, alice |
+| Metric                                           | rag26 (10 topics)                | ragtime26                        |
+| ------------------------------------------------ | -------------------------------- | -------------------------------- |
+| Board Spearman / Kendall vs Gemini               | **0.976** / 0.869                | **0.937** / 0.811 (3 topics)     |
+| Per-topic Spearman vs Gemini, median             | 0.957                            | 0.925                            |
+| Split-half (5 vs 5 topics, 200 splits), Spearman | 0.975 [0.959, 0.983]             | 0.941 [0.908, 0.967]             |
+| Top 5                                            | carmen, lars, edith, ariel, hana | alyssa, marie, dina, lori, alice |
 
 Jev and Gemini rank runs alike. ragtime26 is noisier, with fewer runs, closer
 competition and more varied topics.
 
 ### 5.2 Distribution of Choice probabilities (RQ2)
 
-| Metric | rag26 | ragtime26 |
-| --- | --- | --- |
-| Exactly 0 or 1 | **49.8%** | 18.5% |
-| Decisive (P < 0.25 or > 0.75) | 88.5% | 79.5% |
-| P in [0.4, 0.6] | 4.4% | 8.0% |
-| Mean P(A) | 0.506 | 0.483 |
+| Metric                                            | rag26      | ragtime26  |
+| ------------------------------------------------- | ---------- | ---------- |
+| Exactly 0 or 1                                    | **49.8%**  | 18.5%      |
+| Decisive (P < 0.25 or > 0.75)                     | 88.5%      | 79.5%      |
+| P in [0.4, 0.6]                                   | 4.4%       | 8.0%       |
+| Mean P(A)                                         | 0.506      | 0.483      |
 | Probability-weighted vs binary ranking (Spearman) | **0.9992** | **0.9987** |
 
 - **Probabilities don't change the ranking.** Choice is saturated on rag26 and less so
@@ -380,15 +381,15 @@ both orders is the usual remedy [38, 34]. Pairs are grouped by their
 orientation-averaged P(x better). A good judge gives P(slot A wins) = 0.5 in every group.
 
 | Closeness (orientation-averaged P) | rag26 pairs | rag26 P(slot A wins) / winner flips | ragtime26 pairs | ragtime26 P(slot A wins) / winner flips |
-| --- | --- | --- | --- | --- |
-| 0.00–0.05 | 12,604 | 0.500 / 0.00 | 2,261 | 0.497 / 0.00 |
-| 0.05–0.25 | 2,993 | 0.511 / 0.00 | 1,446 | 0.478 / 0.00 |
-| 0.25–0.40 | 1,188 | 0.526 / 0.16 | 663 | 0.458 / 0.09 |
-| **0.40–0.60** | 1,406 | **0.540 / 0.71** | 797 | **0.465 / 0.64** |
-| 0.60–0.75 | 1,176 | 0.530 / 0.17 | 679 | 0.460 / 0.08 |
-| 0.75–0.95 | 2,680 | 0.514 / 0.00 | 1,723 | 0.477 / 0.00 |
-| 0.95–1.00 | 10,023 | 0.500 / 0.00 | 2,671 | 0.496 / 0.00 |
-| **All pairs** | 32,070 | 0.506 / 0.043 | 10,240 | 0.483 / 0.061 |
+| ---------------------------------- | ----------- | ----------------------------------- | --------------- | --------------------------------------- |
+| 0.00–0.05                          | 12,604      | 0.500 / 0.00                        | 2,261           | 0.497 / 0.00                            |
+| 0.05–0.25                          | 2,993       | 0.511 / 0.00                        | 1,446           | 0.478 / 0.00                            |
+| 0.25–0.40                          | 1,188       | 0.526 / 0.16                        | 663             | 0.458 / 0.09                            |
+| **0.40–0.60**                      | 1,406       | **0.540 / 0.71**                    | 797             | **0.465 / 0.64**                        |
+| 0.60–0.75                          | 1,176       | 0.530 / 0.17                        | 679             | 0.460 / 0.08                            |
+| 0.75–0.95                          | 2,680       | 0.514 / 0.00                        | 1,723           | 0.477 / 0.00                            |
+| 0.95–1.00                          | 10,023      | 0.500 / 0.00                        | 2,671           | 0.496 / 0.00                            |
+| **All pairs**                      | 32,070      | 0.506 / 0.043                       | 10,240          | 0.483 / 0.061                           |
 
 - **The position effect is concentrated in close pairs,** where the winner flips with
   the orientation in 64–71% of cases. Those are exactly the pairs where probabilities
@@ -408,15 +409,15 @@ orientation-averaged P(x better). A good judge gives P(slot A wins) = 0.5 in eve
 LLM judges are known to prefer longer answers [33, 40, 41]. Same
 Choice pilot, orientation-averaged. "Longer" compares report word counts.
 
-| Metric | rag26 | ragtime26 |
-| --- | --- | --- |
-| P(longer wins), all pairs | **0.700** | **0.488** |
-| … length ratio < 1.25× / 1.25–2× / ≥ 2× (single orientation, Section 7) | 0.530 / 0.632 / 0.865 | 0.439 / 0.502 / 0.519 |
-| Per-topic Spearman(win rate, words): median [min, max] | **+0.541** [0.475, 0.664] | **−0.102** [−0.377, 0.069] |
+| Metric                                                                  | rag26                     | ragtime26                  |
+| ----------------------------------------------------------------------- | ------------------------- | -------------------------- |
+| P(longer wins), all pairs                                               | **0.700**                 | **0.488**                  |
+| … length ratio < 1.25× / 1.25–2× / ≥ 2× (single orientation, Section 7) | 0.530 / 0.632 / 0.865     | 0.439 / 0.502 / 0.519      |
+| Per-topic Spearman(win rate, words): median [min, max]                  | **+0.541** [0.475, 0.664] | **−0.102** [−0.377, 0.069] |
 
 - **rag26 rewards longer reports, mostly in lopsided pairs.** P = 0.865 when one report
   is at least twice as long.
-- **ragtime26 does not.** Within topics, longer reports tend to rank slightly *lower*.
+- **ragtime26 does not.** Within topics, longer reports tend to rank slightly _lower_.
 - **The effect belongs to the dataset, not the judge.** All four Choice wordings
   (Section 7) and the mirrored Noul form (Section 10) show the same pattern. On rag26's multi-part topics, a
   short report can't cover all the facets.
@@ -434,29 +435,29 @@ Choice pilot, orientation-averaged. "Longer" compares report word counts.
   - `better_summary` (control)
   - `length_neutral`: judge substance not length; prefer the concise answer when equal.
   - `needs_coverage`: credit only content that answers what the user asked.
-  - `precision`: judge the *proportion* of relevant, specific statements.
+  - `precision`: judge the _proportion_ of relevant, specific statements.
 - All 10 window topics, single orientation (hashed).
 - rag26: 32,070 comparisons; ragtime26: 10,240.
 
 **Length dependence (RQ3) by question.**
 
-| Question | rag26 P(longer) | rag26 ρ(win rate, words) | ragtime26 P(longer) | ragtime26 ρ |
-| --- | --- | --- | --- | --- |
-| better_summary | 0.701 | +0.545 | 0.489 | −0.086 |
-| length_neutral | 0.669 | +0.460 | 0.450 | −0.199 |
-| needs_coverage | 0.701 | +0.540 | 0.499 | −0.044 |
-| precision | 0.673 | +0.474 | 0.439 | −0.232 |
+| Question       | rag26 P(longer) | rag26 ρ(win rate, words) | ragtime26 P(longer) | ragtime26 ρ |
+| -------------- | --------------- | ------------------------ | ------------------- | ----------- |
+| better_summary | 0.701           | +0.545                   | 0.489               | −0.086      |
+| length_neutral | 0.669           | +0.460                   | 0.450               | −0.199      |
+| needs_coverage | 0.701           | +0.540                   | 0.499               | −0.044      |
+| precision      | 0.673           | +0.474                   | 0.439               | −0.232      |
 
 ρ is the mean over topics of Spearman(run win rate, words).
 
 **Agreement with the control and with Gemini (RQ4).**
 
-| Question | Ranking vs control (per-topic ρ, mean): rag26 / ragtime26 | Pair decisions agreeing with control: rag26 / ragtime26 | Board ρ vs Gemini: rag26 / ragtime26 |
-| --- | --- | --- | --- |
-| better_summary | — | — | 0.976 / 0.935 |
-| length_neutral | 0.984 / 0.957 | 95.4% / 93.4% | **0.987** / **0.955** |
-| needs_coverage | 0.992 / 0.944 | 96.7% / 91.6% | 0.977 / 0.950 |
-| precision | 0.982 / 0.938 | 95.1% / 91.0% | 0.977 / 0.914 |
+| Question       | Ranking vs control (per-topic ρ, mean): rag26 / ragtime26 | Pair decisions agreeing with control: rag26 / ragtime26 | Board ρ vs Gemini: rag26 / ragtime26 |
+| -------------- | --------------------------------------------------------- | ------------------------------------------------------- | ------------------------------------ |
+| better_summary | —                                                         | —                                                       | 0.976 / 0.935                        |
+| length_neutral | 0.984 / 0.957                                             | 95.4% / 93.4%                                           | **0.987** / **0.955**                |
+| needs_coverage | 0.992 / 0.944                                             | 96.7% / 91.6%                                           | 0.977 / 0.950                        |
+| precision      | 0.982 / 0.938                                             | 95.1% / 91.0%                                           | 0.977 / 0.914                        |
 
 **Test–retest.** The control asked alongside three other questions was compared with
 the same oriented comparison in the single-question Choice pilot.
@@ -484,13 +485,13 @@ Asking extra questions in the same request barely changes an answer.
 
 Each run's own report against itself: 828 runs × topics on rag26, 490 on ragtime26.
 
-| Form | rag26 | ragtime26 |
-| --- | --- | --- |
-| Choice `better_summary`: mean P(A) | **0.792** (per topic 0.748–0.822; A chosen 828/828) | **0.789** (A chosen 490/490) |
-| Noul `noul_a_proportionate`: mean P(yes) | 0.177 | 0.184 |
-| Noul `noul_b_proportionate`: mean P(yes) | 0.108 | 0.106 |
-| **Mirror** (yA + 1 − yB) / 2 | **0.535** | **0.539** |
-| Mirror tie flag ("no" to both) | 828/828 | 490/490 |
+| Form                                     | rag26                                               | ragtime26                    |
+| ---------------------------------------- | --------------------------------------------------- | ---------------------------- |
+| Choice `better_summary`: mean P(A)       | **0.792** (per topic 0.748–0.822; A chosen 828/828) | **0.789** (A chosen 490/490) |
+| Noul `noul_a_proportionate`: mean P(yes) | 0.177                                               | 0.184                        |
+| Noul `noul_b_proportionate`: mean P(yes) | 0.108                                               | 0.106                        |
+| **Mirror** (yA + 1 − yB) / 2             | **0.535**                                           | **0.539**                    |
+| Mirror tie flag ("no" to both)           | 828/828                                             | 490/490                      |
 
 - **Choice has a strong first-slot bias when the two summaries are identical.**
   P(A) ≈ 0.79, never near 0.5.
@@ -503,12 +504,12 @@ Each run's own report against itself: 828 runs × topics on rag26, 490 on ragtim
 
 Each comparison of one topic (rag2026-3 / 2003) is asked twice with the cache bypassed.
 
-| Metric | rag26 (3,223 comparisons) | ragtime26 (1,024) |
-| --- | --- | --- |
-| Identical mirror score | 39.1% | 24.0% |
-| Mean / p95 / max \|ΔP\| | 0.0049 / 0.015 / 0.050 | 0.0067 / 0.020 / 0.040 |
-| **Winner flips** | **5 (0.155%)** | **7 (0.684%)** |
-| Tie flag pass 1 / pass 2 / changed | 43 / 38 / 17 | 17 / 15 / 6 |
+| Metric                             | rag26 (3,223 comparisons) | ragtime26 (1,024)      |
+| ---------------------------------- | ------------------------- | ---------------------- |
+| Identical mirror score             | 39.1%                     | 24.0%                  |
+| Mean / p95 / max \|ΔP\|            | 0.0049 / 0.015 / 0.050    | 0.0067 / 0.020 / 0.040 |
+| **Winner flips**                   | **5 (0.155%)**            | **7 (0.684%)**         |
+| Tie flag pass 1 / pass 2 / changed | 43 / 38 / 17              | 17 / 15 / 6            |
 
 - **Jev is near-deterministic.** Repeated answers differ by about 0.005 on average.
   Winners flip only for pairs already near 0.5.
@@ -532,14 +533,14 @@ instead regresses length out of the judge's preferences [41].)
 - **Variants of each target** (padding sentences interleaved at seeded random positions,
   not appended):
 
-| Variant | Change | Information |
-| --- | --- | --- |
-| original | unchanged | — |
-| pad_repeat | +≈50% words: the report's own sentences duplicated | none |
-| pad_generic | +≈50% words: topic-agnostic filler (Section 18.4) | none |
-| pad_offtopic | +≈50% words: sentences from another window topic (topic i+5) | irrelevant |
-| pad_relevant | +≈50% words: unseen sentences from the topic's strongest run of another team | positive control |
-| truncate | last third of sentences removed | less, and shorter |
+| Variant      | Change                                                                       | Information       |
+| ------------ | ---------------------------------------------------------------------------- | ----------------- |
+| original     | unchanged                                                                    | —                 |
+| pad_repeat   | +≈50% words: the report's own sentences duplicated                           | none              |
+| pad_generic  | +≈50% words: topic-agnostic filler (Section 18.4)                            | none              |
+| pad_offtopic | +≈50% words: sentences from another window topic (topic i+5)                 | irrelevant        |
+| pad_relevant | +≈50% words: unseen sentences from the topic's strongest run of another team | positive control  |
+| truncate     | last third of sentences removed                                              | less, and shorter |
 
 - **Judging.** Each target variant against each opponent, in **both orientations**.
 - **Measure.** ΔP = the mean change in orientation-averaged P(target beats opponent),
@@ -551,13 +552,13 @@ instead regresses length out of the judge's preferences [41].)
 
 ### 9.2 Results: submitted form (mirrored proportionate Noul), all 10 topics
 
-| Variant | Words × | rag26 ΔP [95% CI] | rag26 targets ΔP > 0 | ragtime26 ΔP [95% CI] | ragtime26 targets ΔP > 0 |
-| --- | --- | --- | --- | --- | --- |
-| pad_repeat | 1.53 | −0.048 [−0.053, −0.044] | 1/160 | −0.074 [−0.080, −0.069] | 1/160 |
-| pad_generic | 1.51 | −0.095 [−0.102, −0.088] | 0/160 | −0.135 [−0.144, −0.125] | 1/160 |
-| pad_offtopic | 1.53 | −0.196 [−0.209, −0.183] | 0/160 | −0.258 [−0.271, −0.245] | 0/160 |
-| **pad_relevant** | 1.53 | **+0.179** [+0.170, +0.188] | 160/160 | **+0.098** [+0.088, +0.107] | 155/160 |
-| truncate | 0.67 | −0.081 [−0.088, −0.072] | 2/160 | −0.078 [−0.088, −0.068] | 16/160 |
+| Variant          | Words × | rag26 ΔP [95% CI]           | rag26 targets ΔP > 0 | ragtime26 ΔP [95% CI]       | ragtime26 targets ΔP > 0 |
+| ---------------- | ------- | --------------------------- | -------------------- | --------------------------- | ------------------------ |
+| pad_repeat       | 1.53    | −0.048 [−0.053, −0.044]     | 1/160                | −0.074 [−0.080, −0.069]     | 1/160                    |
+| pad_generic      | 1.51    | −0.095 [−0.102, −0.088]     | 0/160                | −0.135 [−0.144, −0.125]     | 1/160                    |
+| pad_offtopic     | 1.53    | −0.196 [−0.209, −0.183]     | 0/160                | −0.258 [−0.271, −0.245]     | 0/160                    |
+| **pad_relevant** | 1.53    | **+0.179** [+0.170, +0.188] | 160/160              | **+0.098** [+0.088, +0.107] | 155/160                  |
+| truncate         | 0.67    | −0.081 [−0.088, −0.072]     | 2/160                | −0.078 [−0.088, −0.068]     | 16/160                   |
 
 Baseline P(win) for the originals: 0.333 on rag26, 0.422 on ragtime26.
 
@@ -574,13 +575,13 @@ Other observations:
 
 ### 9.3 Gemini vs Jev on the same 3 topics
 
-| Variant | rag26: Gemini ΔP [95% CI] | rag26: Jev mirror ΔP | ragtime26: Gemini ΔP [95% CI] | ragtime26: Jev mirror ΔP |
-| --- | --- | --- | --- | --- |
-| pad_repeat | −0.132 [−0.160, −0.104] | −0.040 | −0.203 [−0.249, −0.160] | −0.091 |
-| pad_generic | −0.104 [−0.130, −0.079] | −0.075 | −0.186 [−0.224, −0.150] | −0.163 |
-| pad_offtopic | −0.206 [−0.250, −0.165] | −0.189 | −0.309 [−0.368, −0.250] | −0.265 |
-| pad_relevant | **+0.104** [+0.070, +0.138] (36/48 > 0) | +0.182 (48/48) | **−0.117** [−0.151, −0.085] (3/48 > 0) | +0.070 (46/48) |
-| truncate | −0.078 [−0.107, −0.049] | −0.077 | −0.152 [−0.195, −0.113] | −0.105 |
+| Variant      | rag26: Gemini ΔP [95% CI]               | rag26: Jev mirror ΔP | ragtime26: Gemini ΔP [95% CI]          | ragtime26: Jev mirror ΔP |
+| ------------ | --------------------------------------- | -------------------- | -------------------------------------- | ------------------------ |
+| pad_repeat   | −0.132 [−0.160, −0.104]                 | −0.040               | −0.203 [−0.249, −0.160]                | −0.091                   |
+| pad_generic  | −0.104 [−0.130, −0.079]                 | −0.075               | −0.186 [−0.224, −0.150]                | −0.163                   |
+| pad_offtopic | −0.206 [−0.250, −0.165]                 | −0.189               | −0.309 [−0.368, −0.250]                | −0.265                   |
+| pad_relevant | **+0.104** [+0.070, +0.138] (36/48 > 0) | +0.182 (48/48)       | **−0.117** [−0.151, −0.085] (3/48 > 0) | +0.070 (46/48)           |
+| truncate     | −0.078 [−0.107, −0.049]                 | −0.077               | −0.152 [−0.195, −0.113]                | −0.105                   |
 
 Gemini's mean P(slot A wins) is 0.479 on rag26 and 0.466 on ragtime26.
 
@@ -617,19 +618,19 @@ the pair "is A better than B?" / "is B better than A?" can be asked in one reque
 (Section 11); its data on the window comes from the full runs (Section 13), which judged
 every pair in both orientations.
 
-| Metric (window, both orientations) | rag26 Choice | rag26 mirror | ragtime26 Choice | ragtime26 mirror |
-| --- | --- | --- | --- | --- |
-| Exactly 0 or 1 | 49.8% | **0.0%** | 18.5% | **0.0%** |
-| Decisive (< 0.25 or > 0.75) | 88.5% | 77.2% | 79.5% | 58.7% |
-| In [0.4, 0.6] | 4.4% | 8.1% | 8.0% | 13.4% |
-| Distinct values | 101 | 406 | 101 | 373 |
-| Identical summaries (Section 8.1) | 0.792 | **0.535** | 0.789 | **0.539** |
-| P(slot A wins), close pairs | 0.540 | 0.553 | 0.465 | 0.523 |
-| Winner flips on swap, all / close pairs | 4.3% / 71% | 4.8% / 57% | 6.1% / 64% | 5.0% / 37% |
-| Probability-weighted vs binary ranking | 0.9992 | 0.9982 | 0.9987 | 0.9978 |
-| Board ρ vs Gemini | 0.976 | 0.974 | 0.937 | 0.939 |
-| P(longer wins) | 0.700 | 0.675 | 0.488 | 0.486 |
-| Flagged near-ties / both "yes" | — | 0.84% / 1.95% | — | 2.80% / 1.65% |
+| Metric (window, both orientations)      | rag26 Choice | rag26 mirror  | ragtime26 Choice | ragtime26 mirror |
+| --------------------------------------- | ------------ | ------------- | ---------------- | ---------------- |
+| Exactly 0 or 1                          | 49.8%        | **0.0%**      | 18.5%            | **0.0%**         |
+| Decisive (< 0.25 or > 0.75)             | 88.5%        | 77.2%         | 79.5%            | 58.7%            |
+| In [0.4, 0.6]                           | 4.4%         | 8.1%          | 8.0%             | 13.4%            |
+| Distinct values                         | 101          | 406           | 101              | 373              |
+| Identical summaries (Section 8.1)       | 0.792        | **0.535**     | 0.789            | **0.539**        |
+| P(slot A wins), close pairs             | 0.540        | 0.553         | 0.465            | 0.523            |
+| Winner flips on swap, all / close pairs | 4.3% / 71%   | 4.8% / 57%    | 6.1% / 64%       | 5.0% / 37%       |
+| Probability-weighted vs binary ranking  | 0.9992       | 0.9982        | 0.9987           | 0.9978           |
+| Board ρ vs Gemini                       | 0.976        | 0.974         | 0.937            | 0.939            |
+| P(longer wins)                          | 0.700        | 0.675         | 0.488            | 0.486            |
+| Flagged near-ties / both "yes"          | —            | 0.84% / 1.95% | —                | 2.80% / 1.65%    |
 
 **Ranking, Choice vs mirror** (board over the window, both orientations):
 
@@ -654,7 +655,7 @@ every pair in both orientations.
 ## 11. Depth-proportionate prompt: broad vs narrow
 
 **Motivation.** Some needs require long answers; others need a short, direct one. A
-good judge should reward depth that is *proportionate* to the need, rather than always
+good judge should reward depth that is _proportionate_ to the need, rather than always
 preferring longer or shorter answers.
 
 **Questions** (verbatim in 17.3):
@@ -669,7 +670,7 @@ preferring longer or shorter answers.
 **Design: a controlled change to the request.**
 
 - Neither dataset has genuinely narrow needs.
-- The *same* report pairs are judged under two framings:
+- The _same_ report pairs are judged under two framings:
   - **Broad:** the original topic.
   - **Narrow:** one sub-question written from that topic's own text, with no problem
     statement or background. All 20 are listed in Section 18.6.
@@ -677,29 +678,29 @@ preferring longer or shorter answers.
   (hashed, identical across framings), on all 10 window topics.
 - **Measure:** the change in P(longer wins) from broad to narrow. The key number is the
   **difference-in-differences (DiD) against `better`** on the same comparisons.
-  Negative means proportionate moves toward shorter answers *more* than `better` does
+  Negative means proportionate moves toward shorter answers _more_ than `better` does
   when the request is narrowed, which is the intended behaviour.
 
-| Topic | rag26: better shift | rag26: proportionate shift | **rag26 DiD** | ragtime26 topic | ragtime26: better shift | ragtime26: proportionate shift | **ragtime26 DiD** |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| rag2026-0 | −0.008 | −0.024 | **−0.015** | 2000 | −0.056 | −0.064 | **−0.008** |
-| rag2026-1 | −0.043 | −0.076 | **−0.033** | 2001 | −0.009 | −0.036 | **−0.027** |
-| rag2026-2 | −0.054 | −0.090 | **−0.036** | 2002 | −0.034 | −0.049 | **−0.015** |
-| rag2026-3 | −0.013 | −0.066 | **−0.053** | 2003 | −0.001 | −0.017 | **−0.016** |
-| rag2026-4 | −0.006 | −0.023 | **−0.017** | 2004 | +0.001 | −0.010 | **−0.011** |
-| rag2026-5 | −0.020 | −0.044 | **−0.023** | 2005 | −0.017 | −0.042 | **−0.025** |
-| rag2026-6 | −0.058 | −0.093 | **−0.035** | 2006 | −0.007 | −0.022 | **−0.015** |
-| rag2026-7 | −0.037 | −0.068 | **−0.030** | 2007 | −0.013 | −0.022 | **−0.010** |
-| rag2026-8 | −0.047 | −0.088 | **−0.041** | 2008 | +0.026 | +0.015 | **−0.011** |
-| rag2026-9 | −0.034 | −0.068 | **−0.034** | 2009 | +0.011 | −0.010 | **−0.020** |
-| **Pooled** | 0.672 → 0.640 (−0.032) | 0.676 → 0.612 (−0.064) | **−0.032** | | 0.486 → 0.477 (−0.010) | 0.487 → 0.461 (−0.026) | **−0.016** |
+| Topic      | rag26: better shift    | rag26: proportionate shift | **rag26 DiD** | ragtime26 topic | ragtime26: better shift | ragtime26: proportionate shift | **ragtime26 DiD** |
+| ---------- | ---------------------- | -------------------------- | ------------- | --------------- | ----------------------- | ------------------------------ | ----------------- |
+| rag2026-0  | −0.008                 | −0.024                     | **−0.015**    | 2000            | −0.056                  | −0.064                         | **−0.008**        |
+| rag2026-1  | −0.043                 | −0.076                     | **−0.033**    | 2001            | −0.009                  | −0.036                         | **−0.027**        |
+| rag2026-2  | −0.054                 | −0.090                     | **−0.036**    | 2002            | −0.034                  | −0.049                         | **−0.015**        |
+| rag2026-3  | −0.013                 | −0.066                     | **−0.053**    | 2003            | −0.001                  | −0.017                         | **−0.016**        |
+| rag2026-4  | −0.006                 | −0.023                     | **−0.017**    | 2004            | +0.001                  | −0.010                         | **−0.011**        |
+| rag2026-5  | −0.020                 | −0.044                     | **−0.023**    | 2005            | −0.017                  | −0.042                         | **−0.025**        |
+| rag2026-6  | −0.058                 | −0.093                     | **−0.035**    | 2006            | −0.007                  | −0.022                         | **−0.015**        |
+| rag2026-7  | −0.037                 | −0.068                     | **−0.030**    | 2007            | −0.013                  | −0.022                         | **−0.010**        |
+| rag2026-8  | −0.047                 | −0.088                     | **−0.041**    | 2008            | +0.026                  | +0.015                         | **−0.011**        |
+| rag2026-9  | −0.034                 | −0.068                     | **−0.034**    | 2009            | +0.011                  | −0.010                         | **−0.020**        |
+| **Pooled** | 0.672 → 0.640 (−0.032) | 0.676 → 0.612 (−0.064)     | **−0.032**    |                 | 0.486 → 0.477 (−0.010)  | 0.487 → 0.461 (−0.026)         | **−0.016**        |
 
-| Pooled metric | rag26: better / proportionate | ragtime26: better / proportionate |
-| --- | --- | --- |
-| ρ(win rate, words), broad → narrow | 0.557 → 0.499 / **0.563 → 0.420** | −0.086 → −0.116 / **−0.079 → −0.180** |
-| Run ranking, broad vs narrow | 0.944 / 0.903 | 0.889 / 0.873 |
-| Tie flag, broad → narrow | 0.7 → 2.0% / 0.8 → 3.8% | 2.8 → 1.7% / 2.7 → 2.9% |
-| Winner differs from `better`: broad / narrow | — / 0.96%, 3.57% | — / 1.53%, 3.21% |
+| Pooled metric                                | rag26: better / proportionate     | ragtime26: better / proportionate     |
+| -------------------------------------------- | --------------------------------- | ------------------------------------- |
+| ρ(win rate, words), broad → narrow           | 0.557 → 0.499 / **0.563 → 0.420** | −0.086 → −0.116 / **−0.079 → −0.180** |
+| Run ranking, broad vs narrow                 | 0.944 / 0.903                     | 0.889 / 0.873                         |
+| Tie flag, broad → narrow                     | 0.7 → 2.0% / 0.8 → 3.8%           | 2.8 → 1.7% / 2.7 → 2.9%               |
+| Winner differs from `better`: broad / narrow | — / 0.96%, 3.57%                  | — / 1.53%, 3.21%                      |
 
 **Findings.**
 
@@ -724,13 +725,13 @@ real short-answer needs.
 The decisions were recorded in `temp/WINDOW_STUDY_PLAN.md` before anything was run or
 read on ragtime26.
 
-| # | Criterion | rag26 (decision) | ragtime26 (confirmation) |
-| --- | --- | --- | --- |
-| 1 | Proportionate DiD < 0 on ≥ 7/10 topics, CI excludes 0 | **Pass**: 10/10, pooled −0.032 | **Confirmed**: 10/10, pooled −0.016 |
-| 2 | Identical summaries within [0.40, 0.60] | **Pass**: 0.535 | **Confirmed**: 0.539 |
-| 3 | Drop one orientation only if close-pair slot bias is non-significant and ties are within [0.45, 0.55] | **Keep both**: 0.553 [0.547, 0.559] | **Confirmed**: 0.523 [0.514, 0.532] |
-| 4 | Uninformative padding ΔP < 0 (CI excludes 0); relevant ΔP > 0 | **Pass** (Section 9.2) | **Confirmed** |
-| 5 | Reopen Choice only if mirror flips > 2% or ρ vs Choice < 0.95 | **Not reopened**: 0.155%, ρ 0.998 | **Confirmed**: 0.684%, ρ 0.998 |
+| #   | Criterion                                                                                             | rag26 (decision)                    | ragtime26 (confirmation)            |
+| --- | ----------------------------------------------------------------------------------------------------- | ----------------------------------- | ----------------------------------- |
+| 1   | Proportionate DiD < 0 on ≥ 7/10 topics, CI excludes 0                                                 | **Pass**: 10/10, pooled −0.032      | **Confirmed**: 10/10, pooled −0.016 |
+| 2   | Identical summaries within [0.40, 0.60]                                                               | **Pass**: 0.535                     | **Confirmed**: 0.539                |
+| 3   | Drop one orientation only if close-pair slot bias is non-significant and ties are within [0.45, 0.55] | **Keep both**: 0.553 [0.547, 0.559] | **Confirmed**: 0.523 [0.514, 0.532] |
+| 4   | Uninformative padding ΔP < 0 (CI excludes 0); relevant ΔP > 0                                         | **Pass** (Section 9.2)              | **Confirmed**                       |
+| 5   | Reopen Choice only if mirror flips > 2% or ρ vs Choice < 0.95                                         | **Not reopened**: 0.155%, ρ 0.998   | **Confirmed**: 0.684%, ρ 0.998      |
 
 The submitted form (mirrored proportionate Noul, both orientations) is kept. The full
 runs did not need redoing.
@@ -753,13 +754,13 @@ present on every topic: 0.537–0.572 on rag26 and 0.503–0.549 on ragtime26.
 - ragtime26 ran first, then rag26 (`temp/run_full_proportionate.sh`, under nohup).
 - Snapshot served throughout: `typesafe/jev-1.13-20260917`.
 
-| | ragtime26 | rag26 |
-| --- | --- | --- |
-| Topics / runs / teams | 103 / 49 / 10 | 119 / 83 / 25 |
+|                       | ragtime26                         | rag26                             |
+| --------------------- | --------------------------------- | --------------------------------- |
+| Topics / runs / teams | 103 / 49 / 10                     | 119 / 83 / 25                     |
 | Comparisons (ordered) | 210,418, **all valid**, 0 missing | 760,886, **all valid**, 0 missing |
-| Unique calls | 196,958 | 703,536 |
-| Cost | **$18.95** ($0.0000962/call) | **$74.89** ($0.0001065/call) |
-| Wall-clock | 3.0 h (about 18 calls/s) | 11.1 h (about 18 calls/s) |
+| Unique calls          | 196,958                           | 703,536                           |
+| Cost                  | **$18.95** ($0.0000962/call)      | **$74.89** ($0.0001065/call)      |
+| Wall-clock            | 3.0 h (about 18 calls/s)          | 11.1 h (about 18 calls/s)         |
 
 **Scoring and submission.**
 
@@ -777,20 +778,20 @@ as results; nothing was tuned on them.
 
 **rag26 (top 12 of 83).**
 
-| Rank | Run | Team | Win rate |
-| --- | --- | --- | --- |
-| 1 | carmen | T569 | 0.8611 |
-| 2 | lars | T569 | 0.8564 |
-| 3 | edith | T569 | 0.8456 |
-| 4 | ariel | T569 | 0.8453 |
-| 5 | hana | T300 | 0.8429 |
-| 6 | xavi | T300 | 0.8397 |
-| 7 | luca | T300 | 0.8295 |
-| 8 | yara | T649 | 0.8216 |
-| 9 | todd | T736 | 0.8047 |
-| 10 | eve | T341 | 0.8029 |
-| 11 | rita | T736 | 0.8024 |
-| 12 | eden | T736 | 0.8017 |
+| Rank | Run    | Team | Win rate |
+| ---- | ------ | ---- | -------- |
+| 1    | carmen | T569 | 0.8611   |
+| 2    | lars   | T569 | 0.8564   |
+| 3    | edith  | T569 | 0.8456   |
+| 4    | ariel  | T569 | 0.8453   |
+| 5    | hana   | T300 | 0.8429   |
+| 6    | xavi   | T300 | 0.8397   |
+| 7    | luca   | T300 | 0.8295   |
+| 8    | yara   | T649 | 0.8216   |
+| 9    | todd   | T736 | 0.8047   |
+| 10   | eve    | T341 | 0.8029   |
+| 11   | rita   | T736 | 0.8024   |
+| 12   | eden   | T736 | 0.8017   |
 
 - Bottom: carlo 0.084, annie 0.048, paula 0.044.
 - Teams by best run: T569 0.861, T300 0.843, T649 0.822, T736 0.805, T341 0.803,
@@ -798,20 +799,20 @@ as results; nothing was tuned on them.
 
 **ragtime26 (top 12 of 49).**
 
-| Rank | Run | Team | Win rate |
-| --- | --- | --- | --- |
-| 1 | marie | T958 | 0.8093 |
-| 2 | alice | T958 | 0.8083 |
-| 3 | lori | T958 | 0.7956 |
-| 4 | alyssa | T958 | 0.7950 |
-| 5 | briar | T289 | 0.7127 |
-| 6 | kent | T289 | 0.7112 |
-| 7 | bree | T706 | 0.7065 |
-| 8 | dina | T846 | 0.7035 |
-| 9 | diana | T706 | 0.7021 |
-| 10 | susan | T706 | 0.6904 |
-| 11 | joyce | T706 | 0.6882 |
-| 12 | kurt | T289 | 0.6770 |
+| Rank | Run    | Team | Win rate |
+| ---- | ------ | ---- | -------- |
+| 1    | marie  | T958 | 0.8093   |
+| 2    | alice  | T958 | 0.8083   |
+| 3    | lori   | T958 | 0.7956   |
+| 4    | alyssa | T958 | 0.7950   |
+| 5    | briar  | T289 | 0.7127   |
+| 6    | kent   | T289 | 0.7112   |
+| 7    | bree   | T706 | 0.7065   |
+| 8    | dina   | T846 | 0.7035   |
+| 9    | diana  | T706 | 0.7021   |
+| 10   | susan  | T706 | 0.6904   |
+| 11   | joyce  | T706 | 0.6882   |
+| 12   | kurt   | T289 | 0.6770   |
 
 - Bottom: hans 0.171, faye 0.110, adair 0.091.
 - Teams by best run: T958 0.809, T289 0.713, T706 0.707, T846 0.704, T673 0.587,
@@ -822,16 +823,16 @@ as results; nothing was tuned on them.
 Computed from the full runs' comparisons on the 10 window topics of each dataset; the
 details are in Sections 5, 6, 10 and 12.
 
-| Metric | rag26 | ragtime26 |
-| --- | --- | --- |
-| Comparisons on the window | 64,140 | 20,480 |
-| Split-half reliability (5 vs 5 topics) | 0.974 [0.960, 0.982] | 0.948 [0.915, 0.970] |
-| Board ρ / Kendall vs Gemini | 0.974 / 0.866 (10 topics) | 0.939 / 0.818 (3 topics) |
-| P(longer wins); per-topic ρ(win rate, words), median | 0.675; +0.558 | 0.486; −0.090 |
-| P(slot A wins): all pairs / close pairs | 0.520 / 0.553 | 0.511 / 0.523 |
-| Winner flips on swap | 4.8% | 5.0% |
-| Decisive / in [0.4, 0.6] | 77.2% / 8.1% | 58.7% / 13.4% |
-| Flagged near-ties / both "yes" | 0.84% / 1.95% | 2.80% / 1.65% |
+| Metric                                               | rag26                     | ragtime26                |
+| ---------------------------------------------------- | ------------------------- | ------------------------ |
+| Comparisons on the window                            | 64,140                    | 20,480                   |
+| Split-half reliability (5 vs 5 topics)               | 0.974 [0.960, 0.982]      | 0.948 [0.915, 0.970]     |
+| Board ρ / Kendall vs Gemini                          | 0.974 / 0.866 (10 topics) | 0.939 / 0.818 (3 topics) |
+| P(longer wins); per-topic ρ(win rate, words), median | 0.675; +0.558             | 0.486; −0.090            |
+| P(slot A wins): all pairs / close pairs              | 0.520 / 0.553             | 0.511 / 0.523            |
+| Winner flips on swap                                 | 4.8%                      | 5.0%                     |
+| Decisive / in [0.4, 0.6]                             | 77.2% / 8.1%              | 58.7% / 13.4%            |
+| Flagged near-ties / both "yes"                       | 0.84% / 1.95%             | 2.80% / 1.65%            |
 
 **Findings.**
 
@@ -908,13 +909,13 @@ The code is `judges/bonsai_judge/bod.py`, run with `workflow.bod.yml`.
    - Grades are written to `<filebase>.bod/grades.jsonl`, one row per question.
    - The leaderboard is tallied from those rows with no further calls.
 
-| Measure | Definition |
-| --- | --- |
+| Measure              | Definition                                                                                                                                    |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | `BOD_MEAN` (primary) | mean expected grade over the topic's questions, /3; the overall score is the mean over topics, so topics with more questions don't weigh more |
-| `BOD_COVERAGE` | fraction of questions with P(grade ≥ 2) > 0.5 |
-| `BOD_FULL` | fraction of questions with P(grade = 3) > 0.5 |
-| `BOD_PADDING` | P(yes) on the padding question; diagnostic only, not part of `BOD_MEAN` |
-| `BOD_QUESTIONS` | number of rubric questions |
+| `BOD_COVERAGE`       | fraction of questions with P(grade ≥ 2) > 0.5                                                                                                 |
+| `BOD_FULL`           | fraction of questions with P(grade = 3) > 0.5                                                                                                 |
+| `BOD_PADDING`        | P(yes) on the padding question; diagnostic only, not part of `BOD_MEAN`                                                                       |
+| `BOD_QUESTIONS`      | number of rubric questions                                                                                                                    |
 
 Empty reports score 0 without a call, as in the other judges.
 
@@ -924,12 +925,12 @@ Empty reports score 0 without a call, as in the other judges.
 hand-written questions (`temp/bod_smoke.py`, 4 calls). A Choice with labels `"0"…"3"`
 returns `probabilities` over all four labels, plus `choice` and `confidence`.
 
-| Case | BOD_MEAN | Padding P(yes) |
-| --- | --- | --- |
-| On-topic answer (run1/leaf) | 0.643 | 0.06 |
-| Off-topic answer (run1/cloud, graded on the leaf rubric) | 0.000 (every question P(0) = 1.00) | 0.98 |
-| Same as the first row, grades listed 3→0 | 0.642 (per question \|Δ\| ≤ 0.03) | 0.06 |
-| Shorter answer (run2/leaf) | 0.261 | 0.09 |
+| Case                                                     | BOD_MEAN                           | Padding P(yes) |
+| -------------------------------------------------------- | ---------------------------------- | -------------- |
+| On-topic answer (run1/leaf)                              | 0.643                              | 0.06           |
+| Off-topic answer (run1/cloud, graded on the leaf rubric) | 0.000 (every question P(0) = 1.00) | 0.98           |
+| Same as the first row, grades listed 3→0                 | 0.642 (per question \|Δ\| ≤ 0.03)  | 0.06           |
+| Shorter answer (run2/leaf)                               | 0.261                              | 0.09           |
 
 The grades match the texts. For example, run2 partly explains the colour change
 (E[g] 2.08), mentions evergreens (1.78), and says nothing about whether the leaves are
@@ -940,7 +941,7 @@ context stated in the need (audience, situation, goals)". On kiddie that produce
 persona questions, for example "Does the answer acknowledge the child's interest in
 sweet foods and insects?" and "…maintain a gentle and reassuring tone…".
 
-We tightened the prompt: background may only decide *what content* is needed, and no
+We tightened the prompt: background may only decide _what content_ is needed, and no
 questions about acknowledging interests, tone or reading level. Afterwards:
 
 - The kiddie rubrics are all content questions (7–9 per topic instead of 8–11).
@@ -961,20 +962,20 @@ synthetic, so this checks the pipeline, not quality.
 - Analysis: `temp/bod_pilot_analysis.py`, which reads per-answer data on window topics
   only.
 
-| | rag26 window |
-| --- | --- |
-| Questions per topic | 5–13 (mean 9.0) |
-| BOD_MEAN p10 / p50 / p90 | 0.420 / 0.756 / 0.983 |
-| Most likely grade 0 / 1 / 2 / 3 | 8.2% / 9.2% / 40.3% / 42.3% |
-| Max grade probability > 0.9 | 39.8% of questions |
-| \|E[g] − most likely grade\| > 0.25 | 26.9% of questions |
-| Split-half (5 vs 5 topics, 200 splits), Spearman | 0.969 [0.956, 0.979] |
-| Per-topic Spearman(BOD_MEAN, words), median | 0.518 [min 0.396, max 0.724] |
-| Same for the Jev pairwise (mirror) full run | 0.558 |
-| Same for Gemini (7 window topics) | 0.451 |
-| Mean padding P(yes); Spearman(padding, words) median | 0.426; −0.182 |
-| Agreement with Jev pairwise (mirror), board Spearman / Kendall | **0.990** / 0.919 (per-topic median 0.968) |
-| Agreement with Gemini (7 window topics), board Spearman / Kendall | 0.972 / 0.859 (per-topic median 0.938) |
+|                                                                   | rag26 window                               |
+| ----------------------------------------------------------------- | ------------------------------------------ |
+| Questions per topic                                               | 5–13 (mean 9.0)                            |
+| BOD_MEAN p10 / p50 / p90                                          | 0.420 / 0.756 / 0.983                      |
+| Most likely grade 0 / 1 / 2 / 3                                   | 8.2% / 9.2% / 40.3% / 42.3%                |
+| Max grade probability > 0.9                                       | 39.8% of questions                         |
+| \|E[g] − most likely grade\| > 0.25                               | 26.9% of questions                         |
+| Split-half (5 vs 5 topics, 200 splits), Spearman                  | 0.969 [0.956, 0.979]                       |
+| Per-topic Spearman(BOD_MEAN, words), median                       | 0.518 [min 0.396, max 0.724]               |
+| Same for the Jev pairwise (mirror) full run                       | 0.558                                      |
+| Same for Gemini (7 window topics)                                 | 0.451                                      |
+| Mean padding P(yes); Spearman(padding, words) median              | 0.426; −0.182                              |
+| Agreement with Jev pairwise (mirror), board Spearman / Kendall    | **0.990** / 0.919 (per-topic median 0.968) |
+| Agreement with Gemini (7 window topics), board Spearman / Kendall | 0.972 / 0.859 (per-topic median 0.938)     |
 
 - **Agreement:** on the window, BOD ranks runs almost exactly like the submitted
   pairwise judge, at about 1/1000 of its cost per topic.
@@ -999,13 +1000,13 @@ topic's rubric.
   - It should increase for relevant padding and decrease for truncation.
   - `BOD_PADDING` should increase for the three uninformative variants.
 
-| Variant | Words × | ΔBOD_MEAN | 95% CI | ΔPADDING | 95% CI |
-| --- | --- | --- | --- | --- | --- |
-| pad_repeat | 1.52 | −0.023 | [−0.025, −0.020] | +0.510 | [+0.474, +0.544] |
-| pad_generic | 1.51 | −0.032 | [−0.035, −0.028] | +0.537 | [+0.499, +0.574] |
-| pad_offtopic | 1.53 | −0.043 | [−0.047, −0.039] | +0.574 | [+0.535, +0.612] |
-| pad_relevant | 1.54 | **+0.132** | [+0.121, +0.144] | +0.038 | [+0.021, +0.055] |
-| truncate | 0.67 | **−0.103** | [−0.114, −0.092] | −0.044 | [−0.061, −0.027] |
+| Variant      | Words × | ΔBOD_MEAN  | 95% CI           | ΔPADDING | 95% CI           |
+| ------------ | ------- | ---------- | ---------------- | -------- | ---------------- |
+| pad_repeat   | 1.52    | −0.023     | [−0.025, −0.020] | +0.510   | [+0.474, +0.544] |
+| pad_generic  | 1.51    | −0.032     | [−0.035, −0.028] | +0.537   | [+0.499, +0.574] |
+| pad_offtopic | 1.53    | −0.043     | [−0.047, −0.039] | +0.574   | [+0.535, +0.612] |
+| pad_relevant | 1.54    | **+0.132** | [+0.121, +0.144] | +0.038   | [+0.021, +0.055] |
+| truncate     | 0.67    | **−0.103** | [−0.114, −0.092] | −0.044   | [−0.061, −0.027] |
 
 (Baseline: BOD_MEAN 0.761, padding 0.398. CIs are bootstraps over targets.)
 
@@ -1027,14 +1028,14 @@ topic's rubric.
 - **Overlap:** some redundancy remains, for example separate questions on "life
   satisfaction" and "happiness" for 2006.
 
-| | ragtime26 window |
-| --- | --- |
-| BOD_MEAN p10 / p50 / p90 | 0.514 / 0.710 / 0.894 |
-| Most likely grade 0 / 1 / 2 / 3 | 8.4% / 7.8% / 46.4% / 37.5% |
-| \|E[g] − most likely grade\| > 0.25 | 37.7% of questions |
-| Split-half (5 vs 5), Spearman | 0.854 [0.789, 0.914] |
+|                                             | ragtime26 window                   |
+| ------------------------------------------- | ---------------------------------- |
+| BOD_MEAN p10 / p50 / p90                    | 0.514 / 0.710 / 0.894              |
+| Most likely grade 0 / 1 / 2 / 3             | 8.4% / 7.8% / 46.4% / 37.5%        |
+| \|E[g] − most likely grade\| > 0.25         | 37.7% of questions                 |
+| Split-half (5 vs 5), Spearman               | 0.854 [0.789, 0.914]               |
 | Per-topic Spearman(BOD_MEAN, words), median | **−0.120** [min −0.439, max 0.306] |
-| Per-topic Spearman(PADDING, words), median | +0.491 |
+| Per-topic Spearman(PADDING, words), median  | +0.491                             |
 
 - **Length:** as with the pairwise judges (Section 6), the length relationship is
   dataset-specific. On ragtime26 longer answers do not score higher, and they are more
@@ -1049,13 +1050,13 @@ topic's rubric.
 
 Variant `full`, run with `temp/run_bod_full.sh`; snapshot `typesafe/jev-1.13-20260917`.
 
-| | ragtime26 | rag26 |
-| --- | --- | --- |
-| Topics / runs | 103 / 49 | 119 / 83 |
-| Rubric questions per topic | 5–11 (mean 7.7) | 5–15 (mean 8.4) |
-| Answers graded | **5,041 / 5,041** | **9,838 / 9,838** |
-| New Jev calls (the rest cached from the pilots) | 4,398 | 8,670 |
-| Wall-clock | 3.0 min | 8.5 min |
+|                                                 | ragtime26         | rag26             |
+| ----------------------------------------------- | ----------------- | ----------------- |
+| Topics / runs                                   | 103 / 49          | 119 / 83          |
+| Rubric questions per topic                      | 5–11 (mean 7.7)   | 5–15 (mean 8.4)   |
+| Answers graded                                  | **5,041 / 5,041** | **9,838 / 9,838** |
+| New Jev calls (the rest cached from the pilots) | 4,398             | 8,670             |
+| Wall-clock                                      | 3.0 min           | 8.5 min           |
 
 - **Cost:** the key's usage rose by **$1.31** for both runs together, including rubric
   generation. The per-answer cost is ≈ $0.0001, the same as one pairwise call, but
@@ -1070,14 +1071,14 @@ This compares the two submitted leaderboards' "all" rows. It was produced for
 information, after both submissions were fixed, and was not used to choose or rank
 submissions.
 
-| | rag26 | ragtime26 |
-| --- | --- | --- |
+|                                                   | rag26         | ragtime26     |
+| ------------------------------------------------- | ------------- | ------------- |
 | Spearman / Kendall (BOD_MEAN vs PAIRWISE_WINRATE) | 0.991 / 0.929 | 0.943 / 0.827 |
-| Median \|rank change\| | 1 | 2 |
-| Runs moving ≥ 5 / ≥ 10 places | 13 / 2 | 10 / 2 |
-| Largest move | 11 | 21 |
-| Shared top-10 / top-5 | 8 / 4 | 8 / 4 |
-| Same #1 | no | no |
+| Median \|rank change\|                            | 1             | 2             |
+| Runs moving ≥ 5 / ≥ 10 places                     | 13 / 2        | 10 / 2        |
+| Largest move                                      | 11            | 21            |
+| Shared top-10 / top-5                             | 8 / 4         | 8 / 4         |
+| Same #1                                           | no            | no            |
 
 - **rag26:** the full-run agreement matches the window pilot (0.990).
 - **ragtime26:** the judges diverge more. One candidate explanation is the
@@ -1120,7 +1121,7 @@ restricted topics, in the same way as the pairwise method (Section 16.3).
 
 **Idea.** BOD rewards answering the rubric. It does not check whether what the answer
 says is supported by the documents it cites. This judge discounts each answer's BOD score
-by the share of its content that is unsupported *and* that no other run produced, the
+by the share of its content that is unsupported _and_ that no other run produced, the
 strongest lexical signal of a hallucination.
 
 **Sources.** Irwin's concept F1 [53] extracts nouns from a summary and from the
@@ -1161,12 +1162,12 @@ The code is `judges/bonsai_judge/bod_risk.py` (`BodRiskJudge`, a subclass of
 - **Grades:** the BOD grades are reused unchanged: same rubric (byte-identical copy of the
   BOD submission's nugget banks), same Jev requests, served from the prompt cache.
 
-| Measure | Definition |
-| --- | --- |
-| `BOD_GROUNDED` (primary) | `BOD_MEAN × (1 − HALLUC_RISK)` per answer; overall = mean over topics. No weight, no threshold. |
-| `HALLUC_RISK` | \|private-ungrounded\| / \|sn\|; higher is worse; depends on the pool of runs |
-| `UNGROUNDED_RATE` | \|sn − hn\| / \|sn\| = 1 − CONCEPT_PRECISION; diagnostic |
-| `BOD_MEAN`, `BOD_COVERAGE`, `BOD_FULL`, `BOD_PADDING`, `BOD_QUESTIONS` | as in Section 14.1 |
+| Measure                                                                | Definition                                                                                      |
+| ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `BOD_GROUNDED` (primary)                                               | `BOD_MEAN × (1 − HALLUC_RISK)` per answer; overall = mean over topics. No weight, no threshold. |
+| `HALLUC_RISK`                                                          | \|private-ungrounded\| / \|sn\|; higher is worse; depends on the pool of runs                   |
+| `UNGROUNDED_RATE`                                                      | \|sn − hn\| / \|sn\| = 1 − CONCEPT_PRECISION; diagnostic                                        |
+| `BOD_MEAN`, `BOD_COVERAGE`, `BOD_FULL`, `BOD_PADDING`, `BOD_QUESTIONS` | as in Section 14.1                                                                              |
 
 Empty reports score 0, as in the other judges.
 
@@ -1192,23 +1193,23 @@ Analysis: `temp/bod_risk_analysis.py`, which reads window topics only.
 
 ### 15.3 Window results
 
-| Criterion | rag26 window (development) | ragtime26 window (confirmation) |
-| --- | --- | --- |
-| Runs / answers | 83 / 828 | 49 / 490 |
-| 1 Pipeline | 0 new calls; defined 826/828 — pass | 0 new calls; defined 490/490 — pass |
-| 2 Not redundant | ρ 0.992 — **fail** | ρ 0.984 — pass |
-| 3 Not dominant | ρ 0.992 — pass | ρ 0.984 — pass |
-| 4 Reliability (GROUNDED vs MEAN) | 0.968 vs 0.969 — pass | 0.820 vs 0.854 — pass |
-| 5 Length (GROUNDED vs MEAN) | +0.505 vs +0.523 — pass | −0.163 vs −0.120 — pass |
-| 6 Pool stability, half-pool ρ min / mean | 0.993 / 0.996 — pass | 0.910 / 0.964 — pass |
+| Criterion                                | rag26 window (development)          | ragtime26 window (confirmation)     |
+| ---------------------------------------- | ----------------------------------- | ----------------------------------- |
+| Runs / answers                           | 83 / 828                            | 49 / 490                            |
+| 1 Pipeline                               | 0 new calls; defined 826/828 — pass | 0 new calls; defined 490/490 — pass |
+| 2 Not redundant                          | ρ 0.992 — **fail**                  | ρ 0.984 — pass                      |
+| 3 Not dominant                           | ρ 0.992 — pass                      | ρ 0.984 — pass                      |
+| 4 Reliability (GROUNDED vs MEAN)         | 0.968 vs 0.969 — pass               | 0.820 vs 0.854 — pass               |
+| 5 Length (GROUNDED vs MEAN)              | +0.505 vs +0.523 — pass             | −0.163 vs −0.120 — pass             |
+| 6 Pool stability, half-pool ρ min / mean | 0.993 / 0.996 — pass                | 0.910 / 0.964 — pass                |
 
-| Diagnostic | rag26 window | ragtime26 window |
-| --- | --- | --- |
-| HALLUC_RISK mean / median / p75 / max | 0.021 / 0.009 / 0.027 / 1.000 | 0.025 / 0.013 / 0.036 / 0.139 |
-| UNGROUNDED_RATE mean | 0.104 | 0.140 |
-| Median per-topic Spearman(risk, number of cited documents) | +0.165 | +0.131 |
-| Median per-topic Spearman(risk, BOD_MEAN) | +0.331 | +0.347 |
-| Mean BOD_GROUNDED / BOD_MEAN | 0.703 / 0.718 | 0.681 / 0.699 |
+| Diagnostic                                                 | rag26 window                  | ragtime26 window              |
+| ---------------------------------------------------------- | ----------------------------- | ----------------------------- |
+| HALLUC_RISK mean / median / p75 / max                      | 0.021 / 0.009 / 0.027 / 1.000 | 0.025 / 0.013 / 0.036 / 0.139 |
+| UNGROUNDED_RATE mean                                       | 0.104                         | 0.140                         |
+| Median per-topic Spearman(risk, number of cited documents) | +0.165                        | +0.131                        |
+| Median per-topic Spearman(risk, BOD_MEAN)                  | +0.331                        | +0.347                        |
+| Mean BOD_GROUNDED / BOD_MEAN                               | 0.703 / 0.718                 | 0.681 / 0.699                 |
 
 (The rag26 maximum of 1.000 is one of the two answers whose risk is undefined.)
 
@@ -1235,14 +1236,14 @@ passed all six criteria. The decision is recorded in `temp/BOD_RISK_PLAN.md`.
 
 Variant `full`, run with `temp/run_bod_risk_full.sh`.
 
-| | ragtime26 | rag26 |
-| --- | --- | --- |
-| Topics / runs | 103 / 49 | 119 / 83 |
-| Answers graded | 5,041 / 5,041 | 9,838 / 9,838 |
-| New Jev calls | **0** | **0** |
-| Risk defined | 5,033 / 5,041 | 9,791 / 9,838 |
-| Cited documents tagged | 10,394 | 61,151 |
-| Wall-clock (spaCy, single process) | 10 min | 146 min |
+|                                    | ragtime26     | rag26         |
+| ---------------------------------- | ------------- | ------------- |
+| Topics / runs                      | 103 / 49      | 119 / 83      |
+| Answers graded                     | 5,041 / 5,041 | 9,838 / 9,838 |
+| New Jev calls                      | **0**         | **0**         |
+| Risk defined                       | 5,033 / 5,041 | 9,791 / 9,838 |
+| Cited documents tagged             | 10,394        | 61,151        |
+| Wall-clock (spaCy, single process) | 10 min        | 146 min       |
 
 - **Cost:** $0 in API calls; all grades came from the BOD prompt cache. The time is
   spaCy tagging the cited documents.
@@ -1254,14 +1255,14 @@ Variant `full`, run with `temp/run_bod_risk_full.sh`.
 This compares the submitted leaderboards' "all" rows. It was produced for information
 after the submissions were fixed, and was not used to choose or rank submissions.
 
-| | rag26: vs BOD_MEAN | rag26: vs pairwise | ragtime26: vs BOD_MEAN | ragtime26: vs pairwise |
-| --- | --- | --- | --- | --- |
-| Spearman / Kendall | 0.993 / 0.952 | 0.982 / 0.890 | 0.975 / 0.884 | 0.911 / 0.765 |
-| Median \|rank change\| | 1 | 3 | 2 | 4 |
-| Runs moving ≥ 5 / ≥ 10 places | 12 / 1 | 26 / 3 | 6 / 0 | 18 / 2 |
-| Largest move | 11 | 14 | 8 | 24 |
-| Shared top-10 / top-5 | 9 / 4 | 7 / 3 | 9 / 3 | 8 / 2 |
-| Same #1 | no | no | no | no |
+|                               | rag26: vs BOD_MEAN | rag26: vs pairwise | ragtime26: vs BOD_MEAN | ragtime26: vs pairwise |
+| ----------------------------- | ------------------ | ------------------ | ---------------------- | ---------------------- |
+| Spearman / Kendall            | 0.993 / 0.952      | 0.982 / 0.890      | 0.975 / 0.884          | 0.911 / 0.765          |
+| Median \|rank change\|        | 1                  | 3                  | 2                      | 4                      |
+| Runs moving ≥ 5 / ≥ 10 places | 12 / 1             | 26 / 3             | 6 / 0                  | 18 / 2                 |
+| Largest move                  | 11                 | 14                 | 8                      | 24                     |
+| Shared top-10 / top-5         | 9 / 4              | 7 / 3              | 9 / 3                  | 8 / 2                  |
+| Same #1                       | no                 | no                 | no                     | no                     |
 
 Run level, all topics: mean HALLUC_RISK 0.026 (rag26) and 0.029 (ragtime26); mean
 UNGROUNDED_RATE 0.108 and 0.133. Over runs, Spearman(HALLUC_RISK, BOD_MEAN) is +0.28 and
@@ -1302,14 +1303,14 @@ the #1 run on both datasets, though, so the top of the board is where it matters
 
 All answers below come from the permitted window only.
 
-| RQ | Answer |
-| --- | --- |
-| RQ1 Jev vs Gemini agreement | **High.** Board Spearman 0.976 on the 10 rag26 window topics and 0.937 on ragtime26's 3 (Choice); 0.974 / 0.939 for the submitted mirror form. |
-| RQ2 Do probabilities matter? | **Not for ranking.** Probability-weighted and binary win rates have ρ ≥ 0.998 for both Choice (19–50% saturated) and the mirror (never saturated). Without ground truth we can't say whether probabilities improve accuracy. |
-| RQ3 Length bias | **Not for crude padding.** Both judges penalise repeated, generic and off-topic additions on every topic (Section 9). The natural length correlation is dataset-specific: about +0.54 on rag26 and about −0.10 on ragtime26. Subtle on-topic verbosity is untested. |
-| RQ4 Prompt sensitivity | **Wording matters little for ranking.** Rewording changes 3–9% of pair decisions; ranking ρ is ≥ 0.98 (rag26) and ≥ 0.94 (ragtime26) against the control. Instruction-following probes (negation, label swap) were not re-run on the window, so instruction following is not established here. |
-| RQ5 Reliability | **Mixed.** The mirror is near-deterministic (0.16% / 0.68% winner flips). Choice is strongly slot-A biased on ties (P(A) ≈ 0.79); the mirror is not (0.535 / 0.539). Close-pair position effects remain in both forms, with a dataset-dependent direction for Choice, so both orientations are needed. Split-half reliability on the window is 0.94–0.98. |
-| RQ6 Depth proportionality | **Yes, modestly.** The proportionate wording matches `better` on broad requests, and moves 1–5 points further toward shorter answers when the request is narrowed, on 20 of 20 topics (Section 11). This is shown with synthetic narrow requests only. |
+| RQ                           | Answer                                                                                                                                                                                                                                                                                                                                                    |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| RQ1 Jev vs Gemini agreement  | **High.** Board Spearman 0.976 on the 10 rag26 window topics and 0.937 on ragtime26's 3 (Choice); 0.974 / 0.939 for the submitted mirror form.                                                                                                                                                                                                            |
+| RQ2 Do probabilities matter? | **Not for ranking.** Probability-weighted and binary win rates have ρ ≥ 0.998 for both Choice (19–50% saturated) and the mirror (never saturated). Without ground truth we can't say whether probabilities improve accuracy.                                                                                                                              |
+| RQ3 Length bias              | **Not for crude padding.** Both judges penalise repeated, generic and off-topic additions on every topic (Section 9). The natural length correlation is dataset-specific: about +0.54 on rag26 and about −0.10 on ragtime26. Subtle on-topic verbosity is untested.                                                                                       |
+| RQ4 Prompt sensitivity       | **Wording matters little for ranking.** Rewording changes 3–9% of pair decisions; ranking ρ is ≥ 0.98 (rag26) and ≥ 0.94 (ragtime26) against the control. Instruction-following probes (negation, label swap) were not re-run on the window, so instruction following is not established here.                                                            |
+| RQ5 Reliability              | **Mixed.** The mirror is near-deterministic (0.16% / 0.68% winner flips). Choice is strongly slot-A biased on ties (P(A) ≈ 0.79); the mirror is not (0.535 / 0.539). Close-pair position effects remain in both forms, with a dataset-dependent direction for Choice, so both orientations are needed. Split-half reliability on the window is 0.94–0.98. |
+| RQ6 Depth proportionality    | **Yes, modestly.** The proportionate wording matches `better` on broad requests, and moves 1–5 points further toward shorter answers when the request is narrowed, on 20 of 20 topics (Section 11). This is shown with synthetic narrow requests only.                                                                                                    |
 
 ### 16.2 Recommended protocol for a Jev pairwise run
 
@@ -1390,15 +1391,15 @@ All answers below come from the permitted window only.
 
 ### 16.5 Cost summary
 
-| Item | Cost |
-| --- | --- |
-| Window study, rag26 (Section 4) | $25.27 |
-| Window study, ragtime26 (Section 4) | $6.82 |
-| Full runs, ragtime26 + rag26 (Section 13) | $93.84 |
-| Bag-of-decisions judge: smoke test, pilots, padding test, full runs (Section 14) | $1.57 |
-| BOD × Hallucination Risk: pilots and full runs, all grades cached (Section 15) | $0.00 |
-| Earlier study, withdrawn (Jev pilots and probes, about $19.49) | — |
-| **Total for the results reported here** | **≈ $127.50** |
+| Item                                                                             | Cost          |
+| -------------------------------------------------------------------------------- | ------------- |
+| Window study, rag26 (Section 4)                                                  | $25.27        |
+| Window study, ragtime26 (Section 4)                                              | $6.82         |
+| Full runs, ragtime26 + rag26 (Section 13)                                        | $93.84        |
+| Bag-of-decisions judge: smoke test, pilots, padding test, full runs (Section 14) | $1.57         |
+| BOD × Hallucination Risk: pilots and full runs, all grades cached (Section 15)   | $0.00         |
+| Earlier study, withdrawn (Jev pilots and probes, about $19.49)                   | —             |
+| **Total for the results reported here**                                          | **≈ $127.50** |
 
 The partial Gemini tournament from September 2026 (78/119 rag26 topics) cost about
 $149 and is not counted.
@@ -1422,15 +1423,15 @@ configured topic outside it.
 
 **Window study.**
 
-| Section | Command | Output |
-| --- | --- | --- |
-| 4–10 | `bash temp/run_window_suite.sh <ds>`: prompt variants, Choice pilot, identical summaries, determinism, mirror padding, Gemini window run (rag26), Gemini padding; budget-guarded | `output-win-<ds>-jev{,-prompts}/`, `output-win-rag26-gemini/`, `temp/jev_probes_win_<ds>/`; logs `temp/win_<ds>_*.log` |
-| 11 | `bash temp/run_proportionate_test.sh <ds>`, then `JEV_DATASET=<ds> python temp/jev_proportionate_compare.py <broad comparisons> <narrow comparisons>` | `output-win-<ds>-prop-{broad,narrow}/`; `temp/win_<ds>_proportionate.txt` |
-| 5, 6, 10, 13.2 | `JEV_DATASET=<ds> python temp/jev_win_report.py <comparisons.jsonl> <score> [gemini comparisons]` | `temp/win_<ds>_report.txt` |
-| 7 | `JEV_DATASET=<ds> python temp/jev_prompt_compare.py <prompts comparisons> <Choice pilot comparisons> <gemini comparisons>` | `temp/win_<ds>_prompt_compare.txt` |
-| 8 | `JEV_DATASET=<ds> python temp/jev_probes.py report --question better_summary\|noul_a_proportionate\|noul_b_proportionate\|mirror` | `temp/win_<ds>_probes.txt` |
-| 9 | `JEV_DATASET=<ds> python temp/jev_padding.py report --judge noul\|gemini [--topics …]` | `temp/win_<ds>_padding_{noul,gemini}.txt` |
-| 12 | Decisions and confirmation recorded in `temp/WINDOW_STUDY_PLAN.md`. Decision 3 CIs and diagnostics: `JEV_DATASET=<ds> python temp/jev_full_analysis.py <full-run out-dir> <gemini comparisons>` | `temp/win_<ds>_full_window_diag.txt`, `temp/win_<ds>_choice_vs_mirror.txt` |
+| Section        | Command                                                                                                                                                                                         | Output                                                                                                                 |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| 4–10           | `bash temp/run_window_suite.sh <ds>`: prompt variants, Choice pilot, identical summaries, determinism, mirror padding, Gemini window run (rag26), Gemini padding; budget-guarded                | `output-win-<ds>-jev{,-prompts}/`, `output-win-rag26-gemini/`, `temp/jev_probes_win_<ds>/`; logs `temp/win_<ds>_*.log` |
+| 11             | `bash temp/run_proportionate_test.sh <ds>`, then `JEV_DATASET=<ds> python temp/jev_proportionate_compare.py <broad comparisons> <narrow comparisons>`                                           | `output-win-<ds>-prop-{broad,narrow}/`; `temp/win_<ds>_proportionate.txt`                                              |
+| 5, 6, 10, 13.2 | `JEV_DATASET=<ds> python temp/jev_win_report.py <comparisons.jsonl> <score> [gemini comparisons]`                                                                                               | `temp/win_<ds>_report.txt`                                                                                             |
+| 7              | `JEV_DATASET=<ds> python temp/jev_prompt_compare.py <prompts comparisons> <Choice pilot comparisons> <gemini comparisons>`                                                                      | `temp/win_<ds>_prompt_compare.txt`                                                                                     |
+| 8              | `JEV_DATASET=<ds> python temp/jev_probes.py report --question better_summary\|noul_a_proportionate\|noul_b_proportionate\|mirror`                                                               | `temp/win_<ds>_probes.txt`                                                                                             |
+| 9              | `JEV_DATASET=<ds> python temp/jev_padding.py report --judge noul\|gemini [--topics …]`                                                                                                          | `temp/win_<ds>_padding_{noul,gemini}.txt`                                                                              |
+| 12             | Decisions and confirmation recorded in `temp/WINDOW_STUDY_PLAN.md`. Decision 3 CIs and diagnostics: `JEV_DATASET=<ds> python temp/jev_full_analysis.py <full-run out-dir> <gemini comparisons>` | `temp/win_<ds>_full_window_diag.txt`, `temp/win_<ds>_choice_vs_mirror.txt`                                             |
 
 `<ds>` is `rag26` or `ragtime26`. Gemini comparisons:
 
@@ -1447,23 +1448,23 @@ configured topic outside it.
 
 **Bag-of-decisions (Section 14).**
 
-| Step | Command |
-| --- | --- |
-| Smoke test | `python temp/bod_smoke.py` |
-| Kiddie | `auto-judge run --workflow judges/bonsai_judge/workflow.bod.yml --variant kiddie --rag-responses data/kiddie/runs/repgen/ --rag-topics data/kiddie/topics/kiddie-topics.jsonl --out-dir ./output-kiddie-bod2/` |
-| Pilots | the same workflow with `--variant pilot`, then `JEV_DATASET=<ds> python temp/bod_pilot_analysis.py output-win-<ds>-bod` |
-| Padding | `JEV_DATASET=rag26 python temp/bod_padding.py run`, then `report` |
-| Full runs | `bash temp/run_bod_full.sh` |
+| Step       | Command                                                                                                                                                                                                        |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Smoke test | `python temp/bod_smoke.py`                                                                                                                                                                                     |
+| Kiddie     | `auto-judge run --workflow judges/bonsai_judge/workflow.bod.yml --variant kiddie --rag-responses data/kiddie/runs/repgen/ --rag-topics data/kiddie/topics/kiddie-topics.jsonl --out-dir ./output-kiddie-bod2/` |
+| Pilots     | the same workflow with `--variant pilot`, then `JEV_DATASET=<ds> python temp/bod_pilot_analysis.py output-win-<ds>-bod`                                                                                        |
+| Padding    | `JEV_DATASET=rag26 python temp/bod_padding.py run`, then `report`                                                                                                                                              |
+| Full runs  | `bash temp/run_bod_full.sh`                                                                                                                                                                                    |
 
 **BOD × Hallucination Risk (Section 15).** Plan, criteria and results:
 `temp/BOD_RISK_PLAN.md`. Each run reuses the BOD rubric, copied byte for byte to
 `<out-dir>/bonsai_bod_risk.nuggets.jsonl`, so no questions are regenerated.
 
-| Step | Command | Output |
-| --- | --- | --- |
-| Kiddie | `auto-judge run --workflow judges/bonsai_judge/workflow.bod_risk.yml --variant kiddie --rag-responses data/kiddie/runs/repgen/ --rag-topics data/kiddie/topics/kiddie-topics.jsonl --out-dir ./output-kiddie-bodrisk/` | |
-| Pilots | the same workflow with `--variant pilot` and `--out-dir ./output-win-<ds>-bodrisk/`, then `JEV_DATASET=<ds> python temp/bod_risk_analysis.py output-win-<ds>-bodrisk` | `temp/win_<ds>_bod_risk.txt` |
-| Full runs | `bash temp/run_bod_risk_full.sh` | `output-full-<ds>-bodrisk/`; copies in `submissions/bonsai-bod-risk-jev-20261013/` |
+| Step      | Command                                                                                                                                                                                                                | Output                                                                             |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Kiddie    | `auto-judge run --workflow judges/bonsai_judge/workflow.bod_risk.yml --variant kiddie --rag-responses data/kiddie/runs/repgen/ --rag-topics data/kiddie/topics/kiddie-topics.jsonl --out-dir ./output-kiddie-bodrisk/` |                                                                                    |
+| Pilots    | the same workflow with `--variant pilot` and `--out-dir ./output-win-<ds>-bodrisk/`, then `JEV_DATASET=<ds> python temp/bod_risk_analysis.py output-win-<ds>-bodrisk`                                                  | `temp/win_<ds>_bod_risk.txt`                                                       |
+| Full runs | `bash temp/run_bod_risk_full.sh`                                                                                                                                                                                       | `output-full-<ds>-bodrisk/`; copies in `submissions/bonsai-bod-risk-jev-20261013/` |
 
 The per-answer risk values are in `<out-dir>/bonsai_bod_risk.bod/risk.jsonl` (numbers
 only, never concepts). For the full runs that file is restricted beyond the window, like
@@ -1614,7 +1615,7 @@ circumstances and goals." The full list is `GENERIC` in `temp/jev_padding.py`.
 Rubric generation (Gemini 2.5 Flash Lite, temperature 0). `<%=topic_query%>` is the query,
 problem statement and background:
 
-````markdown
+```markdown
 You are designing a grading rubric for answers to a user's information need.
 
 <information_need>
@@ -1624,6 +1625,7 @@ You are designing a grading rubric for answers to a user's information need.
 Write the questions a careful expert would use to grade how well an answer meets this information need. Each question checks one distinct part of what the user needs to know or do.
 
 Rules:
+
 - Write between <%=min_questions%> and <%=max_questions%> questions. Use as many as the need has genuinely distinct parts: a narrow, single-fact need gets few questions; a broad, multi-part need gets more. Do not pad the list to reach a number.
 - Each question must be gradable on a scale from "not addressed" to "fully answered with specific detail", so phrase it as "Does the answer ...?" about content, e.g. "Does the answer explain why ...?" or "Does the answer give ...?".
 - Every question must check substantive content: a fact, explanation, step, or piece of advice the user asked for or clearly needs to act on what they asked.
@@ -1632,18 +1634,21 @@ Rules:
 - Do not mention any particular source, product, or answer.
 
 Return ONLY a JSON array of strings, one per question, with no other text.
-````
+```
 
 Each rubric question is sent to Jev as:
 
 ```json
-{"type": "choice",
- "instructions": "Grade the answer on this question: <rubric question>",
- "criteria": {
-   "0": "The answer does not address this question at all.",
-   "1": "The answer mentions this topic but gives no real substance or explanation.",
-   "2": "The answer partially answers this question; important parts are missing or vague.",
-   "3": "The answer fully answers this question with specific, accurate detail."}}
+{
+  "type": "choice",
+  "instructions": "Grade the answer on this question: <rubric question>",
+  "criteria": {
+    "0": "The answer does not address this question at all.",
+    "1": "The answer mentions this topic but gives no real substance or explanation.",
+    "2": "The answer partially answers this question; important parts are missing or vague.",
+    "3": "The answer fully answers this question with specific, accurate detail."
+  }
+}
 ```
 
 The padding question is a Noul: "Does the answer contain substantial content that is
@@ -1654,28 +1659,28 @@ off-topic, repeated, or generic filler that does not help with the user's questi
 Each was written from the topic's own text, and sent as the only topic field (`query`).
 Files: `temp/narrow_topics_{rag26,ragtime26}.jsonl`.
 
-| Dataset | Topic | Narrow request |
-| --- | --- | --- |
-| rag26 | rag2026-0 | What outcomes should a hospital nursing DEI plan measure to show it improves recruitment and retention of nurses of color? |
-| rag26 | rag2026-1 | My 72-year-old mother was widowed six weeks ago and has chest tightness. What warning signs should we take seriously? |
-| rag26 | rag2026-2 | Would treating health care as a right in U.S. policy require a single-payer system? |
-| rag26 | rag2026-3 | Should an 18-year-old investing $10,000 for the long term put it in a low-cost broad-market index fund? |
-| rag26 | rag2026-4 | When is looking back at nostalgic memories psychologically useful rather than harmful? |
-| rag26 | rag2026-5 | Is shipping straight from China to each customer under the $800 de minimis rule a smart move for a small US online shop? |
-| rag26 | rag2026-6 | How did work culture change after the COVID-19 pandemic? |
-| rag26 | rag2026-7 | Is it legal for a public pension fund to trade on congressional trading disclosures? |
-| rag26 | rag2026-8 | Did the 2020 Arizona election audit find evidence that changed the official result? |
-| rag26 | rag2026-9 | Does Russia's role in uranium enrichment create a fuel-supply risk for U.S. nuclear utilities? |
-| ragtime26 | 2000 | Have anti-vaping laws measurably reduced vaping among teenagers? |
-| ragtime26 | 2001 | Is Nordic walking better exercise than normal walking? |
-| ragtime26 | 2002 | What is the Chinese government's attitude toward the "lying flat" movement? |
-| ragtime26 | 2003 | Is ketamine an effective treatment for PTSD? |
-| ragtime26 | 2004 | Is felinotherapy (cat-assisted therapy) beneficial for autistic children? |
-| ragtime26 | 2005 | Is ketamine an approved medical treatment for depression? |
-| ragtime26 | 2006 | Do night owls report lower life satisfaction than morning people? |
-| ragtime26 | 2007 | Do children educated in Montessori schools do better later in life? |
-| ragtime26 | 2008 | How was the Zaporizhzhia nuclear power plant affected by the Russian invasion of Ukraine? |
-| ragtime26 | 2009 | Does radiation from X-rays and CT scans cause cancer or alter DNA? |
+| Dataset   | Topic     | Narrow request                                                                                                             |
+| --------- | --------- | -------------------------------------------------------------------------------------------------------------------------- |
+| rag26     | rag2026-0 | What outcomes should a hospital nursing DEI plan measure to show it improves recruitment and retention of nurses of color? |
+| rag26     | rag2026-1 | My 72-year-old mother was widowed six weeks ago and has chest tightness. What warning signs should we take seriously?      |
+| rag26     | rag2026-2 | Would treating health care as a right in U.S. policy require a single-payer system?                                        |
+| rag26     | rag2026-3 | Should an 18-year-old investing $10,000 for the long term put it in a low-cost broad-market index fund?                    |
+| rag26     | rag2026-4 | When is looking back at nostalgic memories psychologically useful rather than harmful?                                     |
+| rag26     | rag2026-5 | Is shipping straight from China to each customer under the $800 de minimis rule a smart move for a small US online shop?   |
+| rag26     | rag2026-6 | How did work culture change after the COVID-19 pandemic?                                                                   |
+| rag26     | rag2026-7 | Is it legal for a public pension fund to trade on congressional trading disclosures?                                       |
+| rag26     | rag2026-8 | Did the 2020 Arizona election audit find evidence that changed the official result?                                        |
+| rag26     | rag2026-9 | Does Russia's role in uranium enrichment create a fuel-supply risk for U.S. nuclear utilities?                             |
+| ragtime26 | 2000      | Have anti-vaping laws measurably reduced vaping among teenagers?                                                           |
+| ragtime26 | 2001      | Is Nordic walking better exercise than normal walking?                                                                     |
+| ragtime26 | 2002      | What is the Chinese government's attitude toward the "lying flat" movement?                                                |
+| ragtime26 | 2003      | Is ketamine an effective treatment for PTSD?                                                                               |
+| ragtime26 | 2004      | Is felinotherapy (cat-assisted therapy) beneficial for autistic children?                                                  |
+| ragtime26 | 2005      | Is ketamine an approved medical treatment for depression?                                                                  |
+| ragtime26 | 2006      | Do night owls report lower life satisfaction than morning people?                                                          |
+| ragtime26 | 2007      | Do children educated in Montessori schools do better later in life?                                                        |
+| ragtime26 | 2008      | How was the Zaporizhzhia nuclear power plant affected by the Russian invasion of Ukraine?                                  |
+| ragtime26 | 2009      | Does radiation from X-rays and CT scans cause cancer or alter DNA?                                                         |
 
 ---
 
