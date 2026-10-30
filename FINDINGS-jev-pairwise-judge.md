@@ -10,10 +10,10 @@
 - ragtime26: `2000` … `2009`.
 - kiddie (synthetic, unrestricted), for smoke tests.
 
-The TREC AutoJudge data policy forbids inspecting, aggregating or tuning on any other
-topic. Over all topics we read only the scored leaderboards (`.eval.txt`), for
-completeness checks and for reporting the leaderboard (Section 13). We did not use them
-to make decisions.
+The TREC AutoJudge [1] data policy [2] forbids inspecting, aggregating or tuning on any
+other topic. Over all topics we read only the scored leaderboards (`.eval.txt`), for
+completeness checks and for reporting the leaderboard (Section 13). We did not use them to
+make decisions.
 
 - **Earlier version withdrawn.** An earlier version of this document (2026-09-10 to
   2026-10-09) drew pilots, probes and statistics from topics outside the window. It has
@@ -103,6 +103,7 @@ verbosity is still untested (Section 16.4).
 16. [Discussion, threats to validity, open questions](#16-discussion)
 17. [Reproduction](#17-reproduction)
 18. [Appendix: prompts and questions verbatim](#18-appendix-prompts-and-questions-verbatim)
+19. [References](#19-references)
 
 ---
 
@@ -121,8 +122,8 @@ quality, was driving its decisions.
 Jev was attractive for two reasons:
 
 - **Probabilistic output.** Jev answers a typed Choice question with a probability per
-  option, giving a graded outcome per comparison instead of 0/1. The hope was that close
-  pairs would contribute partial credit rather than coin-flip noise.
+  option [3], giving a graded outcome per comparison instead of 0/1. The hope was that
+  close pairs would contribute partial credit rather than coin-flip noise.
 - **Cost.** Jev bills input tokens only, which makes a full tournament much cheaper.
 
 Research questions:
@@ -136,11 +137,33 @@ Research questions:
 - **RQ6** Can the question make the judge reward depth proportionate to the need, rather
   than length in either direction?
 
+**Context and related work.**
+
+- **The tracks.** The runs come from the TREC 2026 RAG track [4], which continues the 2024
+  and 2025 tracks [5, 6], and from the TREC RAGTIME track [7, 8], which asks for
+  multilingual reports. Mayfield et al. set out how such reports can be evaluated [9].
+  TREC AutoJudge [1] asks participants to rank these runs automatically. Judges run on
+  TIRA [10, 11] and write leaderboards in the ir_measures / trec_eval format [12, 13].
+- **How RAG runs have been judged.** TREC 2024 RAG used LLM-assisted nugget evaluation
+  [14, 15] and citation-support judgments [16]. Nuggets go back to the TREC QA track [17,
+  18] and its automatic variants [19, 20], and are related to the Pyramid method in
+  summarisation [21].
+- **LLMs as assessors.** LLM relevance labels can track human preferences [22, 23, 24,
+  25]. Whether they can replace human assessment is disputed [26, 27], and LLM judges can
+  be manipulated [28]. Arabzadeh and Clarke compare several ways of evaluating generative
+  IR, including pairwise preferences [29]. Farzi and Dietz evaluate RAG output with
+  LLM-graded rubrics [30].
+- **Pairwise judging.** Preference judgments are an established alternative to graded
+  relevance in IR [31, 32]. LLM pairwise judges are widely used [33, 34, 35], and their
+  outcomes are aggregated by win rate or Bradley–Terry [36, 37]. They are known to show
+  position and verbosity bias [33, 38, 39, 40, 41], which is what RQ3 and RQ5 test.
+
 ---
 
 ## 2. Data
 
-TREC 2026 AutoJudge test data:
+TREC 2026 AutoJudge [1] test data, from the TREC 2026 RAG [4] and RAGTIME
+[7] tracks:
 
 | Property | rag26 (`data/rag26/runs/generation/`) | ragtime26 (`data/ragtime26/runs/repgen/`) |
 | --- | --- | --- |
@@ -198,7 +221,8 @@ may not transfer to the other topics (Section 16.3).
 ### 3.2 Jev probabilistic judge
 
 - **Model and endpoint:** `typesafe/jev-1.13` through OpenRouter's Decisions API
-  (`POST /api/alpha/decisions`). Every response reported the snapshot
+  (`POST /api/alpha/decisions`) [3, 42]. Jev has also been evaluated as a
+  reranker [43, 44]. Every response reported the snapshot
   `typesafe/jev-1.13-20260917`.
 - **Request shape:** Jev is not a chat model. Each request carries a `state` object
   (`{query, [problem_statement], [background], summary_a, summary_b}`) and one or more
@@ -247,7 +271,8 @@ reasoning effort* per request; it is not a probabilistic judge.
 
 ## 4. Study design: development on the permitted window
 
-**Plan written before any results** (`temp/WINDOW_STUDY_PLAN.md`):
+**Plan written before any results** (`temp/WINDOW_STUDY_PLAN.md`), in the spirit of
+pre-registration (see [45] for the arguments for and against in NLP):
 
 - **Development set:** the rag26 window. Every method decision is made here.
 - **Confirmation set:** the ragtime26 window, run and read **once**, after the rag26
@@ -270,9 +295,11 @@ reasoning effort* per request; it is not a probabilistic judge.
 - ragtime26 Gemini: the existing 2000–2002 run.
 
 **Statistics.** Results are given per topic and pooled. Uncertainty comes from
-bootstrapping over **topics**, or from the sign pattern across topics. CIs over
+bootstrapping over **topics** [46], or from the sign pattern across topics. CIs over
 comparisons are reported only where marked, because comparisons share runs and such
-CIs are too narrow.
+CIs are too narrow. Rankings are compared with Spearman's ρ and Kendall's τ [47], the
+usual way to compare system rankings in IR [48]; AutoJudge's meta-evaluation
+also correlates a judge's leaderboard with the official one [2].
 
 **Not re-run** (no decision depended on them; dropped to fit the budget):
 
@@ -281,10 +308,10 @@ CIs are too narrow.
 - Choice determinism.
 - Choice-only padding.
 - The "appropriate" (conciseness) prompt, removed altogether.
-- Bradley–Terry analyses.
+- Bradley–Terry [36] analyses.
 
 Earlier results on these came partly from restricted topics and are withdrawn. Section
-15.4 lists what remains open as a result.
+16.4 lists what remains open as a result.
 
 **Budget and spend.** The OpenRouter key had $57.21 left. A guard skipped any step that
 would take the balance below its estimate plus $10.
@@ -348,8 +375,9 @@ competition and more varied topics.
 
 ### 5.3 Position effects (RQ5)
 
-Pairs are grouped by their orientation-averaged P(x better). A good judge gives
-P(slot A wins) = 0.5 in every group.
+Position bias is well documented for LLM judges [33, 38, 39], and judging
+both orders is the usual remedy [38, 34]. Pairs are grouped by their
+orientation-averaged P(x better). A good judge gives P(slot A wins) = 0.5 in every group.
 
 | Closeness (orientation-averaged P) | rag26 pairs | rag26 P(slot A wins) / winner flips | ragtime26 pairs | ragtime26 P(slot A wins) / winner flips |
 | --- | --- | --- | --- | --- |
@@ -377,7 +405,8 @@ P(slot A wins) = 0.5 in every group.
 
 ## 6. Length dependence in natural comparisons
 
-Same Choice pilot, orientation-averaged. "Longer" compares report word counts.
+LLM judges are known to prefer longer answers [33, 40, 41]. Same
+Choice pilot, orientation-averaged. "Longer" compares report word counts.
 
 | Metric | rag26 | ragtime26 |
 | --- | --- | --- |
@@ -492,7 +521,8 @@ Each comparison of one topic (rag2026-3 / 2003) is asked twice with the cache by
 ## 9. Padding test
 
 **Question.** Does the judge reward length itself, or content? Natural correlations
-(Section 6) can't tell, so we manipulated reports directly.
+(Section 6) can't tell, so we manipulated reports directly. (Length-controlled AlpacaEval
+instead regresses length out of the judge's preferences [41].)
 
 ### 9.1 Design
 
@@ -738,7 +768,7 @@ present on every topic: 0.537–0.572 on rag26 and 0.503–0.549 on ragtime26.
 - Empty reports get explicit zero rows, so that every run has every topic.
 - Submission leaderboards:
   `submissions/bonsai-jev-pairwise-noul-mirror-proportionate-20261009/{rag26,ragtime26}/`.
-  Both pass TIRA's dry-run validation.
+  Both pass TIRA's [10] dry-run validation.
 
 ### 13.1 Leaderboards (scored outputs, all topics)
 
@@ -828,9 +858,9 @@ this judge was made only on the **permitted window**: the first 10 topics of eac
 read only the scored leaderboards (`.eval.txt`), for completeness and reporting
 (Sections 14.6–14.7).
 
-**Idea.** The method adapts the "bag of decisions" reranker [1]. There, an LLM writes 10
-yes/no criteria per query, Jev answers all of them about a document in one request, and
-the score is the sum of P(yes). We change three things:
+**Idea.** The method adapts Turnbull's "Bag of Decisions Reranker" [44]. There, an LLM
+writes 10 yes/no criteria per query, Jev answers all of them about a document in one
+request, and the score is the sum of P(yes). We change three things:
 
 - **Number of questions:** it varies by topic.
 - **Scale:** each question is graded 0–3, not yes/no.
@@ -840,9 +870,12 @@ the score is the sum of P(yes). We change three things:
 Every answer is scored on its own against the topic's rubric, so a topic needs O(runs)
 calls instead of O(runs²) as in the tournament.
 
-[1] https://softwaredoug.com/blog/2026/10/08/bag-of-decisions. The post does not name the
-question-generation model or give costs. Its only evaluation is an NDCG gain over BM25 on
-two e-commerce datasets.
+Grading every answer against per-topic questions is close to nugget evaluation [17, 14,
+15] and to rubric-based LLM evaluation [30, 49, 50, 51]. Taking the expected grade from
+the model's probability distribution follows G-Eval [52].
+
+The post [44] does not name the question-generation model or give costs. Its only
+evaluation is an NDCG gain over BM25 on two e-commerce datasets.
 
 ### 14.1 Design
 
@@ -871,7 +904,7 @@ The code is `judges/bonsai_judge/bod.py`, run with `workflow.bod.yml`.
      barely changes cost.
 3. **Scoring.**
    - Each question's score is the **expected grade** Σ_g P(g)·g / 3, using the
-     probabilities rather than the most likely grade.
+     probabilities rather than the most likely grade, as in G-Eval [52].
    - Grades are written to `<filebase>.bod/grades.jsonl`, one row per question.
    - The leaderboard is tallied from those rows with no further calls.
 
@@ -1090,13 +1123,32 @@ says is supported by the documents it cites. This judge discounts each answer's 
 by the share of its content that is unsupported *and* that no other run produced, the
 strongest lexical signal of a hallucination.
 
+**Sources.** Irwin's concept F1 [53] extracts nouns from a summary and from the
+search results it cites. Its precision is the share of the summary's nouns found in the
+sources, so nouns absent from the sources count as hallucination. The post compares it to
+RAGAS's context entities recall [54]. We keep that precision side
+(`UNGROUNDED_RATE` = 1 − precision) and add two things the post does not have:
+
+- spaCy [55] lemmatisation with `en_core_web_lg` [56];
+- the cross-run condition that no other run states the concept.
+
+The cross-run condition is a cross-system analogue of SelfCheckGPT's consistency check
+[57]. SelfCheckGPT compares several samples from one model, while we compare
+answers from different systems.
+
+Model-based alternatives check claims rather than words: FActScore [58], AIS
+[59], ALCE citation precision and recall [60], ARES [61], and verifiability audits
+of generative search [62]; see also [63, 64]. HALLUC_RISK uses
+no model beyond the tagger. It is a lexical measure, like ROUGE [65], with the same
+blindness to paraphrase.
+
 ### 15.1 Design
 
 The code is `judges/bonsai_judge/bod_risk.py` (`BodRiskJudge`, a subclass of
 `BodJevJudge`), run with `workflow.bod_risk.yml`.
 
-- **Concepts.** spaCy `en_core_web_lg` NOUN/PROPN lemmas, lowercased, as a set: the same
-  extraction as concept-F1 (`bonsai_judge.py`).
+- **Concepts.** spaCy `en_core_web_lg` NOUN/PROPN lemmas, lowercased, as a set: our
+  implementation of concept F1's noun extraction [53] (`bonsai_judge.py`).
   - `sn`: the answer's concepts.
   - `hn`: the union of the concepts of the documents the answer cites.
   - `df[topic][c]`: the number of runs whose answer for that topic states `c`.
@@ -1284,7 +1336,8 @@ All answers below come from the permitted window only.
 ### 16.3 Threats to validity
 
 - **No ground truth.** All conclusions are about agreement, consistency and controlled
-  sensitivity, not accuracy. Two judges agreeing can share a bias.
+  sensitivity, not accuracy. Two judges agreeing can share a bias. LLM-judged
+  leaderboards can also be circular or gamed [27, 28].
 - **The window is small and not random.** It is 10 topics per dataset, fixed by file
   order.
   - rag26's window topics are the dataset's first ten requests.
@@ -1300,7 +1353,8 @@ All answers below come from the permitted window only.
   - pad_relevant adds both information and text from the strongest run. Its direction
     is clear; its size does not isolate "more information".
 - **Model drift.** Jev 1.13 (snapshot 20260917) and the Gemini slug may change
-  server-side. Results are reproducible from the cache, not necessarily from fresh calls
+  server-side. OpenRouter now lists `typesafe/jev-1.14` as the latest Jev [3]; we
+  pinned 1.13. Results are reproducible from the cache, not necessarily from fresh calls
   later.
 - **Uncalibrated probabilities.** Choice's P is not a win probability (tie bias,
   Section 8.1).
@@ -1622,3 +1676,78 @@ Files: `temp/narrow_topics_{rag26,ragtime26}.jsonl`.
 | ragtime26 | 2007 | Do children educated in Montessori schools do better later in life? |
 | ragtime26 | 2008 | How was the Zaporizhzhia nuclear power plant affected by the Russian invasion of Ukraine? |
 | ragtime26 | 2009 | Does radiation from X-rays and CT scans cause cancer or alter DNA? |
+
+---
+
+## 19. References
+
+Numbered in order of first citation. Every entry was checked on 2026-10-30 against its
+landing page (arXiv, ACL Anthology, DOI/Crossref, or the official site), most against a
+second source too. Items with no venue are preprints, blog posts, software or
+documentation.
+
+1. TREC AutoJudge track (2025 pilot, 2026 main track). Organizers L. Dietz, N. Farzi, E. Yang. https://trec-auto-judge.cs.unh.edu/
+2. TREC AutoJudge Participant HowTo, including the data-handling policy. https://github.com/trec-auto-judge/.github/blob/main/profile/howto/README.md
+3. OpenRouter. "Jev Documentation: Using the TypeSafe Decision Model on OpenRouter." https://openrouter.ai/docs/guides/community/jev
+4. TREC RAG track site (2024–2026), including the 2026 guidelines. https://trec-rag.github.io/
+5. R. Pradeep, N. Thakur, S. Sharifymoghaddam, E. Zhang, R. Nguyen, D. Campos, N. Craswell, J. Lin. "Ragnarök: A Reusable RAG Framework and Baselines for TREC 2024 Retrieval-Augmented Generation Track." ECIR 2025, LNCS, pp. 132–148. https://doi.org/10.1007/978-3-031-88708-6_9
+6. S. Upadhyay, N. Thakur, R. Pradeep, N. Craswell, D. Campos, J. Lin. "Overview of the TREC 2025 Retrieval Augmented Generation (RAG) Track." arXiv:2603.09891, 2026. https://arxiv.org/abs/2603.09891
+7. TREC RAGTIME track site (2025–2026), including the 2026 guidelines. https://trec-ragtime.github.io/
+8. D. Lawrie, S. MacAvaney, J. Mayfield, L. Soldaini, E. Yang, A. Yates. "Overview of the TREC 2025 RAGTIME Track." arXiv:2602.10024, 2026. https://arxiv.org/abs/2602.10024
+9. J. Mayfield, E. Yang, D. Lawrie, S. MacAvaney, P. McNamee, D. W. Oard, L. Soldaini, I. Soboroff, O. Weller, E. Kayi, K. Sanders, M. Mason, N. Hibbler. "On the Evaluation of Machine-Generated Reports." SIGIR 2024, pp. 1904–1915. https://doi.org/10.1145/3626772.3657846
+10. M. Fröbe, M. Wiegmann, N. Kolyada, B. Grahm, T. Elstner, F. Loebe, et al. "Continuous Integration for Reproducible Shared Tasks with TIRA.io." ECIR 2023, LNCS, pp. 236–241. https://doi.org/10.1007/978-3-031-28241-6_20
+11. M. Fröbe, J. H. Reimer, S. MacAvaney, N. Deckers, S. Reich, J. Bevendorff, B. Stein, M. Hagen, M. Potthast. "The Information Retrieval Experiment Platform." SIGIR 2023, pp. 2826–2836. https://doi.org/10.1145/3539618.3591888
+12. S. MacAvaney, C. Macdonald, I. Ounis. "Streamlining Evaluation with ir-measures." ECIR 2022, LNCS, pp. 305–310. https://doi.org/10.1007/978-3-030-99739-7_38
+13. trec_eval (software). https://github.com/usnistgov/trec_eval
+14. R. Pradeep, N. Thakur, S. Upadhyay, D. Campos, N. Craswell, J. Lin. "Initial Nugget Evaluation Results for the TREC 2024 RAG Track with the AutoNuggetizer Framework." arXiv:2411.09607, 2024. https://arxiv.org/abs/2411.09607
+15. R. Pradeep, N. Thakur, S. Upadhyay, D. Campos, N. Craswell, I. Soboroff, H. T. Dang, J. Lin. "The Great Nugget Recall: Automating Fact Extraction and RAG Evaluation with Large Language Models." SIGIR 2025, pp. 180–190. https://doi.org/10.1145/3726302.3730090
+16. N. Thakur, R. Pradeep, S. Upadhyay, D. Campos, N. Craswell, I. Soboroff, H. T. Dang, J. Lin. "Assessing Support for the TREC 2024 RAG Track: A Large-Scale Comparative Study of LLM and Human Evaluations." SIGIR 2025, pp. 2759–2763. https://doi.org/10.1145/3726302.3730165
+17. E. M. Voorhees. "Overview of the TREC 2003 Question Answering Track." TREC 2003, NIST SP 500-255. https://doi.org/10.6028/NIST.SP.500-255.qa-overview
+18. E. M. Voorhees. "Evaluating Answers to Definition Questions." HLT-NAACL 2003 (short papers), pp. 109–111. https://aclanthology.org/N03-2037/
+19. J. Lin, D. Demner-Fushman. "Automatically Evaluating Answers to Definition Questions." HLT/EMNLP 2005, pp. 931–938. https://aclanthology.org/H05-1117/
+20. J. Lin, D. Demner-Fushman. "Will Pyramids Built of Nuggets Topple Over?" HLT-NAACL 2006, pp. 383–390. https://aclanthology.org/N06-1049/
+21. A. Nenkova, R. Passonneau. "Evaluating Content Selection in Summarization: The Pyramid Method." HLT-NAACL 2004, pp. 145–152. https://aclanthology.org/N04-1019/
+22. P. Thomas, S. Spielman, N. Craswell, B. Mitra. "Large Language Models can Accurately Predict Searcher Preferences." SIGIR 2024, pp. 1930–1940. https://doi.org/10.1145/3626772.3657707
+23. S. Upadhyay, R. Pradeep, N. Thakur, N. Craswell, J. Lin. "UMBRELA: UMbrela is the (Open-Source Reproduction of the) Bing RELevance Assessor." arXiv:2406.06519, 2024. https://arxiv.org/abs/2406.06519
+24. H. A. Rahmani, E. Yilmaz, N. Craswell, B. Mitra, P. Thomas, C. L. A. Clarke, M. Aliannejadi, C. Siro, G. Faggioli. "LLMJudge: LLMs for Relevance Judgments." arXiv:2408.08896, 2024. https://arxiv.org/abs/2408.08896
+25. H. A. Rahmani, C. Siro, M. Aliannejadi, N. Craswell, C. L. A. Clarke, G. Faggioli, B. Mitra, P. Thomas, E. Yilmaz. "Report on the 1st Workshop on Large Language Model for Evaluation in Information Retrieval (LLM4Eval 2024) at SIGIR 2024." SIGIR Forum, 2024. https://doi.org/10.1145/3722449.3722461
+26. G. Faggioli, L. Dietz, C. L. A. Clarke, G. Demartini, M. Hagen, C. Hauff, N. Kando, E. Kanoulas, M. Potthast, B. Stein, H. Wachsmuth. "Perspectives on Large Language Models for Relevance Judgment." ICTIR 2023, pp. 39–50. https://doi.org/10.1145/3578337.3605136
+27. C. L. A. Clarke, L. Dietz. "LLM-based relevance assessment still can't replace human relevance assessment." arXiv:2412.17156, 2024 (v3 2026). https://arxiv.org/abs/2412.17156
+28. M. Alaofi, P. Thomas, F. Scholer, M. Sanderson. "LLMs can be Fooled into Labelling a Document as Relevant (best café near me; this paper is perfectly relevant)." SIGIR-AP 2024, pp. 32–41. https://doi.org/10.1145/3673791.3698431
+29. N. Arabzadeh, C. L. A. Clarke. "A Comparison of Methods for Evaluating Generative IR." arXiv:2404.04044, 2024. https://arxiv.org/abs/2404.04044
+30. N. Farzi, L. Dietz. "Pencils Down! Automatic Rubric-based Evaluation of Retrieve/Generate Systems." ICTIR 2024, pp. 175–184. https://doi.org/10.1145/3664190.3672511
+31. B. Carterette, P. N. Bennett, D. M. Chickering, S. T. Dumais. "Here or There: Preference Judgments for Relevance." ECIR 2008, LNCS, pp. 16–27. https://doi.org/10.1007/978-3-540-78646-7_5
+32. C. L. A. Clarke, A. Vtyurina, M. D. Smucker. "Assessing Top-k Preferences." ACM TOIS, 2021. https://doi.org/10.1145/3451161
+33. L. Zheng, W.-L. Chiang, Y. Sheng, et al. "Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena." NeurIPS 2023 Datasets and Benchmarks Track. https://arxiv.org/abs/2306.05685
+34. Z. Qin, R. Jagerman, K. Hui, et al. "Large Language Models are Effective Text Rankers with Pairwise Ranking Prompting." Findings of NAACL 2024, pp. 1504–1518. https://aclanthology.org/2024.findings-naacl.97
+35. J. Gu, X. Jiang, Z. Shi, et al. "A Survey on LLM-as-a-Judge." arXiv:2411.15594, 2024. https://arxiv.org/abs/2411.15594
+36. R. A. Bradley, M. E. Terry. "Rank Analysis of Incomplete Block Designs: I. The Method of Paired Comparisons." Biometrika 39(3/4):324–345, 1952. https://doi.org/10.2307/2334029
+37. W.-L. Chiang, L. Zheng, Y. Sheng, et al. "Chatbot Arena: An Open Platform for Evaluating LLMs by Human Preference." ICML 2024, PMLR 235:8359–8388. https://proceedings.mlr.press/v235/chiang24b.html
+38. P. Wang, L. Li, L. Chen, Z. Cai, D. Zhu, B. Lin, Y. Cao, L. Kong, Q. Liu, T. Liu, Z. Sui. "Large Language Models are not Fair Evaluators." ACL 2024, pp. 9440–9450. https://aclanthology.org/2024.acl-long.511
+39. L. Shi, C. Ma, W. Liang, X. Diao, W. Ma, S. Vosoughi. "Judging the Judges: A Systematic Study of Position Bias in LLM-as-a-Judge." AACL-IJCNLP 2025. https://arxiv.org/abs/2406.07791
+40. K. Saito, A. Wachi, K. Wataoka, Y. Akimoto. "Verbosity Bias in Preference Labeling by Large Language Models." arXiv:2310.10076, 2023. https://arxiv.org/abs/2310.10076
+41. Y. Dubois, B. Galambosi, P. Liang, T. B. Hashimoto. "Length-Controlled AlpacaEval: A Simple Way to Debias Automatic Evaluators." COLM 2024. https://arxiv.org/abs/2404.04475
+42. OpenRouter API reference. "Submit a Decisions request." https://openrouter.ai/docs/api/api-reference/alphadecisions/submit-a-decisions-request.md
+43. A. Hevenor. "Jev as a Reranker: BEIR Benchmarks vs Cohere, Voyage & Jina." Blog post, 2026-09-17. https://hevmind.com/writing/jev-as-a-reranker/
+44. D. Turnbull. "Bag of Decisions Reranker." Blog post, 2026-10-08. https://softwaredoug.com/blog/2026/10/08/bag-of-decisions
+45. A. Søgaard, D. Hershcovich, M. de Lhoneux. "A Two-Sided Discussion of Preregistration of NLP Research." EACL 2023. https://arxiv.org/abs/2302.10086
+46. T. Sakai. "Evaluating Evaluation Metrics Based on the Bootstrap." SIGIR 2006, pp. 525–532. https://doi.org/10.1145/1148170.1148261
+47. M. G. Kendall. "A New Measure of Rank Correlation." Biometrika 30(1–2):81–93, 1938. https://doi.org/10.1093/biomet/30.1-2.81
+48. E. M. Voorhees. "Variations in relevance judgments and the measurement of retrieval effectiveness." Information Processing & Management 36(5):697–716, 2000. https://doi.org/10.1016/S0306-4573(00)00010-8
+49. H. Hashemi, J. Eisner, C. Rosset, B. Van Durme, C. Kedzie. "LLM-Rubric: A Multidimensional, Calibrated Approach to Automated Evaluation of Natural Language Texts." ACL 2024, pp. 13806–13834. https://aclanthology.org/2024.acl-long.745/
+50. S. Kim, J. Shin, Y. Cho, et al. "Prometheus: Inducing Fine-grained Evaluation Capability in Language Models." ICLR 2024. https://arxiv.org/abs/2310.08491
+51. S. Ye, D. Kim, S. Kim, et al. "FLASK: Fine-grained Language Model Evaluation based on Alignment Skill Sets." ICLR 2024. https://arxiv.org/abs/2307.10928
+52. Y. Liu, D. Iter, Y. Xu, S. Wang, R. Xu, C. Zhu. "G-Eval: NLG Evaluation using GPT-4 with Better Human Alignment." EMNLP 2023, pp. 2511–2522. https://aclanthology.org/2023.emnlp-main.153/
+53. M. Irwin. "Comparing Models for Retrieval Augmented Generation." Blog post, 2025-09-10 (introduces concept F1). https://maxirwin.com/articles/llm-rag/
+54. S. Es, J. James, L. Espinosa Anke, S. Schockaert. "RAGAs: Automated Evaluation of Retrieval Augmented Generation." EACL 2024 System Demonstrations, pp. 150–158. https://aclanthology.org/2024.eacl-demo.16/
+55. M. Honnibal, I. Montani, S. Van Landeghem, A. Boyd. "spaCy: Industrial-strength Natural Language Processing in Python." Zenodo, 2020. https://doi.org/10.5281/zenodo.1212303
+56. Explosion. en_core_web_lg English pipeline (tagger, lemmatizer). https://spacy.io/models/en#en_core_web_lg
+57. P. Manakul, A. Liusie, M. Gales. "SelfCheckGPT: Zero-Resource Black-Box Hallucination Detection for Generative Large Language Models." EMNLP 2023, pp. 9004–9017. https://aclanthology.org/2023.emnlp-main.557/
+58. S. Min, K. Krishna, X. Lyu, et al. "FActScore: Fine-grained Atomic Evaluation of Factual Precision in Long Form Text Generation." EMNLP 2023, pp. 12076–12100. https://aclanthology.org/2023.emnlp-main.741/
+59. H. Rashkin, V. Nikolaev, M. Lamm, L. Aroyo, M. Collins, D. Das, S. Petrov, G. S. Tomar, I. Turc, D. Reitter. "Measuring Attribution in Natural Language Generation Models." Computational Linguistics 49(4):777–840, 2023. https://aclanthology.org/2023.cl-4.2/
+60. T. Gao, H. Yen, J. Yu, D. Chen. "Enabling Large Language Models to Generate Text with Citations." EMNLP 2023, pp. 6465–6488. https://aclanthology.org/2023.emnlp-main.398/
+61. J. Saad-Falcon, O. Khattab, C. Potts, M. Zaharia. "ARES: An Automated Evaluation Framework for Retrieval-Augmented Generation Systems." NAACL 2024, pp. 338–354. https://aclanthology.org/2024.naacl-long.20/
+62. N. F. Liu, T. Zhang, P. Liang. "Evaluating Verifiability in Generative Search Engines." Findings of EMNLP 2023. https://aclanthology.org/2023.findings-emnlp.467
+63. Z. Ji, N. Lee, R. Frieske, et al. "Survey of Hallucination in Natural Language Generation." ACM Computing Surveys 55(12):1–38, 2023. https://doi.org/10.1145/3571730
+64. J. Maynez, S. Narayan, B. Bohnet, R. McDonald. "On Faithfulness and Factuality in Abstractive Summarization." ACL 2020, pp. 1906–1919. https://aclanthology.org/2020.acl-main.173/
+65. C.-Y. Lin. "ROUGE: A Package for Automatic Evaluation of Summaries." Text Summarization Branches Out (ACL workshop), 2004, pp. 74–81. https://aclanthology.org/W04-1013/
