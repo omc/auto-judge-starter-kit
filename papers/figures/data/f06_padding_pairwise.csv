@@ -1,0 +1,2081 @@
+dataset,judge,variant,Δ,topic
+rag26,Jev mirror,pad_repeat,-0.0490625,rag2026-0
+rag26,Jev mirror,pad_generic,-0.12,rag2026-0
+rag26,Jev mirror,pad_offtopic,-0.373437,rag2026-0
+rag26,Jev mirror,pad_relevant,0.0875,rag2026-0
+rag26,Jev mirror,truncate,-0.0725,rag2026-0
+rag26,Jev mirror,pad_repeat,-0.0434375,rag2026-0
+rag26,Jev mirror,pad_generic,-0.09125,rag2026-0
+rag26,Jev mirror,pad_offtopic,-0.272187,rag2026-0
+rag26,Jev mirror,pad_relevant,0.180625,rag2026-0
+rag26,Jev mirror,truncate,-0.168438,rag2026-0
+rag26,Jev mirror,pad_repeat,-0.0434375,rag2026-0
+rag26,Jev mirror,pad_generic,-0.0771875,rag2026-0
+rag26,Jev mirror,pad_offtopic,-0.283125,rag2026-0
+rag26,Jev mirror,pad_relevant,0.163438,rag2026-0
+rag26,Jev mirror,truncate,-0.076875,rag2026-0
+rag26,Jev mirror,pad_repeat,-0.038125,rag2026-0
+rag26,Jev mirror,pad_generic,-0.0409375,rag2026-0
+rag26,Jev mirror,pad_offtopic,-0.27875,rag2026-0
+rag26,Jev mirror,pad_relevant,0.14875,rag2026-0
+rag26,Jev mirror,truncate,-0.053125,rag2026-0
+rag26,Jev mirror,pad_repeat,-0.03625,rag2026-0
+rag26,Jev mirror,pad_generic,-0.0671875,rag2026-0
+rag26,Jev mirror,pad_offtopic,-0.263125,rag2026-0
+rag26,Jev mirror,pad_relevant,0.20125,rag2026-0
+rag26,Jev mirror,truncate,-0.111875,rag2026-0
+rag26,Jev mirror,pad_repeat,-0.029375,rag2026-0
+rag26,Jev mirror,pad_generic,-0.07625,rag2026-0
+rag26,Jev mirror,pad_offtopic,-0.234687,rag2026-0
+rag26,Jev mirror,pad_relevant,0.134687,rag2026-0
+rag26,Jev mirror,truncate,-0.0815625,rag2026-0
+rag26,Jev mirror,pad_repeat,-0.028125,rag2026-0
+rag26,Jev mirror,pad_generic,-0.05625,rag2026-0
+rag26,Jev mirror,pad_offtopic,-0.189375,rag2026-0
+rag26,Jev mirror,pad_relevant,0.196563,rag2026-0
+rag26,Jev mirror,truncate,-0.08375,rag2026-0
+rag26,Jev mirror,pad_repeat,-0.0275,rag2026-0
+rag26,Jev mirror,pad_generic,-0.0396875,rag2026-0
+rag26,Jev mirror,pad_offtopic,-0.116875,rag2026-0
+rag26,Jev mirror,pad_relevant,0.218437,rag2026-0
+rag26,Jev mirror,truncate,-0.04875,rag2026-0
+rag26,Jev mirror,pad_repeat,-0.0425,rag2026-0
+rag26,Jev mirror,pad_generic,-0.0665625,rag2026-0
+rag26,Jev mirror,pad_offtopic,-0.1925,rag2026-0
+rag26,Jev mirror,pad_relevant,0.249687,rag2026-0
+rag26,Jev mirror,truncate,-0.0375,rag2026-0
+rag26,Jev mirror,pad_repeat,-0.018125,rag2026-0
+rag26,Jev mirror,pad_generic,-0.040625,rag2026-0
+rag26,Jev mirror,pad_offtopic,-0.179375,rag2026-0
+rag26,Jev mirror,pad_relevant,0.107187,rag2026-0
+rag26,Jev mirror,truncate,-0.09875,rag2026-0
+rag26,Jev mirror,pad_repeat,-0.0325,rag2026-0
+rag26,Jev mirror,pad_generic,-0.0353125,rag2026-0
+rag26,Jev mirror,pad_offtopic,-0.135313,rag2026-0
+rag26,Jev mirror,pad_relevant,0.146562,rag2026-0
+rag26,Jev mirror,truncate,-0.100313,rag2026-0
+rag26,Jev mirror,pad_repeat,-0.026875,rag2026-0
+rag26,Jev mirror,pad_generic,-0.0190625,rag2026-0
+rag26,Jev mirror,pad_offtopic,-0.16375,rag2026-0
+rag26,Jev mirror,pad_relevant,0.154375,rag2026-0
+rag26,Jev mirror,truncate,-0.0784375,rag2026-0
+rag26,Jev mirror,pad_repeat,-0.071875,rag2026-0
+rag26,Jev mirror,pad_generic,-0.044375,rag2026-0
+rag26,Jev mirror,pad_offtopic,-0.1625,rag2026-0
+rag26,Jev mirror,pad_relevant,0.30125,rag2026-0
+rag26,Jev mirror,truncate,-0.116875,rag2026-0
+rag26,Jev mirror,pad_repeat,-0.0478125,rag2026-0
+rag26,Jev mirror,pad_generic,-0.0571875,rag2026-0
+rag26,Jev mirror,pad_offtopic,-0.17125,rag2026-0
+rag26,Jev mirror,pad_relevant,0.239062,rag2026-0
+rag26,Jev mirror,truncate,-0.0028125,rag2026-0
+rag26,Jev mirror,pad_repeat,-0.011875,rag2026-0
+rag26,Jev mirror,pad_generic,-0.048125,rag2026-0
+rag26,Jev mirror,pad_offtopic,-0.0871875,rag2026-0
+rag26,Jev mirror,pad_relevant,0.229687,rag2026-0
+rag26,Jev mirror,truncate,-0.0203125,rag2026-0
+rag26,Jev mirror,pad_repeat,-0.0271875,rag2026-0
+rag26,Jev mirror,pad_generic,-0.0346875,rag2026-0
+rag26,Jev mirror,pad_offtopic,-0.0778125,rag2026-0
+rag26,Jev mirror,pad_relevant,0.170938,rag2026-0
+rag26,Jev mirror,truncate,-0.0503125,rag2026-0
+rag26,Jev mirror,pad_repeat,-0.0628125,rag2026-1
+rag26,Jev mirror,pad_generic,-0.126563,rag2026-1
+rag26,Jev mirror,pad_offtopic,-0.264063,rag2026-1
+rag26,Jev mirror,pad_relevant,0.115,rag2026-1
+rag26,Jev mirror,truncate,-0.1075,rag2026-1
+rag26,Jev mirror,pad_repeat,-0.000625,rag2026-1
+rag26,Jev mirror,pad_generic,-0.08875,rag2026-1
+rag26,Jev mirror,pad_offtopic,-0.230625,rag2026-1
+rag26,Jev mirror,pad_relevant,0.122188,rag2026-1
+rag26,Jev mirror,truncate,-0.2,rag2026-1
+rag26,Jev mirror,pad_repeat,-0.06625,rag2026-1
+rag26,Jev mirror,pad_generic,-0.120938,rag2026-1
+rag26,Jev mirror,pad_offtopic,-0.271562,rag2026-1
+rag26,Jev mirror,pad_relevant,0.135,rag2026-1
+rag26,Jev mirror,truncate,-0.0746875,rag2026-1
+rag26,Jev mirror,pad_repeat,-0.0646875,rag2026-1
+rag26,Jev mirror,pad_generic,-0.12875,rag2026-1
+rag26,Jev mirror,pad_offtopic,-0.279062,rag2026-1
+rag26,Jev mirror,pad_relevant,0.117188,rag2026-1
+rag26,Jev mirror,truncate,-0.133125,rag2026-1
+rag26,Jev mirror,pad_repeat,-0.0540625,rag2026-1
+rag26,Jev mirror,pad_generic,-0.121875,rag2026-1
+rag26,Jev mirror,pad_offtopic,-0.29875,rag2026-1
+rag26,Jev mirror,pad_relevant,0.135313,rag2026-1
+rag26,Jev mirror,truncate,-0.118437,rag2026-1
+rag26,Jev mirror,pad_repeat,-0.061875,rag2026-1
+rag26,Jev mirror,pad_generic,-0.11125,rag2026-1
+rag26,Jev mirror,pad_offtopic,-0.225312,rag2026-1
+rag26,Jev mirror,pad_relevant,0.157813,rag2026-1
+rag26,Jev mirror,truncate,-0.15875,rag2026-1
+rag26,Jev mirror,pad_repeat,-0.063125,rag2026-1
+rag26,Jev mirror,pad_generic,-0.0975,rag2026-1
+rag26,Jev mirror,pad_offtopic,-0.194375,rag2026-1
+rag26,Jev mirror,pad_relevant,0.206875,rag2026-1
+rag26,Jev mirror,truncate,-0.115938,rag2026-1
+rag26,Jev mirror,pad_repeat,-0.0175,rag2026-1
+rag26,Jev mirror,pad_generic,-0.0559375,rag2026-1
+rag26,Jev mirror,pad_offtopic,-0.110312,rag2026-1
+rag26,Jev mirror,pad_relevant,0.149375,rag2026-1
+rag26,Jev mirror,truncate,-0.135625,rag2026-1
+rag26,Jev mirror,pad_repeat,-0.061875,rag2026-1
+rag26,Jev mirror,pad_generic,-0.0671875,rag2026-1
+rag26,Jev mirror,pad_offtopic,-0.1325,rag2026-1
+rag26,Jev mirror,pad_relevant,0.190937,rag2026-1
+rag26,Jev mirror,truncate,0.0284375,rag2026-1
+rag26,Jev mirror,pad_repeat,-0.0403125,rag2026-1
+rag26,Jev mirror,pad_generic,-0.0728125,rag2026-1
+rag26,Jev mirror,pad_offtopic,-0.17125,rag2026-1
+rag26,Jev mirror,pad_relevant,0.200625,rag2026-1
+rag26,Jev mirror,truncate,-0.085625,rag2026-1
+rag26,Jev mirror,pad_repeat,-0.0284375,rag2026-1
+rag26,Jev mirror,pad_generic,-0.0978125,rag2026-1
+rag26,Jev mirror,pad_offtopic,-0.16125,rag2026-1
+rag26,Jev mirror,pad_relevant,0.225937,rag2026-1
+rag26,Jev mirror,truncate,-0.056875,rag2026-1
+rag26,Jev mirror,pad_repeat,-0.028125,rag2026-1
+rag26,Jev mirror,pad_generic,-0.0178125,rag2026-1
+rag26,Jev mirror,pad_offtopic,-0.06375,rag2026-1
+rag26,Jev mirror,pad_relevant,0.170625,rag2026-1
+rag26,Jev mirror,truncate,-0.055625,rag2026-1
+rag26,Jev mirror,pad_repeat,-0.039375,rag2026-1
+rag26,Jev mirror,pad_generic,-0.03875,rag2026-1
+rag26,Jev mirror,pad_offtopic,-0.128125,rag2026-1
+rag26,Jev mirror,pad_relevant,0.231875,rag2026-1
+rag26,Jev mirror,truncate,-0.018125,rag2026-1
+rag26,Jev mirror,pad_repeat,-0.01375,rag2026-1
+rag26,Jev mirror,pad_generic,-0.050625,rag2026-1
+rag26,Jev mirror,pad_offtopic,-0.09125,rag2026-1
+rag26,Jev mirror,pad_relevant,0.237187,rag2026-1
+rag26,Jev mirror,truncate,-0.014375,rag2026-1
+rag26,Jev mirror,pad_repeat,-0.0175,rag2026-1
+rag26,Jev mirror,pad_generic,-0.0296875,rag2026-1
+rag26,Jev mirror,pad_offtopic,-0.0603125,rag2026-1
+rag26,Jev mirror,pad_relevant,0.305,rag2026-1
+rag26,Jev mirror,truncate,-0.0028125,rag2026-1
+rag26,Jev mirror,pad_repeat,-0.033125,rag2026-1
+rag26,Jev mirror,pad_generic,-0.0615625,rag2026-1
+rag26,Jev mirror,pad_offtopic,-0.0825,rag2026-1
+rag26,Jev mirror,pad_relevant,0.20375,rag2026-1
+rag26,Jev mirror,truncate,-0.066875,rag2026-1
+rag26,Jev mirror,pad_repeat,-0.0796875,rag2026-2
+rag26,Jev mirror,pad_generic,-0.149687,rag2026-2
+rag26,Jev mirror,pad_offtopic,-0.355312,rag2026-2
+rag26,Jev mirror,pad_relevant,0.145625,rag2026-2
+rag26,Jev mirror,truncate,-0.170625,rag2026-2
+rag26,Jev mirror,pad_repeat,-0.0253125,rag2026-2
+rag26,Jev mirror,pad_generic,-0.078125,rag2026-2
+rag26,Jev mirror,pad_offtopic,-0.315312,rag2026-2
+rag26,Jev mirror,pad_relevant,0.164375,rag2026-2
+rag26,Jev mirror,truncate,-0.06625,rag2026-2
+rag26,Jev mirror,pad_repeat,-0.08,rag2026-2
+rag26,Jev mirror,pad_generic,-0.104687,rag2026-2
+rag26,Jev mirror,pad_offtopic,-0.324375,rag2026-2
+rag26,Jev mirror,pad_relevant,0.14375,rag2026-2
+rag26,Jev mirror,truncate,-0.131875,rag2026-2
+rag26,Jev mirror,pad_repeat,-0.059375,rag2026-2
+rag26,Jev mirror,pad_generic,-0.115937,rag2026-2
+rag26,Jev mirror,pad_offtopic,-0.3325,rag2026-2
+rag26,Jev mirror,pad_relevant,0.105938,rag2026-2
+rag26,Jev mirror,truncate,-0.13,rag2026-2
+rag26,Jev mirror,pad_repeat,-0.0125,rag2026-2
+rag26,Jev mirror,pad_generic,-0.114063,rag2026-2
+rag26,Jev mirror,pad_offtopic,-0.232812,rag2026-2
+rag26,Jev mirror,pad_relevant,0.193438,rag2026-2
+rag26,Jev mirror,truncate,-0.133437,rag2026-2
+rag26,Jev mirror,pad_repeat,-0.0290625,rag2026-2
+rag26,Jev mirror,pad_generic,-0.135625,rag2026-2
+rag26,Jev mirror,pad_offtopic,-0.264375,rag2026-2
+rag26,Jev mirror,pad_relevant,0.146562,rag2026-2
+rag26,Jev mirror,truncate,-0.053125,rag2026-2
+rag26,Jev mirror,pad_repeat,-0.0209375,rag2026-2
+rag26,Jev mirror,pad_generic,-0.060625,rag2026-2
+rag26,Jev mirror,pad_offtopic,-0.17,rag2026-2
+rag26,Jev mirror,pad_relevant,0.170625,rag2026-2
+rag26,Jev mirror,truncate,-0.121562,rag2026-2
+rag26,Jev mirror,pad_repeat,-0.044375,rag2026-2
+rag26,Jev mirror,pad_generic,-0.1125,rag2026-2
+rag26,Jev mirror,pad_offtopic,-0.210938,rag2026-2
+rag26,Jev mirror,pad_relevant,0.225312,rag2026-2
+rag26,Jev mirror,truncate,-0.050625,rag2026-2
+rag26,Jev mirror,pad_repeat,-0.0765625,rag2026-2
+rag26,Jev mirror,pad_generic,-0.12,rag2026-2
+rag26,Jev mirror,pad_offtopic,-0.170313,rag2026-2
+rag26,Jev mirror,pad_relevant,0.250625,rag2026-2
+rag26,Jev mirror,truncate,-0.0121875,rag2026-2
+rag26,Jev mirror,pad_repeat,-0.040625,rag2026-2
+rag26,Jev mirror,pad_generic,-0.0790625,rag2026-2
+rag26,Jev mirror,pad_offtopic,-0.135625,rag2026-2
+rag26,Jev mirror,pad_relevant,0.15,rag2026-2
+rag26,Jev mirror,truncate,-0.0315625,rag2026-2
+rag26,Jev mirror,pad_repeat,-0.0646875,rag2026-2
+rag26,Jev mirror,pad_generic,-0.085,rag2026-2
+rag26,Jev mirror,pad_offtopic,-0.152813,rag2026-2
+rag26,Jev mirror,pad_relevant,0.219062,rag2026-2
+rag26,Jev mirror,truncate,-0.115,rag2026-2
+rag26,Jev mirror,pad_repeat,-0.00875,rag2026-2
+rag26,Jev mirror,pad_generic,-0.0453125,rag2026-2
+rag26,Jev mirror,pad_offtopic,-0.065625,rag2026-2
+rag26,Jev mirror,pad_relevant,0.16375,rag2026-2
+rag26,Jev mirror,truncate,-0.028125,rag2026-2
+rag26,Jev mirror,pad_repeat,-0.025,rag2026-2
+rag26,Jev mirror,pad_generic,-0.0815625,rag2026-2
+rag26,Jev mirror,pad_offtopic,-0.085,rag2026-2
+rag26,Jev mirror,pad_relevant,0.290937,rag2026-2
+rag26,Jev mirror,truncate,0.0009375,rag2026-2
+rag26,Jev mirror,pad_repeat,-0.0653125,rag2026-2
+rag26,Jev mirror,pad_generic,-0.0603125,rag2026-2
+rag26,Jev mirror,pad_offtopic,-0.125937,rag2026-2
+rag26,Jev mirror,pad_relevant,0.257812,rag2026-2
+rag26,Jev mirror,truncate,-0.058125,rag2026-2
+rag26,Jev mirror,pad_repeat,-0.0096875,rag2026-2
+rag26,Jev mirror,pad_generic,-0.0434375,rag2026-2
+rag26,Jev mirror,pad_offtopic,-0.08875,rag2026-2
+rag26,Jev mirror,pad_relevant,0.151875,rag2026-2
+rag26,Jev mirror,truncate,-0.026875,rag2026-2
+rag26,Jev mirror,pad_repeat,-0.03625,rag2026-2
+rag26,Jev mirror,pad_generic,-0.034375,rag2026-2
+rag26,Jev mirror,pad_offtopic,-0.10875,rag2026-2
+rag26,Jev mirror,pad_relevant,0.126562,rag2026-2
+rag26,Jev mirror,truncate,-0.0528125,rag2026-2
+rag26,Jev mirror,pad_repeat,-0.115313,rag2026-3
+rag26,Jev mirror,pad_generic,-0.109063,rag2026-3
+rag26,Jev mirror,pad_offtopic,-0.353125,rag2026-3
+rag26,Jev mirror,pad_relevant,0.08375,rag2026-3
+rag26,Jev mirror,truncate,-0.086875,rag2026-3
+rag26,Jev mirror,pad_repeat,-0.0471875,rag2026-3
+rag26,Jev mirror,pad_generic,-0.110312,rag2026-3
+rag26,Jev mirror,pad_offtopic,-0.249375,rag2026-3
+rag26,Jev mirror,pad_relevant,0.10875,rag2026-3
+rag26,Jev mirror,truncate,-0.0975,rag2026-3
+rag26,Jev mirror,pad_repeat,-0.05875,rag2026-3
+rag26,Jev mirror,pad_generic,-0.0925,rag2026-3
+rag26,Jev mirror,pad_offtopic,-0.289062,rag2026-3
+rag26,Jev mirror,pad_relevant,0.124688,rag2026-3
+rag26,Jev mirror,truncate,-0.054375,rag2026-3
+rag26,Jev mirror,pad_repeat,-0.0628125,rag2026-3
+rag26,Jev mirror,pad_generic,-0.112813,rag2026-3
+rag26,Jev mirror,pad_offtopic,-0.324688,rag2026-3
+rag26,Jev mirror,pad_relevant,0.10625,rag2026-3
+rag26,Jev mirror,truncate,-0.041875,rag2026-3
+rag26,Jev mirror,pad_repeat,-0.0378125,rag2026-3
+rag26,Jev mirror,pad_generic,-0.078125,rag2026-3
+rag26,Jev mirror,pad_offtopic,-0.2125,rag2026-3
+rag26,Jev mirror,pad_relevant,0.0371875,rag2026-3
+rag26,Jev mirror,truncate,-0.129375,rag2026-3
+rag26,Jev mirror,pad_repeat,-0.046875,rag2026-3
+rag26,Jev mirror,pad_generic,-0.111563,rag2026-3
+rag26,Jev mirror,pad_offtopic,-0.25,rag2026-3
+rag26,Jev mirror,pad_relevant,0.225625,rag2026-3
+rag26,Jev mirror,truncate,-0.070625,rag2026-3
+rag26,Jev mirror,pad_repeat,-0.03375,rag2026-3
+rag26,Jev mirror,pad_generic,-0.0665625,rag2026-3
+rag26,Jev mirror,pad_offtopic,-0.286562,rag2026-3
+rag26,Jev mirror,pad_relevant,0.11375,rag2026-3
+rag26,Jev mirror,truncate,-0.08875,rag2026-3
+rag26,Jev mirror,pad_repeat,-0.0559375,rag2026-3
+rag26,Jev mirror,pad_generic,-0.10375,rag2026-3
+rag26,Jev mirror,pad_offtopic,-0.258437,rag2026-3
+rag26,Jev mirror,pad_relevant,0.151562,rag2026-3
+rag26,Jev mirror,truncate,-0.0809375,rag2026-3
+rag26,Jev mirror,pad_repeat,-0.0821875,rag2026-3
+rag26,Jev mirror,pad_generic,-0.0778125,rag2026-3
+rag26,Jev mirror,pad_offtopic,-0.195625,rag2026-3
+rag26,Jev mirror,pad_relevant,0.215938,rag2026-3
+rag26,Jev mirror,truncate,-0.0665625,rag2026-3
+rag26,Jev mirror,pad_repeat,-0.071875,rag2026-3
+rag26,Jev mirror,pad_generic,-0.086875,rag2026-3
+rag26,Jev mirror,pad_offtopic,-0.204375,rag2026-3
+rag26,Jev mirror,pad_relevant,0.201563,rag2026-3
+rag26,Jev mirror,truncate,-0.05,rag2026-3
+rag26,Jev mirror,pad_repeat,-0.0490625,rag2026-3
+rag26,Jev mirror,pad_generic,-0.0228125,rag2026-3
+rag26,Jev mirror,pad_offtopic,-0.145312,rag2026-3
+rag26,Jev mirror,pad_relevant,0.1075,rag2026-3
+rag26,Jev mirror,truncate,-0.08,rag2026-3
+rag26,Jev mirror,pad_repeat,-0.003125,rag2026-3
+rag26,Jev mirror,pad_generic,-0.028125,rag2026-3
+rag26,Jev mirror,pad_offtopic,-0.107812,rag2026-3
+rag26,Jev mirror,pad_relevant,0.17375,rag2026-3
+rag26,Jev mirror,truncate,-0.051875,rag2026-3
+rag26,Jev mirror,pad_repeat,-0.0346875,rag2026-3
+rag26,Jev mirror,pad_generic,-0.075625,rag2026-3
+rag26,Jev mirror,pad_offtopic,-0.18625,rag2026-3
+rag26,Jev mirror,pad_relevant,0.161562,rag2026-3
+rag26,Jev mirror,truncate,-0.103438,rag2026-3
+rag26,Jev mirror,pad_repeat,-0.03875,rag2026-3
+rag26,Jev mirror,pad_generic,-0.064375,rag2026-3
+rag26,Jev mirror,pad_offtopic,-0.1375,rag2026-3
+rag26,Jev mirror,pad_relevant,0.156562,rag2026-3
+rag26,Jev mirror,truncate,-0.029375,rag2026-3
+rag26,Jev mirror,pad_repeat,-0.008125,rag2026-3
+rag26,Jev mirror,pad_generic,-0.028125,rag2026-3
+rag26,Jev mirror,pad_offtopic,-0.0921875,rag2026-3
+rag26,Jev mirror,pad_relevant,0.148437,rag2026-3
+rag26,Jev mirror,truncate,-0.0309375,rag2026-3
+rag26,Jev mirror,pad_repeat,-0.058125,rag2026-3
+rag26,Jev mirror,pad_generic,-0.086875,rag2026-3
+rag26,Jev mirror,pad_offtopic,-0.158125,rag2026-3
+rag26,Jev mirror,pad_relevant,0.29375,rag2026-3
+rag26,Jev mirror,truncate,-0.0259375,rag2026-3
+rag26,Jev mirror,pad_repeat,-0.04,rag2026-4
+rag26,Jev mirror,pad_generic,-0.169062,rag2026-4
+rag26,Jev mirror,pad_offtopic,-0.387187,rag2026-4
+rag26,Jev mirror,pad_relevant,0.086875,rag2026-4
+rag26,Jev mirror,truncate,-0.10875,rag2026-4
+rag26,Jev mirror,pad_repeat,-0.0584375,rag2026-4
+rag26,Jev mirror,pad_generic,-0.196875,rag2026-4
+rag26,Jev mirror,pad_offtopic,-0.366562,rag2026-4
+rag26,Jev mirror,pad_relevant,0.101875,rag2026-4
+rag26,Jev mirror,truncate,-0.0509375,rag2026-4
+rag26,Jev mirror,pad_repeat,-0.06625,rag2026-4
+rag26,Jev mirror,pad_generic,-0.158437,rag2026-4
+rag26,Jev mirror,pad_offtopic,-0.364687,rag2026-4
+rag26,Jev mirror,pad_relevant,0.108437,rag2026-4
+rag26,Jev mirror,truncate,-0.0834375,rag2026-4
+rag26,Jev mirror,pad_repeat,-0.05625,rag2026-4
+rag26,Jev mirror,pad_generic,-0.132812,rag2026-4
+rag26,Jev mirror,pad_offtopic,-0.337812,rag2026-4
+rag26,Jev mirror,pad_relevant,0.16,rag2026-4
+rag26,Jev mirror,truncate,-0.03875,rag2026-4
+rag26,Jev mirror,pad_repeat,-0.0759375,rag2026-4
+rag26,Jev mirror,pad_generic,-0.151562,rag2026-4
+rag26,Jev mirror,pad_offtopic,-0.324375,rag2026-4
+rag26,Jev mirror,pad_relevant,0.175312,rag2026-4
+rag26,Jev mirror,truncate,-0.15625,rag2026-4
+rag26,Jev mirror,pad_repeat,-0.0334375,rag2026-4
+rag26,Jev mirror,pad_generic,-0.135,rag2026-4
+rag26,Jev mirror,pad_offtopic,-0.29125,rag2026-4
+rag26,Jev mirror,pad_relevant,0.204063,rag2026-4
+rag26,Jev mirror,truncate,-0.05375,rag2026-4
+rag26,Jev mirror,pad_repeat,-0.041875,rag2026-4
+rag26,Jev mirror,pad_generic,-0.137812,rag2026-4
+rag26,Jev mirror,pad_offtopic,-0.26875,rag2026-4
+rag26,Jev mirror,pad_relevant,0.113438,rag2026-4
+rag26,Jev mirror,truncate,-0.1325,rag2026-4
+rag26,Jev mirror,pad_repeat,-0.110938,rag2026-4
+rag26,Jev mirror,pad_generic,-0.155625,rag2026-4
+rag26,Jev mirror,pad_offtopic,-0.311563,rag2026-4
+rag26,Jev mirror,pad_relevant,0.160625,rag2026-4
+rag26,Jev mirror,truncate,-0.0740625,rag2026-4
+rag26,Jev mirror,pad_repeat,-0.033125,rag2026-4
+rag26,Jev mirror,pad_generic,-0.125312,rag2026-4
+rag26,Jev mirror,pad_offtopic,-0.222812,rag2026-4
+rag26,Jev mirror,pad_relevant,0.211875,rag2026-4
+rag26,Jev mirror,truncate,-0.063125,rag2026-4
+rag26,Jev mirror,pad_repeat,-0.0609375,rag2026-4
+rag26,Jev mirror,pad_generic,-0.12625,rag2026-4
+rag26,Jev mirror,pad_offtopic,-0.194062,rag2026-4
+rag26,Jev mirror,pad_relevant,0.136875,rag2026-4
+rag26,Jev mirror,truncate,-0.0928125,rag2026-4
+rag26,Jev mirror,pad_repeat,-0.0625,rag2026-4
+rag26,Jev mirror,pad_generic,-0.120313,rag2026-4
+rag26,Jev mirror,pad_offtopic,-0.204375,rag2026-4
+rag26,Jev mirror,pad_relevant,0.217812,rag2026-4
+rag26,Jev mirror,truncate,-0.0740625,rag2026-4
+rag26,Jev mirror,pad_repeat,-0.0434375,rag2026-4
+rag26,Jev mirror,pad_generic,-0.0859375,rag2026-4
+rag26,Jev mirror,pad_offtopic,-0.162812,rag2026-4
+rag26,Jev mirror,pad_relevant,0.225,rag2026-4
+rag26,Jev mirror,truncate,-0.0315625,rag2026-4
+rag26,Jev mirror,pad_repeat,-0.03875,rag2026-4
+rag26,Jev mirror,pad_generic,-0.081875,rag2026-4
+rag26,Jev mirror,pad_offtopic,-0.13625,rag2026-4
+rag26,Jev mirror,pad_relevant,0.311562,rag2026-4
+rag26,Jev mirror,truncate,-0.038125,rag2026-4
+rag26,Jev mirror,pad_repeat,-0.05875,rag2026-4
+rag26,Jev mirror,pad_generic,-0.0871875,rag2026-4
+rag26,Jev mirror,pad_offtopic,-0.133125,rag2026-4
+rag26,Jev mirror,pad_relevant,0.195937,rag2026-4
+rag26,Jev mirror,truncate,-0.0159375,rag2026-4
+rag26,Jev mirror,pad_repeat,-0.0434375,rag2026-4
+rag26,Jev mirror,pad_generic,-0.0646875,rag2026-4
+rag26,Jev mirror,pad_offtopic,-0.114687,rag2026-4
+rag26,Jev mirror,pad_relevant,0.285,rag2026-4
+rag26,Jev mirror,truncate,-0.018125,rag2026-4
+rag26,Jev mirror,pad_repeat,0.005625,rag2026-4
+rag26,Jev mirror,pad_generic,-0.030625,rag2026-4
+rag26,Jev mirror,pad_offtopic,-0.0596875,rag2026-4
+rag26,Jev mirror,pad_relevant,0.330625,rag2026-4
+rag26,Jev mirror,truncate,-0.001875,rag2026-4
+rag26,Jev mirror,pad_repeat,-0.0603125,rag2026-5
+rag26,Jev mirror,pad_generic,-0.141875,rag2026-5
+rag26,Jev mirror,pad_offtopic,-0.324375,rag2026-5
+rag26,Jev mirror,pad_relevant,0.147813,rag2026-5
+rag26,Jev mirror,truncate,-0.199375,rag2026-5
+rag26,Jev mirror,pad_repeat,-0.045,rag2026-5
+rag26,Jev mirror,pad_generic,-0.123125,rag2026-5
+rag26,Jev mirror,pad_offtopic,-0.2325,rag2026-5
+rag26,Jev mirror,pad_relevant,0.0990625,rag2026-5
+rag26,Jev mirror,truncate,-0.0103125,rag2026-5
+rag26,Jev mirror,pad_repeat,-0.07625,rag2026-5
+rag26,Jev mirror,pad_generic,-0.08,rag2026-5
+rag26,Jev mirror,pad_offtopic,-0.262813,rag2026-5
+rag26,Jev mirror,pad_relevant,0.103438,rag2026-5
+rag26,Jev mirror,truncate,-0.028125,rag2026-5
+rag26,Jev mirror,pad_repeat,-0.07375,rag2026-5
+rag26,Jev mirror,pad_generic,-0.124375,rag2026-5
+rag26,Jev mirror,pad_offtopic,-0.20375,rag2026-5
+rag26,Jev mirror,pad_relevant,0.187812,rag2026-5
+rag26,Jev mirror,truncate,-0.154062,rag2026-5
+rag26,Jev mirror,pad_repeat,-0.0340625,rag2026-5
+rag26,Jev mirror,pad_generic,-0.10125,rag2026-5
+rag26,Jev mirror,pad_offtopic,-0.25125,rag2026-5
+rag26,Jev mirror,pad_relevant,0.119375,rag2026-5
+rag26,Jev mirror,truncate,-0.13375,rag2026-5
+rag26,Jev mirror,pad_repeat,-0.038125,rag2026-5
+rag26,Jev mirror,pad_generic,-0.101875,rag2026-5
+rag26,Jev mirror,pad_offtopic,-0.208437,rag2026-5
+rag26,Jev mirror,pad_relevant,0.153125,rag2026-5
+rag26,Jev mirror,truncate,-0.066875,rag2026-5
+rag26,Jev mirror,pad_repeat,-0.064375,rag2026-5
+rag26,Jev mirror,pad_generic,-0.113125,rag2026-5
+rag26,Jev mirror,pad_offtopic,-0.246562,rag2026-5
+rag26,Jev mirror,pad_relevant,0.1975,rag2026-5
+rag26,Jev mirror,truncate,-0.0646875,rag2026-5
+rag26,Jev mirror,pad_repeat,-0.0221875,rag2026-5
+rag26,Jev mirror,pad_generic,-0.05375,rag2026-5
+rag26,Jev mirror,pad_offtopic,-0.105313,rag2026-5
+rag26,Jev mirror,pad_relevant,0.149062,rag2026-5
+rag26,Jev mirror,truncate,-0.0534375,rag2026-5
+rag26,Jev mirror,pad_repeat,-0.031875,rag2026-5
+rag26,Jev mirror,pad_generic,-0.0315625,rag2026-5
+rag26,Jev mirror,pad_offtopic,-0.167188,rag2026-5
+rag26,Jev mirror,pad_relevant,0.189062,rag2026-5
+rag26,Jev mirror,truncate,-0.07125,rag2026-5
+rag26,Jev mirror,pad_repeat,-0.0321875,rag2026-5
+rag26,Jev mirror,pad_generic,-0.0678125,rag2026-5
+rag26,Jev mirror,pad_offtopic,-0.122188,rag2026-5
+rag26,Jev mirror,pad_relevant,0.134688,rag2026-5
+rag26,Jev mirror,truncate,-0.070625,rag2026-5
+rag26,Jev mirror,pad_repeat,-0.035625,rag2026-5
+rag26,Jev mirror,pad_generic,-0.064375,rag2026-5
+rag26,Jev mirror,pad_offtopic,-0.10875,rag2026-5
+rag26,Jev mirror,pad_relevant,0.21625,rag2026-5
+rag26,Jev mirror,truncate,-0.069375,rag2026-5
+rag26,Jev mirror,pad_repeat,-0.023125,rag2026-5
+rag26,Jev mirror,pad_generic,-0.044375,rag2026-5
+rag26,Jev mirror,pad_offtopic,-0.10625,rag2026-5
+rag26,Jev mirror,pad_relevant,0.1825,rag2026-5
+rag26,Jev mirror,truncate,-0.086875,rag2026-5
+rag26,Jev mirror,pad_repeat,-0.0515625,rag2026-5
+rag26,Jev mirror,pad_generic,-0.055625,rag2026-5
+rag26,Jev mirror,pad_offtopic,-0.094375,rag2026-5
+rag26,Jev mirror,pad_relevant,0.265,rag2026-5
+rag26,Jev mirror,truncate,-0.069375,rag2026-5
+rag26,Jev mirror,pad_repeat,-0.0484375,rag2026-5
+rag26,Jev mirror,pad_generic,-0.0734375,rag2026-5
+rag26,Jev mirror,pad_offtopic,-0.096875,rag2026-5
+rag26,Jev mirror,pad_relevant,0.333125,rag2026-5
+rag26,Jev mirror,truncate,-0.01125,rag2026-5
+rag26,Jev mirror,pad_repeat,-0.025625,rag2026-5
+rag26,Jev mirror,pad_generic,-0.03875,rag2026-5
+rag26,Jev mirror,pad_offtopic,-0.098125,rag2026-5
+rag26,Jev mirror,pad_relevant,0.20625,rag2026-5
+rag26,Jev mirror,truncate,-0.070625,rag2026-5
+rag26,Jev mirror,pad_repeat,-0.03,rag2026-5
+rag26,Jev mirror,pad_generic,-0.049375,rag2026-5
+rag26,Jev mirror,pad_offtopic,-0.086875,rag2026-5
+rag26,Jev mirror,pad_relevant,0.268125,rag2026-5
+rag26,Jev mirror,truncate,-0.0521875,rag2026-5
+rag26,Jev mirror,pad_repeat,-0.09,rag2026-6
+rag26,Jev mirror,pad_generic,-0.279687,rag2026-6
+rag26,Jev mirror,pad_offtopic,-0.350937,rag2026-6
+rag26,Jev mirror,pad_relevant,0.130625,rag2026-6
+rag26,Jev mirror,truncate,-0.19625,rag2026-6
+rag26,Jev mirror,pad_repeat,-0.0834375,rag2026-6
+rag26,Jev mirror,pad_generic,-0.120625,rag2026-6
+rag26,Jev mirror,pad_offtopic,-0.276562,rag2026-6
+rag26,Jev mirror,pad_relevant,0.18875,rag2026-6
+rag26,Jev mirror,truncate,-0.191562,rag2026-6
+rag26,Jev mirror,pad_repeat,-0.0565625,rag2026-6
+rag26,Jev mirror,pad_generic,-0.167812,rag2026-6
+rag26,Jev mirror,pad_offtopic,-0.316875,rag2026-6
+rag26,Jev mirror,pad_relevant,0.177813,rag2026-6
+rag26,Jev mirror,truncate,-0.259375,rag2026-6
+rag26,Jev mirror,pad_repeat,-0.14625,rag2026-6
+rag26,Jev mirror,pad_generic,-0.165,rag2026-6
+rag26,Jev mirror,pad_offtopic,-0.219375,rag2026-6
+rag26,Jev mirror,pad_relevant,0.2075,rag2026-6
+rag26,Jev mirror,truncate,-0.180938,rag2026-6
+rag26,Jev mirror,pad_repeat,-0.104063,rag2026-6
+rag26,Jev mirror,pad_generic,-0.219375,rag2026-6
+rag26,Jev mirror,pad_offtopic,-0.276875,rag2026-6
+rag26,Jev mirror,pad_relevant,0.222812,rag2026-6
+rag26,Jev mirror,truncate,-0.169375,rag2026-6
+rag26,Jev mirror,pad_repeat,-0.0546875,rag2026-6
+rag26,Jev mirror,pad_generic,-0.14375,rag2026-6
+rag26,Jev mirror,pad_offtopic,-0.199687,rag2026-6
+rag26,Jev mirror,pad_relevant,0.216875,rag2026-6
+rag26,Jev mirror,truncate,-0.14125,rag2026-6
+rag26,Jev mirror,pad_repeat,-0.0540625,rag2026-6
+rag26,Jev mirror,pad_generic,-0.182813,rag2026-6
+rag26,Jev mirror,pad_offtopic,-0.25875,rag2026-6
+rag26,Jev mirror,pad_relevant,0.211875,rag2026-6
+rag26,Jev mirror,truncate,-0.154688,rag2026-6
+rag26,Jev mirror,pad_repeat,-0.0584375,rag2026-6
+rag26,Jev mirror,pad_generic,-0.102187,rag2026-6
+rag26,Jev mirror,pad_offtopic,-0.112187,rag2026-6
+rag26,Jev mirror,pad_relevant,0.210938,rag2026-6
+rag26,Jev mirror,truncate,-0.114375,rag2026-6
+rag26,Jev mirror,pad_repeat,-0.120937,rag2026-6
+rag26,Jev mirror,pad_generic,-0.107187,rag2026-6
+rag26,Jev mirror,pad_offtopic,-0.18625,rag2026-6
+rag26,Jev mirror,pad_relevant,0.199375,rag2026-6
+rag26,Jev mirror,truncate,-0.110625,rag2026-6
+rag26,Jev mirror,pad_repeat,-0.0725,rag2026-6
+rag26,Jev mirror,pad_generic,-0.142812,rag2026-6
+rag26,Jev mirror,pad_offtopic,-0.18375,rag2026-6
+rag26,Jev mirror,pad_relevant,0.252813,rag2026-6
+rag26,Jev mirror,truncate,-0.0946875,rag2026-6
+rag26,Jev mirror,pad_repeat,-0.0428125,rag2026-6
+rag26,Jev mirror,pad_generic,-0.120625,rag2026-6
+rag26,Jev mirror,pad_offtopic,-0.11625,rag2026-6
+rag26,Jev mirror,pad_relevant,0.137813,rag2026-6
+rag26,Jev mirror,truncate,-0.0815625,rag2026-6
+rag26,Jev mirror,pad_repeat,-0.044375,rag2026-6
+rag26,Jev mirror,pad_generic,-0.07,rag2026-6
+rag26,Jev mirror,pad_offtopic,-0.109375,rag2026-6
+rag26,Jev mirror,pad_relevant,0.139062,rag2026-6
+rag26,Jev mirror,truncate,-0.1075,rag2026-6
+rag26,Jev mirror,pad_repeat,-0.0571875,rag2026-6
+rag26,Jev mirror,pad_generic,-0.079375,rag2026-6
+rag26,Jev mirror,pad_offtopic,-0.071875,rag2026-6
+rag26,Jev mirror,pad_relevant,0.186562,rag2026-6
+rag26,Jev mirror,truncate,-0.0596875,rag2026-6
+rag26,Jev mirror,pad_repeat,-0.0125,rag2026-6
+rag26,Jev mirror,pad_generic,-0.0684375,rag2026-6
+rag26,Jev mirror,pad_offtopic,-0.05625,rag2026-6
+rag26,Jev mirror,pad_relevant,0.269687,rag2026-6
+rag26,Jev mirror,truncate,-0.015,rag2026-6
+rag26,Jev mirror,pad_repeat,-0.0396875,rag2026-6
+rag26,Jev mirror,pad_generic,-0.0865625,rag2026-6
+rag26,Jev mirror,pad_offtopic,-0.060625,rag2026-6
+rag26,Jev mirror,pad_relevant,0.19,rag2026-6
+rag26,Jev mirror,truncate,-0.07125,rag2026-6
+rag26,Jev mirror,pad_repeat,-0.0153125,rag2026-6
+rag26,Jev mirror,pad_generic,-0.0921875,rag2026-6
+rag26,Jev mirror,pad_offtopic,-0.0859375,rag2026-6
+rag26,Jev mirror,pad_relevant,0.189375,rag2026-6
+rag26,Jev mirror,truncate,-0.0521875,rag2026-6
+rag26,Jev mirror,pad_repeat,-0.0521875,rag2026-7
+rag26,Jev mirror,pad_generic,-0.0896875,rag2026-7
+rag26,Jev mirror,pad_offtopic,-0.210625,rag2026-7
+rag26,Jev mirror,pad_relevant,0.1075,rag2026-7
+rag26,Jev mirror,truncate,-0.101562,rag2026-7
+rag26,Jev mirror,pad_repeat,-0.0546875,rag2026-7
+rag26,Jev mirror,pad_generic,-0.0925,rag2026-7
+rag26,Jev mirror,pad_offtopic,-0.24625,rag2026-7
+rag26,Jev mirror,pad_relevant,0.124375,rag2026-7
+rag26,Jev mirror,truncate,-0.0771875,rag2026-7
+rag26,Jev mirror,pad_repeat,-0.0815625,rag2026-7
+rag26,Jev mirror,pad_generic,-0.17625,rag2026-7
+rag26,Jev mirror,pad_offtopic,-0.294688,rag2026-7
+rag26,Jev mirror,pad_relevant,0.109687,rag2026-7
+rag26,Jev mirror,truncate,-0.06375,rag2026-7
+rag26,Jev mirror,pad_repeat,-0.0575,rag2026-7
+rag26,Jev mirror,pad_generic,-0.181875,rag2026-7
+rag26,Jev mirror,pad_offtopic,-0.330625,rag2026-7
+rag26,Jev mirror,pad_relevant,0.150938,rag2026-7
+rag26,Jev mirror,truncate,-0.0915625,rag2026-7
+rag26,Jev mirror,pad_repeat,-0.075,rag2026-7
+rag26,Jev mirror,pad_generic,-0.0928125,rag2026-7
+rag26,Jev mirror,pad_offtopic,-0.243125,rag2026-7
+rag26,Jev mirror,pad_relevant,0.1225,rag2026-7
+rag26,Jev mirror,truncate,-0.114062,rag2026-7
+rag26,Jev mirror,pad_repeat,-0.05,rag2026-7
+rag26,Jev mirror,pad_generic,-0.161562,rag2026-7
+rag26,Jev mirror,pad_offtopic,-0.234688,rag2026-7
+rag26,Jev mirror,pad_relevant,0.140625,rag2026-7
+rag26,Jev mirror,truncate,-0.128438,rag2026-7
+rag26,Jev mirror,pad_repeat,-0.0840625,rag2026-7
+rag26,Jev mirror,pad_generic,-0.0678125,rag2026-7
+rag26,Jev mirror,pad_offtopic,-0.16125,rag2026-7
+rag26,Jev mirror,pad_relevant,0.194687,rag2026-7
+rag26,Jev mirror,truncate,-0.20625,rag2026-7
+rag26,Jev mirror,pad_repeat,-0.0603125,rag2026-7
+rag26,Jev mirror,pad_generic,-0.121562,rag2026-7
+rag26,Jev mirror,pad_offtopic,-0.205625,rag2026-7
+rag26,Jev mirror,pad_relevant,0.28625,rag2026-7
+rag26,Jev mirror,truncate,-0.06625,rag2026-7
+rag26,Jev mirror,pad_repeat,-0.0440625,rag2026-7
+rag26,Jev mirror,pad_generic,-0.0725,rag2026-7
+rag26,Jev mirror,pad_offtopic,-0.138437,rag2026-7
+rag26,Jev mirror,pad_relevant,0.226875,rag2026-7
+rag26,Jev mirror,truncate,-0.109375,rag2026-7
+rag26,Jev mirror,pad_repeat,-0.04375,rag2026-7
+rag26,Jev mirror,pad_generic,-0.066875,rag2026-7
+rag26,Jev mirror,pad_offtopic,-0.118438,rag2026-7
+rag26,Jev mirror,pad_relevant,0.178437,rag2026-7
+rag26,Jev mirror,truncate,-0.0996875,rag2026-7
+rag26,Jev mirror,pad_repeat,-0.044375,rag2026-7
+rag26,Jev mirror,pad_generic,-0.0878125,rag2026-7
+rag26,Jev mirror,pad_offtopic,-0.145625,rag2026-7
+rag26,Jev mirror,pad_relevant,0.182188,rag2026-7
+rag26,Jev mirror,truncate,-0.0878125,rag2026-7
+rag26,Jev mirror,pad_repeat,-0.019375,rag2026-7
+rag26,Jev mirror,pad_generic,-0.0759375,rag2026-7
+rag26,Jev mirror,pad_offtopic,-0.155,rag2026-7
+rag26,Jev mirror,pad_relevant,0.156563,rag2026-7
+rag26,Jev mirror,truncate,-0.073125,rag2026-7
+rag26,Jev mirror,pad_repeat,-0.03375,rag2026-7
+rag26,Jev mirror,pad_generic,-0.109375,rag2026-7
+rag26,Jev mirror,pad_offtopic,-0.145625,rag2026-7
+rag26,Jev mirror,pad_relevant,0.203437,rag2026-7
+rag26,Jev mirror,truncate,-0.0440625,rag2026-7
+rag26,Jev mirror,pad_repeat,-0.0215625,rag2026-7
+rag26,Jev mirror,pad_generic,-0.065,rag2026-7
+rag26,Jev mirror,pad_offtopic,-0.109062,rag2026-7
+rag26,Jev mirror,pad_relevant,0.253125,rag2026-7
+rag26,Jev mirror,truncate,-0.0409375,rag2026-7
+rag26,Jev mirror,pad_repeat,-0.008125,rag2026-7
+rag26,Jev mirror,pad_generic,-0.075,rag2026-7
+rag26,Jev mirror,pad_offtopic,-0.122812,rag2026-7
+rag26,Jev mirror,pad_relevant,0.218437,rag2026-7
+rag26,Jev mirror,truncate,-0.021875,rag2026-7
+rag26,Jev mirror,pad_repeat,-0.0225,rag2026-7
+rag26,Jev mirror,pad_generic,-0.040625,rag2026-7
+rag26,Jev mirror,pad_offtopic,-0.0434375,rag2026-7
+rag26,Jev mirror,pad_relevant,0.314062,rag2026-7
+rag26,Jev mirror,truncate,-0.02,rag2026-7
+rag26,Jev mirror,pad_repeat,-0.0640625,rag2026-8
+rag26,Jev mirror,pad_generic,-0.122812,rag2026-8
+rag26,Jev mirror,pad_offtopic,-0.350312,rag2026-8
+rag26,Jev mirror,pad_relevant,0.0815625,rag2026-8
+rag26,Jev mirror,truncate,-0.08875,rag2026-8
+rag26,Jev mirror,pad_repeat,-0.093125,rag2026-8
+rag26,Jev mirror,pad_generic,-0.210625,rag2026-8
+rag26,Jev mirror,pad_offtopic,-0.392812,rag2026-8
+rag26,Jev mirror,pad_relevant,0.137813,rag2026-8
+rag26,Jev mirror,truncate,-0.0971875,rag2026-8
+rag26,Jev mirror,pad_repeat,-0.0890625,rag2026-8
+rag26,Jev mirror,pad_generic,-0.117187,rag2026-8
+rag26,Jev mirror,pad_offtopic,-0.376562,rag2026-8
+rag26,Jev mirror,pad_relevant,0.101875,rag2026-8
+rag26,Jev mirror,truncate,-0.0834375,rag2026-8
+rag26,Jev mirror,pad_repeat,-0.113437,rag2026-8
+rag26,Jev mirror,pad_generic,-0.1125,rag2026-8
+rag26,Jev mirror,pad_offtopic,-0.33125,rag2026-8
+rag26,Jev mirror,pad_relevant,0.136562,rag2026-8
+rag26,Jev mirror,truncate,-0.225938,rag2026-8
+rag26,Jev mirror,pad_repeat,-0.103437,rag2026-8
+rag26,Jev mirror,pad_generic,-0.145937,rag2026-8
+rag26,Jev mirror,pad_offtopic,-0.33625,rag2026-8
+rag26,Jev mirror,pad_relevant,0.12375,rag2026-8
+rag26,Jev mirror,truncate,-0.1725,rag2026-8
+rag26,Jev mirror,pad_repeat,-0.125625,rag2026-8
+rag26,Jev mirror,pad_generic,-0.155937,rag2026-8
+rag26,Jev mirror,pad_offtopic,-0.331562,rag2026-8
+rag26,Jev mirror,pad_relevant,0.187188,rag2026-8
+rag26,Jev mirror,truncate,-0.105,rag2026-8
+rag26,Jev mirror,pad_repeat,-0.106875,rag2026-8
+rag26,Jev mirror,pad_generic,-0.155,rag2026-8
+rag26,Jev mirror,pad_offtopic,-0.30375,rag2026-8
+rag26,Jev mirror,pad_relevant,0.125,rag2026-8
+rag26,Jev mirror,truncate,-0.085,rag2026-8
+rag26,Jev mirror,pad_repeat,-0.112188,rag2026-8
+rag26,Jev mirror,pad_generic,-0.1425,rag2026-8
+rag26,Jev mirror,pad_offtopic,-0.277813,rag2026-8
+rag26,Jev mirror,pad_relevant,0.188437,rag2026-8
+rag26,Jev mirror,truncate,-0.151563,rag2026-8
+rag26,Jev mirror,pad_repeat,-0.0478125,rag2026-8
+rag26,Jev mirror,pad_generic,-0.107187,rag2026-8
+rag26,Jev mirror,pad_offtopic,-0.220313,rag2026-8
+rag26,Jev mirror,pad_relevant,0.08625,rag2026-8
+rag26,Jev mirror,truncate,-0.054375,rag2026-8
+rag26,Jev mirror,pad_repeat,-0.0428125,rag2026-8
+rag26,Jev mirror,pad_generic,-0.068125,rag2026-8
+rag26,Jev mirror,pad_offtopic,-0.130937,rag2026-8
+rag26,Jev mirror,pad_relevant,0.125937,rag2026-8
+rag26,Jev mirror,truncate,-0.0746875,rag2026-8
+rag26,Jev mirror,pad_repeat,-0.03375,rag2026-8
+rag26,Jev mirror,pad_generic,-0.09,rag2026-8
+rag26,Jev mirror,pad_offtopic,-0.134688,rag2026-8
+rag26,Jev mirror,pad_relevant,0.164687,rag2026-8
+rag26,Jev mirror,truncate,-0.0740625,rag2026-8
+rag26,Jev mirror,pad_repeat,-0.0403125,rag2026-8
+rag26,Jev mirror,pad_generic,-0.0771875,rag2026-8
+rag26,Jev mirror,pad_offtopic,-0.145625,rag2026-8
+rag26,Jev mirror,pad_relevant,0.159687,rag2026-8
+rag26,Jev mirror,truncate,-0.083125,rag2026-8
+rag26,Jev mirror,pad_repeat,-0.02,rag2026-8
+rag26,Jev mirror,pad_generic,-0.0903125,rag2026-8
+rag26,Jev mirror,pad_offtopic,-0.195312,rag2026-8
+rag26,Jev mirror,pad_relevant,0.257812,rag2026-8
+rag26,Jev mirror,truncate,-0.0384375,rag2026-8
+rag26,Jev mirror,pad_repeat,-0.0296875,rag2026-8
+rag26,Jev mirror,pad_generic,-0.0759375,rag2026-8
+rag26,Jev mirror,pad_offtopic,-0.115625,rag2026-8
+rag26,Jev mirror,pad_relevant,0.281875,rag2026-8
+rag26,Jev mirror,truncate,-0.05625,rag2026-8
+rag26,Jev mirror,pad_repeat,-0.0478125,rag2026-8
+rag26,Jev mirror,pad_generic,-0.06,rag2026-8
+rag26,Jev mirror,pad_offtopic,-0.12,rag2026-8
+rag26,Jev mirror,pad_relevant,0.122813,rag2026-8
+rag26,Jev mirror,truncate,-0.073125,rag2026-8
+rag26,Jev mirror,pad_repeat,-0.03625,rag2026-8
+rag26,Jev mirror,pad_generic,-0.085,rag2026-8
+rag26,Jev mirror,pad_offtopic,-0.116875,rag2026-8
+rag26,Jev mirror,pad_relevant,0.223125,rag2026-8
+rag26,Jev mirror,truncate,-0.06875,rag2026-8
+rag26,Jev mirror,pad_repeat,-0.051875,rag2026-9
+rag26,Jev mirror,pad_generic,-0.204375,rag2026-9
+rag26,Jev mirror,pad_offtopic,-0.291875,rag2026-9
+rag26,Jev mirror,pad_relevant,0.129687,rag2026-9
+rag26,Jev mirror,truncate,-0.163438,rag2026-9
+rag26,Jev mirror,pad_repeat,-0.088125,rag2026-9
+rag26,Jev mirror,pad_generic,-0.104062,rag2026-9
+rag26,Jev mirror,pad_offtopic,-0.260625,rag2026-9
+rag26,Jev mirror,pad_relevant,0.083125,rag2026-9
+rag26,Jev mirror,truncate,-0.0815625,rag2026-9
+rag26,Jev mirror,pad_repeat,-0.0540625,rag2026-9
+rag26,Jev mirror,pad_generic,-0.098125,rag2026-9
+rag26,Jev mirror,pad_offtopic,-0.200625,rag2026-9
+rag26,Jev mirror,pad_relevant,0.105625,rag2026-9
+rag26,Jev mirror,truncate,-0.0609375,rag2026-9
+rag26,Jev mirror,pad_repeat,-0.016875,rag2026-9
+rag26,Jev mirror,pad_generic,-0.158125,rag2026-9
+rag26,Jev mirror,pad_offtopic,-0.23875,rag2026-9
+rag26,Jev mirror,pad_relevant,0.125938,rag2026-9
+rag26,Jev mirror,truncate,-0.117188,rag2026-9
+rag26,Jev mirror,pad_repeat,-0.0471875,rag2026-9
+rag26,Jev mirror,pad_generic,-0.161875,rag2026-9
+rag26,Jev mirror,pad_offtopic,-0.246875,rag2026-9
+rag26,Jev mirror,pad_relevant,0.214687,rag2026-9
+rag26,Jev mirror,truncate,-0.0075,rag2026-9
+rag26,Jev mirror,pad_repeat,-0.0178125,rag2026-9
+rag26,Jev mirror,pad_generic,-0.078125,rag2026-9
+rag26,Jev mirror,pad_offtopic,-0.151562,rag2026-9
+rag26,Jev mirror,pad_relevant,0.161562,rag2026-9
+rag26,Jev mirror,truncate,-0.100937,rag2026-9
+rag26,Jev mirror,pad_repeat,-0.0325,rag2026-9
+rag26,Jev mirror,pad_generic,-0.075625,rag2026-9
+rag26,Jev mirror,pad_offtopic,-0.1425,rag2026-9
+rag26,Jev mirror,pad_relevant,0.226562,rag2026-9
+rag26,Jev mirror,truncate,-0.073125,rag2026-9
+rag26,Jev mirror,pad_repeat,-0.0440625,rag2026-9
+rag26,Jev mirror,pad_generic,-0.0703125,rag2026-9
+rag26,Jev mirror,pad_offtopic,-0.160312,rag2026-9
+rag26,Jev mirror,pad_relevant,0.185312,rag2026-9
+rag26,Jev mirror,truncate,-0.0509375,rag2026-9
+rag26,Jev mirror,pad_repeat,-0.0215625,rag2026-9
+rag26,Jev mirror,pad_generic,-0.119062,rag2026-9
+rag26,Jev mirror,pad_offtopic,-0.166875,rag2026-9
+rag26,Jev mirror,pad_relevant,0.238125,rag2026-9
+rag26,Jev mirror,truncate,-0.03375,rag2026-9
+rag26,Jev mirror,pad_repeat,-0.0371875,rag2026-9
+rag26,Jev mirror,pad_generic,-0.154062,rag2026-9
+rag26,Jev mirror,pad_offtopic,-0.181875,rag2026-9
+rag26,Jev mirror,pad_relevant,0.205937,rag2026-9
+rag26,Jev mirror,truncate,-0.0821875,rag2026-9
+rag26,Jev mirror,pad_repeat,-0.04,rag2026-9
+rag26,Jev mirror,pad_generic,-0.094375,rag2026-9
+rag26,Jev mirror,pad_offtopic,-0.129062,rag2026-9
+rag26,Jev mirror,pad_relevant,0.230625,rag2026-9
+rag26,Jev mirror,truncate,-0.0459375,rag2026-9
+rag26,Jev mirror,pad_repeat,-0.0121875,rag2026-9
+rag26,Jev mirror,pad_generic,-0.046875,rag2026-9
+rag26,Jev mirror,pad_offtopic,-0.0821875,rag2026-9
+rag26,Jev mirror,pad_relevant,0.221562,rag2026-9
+rag26,Jev mirror,truncate,-0.0090625,rag2026-9
+rag26,Jev mirror,pad_repeat,-0.0140625,rag2026-9
+rag26,Jev mirror,pad_generic,-0.051875,rag2026-9
+rag26,Jev mirror,pad_offtopic,-0.090625,rag2026-9
+rag26,Jev mirror,pad_relevant,0.25875,rag2026-9
+rag26,Jev mirror,truncate,-0.019375,rag2026-9
+rag26,Jev mirror,pad_repeat,-0.0415625,rag2026-9
+rag26,Jev mirror,pad_generic,-0.0659375,rag2026-9
+rag26,Jev mirror,pad_offtopic,-0.06,rag2026-9
+rag26,Jev mirror,pad_relevant,0.12125,rag2026-9
+rag26,Jev mirror,truncate,-0.0334375,rag2026-9
+rag26,Jev mirror,pad_repeat,-0.0321875,rag2026-9
+rag26,Jev mirror,pad_generic,-0.0459375,rag2026-9
+rag26,Jev mirror,pad_offtopic,-0.0984375,rag2026-9
+rag26,Jev mirror,pad_relevant,0.173125,rag2026-9
+rag26,Jev mirror,truncate,-0.033125,rag2026-9
+rag26,Jev mirror,pad_repeat,-0.0209375,rag2026-9
+rag26,Jev mirror,pad_generic,-0.0578125,rag2026-9
+rag26,Jev mirror,pad_offtopic,-0.0890625,rag2026-9
+rag26,Jev mirror,pad_relevant,0.174062,rag2026-9
+rag26,Jev mirror,truncate,-0.055625,rag2026-9
+rag26,Gemini,pad_repeat,-0.125,rag2026-0
+rag26,Gemini,pad_generic,0,rag2026-0
+rag26,Gemini,pad_offtopic,-0.3125,rag2026-0
+rag26,Gemini,pad_relevant,0,rag2026-0
+rag26,Gemini,truncate,0,rag2026-0
+rag26,Gemini,pad_repeat,-0.3125,rag2026-0
+rag26,Gemini,pad_generic,-0.25,rag2026-0
+rag26,Gemini,pad_offtopic,-0.375,rag2026-0
+rag26,Gemini,pad_relevant,0,rag2026-0
+rag26,Gemini,truncate,-0.375,rag2026-0
+rag26,Gemini,pad_repeat,-0.25,rag2026-0
+rag26,Gemini,pad_generic,-0.25,rag2026-0
+rag26,Gemini,pad_offtopic,-0.3125,rag2026-0
+rag26,Gemini,pad_relevant,0,rag2026-0
+rag26,Gemini,truncate,-0.0625,rag2026-0
+rag26,Gemini,pad_repeat,-0.25,rag2026-0
+rag26,Gemini,pad_generic,-0.25,rag2026-0
+rag26,Gemini,pad_offtopic,-0.4375,rag2026-0
+rag26,Gemini,pad_relevant,-0.125,rag2026-0
+rag26,Gemini,truncate,0,rag2026-0
+rag26,Gemini,pad_repeat,-0.1875,rag2026-0
+rag26,Gemini,pad_generic,-0.1875,rag2026-0
+rag26,Gemini,pad_offtopic,-0.375,rag2026-0
+rag26,Gemini,pad_relevant,0.125,rag2026-0
+rag26,Gemini,truncate,-0.1875,rag2026-0
+rag26,Gemini,pad_repeat,-0.0625,rag2026-0
+rag26,Gemini,pad_generic,-0.0625,rag2026-0
+rag26,Gemini,pad_offtopic,-0.1875,rag2026-0
+rag26,Gemini,pad_relevant,0.125,rag2026-0
+rag26,Gemini,truncate,0,rag2026-0
+rag26,Gemini,pad_repeat,-0.125,rag2026-0
+rag26,Gemini,pad_generic,-0.0625,rag2026-0
+rag26,Gemini,pad_offtopic,-0.25,rag2026-0
+rag26,Gemini,pad_relevant,0.25,rag2026-0
+rag26,Gemini,truncate,-0.125,rag2026-0
+rag26,Gemini,pad_repeat,-0.0625,rag2026-0
+rag26,Gemini,pad_generic,-0.125,rag2026-0
+rag26,Gemini,pad_offtopic,-0.0625,rag2026-0
+rag26,Gemini,pad_relevant,0.0625,rag2026-0
+rag26,Gemini,truncate,-0.0625,rag2026-0
+rag26,Gemini,pad_repeat,-0.0625,rag2026-0
+rag26,Gemini,pad_generic,-0.0625,rag2026-0
+rag26,Gemini,pad_offtopic,-0.1875,rag2026-0
+rag26,Gemini,pad_relevant,0.3125,rag2026-0
+rag26,Gemini,truncate,0,rag2026-0
+rag26,Gemini,pad_repeat,-0.1875,rag2026-0
+rag26,Gemini,pad_generic,-0.125,rag2026-0
+rag26,Gemini,pad_offtopic,-0.3125,rag2026-0
+rag26,Gemini,pad_relevant,0.0625,rag2026-0
+rag26,Gemini,truncate,-0.1875,rag2026-0
+rag26,Gemini,pad_repeat,-0.1875,rag2026-0
+rag26,Gemini,pad_generic,-0.0625,rag2026-0
+rag26,Gemini,pad_offtopic,-0.3125,rag2026-0
+rag26,Gemini,pad_relevant,0.125,rag2026-0
+rag26,Gemini,truncate,-0.1875,rag2026-0
+rag26,Gemini,pad_repeat,-0.0625,rag2026-0
+rag26,Gemini,pad_generic,-0.0625,rag2026-0
+rag26,Gemini,pad_offtopic,-0.3125,rag2026-0
+rag26,Gemini,pad_relevant,0.125,rag2026-0
+rag26,Gemini,truncate,-0.125,rag2026-0
+rag26,Gemini,pad_repeat,0,rag2026-0
+rag26,Gemini,pad_generic,0,rag2026-0
+rag26,Gemini,pad_offtopic,0,rag2026-0
+rag26,Gemini,pad_relevant,0.25,rag2026-0
+rag26,Gemini,truncate,0,rag2026-0
+rag26,Gemini,pad_repeat,0,rag2026-0
+rag26,Gemini,pad_generic,0,rag2026-0
+rag26,Gemini,pad_offtopic,0,rag2026-0
+rag26,Gemini,pad_relevant,0.25,rag2026-0
+rag26,Gemini,truncate,0.125,rag2026-0
+rag26,Gemini,pad_repeat,0,rag2026-0
+rag26,Gemini,pad_generic,-0.0625,rag2026-0
+rag26,Gemini,pad_offtopic,-0.0625,rag2026-0
+rag26,Gemini,pad_relevant,0.1875,rag2026-0
+rag26,Gemini,truncate,0,rag2026-0
+rag26,Gemini,pad_repeat,-0.125,rag2026-0
+rag26,Gemini,pad_generic,-0.125,rag2026-0
+rag26,Gemini,pad_offtopic,-0.125,rag2026-0
+rag26,Gemini,pad_relevant,0.0625,rag2026-0
+rag26,Gemini,truncate,-0.125,rag2026-0
+rag26,Gemini,pad_repeat,-0.125,rag2026-1
+rag26,Gemini,pad_generic,-0.0625,rag2026-1
+rag26,Gemini,pad_offtopic,-0.1875,rag2026-1
+rag26,Gemini,pad_relevant,0.0625,rag2026-1
+rag26,Gemini,truncate,0,rag2026-1
+rag26,Gemini,pad_repeat,-0.125,rag2026-1
+rag26,Gemini,pad_generic,-0.3125,rag2026-1
+rag26,Gemini,pad_offtopic,-0.25,rag2026-1
+rag26,Gemini,pad_relevant,-0.125,rag2026-1
+rag26,Gemini,truncate,-0.25,rag2026-1
+rag26,Gemini,pad_repeat,-0.0625,rag2026-1
+rag26,Gemini,pad_generic,-0.0625,rag2026-1
+rag26,Gemini,pad_offtopic,-0.25,rag2026-1
+rag26,Gemini,pad_relevant,0.0625,rag2026-1
+rag26,Gemini,truncate,0,rag2026-1
+rag26,Gemini,pad_repeat,-0.25,rag2026-1
+rag26,Gemini,pad_generic,-0.1875,rag2026-1
+rag26,Gemini,pad_offtopic,-0.4375,rag2026-1
+rag26,Gemini,pad_relevant,-0.1875,rag2026-1
+rag26,Gemini,truncate,-0.1875,rag2026-1
+rag26,Gemini,pad_repeat,-0.1875,rag2026-1
+rag26,Gemini,pad_generic,-0.0625,rag2026-1
+rag26,Gemini,pad_offtopic,-0.1875,rag2026-1
+rag26,Gemini,pad_relevant,0.1875,rag2026-1
+rag26,Gemini,truncate,-0.125,rag2026-1
+rag26,Gemini,pad_repeat,-0.1875,rag2026-1
+rag26,Gemini,pad_generic,-0.0625,rag2026-1
+rag26,Gemini,pad_offtopic,-0.125,rag2026-1
+rag26,Gemini,pad_relevant,-0.0625,rag2026-1
+rag26,Gemini,truncate,-0.1875,rag2026-1
+rag26,Gemini,pad_repeat,-0.125,rag2026-1
+rag26,Gemini,pad_generic,0,rag2026-1
+rag26,Gemini,pad_offtopic,-0.1875,rag2026-1
+rag26,Gemini,pad_relevant,0.125,rag2026-1
+rag26,Gemini,truncate,-0.1875,rag2026-1
+rag26,Gemini,pad_repeat,-0.1875,rag2026-1
+rag26,Gemini,pad_generic,-0.1875,rag2026-1
+rag26,Gemini,pad_offtopic,-0.1875,rag2026-1
+rag26,Gemini,pad_relevant,0.0625,rag2026-1
+rag26,Gemini,truncate,-0.125,rag2026-1
+rag26,Gemini,pad_repeat,-0.125,rag2026-1
+rag26,Gemini,pad_generic,-0.125,rag2026-1
+rag26,Gemini,pad_offtopic,-0.125,rag2026-1
+rag26,Gemini,pad_relevant,0.0625,rag2026-1
+rag26,Gemini,truncate,0,rag2026-1
+rag26,Gemini,pad_repeat,-0.125,rag2026-1
+rag26,Gemini,pad_generic,-0.1875,rag2026-1
+rag26,Gemini,pad_offtopic,-0.125,rag2026-1
+rag26,Gemini,pad_relevant,0.125,rag2026-1
+rag26,Gemini,truncate,-0.0625,rag2026-1
+rag26,Gemini,pad_repeat,-0.0625,rag2026-1
+rag26,Gemini,pad_generic,-0.125,rag2026-1
+rag26,Gemini,pad_offtopic,-0.0625,rag2026-1
+rag26,Gemini,pad_relevant,0.1875,rag2026-1
+rag26,Gemini,truncate,0,rag2026-1
+rag26,Gemini,pad_repeat,-0.125,rag2026-1
+rag26,Gemini,pad_generic,-0.125,rag2026-1
+rag26,Gemini,pad_offtopic,-0.1875,rag2026-1
+rag26,Gemini,pad_relevant,0.0625,rag2026-1
+rag26,Gemini,truncate,-0.125,rag2026-1
+rag26,Gemini,pad_repeat,0,rag2026-1
+rag26,Gemini,pad_generic,0.0625,rag2026-1
+rag26,Gemini,pad_offtopic,0,rag2026-1
+rag26,Gemini,pad_relevant,0.1875,rag2026-1
+rag26,Gemini,truncate,0.0625,rag2026-1
+rag26,Gemini,pad_repeat,-0.0625,rag2026-1
+rag26,Gemini,pad_generic,-0.0625,rag2026-1
+rag26,Gemini,pad_offtopic,-0.0625,rag2026-1
+rag26,Gemini,pad_relevant,0.1875,rag2026-1
+rag26,Gemini,truncate,0,rag2026-1
+rag26,Gemini,pad_repeat,0,rag2026-1
+rag26,Gemini,pad_generic,0,rag2026-1
+rag26,Gemini,pad_offtopic,0,rag2026-1
+rag26,Gemini,pad_relevant,0.25,rag2026-1
+rag26,Gemini,truncate,0,rag2026-1
+rag26,Gemini,pad_repeat,-0.125,rag2026-1
+rag26,Gemini,pad_generic,-0.125,rag2026-1
+rag26,Gemini,pad_offtopic,-0.125,rag2026-1
+rag26,Gemini,pad_relevant,0.125,rag2026-1
+rag26,Gemini,truncate,-0.0625,rag2026-1
+rag26,Gemini,pad_repeat,-0.3125,rag2026-2
+rag26,Gemini,pad_generic,-0.1875,rag2026-2
+rag26,Gemini,pad_offtopic,-0.375,rag2026-2
+rag26,Gemini,pad_relevant,0.125,rag2026-2
+rag26,Gemini,truncate,-0.1875,rag2026-2
+rag26,Gemini,pad_repeat,-0.375,rag2026-2
+rag26,Gemini,pad_generic,-0.25,rag2026-2
+rag26,Gemini,pad_offtopic,-0.75,rag2026-2
+rag26,Gemini,pad_relevant,-0.125,rag2026-2
+rag26,Gemini,truncate,-0.25,rag2026-2
+rag26,Gemini,pad_repeat,-0.375,rag2026-2
+rag26,Gemini,pad_generic,-0.125,rag2026-2
+rag26,Gemini,pad_offtopic,-0.375,rag2026-2
+rag26,Gemini,pad_relevant,0.1875,rag2026-2
+rag26,Gemini,truncate,0,rag2026-2
+rag26,Gemini,pad_repeat,-0.25,rag2026-2
+rag26,Gemini,pad_generic,0,rag2026-2
+rag26,Gemini,pad_offtopic,-0.1875,rag2026-2
+rag26,Gemini,pad_relevant,-0.0625,rag2026-2
+rag26,Gemini,truncate,-0.125,rag2026-2
+rag26,Gemini,pad_repeat,-0.0625,rag2026-2
+rag26,Gemini,pad_generic,-0.1875,rag2026-2
+rag26,Gemini,pad_offtopic,-0.375,rag2026-2
+rag26,Gemini,pad_relevant,0,rag2026-2
+rag26,Gemini,truncate,-0.0625,rag2026-2
+rag26,Gemini,pad_repeat,-0.25,rag2026-2
+rag26,Gemini,pad_generic,-0.0625,rag2026-2
+rag26,Gemini,pad_offtopic,-0.3125,rag2026-2
+rag26,Gemini,pad_relevant,0.125,rag2026-2
+rag26,Gemini,truncate,-0.0625,rag2026-2
+rag26,Gemini,pad_repeat,-0.1875,rag2026-2
+rag26,Gemini,pad_generic,-0.1875,rag2026-2
+rag26,Gemini,pad_offtopic,-0.25,rag2026-2
+rag26,Gemini,pad_relevant,0.125,rag2026-2
+rag26,Gemini,truncate,-0.25,rag2026-2
+rag26,Gemini,pad_repeat,-0.125,rag2026-2
+rag26,Gemini,pad_generic,-0.0625,rag2026-2
+rag26,Gemini,pad_offtopic,-0.125,rag2026-2
+rag26,Gemini,pad_relevant,0.25,rag2026-2
+rag26,Gemini,truncate,-0.0625,rag2026-2
+rag26,Gemini,pad_repeat,0,rag2026-2
+rag26,Gemini,pad_generic,0,rag2026-2
+rag26,Gemini,pad_offtopic,-0.0625,rag2026-2
+rag26,Gemini,pad_relevant,0.3125,rag2026-2
+rag26,Gemini,truncate,0.125,rag2026-2
+rag26,Gemini,pad_repeat,-0.0625,rag2026-2
+rag26,Gemini,pad_generic,0,rag2026-2
+rag26,Gemini,pad_offtopic,-0.0625,rag2026-2
+rag26,Gemini,pad_relevant,0.1875,rag2026-2
+rag26,Gemini,truncate,0.0625,rag2026-2
+rag26,Gemini,pad_repeat,-0.25,rag2026-2
+rag26,Gemini,pad_generic,-0.3125,rag2026-2
+rag26,Gemini,pad_offtopic,-0.3125,rag2026-2
+rag26,Gemini,pad_relevant,0,rag2026-2
+rag26,Gemini,truncate,-0.1875,rag2026-2
+rag26,Gemini,pad_repeat,-0.0625,rag2026-2
+rag26,Gemini,pad_generic,-0.125,rag2026-2
+rag26,Gemini,pad_offtopic,-0.125,rag2026-2
+rag26,Gemini,pad_relevant,0,rag2026-2
+rag26,Gemini,truncate,-0.125,rag2026-2
+rag26,Gemini,pad_repeat,0,rag2026-2
+rag26,Gemini,pad_generic,0,rag2026-2
+rag26,Gemini,pad_offtopic,0,rag2026-2
+rag26,Gemini,pad_relevant,0.375,rag2026-2
+rag26,Gemini,truncate,0,rag2026-2
+rag26,Gemini,pad_repeat,0,rag2026-2
+rag26,Gemini,pad_generic,0,rag2026-2
+rag26,Gemini,pad_offtopic,0,rag2026-2
+rag26,Gemini,pad_relevant,0.25,rag2026-2
+rag26,Gemini,truncate,0,rag2026-2
+rag26,Gemini,pad_repeat,-0.0625,rag2026-2
+rag26,Gemini,pad_generic,-0.125,rag2026-2
+rag26,Gemini,pad_offtopic,-0.25,rag2026-2
+rag26,Gemini,pad_relevant,0.0625,rag2026-2
+rag26,Gemini,truncate,0,rag2026-2
+rag26,Gemini,pad_repeat,-0.0625,rag2026-2
+rag26,Gemini,pad_generic,-0.0625,rag2026-2
+rag26,Gemini,pad_offtopic,-0.1875,rag2026-2
+rag26,Gemini,pad_relevant,0.0625,rag2026-2
+rag26,Gemini,truncate,-0.0625,rag2026-2
+ragtime26,Jev mirror,pad_repeat,-0.098125,2000
+ragtime26,Jev mirror,pad_generic,-0.208437,2000
+ragtime26,Jev mirror,pad_offtopic,-0.341562,2000
+ragtime26,Jev mirror,pad_relevant,0.0878125,2000
+ragtime26,Jev mirror,truncate,-0.0040625,2000
+ragtime26,Jev mirror,pad_repeat,-0.0821875,2000
+ragtime26,Jev mirror,pad_generic,-0.186875,2000
+ragtime26,Jev mirror,pad_offtopic,-0.309688,2000
+ragtime26,Jev mirror,pad_relevant,0.091875,2000
+ragtime26,Jev mirror,truncate,-0.145625,2000
+ragtime26,Jev mirror,pad_repeat,-0.05625,2000
+ragtime26,Jev mirror,pad_generic,-0.155,2000
+ragtime26,Jev mirror,pad_offtopic,-0.285,2000
+ragtime26,Jev mirror,pad_relevant,0.019375,2000
+ragtime26,Jev mirror,truncate,-0.24,2000
+ragtime26,Jev mirror,pad_repeat,-0.109063,2000
+ragtime26,Jev mirror,pad_generic,-0.173438,2000
+ragtime26,Jev mirror,pad_offtopic,-0.26875,2000
+ragtime26,Jev mirror,pad_relevant,0.0046875,2000
+ragtime26,Jev mirror,truncate,-0.208437,2000
+ragtime26,Jev mirror,pad_repeat,-0.110938,2000
+ragtime26,Jev mirror,pad_generic,-0.139688,2000
+ragtime26,Jev mirror,pad_offtopic,-0.19375,2000
+ragtime26,Jev mirror,pad_relevant,0.05625,2000
+ragtime26,Jev mirror,truncate,-0.198125,2000
+ragtime26,Jev mirror,pad_repeat,-0.05875,2000
+ragtime26,Jev mirror,pad_generic,-0.156562,2000
+ragtime26,Jev mirror,pad_offtopic,-0.29,2000
+ragtime26,Jev mirror,pad_relevant,0.038125,2000
+ragtime26,Jev mirror,truncate,-0.0640625,2000
+ragtime26,Jev mirror,pad_repeat,-0.0996875,2000
+ragtime26,Jev mirror,pad_generic,-0.15375,2000
+ragtime26,Jev mirror,pad_offtopic,-0.227812,2000
+ragtime26,Jev mirror,pad_relevant,0.0625,2000
+ragtime26,Jev mirror,truncate,-0.137187,2000
+ragtime26,Jev mirror,pad_repeat,-0.110938,2000
+ragtime26,Jev mirror,pad_generic,-0.135937,2000
+ragtime26,Jev mirror,pad_offtopic,-0.267188,2000
+ragtime26,Jev mirror,pad_relevant,0.045,2000
+ragtime26,Jev mirror,truncate,-0.149375,2000
+ragtime26,Jev mirror,pad_repeat,-0.0734375,2000
+ragtime26,Jev mirror,pad_generic,-0.150312,2000
+ragtime26,Jev mirror,pad_offtopic,-0.256562,2000
+ragtime26,Jev mirror,pad_relevant,0.066875,2000
+ragtime26,Jev mirror,truncate,-0.165,2000
+ragtime26,Jev mirror,pad_repeat,-0.120625,2000
+ragtime26,Jev mirror,pad_generic,-0.137188,2000
+ragtime26,Jev mirror,pad_offtopic,-0.224687,2000
+ragtime26,Jev mirror,pad_relevant,0.0159375,2000
+ragtime26,Jev mirror,truncate,-0.158125,2000
+ragtime26,Jev mirror,pad_repeat,-0.2125,2000
+ragtime26,Jev mirror,pad_generic,-0.0865625,2000
+ragtime26,Jev mirror,pad_offtopic,-0.250937,2000
+ragtime26,Jev mirror,pad_relevant,0.01125,2000
+ragtime26,Jev mirror,truncate,-0.133125,2000
+ragtime26,Jev mirror,pad_repeat,-0.0525,2000
+ragtime26,Jev mirror,pad_generic,-0.07125,2000
+ragtime26,Jev mirror,pad_offtopic,-0.1775,2000
+ragtime26,Jev mirror,pad_relevant,0.0384375,2000
+ragtime26,Jev mirror,truncate,-0.03625,2000
+ragtime26,Jev mirror,pad_repeat,-0.0725,2000
+ragtime26,Jev mirror,pad_generic,-0.111875,2000
+ragtime26,Jev mirror,pad_offtopic,-0.19625,2000
+ragtime26,Jev mirror,pad_relevant,0.0496875,2000
+ragtime26,Jev mirror,truncate,-0.118125,2000
+ragtime26,Jev mirror,pad_repeat,-0.059375,2000
+ragtime26,Jev mirror,pad_generic,-0.08375,2000
+ragtime26,Jev mirror,pad_offtopic,-0.0840625,2000
+ragtime26,Jev mirror,pad_relevant,0.02625,2000
+ragtime26,Jev mirror,truncate,-0.0684375,2000
+ragtime26,Jev mirror,pad_repeat,-0.0190625,2000
+ragtime26,Jev mirror,pad_generic,-0.0759375,2000
+ragtime26,Jev mirror,pad_offtopic,-0.175,2000
+ragtime26,Jev mirror,pad_relevant,0.10875,2000
+ragtime26,Jev mirror,truncate,-0.0640625,2000
+ragtime26,Jev mirror,pad_repeat,-0.0646875,2000
+ragtime26,Jev mirror,pad_generic,-0.0803125,2000
+ragtime26,Jev mirror,pad_offtopic,-0.144062,2000
+ragtime26,Jev mirror,pad_relevant,0.075625,2000
+ragtime26,Jev mirror,truncate,-0.0365625,2000
+ragtime26,Jev mirror,pad_repeat,-0.058125,2001
+ragtime26,Jev mirror,pad_generic,-0.178125,2001
+ragtime26,Jev mirror,pad_offtopic,-0.303437,2001
+ragtime26,Jev mirror,pad_relevant,0.020625,2001
+ragtime26,Jev mirror,truncate,-0.111562,2001
+ragtime26,Jev mirror,pad_repeat,-0.1025,2001
+ragtime26,Jev mirror,pad_generic,-0.227187,2001
+ragtime26,Jev mirror,pad_offtopic,-0.35375,2001
+ragtime26,Jev mirror,pad_relevant,0.048125,2001
+ragtime26,Jev mirror,truncate,-0.138437,2001
+ragtime26,Jev mirror,pad_repeat,-0.076875,2001
+ragtime26,Jev mirror,pad_generic,-0.161562,2001
+ragtime26,Jev mirror,pad_offtopic,-0.340313,2001
+ragtime26,Jev mirror,pad_relevant,0.0175,2001
+ragtime26,Jev mirror,truncate,-0.0678125,2001
+ragtime26,Jev mirror,pad_repeat,-0.170938,2001
+ragtime26,Jev mirror,pad_generic,-0.206562,2001
+ragtime26,Jev mirror,pad_offtopic,-0.282188,2001
+ragtime26,Jev mirror,pad_relevant,0.08875,2001
+ragtime26,Jev mirror,truncate,-0.149062,2001
+ragtime26,Jev mirror,pad_repeat,-0.0840625,2001
+ragtime26,Jev mirror,pad_generic,-0.16125,2001
+ragtime26,Jev mirror,pad_offtopic,-0.279062,2001
+ragtime26,Jev mirror,pad_relevant,-0.0484375,2001
+ragtime26,Jev mirror,truncate,-0.05625,2001
+ragtime26,Jev mirror,pad_repeat,-0.066875,2001
+ragtime26,Jev mirror,pad_generic,-0.155,2001
+ragtime26,Jev mirror,pad_offtopic,-0.275,2001
+ragtime26,Jev mirror,pad_relevant,0.0096875,2001
+ragtime26,Jev mirror,truncate,-0.0696875,2001
+ragtime26,Jev mirror,pad_repeat,-0.07625,2001
+ragtime26,Jev mirror,pad_generic,-0.169375,2001
+ragtime26,Jev mirror,pad_offtopic,-0.301875,2001
+ragtime26,Jev mirror,pad_relevant,0.08875,2001
+ragtime26,Jev mirror,truncate,-0.0709375,2001
+ragtime26,Jev mirror,pad_repeat,-0.0646875,2001
+ragtime26,Jev mirror,pad_generic,-0.195312,2001
+ragtime26,Jev mirror,pad_offtopic,-0.271562,2001
+ragtime26,Jev mirror,pad_relevant,0.119688,2001
+ragtime26,Jev mirror,truncate,-0.0771875,2001
+ragtime26,Jev mirror,pad_repeat,-0.0678125,2001
+ragtime26,Jev mirror,pad_generic,-0.115938,2001
+ragtime26,Jev mirror,pad_offtopic,-0.25625,2001
+ragtime26,Jev mirror,pad_relevant,0.01875,2001
+ragtime26,Jev mirror,truncate,-0.0528125,2001
+ragtime26,Jev mirror,pad_repeat,-0.143125,2001
+ragtime26,Jev mirror,pad_generic,-0.183437,2001
+ragtime26,Jev mirror,pad_offtopic,-0.248437,2001
+ragtime26,Jev mirror,pad_relevant,0.069375,2001
+ragtime26,Jev mirror,truncate,-0.0771875,2001
+ragtime26,Jev mirror,pad_repeat,-0.044375,2001
+ragtime26,Jev mirror,pad_generic,-0.125625,2001
+ragtime26,Jev mirror,pad_offtopic,-0.249687,2001
+ragtime26,Jev mirror,pad_relevant,0.0775,2001
+ragtime26,Jev mirror,truncate,-0.115,2001
+ragtime26,Jev mirror,pad_repeat,-0.112188,2001
+ragtime26,Jev mirror,pad_generic,-0.14625,2001
+ragtime26,Jev mirror,pad_offtopic,-0.2975,2001
+ragtime26,Jev mirror,pad_relevant,0.130625,2001
+ragtime26,Jev mirror,truncate,-0.0534375,2001
+ragtime26,Jev mirror,pad_repeat,-0.09,2001
+ragtime26,Jev mirror,pad_generic,-0.115625,2001
+ragtime26,Jev mirror,pad_offtopic,-0.187188,2001
+ragtime26,Jev mirror,pad_relevant,0.08375,2001
+ragtime26,Jev mirror,truncate,-0.0803125,2001
+ragtime26,Jev mirror,pad_repeat,-0.020625,2001
+ragtime26,Jev mirror,pad_generic,-0.093125,2001
+ragtime26,Jev mirror,pad_offtopic,-0.159062,2001
+ragtime26,Jev mirror,pad_relevant,0.0884375,2001
+ragtime26,Jev mirror,truncate,-0.0434375,2001
+ragtime26,Jev mirror,pad_repeat,-0.0859375,2001
+ragtime26,Jev mirror,pad_generic,-0.0878125,2001
+ragtime26,Jev mirror,pad_offtopic,-0.17,2001
+ragtime26,Jev mirror,pad_relevant,0.202812,2001
+ragtime26,Jev mirror,truncate,-0.0415625,2001
+ragtime26,Jev mirror,pad_repeat,-0.05875,2001
+ragtime26,Jev mirror,pad_generic,-0.0846875,2001
+ragtime26,Jev mirror,pad_offtopic,-0.12125,2001
+ragtime26,Jev mirror,pad_relevant,0.0634375,2001
+ragtime26,Jev mirror,truncate,-0.0390625,2001
+ragtime26,Jev mirror,pad_repeat,-0.125313,2002
+ragtime26,Jev mirror,pad_generic,-0.186875,2002
+ragtime26,Jev mirror,pad_offtopic,-0.37,2002
+ragtime26,Jev mirror,pad_relevant,0.0315625,2002
+ragtime26,Jev mirror,truncate,-0.108125,2002
+ragtime26,Jev mirror,pad_repeat,-0.0934375,2002
+ragtime26,Jev mirror,pad_generic,-0.260937,2002
+ragtime26,Jev mirror,pad_offtopic,-0.35625,2002
+ragtime26,Jev mirror,pad_relevant,-0.0140625,2002
+ragtime26,Jev mirror,truncate,-0.146875,2002
+ragtime26,Jev mirror,pad_repeat,-0.076875,2002
+ragtime26,Jev mirror,pad_generic,-0.181563,2002
+ragtime26,Jev mirror,pad_offtopic,-0.375937,2002
+ragtime26,Jev mirror,pad_relevant,0.0425,2002
+ragtime26,Jev mirror,truncate,-0.155938,2002
+ragtime26,Jev mirror,pad_repeat,-0.195312,2002
+ragtime26,Jev mirror,pad_generic,-0.286562,2002
+ragtime26,Jev mirror,pad_offtopic,-0.42125,2002
+ragtime26,Jev mirror,pad_relevant,0.0890625,2002
+ragtime26,Jev mirror,truncate,-0.09625,2002
+ragtime26,Jev mirror,pad_repeat,-0.0790625,2002
+ragtime26,Jev mirror,pad_generic,-0.180625,2002
+ragtime26,Jev mirror,pad_offtopic,-0.28375,2002
+ragtime26,Jev mirror,pad_relevant,0.005625,2002
+ragtime26,Jev mirror,truncate,-0.10375,2002
+ragtime26,Jev mirror,pad_repeat,-0.133125,2002
+ragtime26,Jev mirror,pad_generic,-0.31125,2002
+ragtime26,Jev mirror,pad_offtopic,-0.405,2002
+ragtime26,Jev mirror,pad_relevant,0.0484375,2002
+ragtime26,Jev mirror,truncate,-0.144062,2002
+ragtime26,Jev mirror,pad_repeat,-0.114688,2002
+ragtime26,Jev mirror,pad_generic,-0.188125,2002
+ragtime26,Jev mirror,pad_offtopic,-0.334688,2002
+ragtime26,Jev mirror,pad_relevant,0.0321875,2002
+ragtime26,Jev mirror,truncate,-0.110938,2002
+ragtime26,Jev mirror,pad_repeat,-0.16,2002
+ragtime26,Jev mirror,pad_generic,-0.260937,2002
+ragtime26,Jev mirror,pad_offtopic,-0.35375,2002
+ragtime26,Jev mirror,pad_relevant,0.102813,2002
+ragtime26,Jev mirror,truncate,-0.149062,2002
+ragtime26,Jev mirror,pad_repeat,-0.158438,2002
+ragtime26,Jev mirror,pad_generic,-0.289062,2002
+ragtime26,Jev mirror,pad_offtopic,-0.416875,2002
+ragtime26,Jev mirror,pad_relevant,0.060625,2002
+ragtime26,Jev mirror,truncate,-0.177812,2002
+ragtime26,Jev mirror,pad_repeat,-0.09625,2002
+ragtime26,Jev mirror,pad_generic,-0.254687,2002
+ragtime26,Jev mirror,pad_offtopic,-0.315625,2002
+ragtime26,Jev mirror,pad_relevant,0.0996875,2002
+ragtime26,Jev mirror,truncate,-0.240937,2002
+ragtime26,Jev mirror,pad_repeat,-0.070625,2002
+ragtime26,Jev mirror,pad_generic,-0.142813,2002
+ragtime26,Jev mirror,pad_offtopic,-0.211875,2002
+ragtime26,Jev mirror,pad_relevant,0.1925,2002
+ragtime26,Jev mirror,truncate,-0.068125,2002
+ragtime26,Jev mirror,pad_repeat,-0.075,2002
+ragtime26,Jev mirror,pad_generic,-0.17375,2002
+ragtime26,Jev mirror,pad_offtopic,-0.222812,2002
+ragtime26,Jev mirror,pad_relevant,0.171875,2002
+ragtime26,Jev mirror,truncate,-0.095,2002
+ragtime26,Jev mirror,pad_repeat,-0.089375,2002
+ragtime26,Jev mirror,pad_generic,-0.176562,2002
+ragtime26,Jev mirror,pad_offtopic,-0.214062,2002
+ragtime26,Jev mirror,pad_relevant,0.15125,2002
+ragtime26,Jev mirror,truncate,-0.0959375,2002
+ragtime26,Jev mirror,pad_repeat,-0.0703125,2002
+ragtime26,Jev mirror,pad_generic,-0.15,2002
+ragtime26,Jev mirror,pad_offtopic,-0.238437,2002
+ragtime26,Jev mirror,pad_relevant,0.139375,2002
+ragtime26,Jev mirror,truncate,-0.0953125,2002
+ragtime26,Jev mirror,pad_repeat,-0.0796875,2002
+ragtime26,Jev mirror,pad_generic,-0.171562,2002
+ragtime26,Jev mirror,pad_offtopic,-0.239375,2002
+ragtime26,Jev mirror,pad_relevant,0.184375,2002
+ragtime26,Jev mirror,truncate,-0.041875,2002
+ragtime26,Jev mirror,pad_repeat,-0.035625,2002
+ragtime26,Jev mirror,pad_generic,-0.110312,2002
+ragtime26,Jev mirror,pad_offtopic,-0.167812,2002
+ragtime26,Jev mirror,pad_relevant,0.16125,2002
+ragtime26,Jev mirror,truncate,-0.02375,2002
+ragtime26,Jev mirror,pad_repeat,-0.0996875,2003
+ragtime26,Jev mirror,pad_generic,-0.109375,2003
+ragtime26,Jev mirror,pad_offtopic,-0.334062,2003
+ragtime26,Jev mirror,pad_relevant,0.078125,2003
+ragtime26,Jev mirror,truncate,-0.0225,2003
+ragtime26,Jev mirror,pad_repeat,-0.071875,2003
+ragtime26,Jev mirror,pad_generic,-0.140313,2003
+ragtime26,Jev mirror,pad_offtopic,-0.433125,2003
+ragtime26,Jev mirror,pad_relevant,0.0125,2003
+ragtime26,Jev mirror,truncate,-0.0734375,2003
+ragtime26,Jev mirror,pad_repeat,-0.030625,2003
+ragtime26,Jev mirror,pad_generic,-0.0546875,2003
+ragtime26,Jev mirror,pad_offtopic,-0.282187,2003
+ragtime26,Jev mirror,pad_relevant,0.0428125,2003
+ragtime26,Jev mirror,truncate,-0.21625,2003
+ragtime26,Jev mirror,pad_repeat,-0.03375,2003
+ragtime26,Jev mirror,pad_generic,-0.114375,2003
+ragtime26,Jev mirror,pad_offtopic,-0.2575,2003
+ragtime26,Jev mirror,pad_relevant,0.0925,2003
+ragtime26,Jev mirror,truncate,-0.0696875,2003
+ragtime26,Jev mirror,pad_repeat,-0.06375,2003
+ragtime26,Jev mirror,pad_generic,-0.142813,2003
+ragtime26,Jev mirror,pad_offtopic,-0.353125,2003
+ragtime26,Jev mirror,pad_relevant,0.029375,2003
+ragtime26,Jev mirror,truncate,0.013125,2003
+ragtime26,Jev mirror,pad_repeat,-0.07875,2003
+ragtime26,Jev mirror,pad_generic,-0.176563,2003
+ragtime26,Jev mirror,pad_offtopic,-0.367188,2003
+ragtime26,Jev mirror,pad_relevant,0.110312,2003
+ragtime26,Jev mirror,truncate,-0.168438,2003
+ragtime26,Jev mirror,pad_repeat,-0.0796875,2003
+ragtime26,Jev mirror,pad_generic,-0.0978125,2003
+ragtime26,Jev mirror,pad_offtopic,-0.393437,2003
+ragtime26,Jev mirror,pad_relevant,0.0746875,2003
+ragtime26,Jev mirror,truncate,-0.102813,2003
+ragtime26,Jev mirror,pad_repeat,-0.0290625,2003
+ragtime26,Jev mirror,pad_generic,-0.090625,2003
+ragtime26,Jev mirror,pad_offtopic,-0.299687,2003
+ragtime26,Jev mirror,pad_relevant,0.0615625,2003
+ragtime26,Jev mirror,truncate,-0.112187,2003
+ragtime26,Jev mirror,pad_repeat,-0.06375,2003
+ragtime26,Jev mirror,pad_generic,-0.094375,2003
+ragtime26,Jev mirror,pad_offtopic,-0.394687,2003
+ragtime26,Jev mirror,pad_relevant,0.088125,2003
+ragtime26,Jev mirror,truncate,-0.00375,2003
+ragtime26,Jev mirror,pad_repeat,-0.015,2003
+ragtime26,Jev mirror,pad_generic,-0.11,2003
+ragtime26,Jev mirror,pad_offtopic,-0.23875,2003
+ragtime26,Jev mirror,pad_relevant,0.160625,2003
+ragtime26,Jev mirror,truncate,0.0615625,2003
+ragtime26,Jev mirror,pad_repeat,-0.061875,2003
+ragtime26,Jev mirror,pad_generic,-0.104687,2003
+ragtime26,Jev mirror,pad_offtopic,-0.273125,2003
+ragtime26,Jev mirror,pad_relevant,0.09125,2003
+ragtime26,Jev mirror,truncate,-0.038125,2003
+ragtime26,Jev mirror,pad_repeat,-0.06,2003
+ragtime26,Jev mirror,pad_generic,-0.1,2003
+ragtime26,Jev mirror,pad_offtopic,-0.286562,2003
+ragtime26,Jev mirror,pad_relevant,0.090625,2003
+ragtime26,Jev mirror,truncate,0.0059375,2003
+ragtime26,Jev mirror,pad_repeat,-0.07625,2003
+ragtime26,Jev mirror,pad_generic,-0.085625,2003
+ragtime26,Jev mirror,pad_offtopic,-0.335938,2003
+ragtime26,Jev mirror,pad_relevant,0.0946875,2003
+ragtime26,Jev mirror,truncate,-0.0859375,2003
+ragtime26,Jev mirror,pad_repeat,-0.0471875,2003
+ragtime26,Jev mirror,pad_generic,-0.085625,2003
+ragtime26,Jev mirror,pad_offtopic,-0.305,2003
+ragtime26,Jev mirror,pad_relevant,0.138437,2003
+ragtime26,Jev mirror,truncate,-0.0825,2003
+ragtime26,Jev mirror,pad_repeat,-0.120312,2003
+ragtime26,Jev mirror,pad_generic,-0.111875,2003
+ragtime26,Jev mirror,pad_offtopic,-0.244062,2003
+ragtime26,Jev mirror,pad_relevant,0.075625,2003
+ragtime26,Jev mirror,truncate,-0.0290625,2003
+ragtime26,Jev mirror,pad_repeat,-0.141563,2003
+ragtime26,Jev mirror,pad_generic,-0.044375,2003
+ragtime26,Jev mirror,pad_offtopic,-0.155,2003
+ragtime26,Jev mirror,pad_relevant,0.100313,2003
+ragtime26,Jev mirror,truncate,0.0121875,2003
+ragtime26,Jev mirror,pad_repeat,-0.096875,2004
+ragtime26,Jev mirror,pad_generic,-0.089375,2004
+ragtime26,Jev mirror,pad_offtopic,-0.260625,2004
+ragtime26,Jev mirror,pad_relevant,0.0109375,2004
+ragtime26,Jev mirror,truncate,-0.04875,2004
+ragtime26,Jev mirror,pad_repeat,-0.0496875,2004
+ragtime26,Jev mirror,pad_generic,-0.089375,2004
+ragtime26,Jev mirror,pad_offtopic,-0.177812,2004
+ragtime26,Jev mirror,pad_relevant,0.056875,2004
+ragtime26,Jev mirror,truncate,-0.10375,2004
+ragtime26,Jev mirror,pad_repeat,-0.056875,2004
+ragtime26,Jev mirror,pad_generic,-0.091875,2004
+ragtime26,Jev mirror,pad_offtopic,-0.294375,2004
+ragtime26,Jev mirror,pad_relevant,0.0271875,2004
+ragtime26,Jev mirror,truncate,-0.0915625,2004
+ragtime26,Jev mirror,pad_repeat,-0.0521875,2004
+ragtime26,Jev mirror,pad_generic,-0.0578125,2004
+ragtime26,Jev mirror,pad_offtopic,-0.221562,2004
+ragtime26,Jev mirror,pad_relevant,0.0571875,2004
+ragtime26,Jev mirror,truncate,-0.0571875,2004
+ragtime26,Jev mirror,pad_repeat,-0.065,2004
+ragtime26,Jev mirror,pad_generic,-0.0678125,2004
+ragtime26,Jev mirror,pad_offtopic,-0.229687,2004
+ragtime26,Jev mirror,pad_relevant,0.0175,2004
+ragtime26,Jev mirror,truncate,-0.102812,2004
+ragtime26,Jev mirror,pad_repeat,-0.04125,2004
+ragtime26,Jev mirror,pad_generic,-0.105312,2004
+ragtime26,Jev mirror,pad_offtopic,-0.207187,2004
+ragtime26,Jev mirror,pad_relevant,0.03625,2004
+ragtime26,Jev mirror,truncate,-0.055625,2004
+ragtime26,Jev mirror,pad_repeat,-0.0078125,2004
+ragtime26,Jev mirror,pad_generic,-0.0528125,2004
+ragtime26,Jev mirror,pad_offtopic,-0.189375,2004
+ragtime26,Jev mirror,pad_relevant,0.0953125,2004
+ragtime26,Jev mirror,truncate,-0.0203125,2004
+ragtime26,Jev mirror,pad_repeat,-0.0696875,2004
+ragtime26,Jev mirror,pad_generic,-0.127188,2004
+ragtime26,Jev mirror,pad_offtopic,-0.219688,2004
+ragtime26,Jev mirror,pad_relevant,0.13,2004
+ragtime26,Jev mirror,truncate,-0.060625,2004
+ragtime26,Jev mirror,pad_repeat,-0.053125,2004
+ragtime26,Jev mirror,pad_generic,-0.0678125,2004
+ragtime26,Jev mirror,pad_offtopic,-0.136875,2004
+ragtime26,Jev mirror,pad_relevant,0.157187,2004
+ragtime26,Jev mirror,truncate,-0.02125,2004
+ragtime26,Jev mirror,pad_repeat,-0.0090625,2004
+ragtime26,Jev mirror,pad_generic,0.0059375,2004
+ragtime26,Jev mirror,pad_offtopic,-0.17875,2004
+ragtime26,Jev mirror,pad_relevant,0.1025,2004
+ragtime26,Jev mirror,truncate,-0.0159375,2004
+ragtime26,Jev mirror,pad_repeat,-0.0328125,2004
+ragtime26,Jev mirror,pad_generic,-0.0296875,2004
+ragtime26,Jev mirror,pad_offtopic,-0.13,2004
+ragtime26,Jev mirror,pad_relevant,0.104687,2004
+ragtime26,Jev mirror,truncate,-0.038125,2004
+ragtime26,Jev mirror,pad_repeat,-0.04375,2004
+ragtime26,Jev mirror,pad_generic,-0.03625,2004
+ragtime26,Jev mirror,pad_offtopic,-0.180312,2004
+ragtime26,Jev mirror,pad_relevant,0.195625,2004
+ragtime26,Jev mirror,truncate,0.025625,2004
+ragtime26,Jev mirror,pad_repeat,-0.060625,2004
+ragtime26,Jev mirror,pad_generic,-0.05,2004
+ragtime26,Jev mirror,pad_offtopic,-0.156875,2004
+ragtime26,Jev mirror,pad_relevant,0.186875,2004
+ragtime26,Jev mirror,truncate,-0.000625,2004
+ragtime26,Jev mirror,pad_repeat,-0.0290625,2004
+ragtime26,Jev mirror,pad_generic,-0.0371875,2004
+ragtime26,Jev mirror,pad_offtopic,-0.099375,2004
+ragtime26,Jev mirror,pad_relevant,0.16625,2004
+ragtime26,Jev mirror,truncate,0.0053125,2004
+ragtime26,Jev mirror,pad_repeat,0.004375,2004
+ragtime26,Jev mirror,pad_generic,-0.0165625,2004
+ragtime26,Jev mirror,pad_offtopic,-0.1075,2004
+ragtime26,Jev mirror,pad_relevant,0.187188,2004
+ragtime26,Jev mirror,truncate,-0.031875,2004
+ragtime26,Jev mirror,pad_repeat,-0.0928125,2004
+ragtime26,Jev mirror,pad_generic,-0.00625,2004
+ragtime26,Jev mirror,pad_offtopic,-0.0796875,2004
+ragtime26,Jev mirror,pad_relevant,0.209687,2004
+ragtime26,Jev mirror,truncate,0.043125,2004
+ragtime26,Jev mirror,pad_repeat,-0.0278125,2005
+ragtime26,Jev mirror,pad_generic,-0.16625,2005
+ragtime26,Jev mirror,pad_offtopic,-0.375625,2005
+ragtime26,Jev mirror,pad_relevant,0.133437,2005
+ragtime26,Jev mirror,truncate,-0.0734375,2005
+ragtime26,Jev mirror,pad_repeat,-0.131875,2005
+ragtime26,Jev mirror,pad_generic,-0.151875,2005
+ragtime26,Jev mirror,pad_offtopic,-0.281875,2005
+ragtime26,Jev mirror,pad_relevant,0.0475,2005
+ragtime26,Jev mirror,truncate,0.055625,2005
+ragtime26,Jev mirror,pad_repeat,-0.11,2005
+ragtime26,Jev mirror,pad_generic,-0.107813,2005
+ragtime26,Jev mirror,pad_offtopic,-0.285312,2005
+ragtime26,Jev mirror,pad_relevant,0.17,2005
+ragtime26,Jev mirror,truncate,-0.150938,2005
+ragtime26,Jev mirror,pad_repeat,-0.054375,2005
+ragtime26,Jev mirror,pad_generic,-0.145937,2005
+ragtime26,Jev mirror,pad_offtopic,-0.253437,2005
+ragtime26,Jev mirror,pad_relevant,0.165625,2005
+ragtime26,Jev mirror,truncate,-0.0746875,2005
+ragtime26,Jev mirror,pad_repeat,-0.00625,2005
+ragtime26,Jev mirror,pad_generic,-0.096875,2005
+ragtime26,Jev mirror,pad_offtopic,-0.2575,2005
+ragtime26,Jev mirror,pad_relevant,0.180625,2005
+ragtime26,Jev mirror,truncate,-0.0040625,2005
+ragtime26,Jev mirror,pad_repeat,-0.06375,2005
+ragtime26,Jev mirror,pad_generic,-0.110938,2005
+ragtime26,Jev mirror,pad_offtopic,-0.240937,2005
+ragtime26,Jev mirror,pad_relevant,0.17625,2005
+ragtime26,Jev mirror,truncate,-0.0625,2005
+ragtime26,Jev mirror,pad_repeat,-0.0803125,2005
+ragtime26,Jev mirror,pad_generic,-0.0721875,2005
+ragtime26,Jev mirror,pad_offtopic,-0.236563,2005
+ragtime26,Jev mirror,pad_relevant,0.128125,2005
+ragtime26,Jev mirror,truncate,-0.165313,2005
+ragtime26,Jev mirror,pad_repeat,-0.0278125,2005
+ragtime26,Jev mirror,pad_generic,-0.165938,2005
+ragtime26,Jev mirror,pad_offtopic,-0.305625,2005
+ragtime26,Jev mirror,pad_relevant,0.120625,2005
+ragtime26,Jev mirror,truncate,-0.0678125,2005
+ragtime26,Jev mirror,pad_repeat,-0.061875,2005
+ragtime26,Jev mirror,pad_generic,-0.113438,2005
+ragtime26,Jev mirror,pad_offtopic,-0.210938,2005
+ragtime26,Jev mirror,pad_relevant,0.167187,2005
+ragtime26,Jev mirror,truncate,-0.0915625,2005
+ragtime26,Jev mirror,pad_repeat,-0.0525,2005
+ragtime26,Jev mirror,pad_generic,-0.117188,2005
+ragtime26,Jev mirror,pad_offtopic,-0.225313,2005
+ragtime26,Jev mirror,pad_relevant,0.105312,2005
+ragtime26,Jev mirror,truncate,-0.100313,2005
+ragtime26,Jev mirror,pad_repeat,-0.0496875,2005
+ragtime26,Jev mirror,pad_generic,-0.121563,2005
+ragtime26,Jev mirror,pad_offtopic,-0.19125,2005
+ragtime26,Jev mirror,pad_relevant,0.119375,2005
+ragtime26,Jev mirror,truncate,-0.0625,2005
+ragtime26,Jev mirror,pad_repeat,-0.069375,2005
+ragtime26,Jev mirror,pad_generic,-0.095,2005
+ragtime26,Jev mirror,pad_offtopic,-0.158438,2005
+ragtime26,Jev mirror,pad_relevant,0.08625,2005
+ragtime26,Jev mirror,truncate,-0.0803125,2005
+ragtime26,Jev mirror,pad_repeat,-0.04375,2005
+ragtime26,Jev mirror,pad_generic,-0.0978125,2005
+ragtime26,Jev mirror,pad_offtopic,-0.221562,2005
+ragtime26,Jev mirror,pad_relevant,0.1425,2005
+ragtime26,Jev mirror,truncate,-0.080625,2005
+ragtime26,Jev mirror,pad_repeat,-0.10875,2005
+ragtime26,Jev mirror,pad_generic,-0.1075,2005
+ragtime26,Jev mirror,pad_offtopic,-0.155938,2005
+ragtime26,Jev mirror,pad_relevant,0.160312,2005
+ragtime26,Jev mirror,truncate,0.029375,2005
+ragtime26,Jev mirror,pad_repeat,-0.09375,2005
+ragtime26,Jev mirror,pad_generic,-0.0828125,2005
+ragtime26,Jev mirror,pad_offtopic,-0.177812,2005
+ragtime26,Jev mirror,pad_relevant,0.13,2005
+ragtime26,Jev mirror,truncate,0.011875,2005
+ragtime26,Jev mirror,pad_repeat,-0.10125,2005
+ragtime26,Jev mirror,pad_generic,-0.112188,2005
+ragtime26,Jev mirror,pad_offtopic,-0.165,2005
+ragtime26,Jev mirror,pad_relevant,0.175937,2005
+ragtime26,Jev mirror,truncate,-0.111563,2005
+ragtime26,Jev mirror,pad_repeat,-0.126875,2006
+ragtime26,Jev mirror,pad_generic,-0.196875,2006
+ragtime26,Jev mirror,pad_offtopic,-0.406875,2006
+ragtime26,Jev mirror,pad_relevant,0.008125,2006
+ragtime26,Jev mirror,truncate,-0.03875,2006
+ragtime26,Jev mirror,pad_repeat,-0.08875,2006
+ragtime26,Jev mirror,pad_generic,-0.239687,2006
+ragtime26,Jev mirror,pad_offtopic,-0.3425,2006
+ragtime26,Jev mirror,pad_relevant,0.0759375,2006
+ragtime26,Jev mirror,truncate,-0.0553125,2006
+ragtime26,Jev mirror,pad_repeat,-0.135625,2006
+ragtime26,Jev mirror,pad_generic,-0.202813,2006
+ragtime26,Jev mirror,pad_offtopic,-0.368438,2006
+ragtime26,Jev mirror,pad_relevant,0.1275,2006
+ragtime26,Jev mirror,truncate,-0.03,2006
+ragtime26,Jev mirror,pad_repeat,-0.084375,2006
+ragtime26,Jev mirror,pad_generic,-0.144688,2006
+ragtime26,Jev mirror,pad_offtopic,-0.30875,2006
+ragtime26,Jev mirror,pad_relevant,0.0890625,2006
+ragtime26,Jev mirror,truncate,-0.061875,2006
+ragtime26,Jev mirror,pad_repeat,-0.100938,2006
+ragtime26,Jev mirror,pad_generic,-0.141563,2006
+ragtime26,Jev mirror,pad_offtopic,-0.300312,2006
+ragtime26,Jev mirror,pad_relevant,0.102187,2006
+ragtime26,Jev mirror,truncate,0.01625,2006
+ragtime26,Jev mirror,pad_repeat,-0.0640625,2006
+ragtime26,Jev mirror,pad_generic,-0.155313,2006
+ragtime26,Jev mirror,pad_offtopic,-0.294687,2006
+ragtime26,Jev mirror,pad_relevant,0.0290625,2006
+ragtime26,Jev mirror,truncate,-0.03125,2006
+ragtime26,Jev mirror,pad_repeat,-0.0734375,2006
+ragtime26,Jev mirror,pad_generic,-0.14125,2006
+ragtime26,Jev mirror,pad_offtopic,-0.266562,2006
+ragtime26,Jev mirror,pad_relevant,0.0509375,2006
+ragtime26,Jev mirror,truncate,-0.119062,2006
+ragtime26,Jev mirror,pad_repeat,-0.038125,2006
+ragtime26,Jev mirror,pad_generic,-0.162813,2006
+ragtime26,Jev mirror,pad_offtopic,-0.277188,2006
+ragtime26,Jev mirror,pad_relevant,0.100937,2006
+ragtime26,Jev mirror,truncate,0.01125,2006
+ragtime26,Jev mirror,pad_repeat,-0.096875,2006
+ragtime26,Jev mirror,pad_generic,-0.159062,2006
+ragtime26,Jev mirror,pad_offtopic,-0.295313,2006
+ragtime26,Jev mirror,pad_relevant,0.110937,2006
+ragtime26,Jev mirror,truncate,-0.162188,2006
+ragtime26,Jev mirror,pad_repeat,-0.0815625,2006
+ragtime26,Jev mirror,pad_generic,-0.172187,2006
+ragtime26,Jev mirror,pad_offtopic,-0.280625,2006
+ragtime26,Jev mirror,pad_relevant,0.124063,2006
+ragtime26,Jev mirror,truncate,-0.035625,2006
+ragtime26,Jev mirror,pad_repeat,-0.070625,2006
+ragtime26,Jev mirror,pad_generic,-0.167187,2006
+ragtime26,Jev mirror,pad_offtopic,-0.255625,2006
+ragtime26,Jev mirror,pad_relevant,0.12125,2006
+ragtime26,Jev mirror,truncate,-0.0384375,2006
+ragtime26,Jev mirror,pad_repeat,-0.0015625,2006
+ragtime26,Jev mirror,pad_generic,-0.08875,2006
+ragtime26,Jev mirror,pad_offtopic,-0.246875,2006
+ragtime26,Jev mirror,pad_relevant,0.0721875,2006
+ragtime26,Jev mirror,truncate,-0.0678125,2006
+ragtime26,Jev mirror,pad_repeat,-0.0740625,2006
+ragtime26,Jev mirror,pad_generic,-0.09,2006
+ragtime26,Jev mirror,pad_offtopic,-0.206875,2006
+ragtime26,Jev mirror,pad_relevant,0.185312,2006
+ragtime26,Jev mirror,truncate,-0.0490625,2006
+ragtime26,Jev mirror,pad_repeat,-0.093125,2006
+ragtime26,Jev mirror,pad_generic,-0.172188,2006
+ragtime26,Jev mirror,pad_offtopic,-0.23625,2006
+ragtime26,Jev mirror,pad_relevant,0.0759375,2006
+ragtime26,Jev mirror,truncate,-0.0584375,2006
+ragtime26,Jev mirror,pad_repeat,-0.066875,2006
+ragtime26,Jev mirror,pad_generic,-0.0690625,2006
+ragtime26,Jev mirror,pad_offtopic,-0.16375,2006
+ragtime26,Jev mirror,pad_relevant,0.1475,2006
+ragtime26,Jev mirror,truncate,0.043125,2006
+ragtime26,Jev mirror,pad_repeat,-0.065,2006
+ragtime26,Jev mirror,pad_generic,-0.065625,2006
+ragtime26,Jev mirror,pad_offtopic,-0.195625,2006
+ragtime26,Jev mirror,pad_relevant,0.0771875,2006
+ragtime26,Jev mirror,truncate,-0.08375,2006
+ragtime26,Jev mirror,pad_repeat,-0.1875,2007
+ragtime26,Jev mirror,pad_generic,-0.098125,2007
+ragtime26,Jev mirror,pad_offtopic,-0.319062,2007
+ragtime26,Jev mirror,pad_relevant,-0.0203125,2007
+ragtime26,Jev mirror,truncate,-0.043125,2007
+ragtime26,Jev mirror,pad_repeat,-0.0928125,2007
+ragtime26,Jev mirror,pad_generic,-0.15,2007
+ragtime26,Jev mirror,pad_offtopic,-0.32,2007
+ragtime26,Jev mirror,pad_relevant,0.0253125,2007
+ragtime26,Jev mirror,truncate,-0.0228125,2007
+ragtime26,Jev mirror,pad_repeat,-0.053125,2007
+ragtime26,Jev mirror,pad_generic,-0.136563,2007
+ragtime26,Jev mirror,pad_offtopic,-0.315,2007
+ragtime26,Jev mirror,pad_relevant,0.08875,2007
+ragtime26,Jev mirror,truncate,-0.0021875,2007
+ragtime26,Jev mirror,pad_repeat,-0.0821875,2007
+ragtime26,Jev mirror,pad_generic,-0.208125,2007
+ragtime26,Jev mirror,pad_offtopic,-0.369062,2007
+ragtime26,Jev mirror,pad_relevant,0.106875,2007
+ragtime26,Jev mirror,truncate,-0.194375,2007
+ragtime26,Jev mirror,pad_repeat,-0.0865625,2007
+ragtime26,Jev mirror,pad_generic,-0.110312,2007
+ragtime26,Jev mirror,pad_offtopic,-0.313125,2007
+ragtime26,Jev mirror,pad_relevant,0.08375,2007
+ragtime26,Jev mirror,truncate,-0.129062,2007
+ragtime26,Jev mirror,pad_repeat,-0.0678125,2007
+ragtime26,Jev mirror,pad_generic,-0.16125,2007
+ragtime26,Jev mirror,pad_offtopic,-0.249062,2007
+ragtime26,Jev mirror,pad_relevant,0.0653125,2007
+ragtime26,Jev mirror,truncate,-0.0846875,2007
+ragtime26,Jev mirror,pad_repeat,-0.0678125,2007
+ragtime26,Jev mirror,pad_generic,-0.113125,2007
+ragtime26,Jev mirror,pad_offtopic,-0.26375,2007
+ragtime26,Jev mirror,pad_relevant,-0.0171875,2007
+ragtime26,Jev mirror,truncate,-0.06625,2007
+ragtime26,Jev mirror,pad_repeat,-0.0928125,2007
+ragtime26,Jev mirror,pad_generic,-0.14,2007
+ragtime26,Jev mirror,pad_offtopic,-0.252812,2007
+ragtime26,Jev mirror,pad_relevant,0.06625,2007
+ragtime26,Jev mirror,truncate,-0.048125,2007
+ragtime26,Jev mirror,pad_repeat,-0.074375,2007
+ragtime26,Jev mirror,pad_generic,-0.0940625,2007
+ragtime26,Jev mirror,pad_offtopic,-0.219063,2007
+ragtime26,Jev mirror,pad_relevant,0.0678125,2007
+ragtime26,Jev mirror,truncate,-0.081875,2007
+ragtime26,Jev mirror,pad_repeat,-0.151875,2007
+ragtime26,Jev mirror,pad_generic,-0.0884375,2007
+ragtime26,Jev mirror,pad_offtopic,-0.261562,2007
+ragtime26,Jev mirror,pad_relevant,0.114687,2007
+ragtime26,Jev mirror,truncate,-0.0746875,2007
+ragtime26,Jev mirror,pad_repeat,-0.0425,2007
+ragtime26,Jev mirror,pad_generic,-0.0734375,2007
+ragtime26,Jev mirror,pad_offtopic,-0.197188,2007
+ragtime26,Jev mirror,pad_relevant,0.238437,2007
+ragtime26,Jev mirror,truncate,-0.0325,2007
+ragtime26,Jev mirror,pad_repeat,-0.0940625,2007
+ragtime26,Jev mirror,pad_generic,-0.0771875,2007
+ragtime26,Jev mirror,pad_offtopic,-0.185937,2007
+ragtime26,Jev mirror,pad_relevant,0.194062,2007
+ragtime26,Jev mirror,truncate,0.0475,2007
+ragtime26,Jev mirror,pad_repeat,-0.0878125,2007
+ragtime26,Jev mirror,pad_generic,-0.09625,2007
+ragtime26,Jev mirror,pad_offtopic,-0.195625,2007
+ragtime26,Jev mirror,pad_relevant,0.16375,2007
+ragtime26,Jev mirror,truncate,-0.0659375,2007
+ragtime26,Jev mirror,pad_repeat,-0.0309375,2007
+ragtime26,Jev mirror,pad_generic,-0.0703125,2007
+ragtime26,Jev mirror,pad_offtopic,-0.12875,2007
+ragtime26,Jev mirror,pad_relevant,0.280312,2007
+ragtime26,Jev mirror,truncate,0.000625,2007
+ragtime26,Jev mirror,pad_repeat,-0.068125,2007
+ragtime26,Jev mirror,pad_generic,-0.075,2007
+ragtime26,Jev mirror,pad_offtopic,-0.146875,2007
+ragtime26,Jev mirror,pad_relevant,0.131563,2007
+ragtime26,Jev mirror,truncate,-0.103125,2007
+ragtime26,Jev mirror,pad_repeat,-0.06625,2007
+ragtime26,Jev mirror,pad_generic,-0.0609375,2007
+ragtime26,Jev mirror,pad_offtopic,-0.175312,2007
+ragtime26,Jev mirror,pad_relevant,0.106875,2007
+ragtime26,Jev mirror,truncate,-0.1025,2007
+ragtime26,Jev mirror,pad_repeat,-0.102812,2008
+ragtime26,Jev mirror,pad_generic,-0.209375,2008
+ragtime26,Jev mirror,pad_offtopic,-0.462812,2008
+ragtime26,Jev mirror,pad_relevant,0.06375,2008
+ragtime26,Jev mirror,truncate,-0.0396875,2008
+ragtime26,Jev mirror,pad_repeat,-0.0409375,2008
+ragtime26,Jev mirror,pad_generic,-0.248437,2008
+ragtime26,Jev mirror,pad_offtopic,-0.39625,2008
+ragtime26,Jev mirror,pad_relevant,0.101875,2008
+ragtime26,Jev mirror,truncate,-0.170625,2008
+ragtime26,Jev mirror,pad_repeat,-0.0825,2008
+ragtime26,Jev mirror,pad_generic,-0.288437,2008
+ragtime26,Jev mirror,pad_offtopic,-0.437187,2008
+ragtime26,Jev mirror,pad_relevant,0.0875,2008
+ragtime26,Jev mirror,truncate,-0.073125,2008
+ragtime26,Jev mirror,pad_repeat,-0.095625,2008
+ragtime26,Jev mirror,pad_generic,-0.217187,2008
+ragtime26,Jev mirror,pad_offtopic,-0.366875,2008
+ragtime26,Jev mirror,pad_relevant,0.109375,2008
+ragtime26,Jev mirror,truncate,-0.1725,2008
+ragtime26,Jev mirror,pad_repeat,-0.06875,2008
+ragtime26,Jev mirror,pad_generic,-0.204688,2008
+ragtime26,Jev mirror,pad_offtopic,-0.345,2008
+ragtime26,Jev mirror,pad_relevant,0.130625,2008
+ragtime26,Jev mirror,truncate,-0.091875,2008
+ragtime26,Jev mirror,pad_repeat,-0.07875,2008
+ragtime26,Jev mirror,pad_generic,-0.224375,2008
+ragtime26,Jev mirror,pad_offtopic,-0.310312,2008
+ragtime26,Jev mirror,pad_relevant,0.0328125,2008
+ragtime26,Jev mirror,truncate,-0.139687,2008
+ragtime26,Jev mirror,pad_repeat,-0.0315625,2008
+ragtime26,Jev mirror,pad_generic,-0.16375,2008
+ragtime26,Jev mirror,pad_offtopic,-0.324687,2008
+ragtime26,Jev mirror,pad_relevant,0.10625,2008
+ragtime26,Jev mirror,truncate,-0.140937,2008
+ragtime26,Jev mirror,pad_repeat,-0.035,2008
+ragtime26,Jev mirror,pad_generic,-0.190625,2008
+ragtime26,Jev mirror,pad_offtopic,-0.2625,2008
+ragtime26,Jev mirror,pad_relevant,0.16375,2008
+ragtime26,Jev mirror,truncate,-0.104063,2008
+ragtime26,Jev mirror,pad_repeat,-0.030625,2008
+ragtime26,Jev mirror,pad_generic,-0.202188,2008
+ragtime26,Jev mirror,pad_offtopic,-0.324375,2008
+ragtime26,Jev mirror,pad_relevant,0.15625,2008
+ragtime26,Jev mirror,truncate,-0.0596875,2008
+ragtime26,Jev mirror,pad_repeat,-0.049375,2008
+ragtime26,Jev mirror,pad_generic,-0.229062,2008
+ragtime26,Jev mirror,pad_offtopic,-0.333437,2008
+ragtime26,Jev mirror,pad_relevant,0.104063,2008
+ragtime26,Jev mirror,truncate,-0.128437,2008
+ragtime26,Jev mirror,pad_repeat,-0.0478125,2008
+ragtime26,Jev mirror,pad_generic,-0.228125,2008
+ragtime26,Jev mirror,pad_offtopic,-0.369687,2008
+ragtime26,Jev mirror,pad_relevant,0.081875,2008
+ragtime26,Jev mirror,truncate,-0.134062,2008
+ragtime26,Jev mirror,pad_repeat,-0.0996875,2008
+ragtime26,Jev mirror,pad_generic,-0.222812,2008
+ragtime26,Jev mirror,pad_offtopic,-0.236562,2008
+ragtime26,Jev mirror,pad_relevant,0.122188,2008
+ragtime26,Jev mirror,truncate,-0.078125,2008
+ragtime26,Jev mirror,pad_repeat,-0.0790625,2008
+ragtime26,Jev mirror,pad_generic,-0.200312,2008
+ragtime26,Jev mirror,pad_offtopic,-0.290625,2008
+ragtime26,Jev mirror,pad_relevant,0.0646875,2008
+ragtime26,Jev mirror,truncate,-0.0875,2008
+ragtime26,Jev mirror,pad_repeat,-0.07125,2008
+ragtime26,Jev mirror,pad_generic,-0.18125,2008
+ragtime26,Jev mirror,pad_offtopic,-0.302812,2008
+ragtime26,Jev mirror,pad_relevant,0.138125,2008
+ragtime26,Jev mirror,truncate,-0.06625,2008
+ragtime26,Jev mirror,pad_repeat,-0.0496875,2008
+ragtime26,Jev mirror,pad_generic,-0.129688,2008
+ragtime26,Jev mirror,pad_offtopic,-0.182812,2008
+ragtime26,Jev mirror,pad_relevant,0.12625,2008
+ragtime26,Jev mirror,truncate,-0.111563,2008
+ragtime26,Jev mirror,pad_repeat,-0.03625,2008
+ragtime26,Jev mirror,pad_generic,-0.124375,2008
+ragtime26,Jev mirror,pad_offtopic,-0.218437,2008
+ragtime26,Jev mirror,pad_relevant,0.133437,2008
+ragtime26,Jev mirror,truncate,-0.156562,2008
+ragtime26,Jev mirror,pad_repeat,-0.09625,2009
+ragtime26,Jev mirror,pad_generic,-0.195937,2009
+ragtime26,Jev mirror,pad_offtopic,-0.337812,2009
+ragtime26,Jev mirror,pad_relevant,0.1125,2009
+ragtime26,Jev mirror,truncate,-0.1025,2009
+ragtime26,Jev mirror,pad_repeat,-0.0934375,2009
+ragtime26,Jev mirror,pad_generic,-0.167187,2009
+ragtime26,Jev mirror,pad_offtopic,-0.382187,2009
+ragtime26,Jev mirror,pad_relevant,0.171875,2009
+ragtime26,Jev mirror,truncate,-0.24625,2009
+ragtime26,Jev mirror,pad_repeat,-0.068125,2009
+ragtime26,Jev mirror,pad_generic,-0.139063,2009
+ragtime26,Jev mirror,pad_offtopic,-0.294063,2009
+ragtime26,Jev mirror,pad_relevant,0.0096875,2009
+ragtime26,Jev mirror,truncate,-0.2025,2009
+ragtime26,Jev mirror,pad_repeat,-0.0675,2009
+ragtime26,Jev mirror,pad_generic,-0.247812,2009
+ragtime26,Jev mirror,pad_offtopic,-0.312188,2009
+ragtime26,Jev mirror,pad_relevant,0.07,2009
+ragtime26,Jev mirror,truncate,-0.04625,2009
+ragtime26,Jev mirror,pad_repeat,-0.0625,2009
+ragtime26,Jev mirror,pad_generic,-0.126875,2009
+ragtime26,Jev mirror,pad_offtopic,-0.236875,2009
+ragtime26,Jev mirror,pad_relevant,0.0784375,2009
+ragtime26,Jev mirror,truncate,0.051875,2009
+ragtime26,Jev mirror,pad_repeat,-0.06875,2009
+ragtime26,Jev mirror,pad_generic,-0.110625,2009
+ragtime26,Jev mirror,pad_offtopic,-0.287187,2009
+ragtime26,Jev mirror,pad_relevant,0.155313,2009
+ragtime26,Jev mirror,truncate,-0.3225,2009
+ragtime26,Jev mirror,pad_repeat,-0.048125,2009
+ragtime26,Jev mirror,pad_generic,-0.08375,2009
+ragtime26,Jev mirror,pad_offtopic,-0.177812,2009
+ragtime26,Jev mirror,pad_relevant,0.0734375,2009
+ragtime26,Jev mirror,truncate,-0.0221875,2009
+ragtime26,Jev mirror,pad_repeat,-0.0403125,2009
+ragtime26,Jev mirror,pad_generic,-0.119063,2009
+ragtime26,Jev mirror,pad_offtopic,-0.176875,2009
+ragtime26,Jev mirror,pad_relevant,0.0440625,2009
+ragtime26,Jev mirror,truncate,-0.0684375,2009
+ragtime26,Jev mirror,pad_repeat,-0.088125,2009
+ragtime26,Jev mirror,pad_generic,-0.100937,2009
+ragtime26,Jev mirror,pad_offtopic,-0.18875,2009
+ragtime26,Jev mirror,pad_relevant,0.141875,2009
+ragtime26,Jev mirror,truncate,-0.112812,2009
+ragtime26,Jev mirror,pad_repeat,-0.0496875,2009
+ragtime26,Jev mirror,pad_generic,-0.129375,2009
+ragtime26,Jev mirror,pad_offtopic,-0.168437,2009
+ragtime26,Jev mirror,pad_relevant,-0.0178125,2009
+ragtime26,Jev mirror,truncate,-0.0175,2009
+ragtime26,Jev mirror,pad_repeat,-0.0725,2009
+ragtime26,Jev mirror,pad_generic,-0.120312,2009
+ragtime26,Jev mirror,pad_offtopic,-0.19,2009
+ragtime26,Jev mirror,pad_relevant,0.271563,2009
+ragtime26,Jev mirror,truncate,-0.120625,2009
+ragtime26,Jev mirror,pad_repeat,-0.0584375,2009
+ragtime26,Jev mirror,pad_generic,-0.108125,2009
+ragtime26,Jev mirror,pad_offtopic,-0.17,2009
+ragtime26,Jev mirror,pad_relevant,0.208125,2009
+ragtime26,Jev mirror,truncate,-0.0234375,2009
+ragtime26,Jev mirror,pad_repeat,-0.0475,2009
+ragtime26,Jev mirror,pad_generic,-0.0778125,2009
+ragtime26,Jev mirror,pad_offtopic,-0.1525,2009
+ragtime26,Jev mirror,pad_relevant,0.15125,2009
+ragtime26,Jev mirror,truncate,-0.0221875,2009
+ragtime26,Jev mirror,pad_repeat,-0.0325,2009
+ragtime26,Jev mirror,pad_generic,-0.0865625,2009
+ragtime26,Jev mirror,pad_offtopic,-0.135625,2009
+ragtime26,Jev mirror,pad_relevant,0.196875,2009
+ragtime26,Jev mirror,truncate,-0.00875,2009
+ragtime26,Jev mirror,pad_repeat,-0.0278125,2009
+ragtime26,Jev mirror,pad_generic,-0.055625,2009
+ragtime26,Jev mirror,pad_offtopic,-0.094375,2009
+ragtime26,Jev mirror,pad_relevant,0.218125,2009
+ragtime26,Jev mirror,truncate,-0.11,2009
+ragtime26,Jev mirror,pad_repeat,-0.0940625,2009
+ragtime26,Jev mirror,pad_generic,-0.056875,2009
+ragtime26,Jev mirror,pad_offtopic,-0.176875,2009
+ragtime26,Jev mirror,pad_relevant,0.182187,2009
+ragtime26,Jev mirror,truncate,-0.0446875,2009
+ragtime26,Gemini,pad_repeat,-0.3125,2000
+ragtime26,Gemini,pad_generic,-0.375,2000
+ragtime26,Gemini,pad_offtopic,-0.4375,2000
+ragtime26,Gemini,pad_relevant,-0.125,2000
+ragtime26,Gemini,truncate,-0.0625,2000
+ragtime26,Gemini,pad_repeat,-0.3125,2000
+ragtime26,Gemini,pad_generic,-0.25,2000
+ragtime26,Gemini,pad_offtopic,-0.4375,2000
+ragtime26,Gemini,pad_relevant,-0.0625,2000
+ragtime26,Gemini,truncate,-0.25,2000
+ragtime26,Gemini,pad_repeat,-0.5,2000
+ragtime26,Gemini,pad_generic,-0.25,2000
+ragtime26,Gemini,pad_offtopic,-0.75,2000
+ragtime26,Gemini,pad_relevant,-0.375,2000
+ragtime26,Gemini,truncate,-0.75,2000
+ragtime26,Gemini,pad_repeat,-0.1875,2000
+ragtime26,Gemini,pad_generic,-0.1875,2000
+ragtime26,Gemini,pad_offtopic,-0.3125,2000
+ragtime26,Gemini,pad_relevant,-0.125,2000
+ragtime26,Gemini,truncate,-0.3125,2000
+ragtime26,Gemini,pad_repeat,-0.25,2000
+ragtime26,Gemini,pad_generic,-0.1875,2000
+ragtime26,Gemini,pad_offtopic,-0.3125,2000
+ragtime26,Gemini,pad_relevant,-0.0625,2000
+ragtime26,Gemini,truncate,-0.3125,2000
+ragtime26,Gemini,pad_repeat,-0.125,2000
+ragtime26,Gemini,pad_generic,-0.0625,2000
+ragtime26,Gemini,pad_offtopic,-0.25,2000
+ragtime26,Gemini,pad_relevant,-0.0625,2000
+ragtime26,Gemini,truncate,-0.0625,2000
+ragtime26,Gemini,pad_repeat,-0.3125,2000
+ragtime26,Gemini,pad_generic,-0.3125,2000
+ragtime26,Gemini,pad_offtopic,-0.5,2000
+ragtime26,Gemini,pad_relevant,-0.125,2000
+ragtime26,Gemini,truncate,-0.25,2000
+ragtime26,Gemini,pad_repeat,-0.3125,2000
+ragtime26,Gemini,pad_generic,-0.375,2000
+ragtime26,Gemini,pad_offtopic,-0.5625,2000
+ragtime26,Gemini,pad_relevant,-0.3125,2000
+ragtime26,Gemini,truncate,-0.5,2000
+ragtime26,Gemini,pad_repeat,-0.25,2000
+ragtime26,Gemini,pad_generic,-0.25,2000
+ragtime26,Gemini,pad_offtopic,-0.4375,2000
+ragtime26,Gemini,pad_relevant,0,2000
+ragtime26,Gemini,truncate,-0.375,2000
+ragtime26,Gemini,pad_repeat,-0.25,2000
+ragtime26,Gemini,pad_generic,-0.1875,2000
+ragtime26,Gemini,pad_offtopic,-0.3125,2000
+ragtime26,Gemini,pad_relevant,-0.1875,2000
+ragtime26,Gemini,truncate,-0.25,2000
+ragtime26,Gemini,pad_repeat,-0.25,2000
+ragtime26,Gemini,pad_generic,-0.1875,2000
+ragtime26,Gemini,pad_offtopic,-0.25,2000
+ragtime26,Gemini,pad_relevant,-0.1875,2000
+ragtime26,Gemini,truncate,-0.25,2000
+ragtime26,Gemini,pad_repeat,-0.1875,2000
+ragtime26,Gemini,pad_generic,-0.1875,2000
+ragtime26,Gemini,pad_offtopic,-0.25,2000
+ragtime26,Gemini,pad_relevant,-0.0625,2000
+ragtime26,Gemini,truncate,-0.1875,2000
+ragtime26,Gemini,pad_repeat,-0.1875,2000
+ragtime26,Gemini,pad_generic,-0.0625,2000
+ragtime26,Gemini,pad_offtopic,-0.1875,2000
+ragtime26,Gemini,pad_relevant,-0.0625,2000
+ragtime26,Gemini,truncate,-0.0625,2000
+ragtime26,Gemini,pad_repeat,-0.0625,2000
+ragtime26,Gemini,pad_generic,-0.0625,2000
+ragtime26,Gemini,pad_offtopic,-0.0625,2000
+ragtime26,Gemini,pad_relevant,-0.0625,2000
+ragtime26,Gemini,truncate,-0.0625,2000
+ragtime26,Gemini,pad_repeat,-0.0625,2000
+ragtime26,Gemini,pad_generic,-0.125,2000
+ragtime26,Gemini,pad_offtopic,-0.1875,2000
+ragtime26,Gemini,pad_relevant,0,2000
+ragtime26,Gemini,truncate,-0.0625,2000
+ragtime26,Gemini,pad_repeat,0,2000
+ragtime26,Gemini,pad_generic,0,2000
+ragtime26,Gemini,pad_offtopic,-0.0625,2000
+ragtime26,Gemini,pad_relevant,0,2000
+ragtime26,Gemini,truncate,0,2000
+ragtime26,Gemini,pad_repeat,-0.0625,2001
+ragtime26,Gemini,pad_generic,-0.1875,2001
+ragtime26,Gemini,pad_offtopic,-0.3125,2001
+ragtime26,Gemini,pad_relevant,-0.0625,2001
+ragtime26,Gemini,truncate,-0.125,2001
+ragtime26,Gemini,pad_repeat,-0.1875,2001
+ragtime26,Gemini,pad_generic,-0.0625,2001
+ragtime26,Gemini,pad_offtopic,-0.1875,2001
+ragtime26,Gemini,pad_relevant,-0.125,2001
+ragtime26,Gemini,truncate,-0.125,2001
+ragtime26,Gemini,pad_repeat,-0.1875,2001
+ragtime26,Gemini,pad_generic,-0.3125,2001
+ragtime26,Gemini,pad_offtopic,-0.4375,2001
+ragtime26,Gemini,pad_relevant,-0.125,2001
+ragtime26,Gemini,truncate,-0.1875,2001
+ragtime26,Gemini,pad_repeat,-0.1875,2001
+ragtime26,Gemini,pad_generic,-0.1875,2001
+ragtime26,Gemini,pad_offtopic,-0.1875,2001
+ragtime26,Gemini,pad_relevant,-0.0625,2001
+ragtime26,Gemini,truncate,-0.125,2001
+ragtime26,Gemini,pad_repeat,-0.1875,2001
+ragtime26,Gemini,pad_generic,-0.1875,2001
+ragtime26,Gemini,pad_offtopic,-0.375,2001
+ragtime26,Gemini,pad_relevant,-0.3125,2001
+ragtime26,Gemini,truncate,-0.0625,2001
+ragtime26,Gemini,pad_repeat,-0.25,2001
+ragtime26,Gemini,pad_generic,-0.25,2001
+ragtime26,Gemini,pad_offtopic,-0.4375,2001
+ragtime26,Gemini,pad_relevant,-0.1875,2001
+ragtime26,Gemini,truncate,-0.125,2001
+ragtime26,Gemini,pad_repeat,-0.25,2001
+ragtime26,Gemini,pad_generic,-0.25,2001
+ragtime26,Gemini,pad_offtopic,-0.375,2001
+ragtime26,Gemini,pad_relevant,0.0625,2001
+ragtime26,Gemini,truncate,-0.125,2001
+ragtime26,Gemini,pad_repeat,-0.0625,2001
+ragtime26,Gemini,pad_generic,0,2001
+ragtime26,Gemini,pad_offtopic,-0.0625,2001
+ragtime26,Gemini,pad_relevant,0,2001
+ragtime26,Gemini,truncate,0.0625,2001
+ragtime26,Gemini,pad_repeat,-0.3125,2001
+ragtime26,Gemini,pad_generic,-0.25,2001
+ragtime26,Gemini,pad_offtopic,-0.4375,2001
+ragtime26,Gemini,pad_relevant,-0.25,2001
+ragtime26,Gemini,truncate,-0.1875,2001
+ragtime26,Gemini,pad_repeat,-0.25,2001
+ragtime26,Gemini,pad_generic,-0.25,2001
+ragtime26,Gemini,pad_offtopic,-0.25,2001
+ragtime26,Gemini,pad_relevant,-0.1875,2001
+ragtime26,Gemini,truncate,-0.0625,2001
+ragtime26,Gemini,pad_repeat,0,2001
+ragtime26,Gemini,pad_generic,-0.0625,2001
+ragtime26,Gemini,pad_offtopic,-0.125,2001
+ragtime26,Gemini,pad_relevant,-0.125,2001
+ragtime26,Gemini,truncate,-0.0625,2001
+ragtime26,Gemini,pad_repeat,-0.3125,2001
+ragtime26,Gemini,pad_generic,-0.1875,2001
+ragtime26,Gemini,pad_offtopic,-0.3125,2001
+ragtime26,Gemini,pad_relevant,-0.0625,2001
+ragtime26,Gemini,truncate,0,2001
+ragtime26,Gemini,pad_repeat,-0.1875,2001
+ragtime26,Gemini,pad_generic,-0.1875,2001
+ragtime26,Gemini,pad_offtopic,-0.1875,2001
+ragtime26,Gemini,pad_relevant,-0.125,2001
+ragtime26,Gemini,truncate,-0.125,2001
+ragtime26,Gemini,pad_repeat,-0.125,2001
+ragtime26,Gemini,pad_generic,-0.125,2001
+ragtime26,Gemini,pad_offtopic,-0.1875,2001
+ragtime26,Gemini,pad_relevant,-0.125,2001
+ragtime26,Gemini,truncate,-0.0625,2001
+ragtime26,Gemini,pad_repeat,0,2001
+ragtime26,Gemini,pad_generic,0,2001
+ragtime26,Gemini,pad_offtopic,0,2001
+ragtime26,Gemini,pad_relevant,0.125,2001
+ragtime26,Gemini,truncate,0,2001
+ragtime26,Gemini,pad_repeat,-0.0625,2001
+ragtime26,Gemini,pad_generic,-0.0625,2001
+ragtime26,Gemini,pad_offtopic,-0.0625,2001
+ragtime26,Gemini,pad_relevant,0,2001
+ragtime26,Gemini,truncate,-0.0625,2001
+ragtime26,Gemini,pad_repeat,-0.4375,2002
+ragtime26,Gemini,pad_generic,-0.375,2002
+ragtime26,Gemini,pad_offtopic,-0.6875,2002
+ragtime26,Gemini,pad_relevant,-0.25,2002
+ragtime26,Gemini,truncate,-0.3125,2002
+ragtime26,Gemini,pad_repeat,-0.375,2002
+ragtime26,Gemini,pad_generic,-0.25,2002
+ragtime26,Gemini,pad_offtopic,-0.6875,2002
+ragtime26,Gemini,pad_relevant,-0.25,2002
+ragtime26,Gemini,truncate,-0.25,2002
+ragtime26,Gemini,pad_repeat,-0.375,2002
+ragtime26,Gemini,pad_generic,-0.4375,2002
+ragtime26,Gemini,pad_offtopic,-0.75,2002
+ragtime26,Gemini,pad_relevant,-0.25,2002
+ragtime26,Gemini,truncate,-0.3125,2002
+ragtime26,Gemini,pad_repeat,-0.75,2002
+ragtime26,Gemini,pad_generic,-0.625,2002
+ragtime26,Gemini,pad_offtopic,-0.8125,2002
+ragtime26,Gemini,pad_relevant,-0.375,2002
+ragtime26,Gemini,truncate,0,2002
+ragtime26,Gemini,pad_repeat,-0.375,2002
+ragtime26,Gemini,pad_generic,-0.375,2002
+ragtime26,Gemini,pad_offtopic,-0.625,2002
+ragtime26,Gemini,pad_relevant,-0.3125,2002
+ragtime26,Gemini,truncate,-0.3125,2002
+ragtime26,Gemini,pad_repeat,-0.25,2002
+ragtime26,Gemini,pad_generic,-0.25,2002
+ragtime26,Gemini,pad_offtopic,-0.25,2002
+ragtime26,Gemini,pad_relevant,-0.1875,2002
+ragtime26,Gemini,truncate,-0.125,2002
+ragtime26,Gemini,pad_repeat,-0.3125,2002
+ragtime26,Gemini,pad_generic,-0.125,2002
+ragtime26,Gemini,pad_offtopic,-0.5,2002
+ragtime26,Gemini,pad_relevant,-0.1875,2002
+ragtime26,Gemini,truncate,-0.125,2002
+ragtime26,Gemini,pad_repeat,-0.125,2002
+ragtime26,Gemini,pad_generic,-0.125,2002
+ragtime26,Gemini,pad_offtopic,-0.1875,2002
+ragtime26,Gemini,pad_relevant,-0.125,2002
+ragtime26,Gemini,truncate,0,2002
+ragtime26,Gemini,pad_repeat,-0.3125,2002
+ragtime26,Gemini,pad_generic,-0.3125,2002
+ragtime26,Gemini,pad_offtopic,-0.375,2002
+ragtime26,Gemini,pad_relevant,-0.1875,2002
+ragtime26,Gemini,truncate,-0.25,2002
+ragtime26,Gemini,pad_repeat,-0.1875,2002
+ragtime26,Gemini,pad_generic,-0.25,2002
+ragtime26,Gemini,pad_offtopic,-0.25,2002
+ragtime26,Gemini,pad_relevant,-0.1875,2002
+ragtime26,Gemini,truncate,-0.25,2002
+ragtime26,Gemini,pad_repeat,0,2002
+ragtime26,Gemini,pad_generic,0,2002
+ragtime26,Gemini,pad_offtopic,-0.125,2002
+ragtime26,Gemini,pad_relevant,0,2002
+ragtime26,Gemini,truncate,0,2002
+ragtime26,Gemini,pad_repeat,0,2002
+ragtime26,Gemini,pad_generic,0,2002
+ragtime26,Gemini,pad_offtopic,-0.0625,2002
+ragtime26,Gemini,pad_relevant,0,2002
+ragtime26,Gemini,truncate,-0.0625,2002
+ragtime26,Gemini,pad_repeat,0,2002
+ragtime26,Gemini,pad_generic,-0.0625,2002
+ragtime26,Gemini,pad_offtopic,-0.0625,2002
+ragtime26,Gemini,pad_relevant,0,2002
+ragtime26,Gemini,truncate,-0.0625,2002
+ragtime26,Gemini,pad_repeat,0,2002
+ragtime26,Gemini,pad_generic,-0.0625,2002
+ragtime26,Gemini,pad_offtopic,-0.0625,2002
+ragtime26,Gemini,pad_relevant,0,2002
+ragtime26,Gemini,truncate,-0.0625,2002
+ragtime26,Gemini,pad_repeat,-0.0625,2002
+ragtime26,Gemini,pad_generic,-0.0625,2002
+ragtime26,Gemini,pad_offtopic,-0.125,2002
+ragtime26,Gemini,pad_relevant,0,2002
+ragtime26,Gemini,truncate,-0.0625,2002
+ragtime26,Gemini,pad_repeat,0,2002
+ragtime26,Gemini,pad_generic,0,2002
+ragtime26,Gemini,pad_offtopic,0,2002
+ragtime26,Gemini,pad_relevant,0.0625,2002
+ragtime26,Gemini,truncate,0,2002

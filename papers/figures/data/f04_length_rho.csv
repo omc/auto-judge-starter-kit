@@ -1,0 +1,74 @@
+dataset,judge,"Spearman(score, words)"
+rag26,Jev Choice,0.523569
+rag26,Jev Choice,0.545137
+rag26,Jev Choice,0.563193
+rag26,Jev Choice,0.550854
+rag26,Jev Choice,0.575247
+rag26,Jev Choice,0.527822
+rag26,Jev Choice,0.664449
+rag26,Jev Choice,0.475265
+rag26,Jev Choice,0.486027
+rag26,Jev Choice,0.535904
+rag26,Jev mirror,0.532729
+rag26,Jev mirror,0.567371
+rag26,Jev mirror,0.586125
+rag26,Jev mirror,0.58845
+rag26,Jev mirror,0.581705
+rag26,Jev mirror,0.545249
+rag26,Jev mirror,0.686129
+rag26,Jev mirror,0.487638
+rag26,Jev mirror,0.509976
+rag26,Jev mirror,0.547804
+rag26,Gemini,0.435946
+rag26,Gemini,0.416461
+rag26,Gemini,0.496785
+rag26,Gemini,0.437753
+rag26,Gemini,0.467308
+rag26,Gemini,0.451362
+rag26,Gemini,0.540534
+rag26,Gemini,0.441712
+rag26,Gemini,0.31272
+rag26,Gemini,0.407663
+rag26,BOD,0.50817
+rag26,BOD,0.525474
+rag26,BOD,0.533759
+rag26,BOD,0.596383
+rag26,BOD,0.562829
+rag26,BOD,0.509633
+rag26,BOD,0.723581
+rag26,BOD,0.50317
+rag26,BOD,0.395751
+rag26,BOD,0.507119
+ragtime26,Jev Choice,-0.0765069
+ragtime26,Jev Choice,0.0257189
+ragtime26,Jev Choice,-0.376547
+ragtime26,Jev Choice,-0.160322
+ragtime26,Jev Choice,0.068325
+ragtime26,Jev Choice,0.0514875
+ragtime26,Jev Choice,-0.128234
+ragtime26,Jev Choice,0.06924
+ragtime26,Jev Choice,-0.163937
+ragtime26,Jev Choice,-0.170477
+ragtime26,Jev mirror,-0.0543548
+ragtime26,Jev mirror,0.0219427
+ragtime26,Jev mirror,-0.353458
+ragtime26,Jev mirror,-0.169809
+ragtime26,Jev mirror,0.124914
+ragtime26,Jev mirror,0.0331173
+ragtime26,Jev mirror,-0.12655
+ragtime26,Jev mirror,0.083986
+ragtime26,Jev mirror,-0.173423
+ragtime26,Jev mirror,-0.168946
+ragtime26,Gemini,-0.157035
+ragtime26,Gemini,-0.08651
+ragtime26,Gemini,-0.374305
+ragtime26,BOD,-0.198117
+ragtime26,BOD,0.14351
+ragtime26,BOD,-0.438691
+ragtime26,BOD,-0.177063
+ragtime26,BOD,0.154156
+ragtime26,BOD,-0.0865993
+ragtime26,BOD,-0.153748
+ragtime26,BOD,0.305745
+ragtime26,BOD,-0.361475
+ragtime26,BOD,-0.0822065

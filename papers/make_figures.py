@@ -110,6 +110,14 @@ def boot_ci(xs, n=4000, seed=0):
     return m[int(.025 * n)], m[int(.975 * n)]
 
 
+DATA = OUT / "data"           # tidy CSVs of exactly what each figure plots (for make_figures.R)
+DATA.mkdir(exist_ok=True)
+
+
+def export(name, df):
+    df.to_csv(DATA / f"{name}.csv", index=False, float_format="%.6g")
+
+
 def save(fig, name, note):
     for ext in ("pdf", "png"):
         fig.savefig(OUT / f"{name}.{ext}")
@@ -152,6 +160,7 @@ def fig_distribution():
                     facet_kws={"sharey": False})
     g.set_titles("{col_name}")
     sat = df.assign(ex=df["P(A better)"].isin([0, 1])).groupby(["dataset", "judge"])["ex"].mean().round(3)
+    export("f01_probability_distribution", df)
     save(g.figure, "f01_probability_distribution", f"share exactly 0/1: {sat.to_dict()}")
 
 
@@ -183,6 +192,8 @@ def fig_position():
         ax.set_xlabel("orientation-averaged P(x better)")
         ax.set_title(ds)
     mid = df[df.bin == 3].groupby(["dataset", "judge"])["P(slot A wins)"].mean().round(3)
+    export("f02_position_bias", df.assign(bin_label=df["bin"].map(
+        {i: f"{lo:.2f}–{min(hi, 1):.2f}" for i, (lo, hi) in enumerate(bins)})))
     save(fig, "f02_position_bias", f"close pairs (0.4-0.6) P(slot A wins): {mid.to_dict()}")
 
 
@@ -209,6 +220,7 @@ def fig_identical():
     ax.set_ylim(0, 1)
     ax.set_xlabel("")
     m = df.groupby(["dataset", "judge"])["P(A better)"].agg(["mean", "count"]).round(3)
+    export("f03_identical_summaries", df)
     save(fig, "f03_identical_summaries", f"means: {m['mean'].to_dict()} n: {m['count'].to_dict()}")
 
 
@@ -263,6 +275,8 @@ def fig_length():
     axes[2].set_xlabel("")
     pl = df.groupby(["dataset", "judge"])["P(longer wins)"].mean().round(3)
     med = rho.groupby(["dataset", "judge"])["Spearman(score, words)"].median().round(3)
+    export("f04_length_ratio", df)
+    export("f04_length_rho", rho)
     save(fig, "f04_length", f"P(longer): {pl.to_dict()} | median rho: {med.to_dict()}")
 
 
@@ -270,7 +284,7 @@ def fig_prompts():
     """F5: ranking agreement between question wordings (mean per-topic Spearman)."""
     qs = ["better_summary", "length_neutral", "needs_coverage", "precision"]
     fig, axes = plt.subplots(1, 3, figsize=(8.4, 3.6), gridspec_kw={"width_ratios": [1, 1, .06]})
-    notes = {}
+    notes, cells = {}, []
     for ax, ds in zip(axes[:2], DATASETS):
         recs = [r for r in comparisons(ds, "prompts") if all(r["p"].get(q) is not None for q in qs)]
         wr = {q: win_rates(recs, lambda r, q=q: r["p"][q]) for q in qs}
@@ -283,12 +297,14 @@ def fig_prompts():
                     xs = [x for (tt, x) in wr[a] if tt == t]
                     vals.append(spearmanr([wr[a][(t, x)] for x in xs], [wr[b][(t, x)] for x in xs])[0])
                 M.loc[a, b] = st.mean(vals)
+        cells += [{"dataset": ds, "row": a, "col": b, "rho": M.loc[a, b]} for a in qs for b in qs]
         lab = [q.replace("_", " ") for q in qs]
         sns.heatmap(M.values, annot=True, fmt=".3f", vmin=.8, vmax=1, cmap="crest", square=True,
                     cbar=ax is axes[1], cbar_ax=axes[2] if ax is axes[1] else None,
                     xticklabels=lab, yticklabels=lab if ax is axes[0] else False, ax=ax)
         ax.set_title(ds)
         notes[ds] = round(float(M.loc["better_summary", "length_neutral"]), 3)
+    export("f05_prompt_agreement", pd.DataFrame(cells))
     save(fig, "f05_prompt_agreement", f"better~length_neutral: {notes}")
 
 
@@ -354,6 +370,8 @@ def fig_padding():
     axes[2].tick_params(axis="x", rotation=35)
     m = df.groupby(["dataset", "judge", "variant"])["Δ"].mean().round(3)
     mb = bdf.groupby(["measure", "variant"])["Δ"].mean().round(3)
+    export("f06_padding_pairwise", df)
+    export("f06_padding_bod", bdf)
     save(fig, "f06_padding", f"pairwise: {m.to_dict()} | BOD: {mb.to_dict()}")
 
 
@@ -396,6 +414,7 @@ def fig_broad_narrow():
     ax.set_ylabel("Δ shift toward shorter\n(proportionate − better)")
     ax.set_xlabel("")
     ax.set_title("narrow vs broad request: per window topic\n(red = mean over topics, topic-bootstrap 95% CI)")
+    export("f07_broad_narrow", df)
     save(fig, "f07_broad_narrow", f"mean, CI, topics<0: {note}")
 
 
@@ -414,7 +433,7 @@ def bod_scores(ds):
 def fig_agreement():
     """F8: run boards on the window: Jev mirror vs Gemini, BOD vs Jev mirror (no labels)."""
     fig, axes = plt.subplots(1, 4, figsize=(12, 2.9))
-    note = {}
+    note, pts = {}, []
     for i, ds in enumerate(DATASETS):
         jm = win_rates(comparisons(ds, "mirror"), P_MIRROR)
         gm = win_rates(comparisons(ds, "gemini"), P_GEMINI)
@@ -424,6 +443,8 @@ def fig_agreement():
         ax = axes[2 * i]
         sns.scatterplot(x=[a[x] for x in xs], y=[b[x] for x in xs], s=14, color=PALETTE["Gemini"], ax=ax)
         r1 = spearmanr([a[x] for x in xs], [b[x] for x in xs])[0]
+        pts += [{"dataset": ds, "panel": "gemini", "topics": len(shared), "rho": r1, "x": a[x], "y": b[x]}
+                for x in xs]
         ax.set(xlabel="Jev mirror win rate", ylabel="Gemini win rate",
                title=f"{ds}: {len(shared)} topics, ρ={r1:.3f}")
         bo = board(bod_scores(ds))
@@ -432,8 +453,10 @@ def fig_agreement():
         ax = axes[2 * i + 1]
         sns.scatterplot(x=[jb[x] for x in xs], y=[bo[x] for x in xs], s=14, color=PALETTE["BOD"], ax=ax)
         r2 = spearmanr([jb[x] for x in xs], [bo[x] for x in xs])[0]
+        pts += [{"dataset": ds, "panel": "bod", "topics": 10, "rho": r2, "x": jb[x], "y": bo[x]} for x in xs]
         ax.set(xlabel="Jev mirror win rate", ylabel="BOD_MEAN", title=f"{ds}: 10 topics, ρ={r2:.3f}")
         note[ds] = (round(r1, 3), round(r2, 3))
+    export("f08_judge_agreement", pd.DataFrame(pts))
     save(fig, "f08_judge_agreement", f"(Jev~Gemini, BOD~Jev): {note}")
 
 
@@ -460,6 +483,8 @@ def fig_bod():
                  element="step", ax=axes[2])
     axes[2].set_title("BOD_MEAN per answer")
     big = df.assign(b=df["E[g] − most likely"].abs() > .25).groupby("dataset")["b"].mean().round(3)
+    export("f09_bod_questions", df)
+    export("f09_bod_answers", adf)
     save(fig, "f09_bod_grades", f"|E[g]-argmax|>0.25: {big.to_dict()} | grade shares: "
          f"{share.round(3).set_index(['dataset', 'most likely grade'])['share'].to_dict()}")
 
@@ -493,6 +518,8 @@ def fig_risk():
         ax.plot([0, 1], [0, 1], color="grey", lw=.8, ls=":")
         ax.set_title(f"{ds}: per answer")
     med = df[df.defined].groupby("dataset")[["HALLUC_RISK", "UNGROUNDED_RATE"]].median().round(3)
+    export("f10_risk", long)
+    export("f10_grounded_vs_mean", sdf)
     save(fig, "f10_hallucination_risk", f"medians: {med.to_dict()} | answers: {len(sdf)}")
 
 
@@ -508,7 +535,7 @@ def eval_all(path):
 def fig_full_boards():
     """F11: submitted full-run boards ("all" rows), unlabeled scatter."""
     fig, axes = plt.subplots(2, 3, figsize=(10.5, 6))
-    note = {}
+    note, pts = {}, []
     for i, ds in enumerate(DATASETS):
         pw = eval_all(SUBMISSIONS["pairwise"].format(ds=ds))["PAIRWISE_WINRATE"]
         bod = eval_all(SUBMISSIONS["bod"].format(ds=ds))["BOD_MEAN"]
@@ -518,11 +545,14 @@ def fig_full_boards():
                                               (pw, "pairwise win rate", gr, "BOD_GROUNDED"))):
             xs = sorted(xa.keys() & ya.keys())
             r = spearmanr([xa[x] for x in xs], [ya[x] for x in xs])[0]
+            pts += [{"dataset": ds, "panel": j, "xname": xn, "yname": yn, "rho": r, "runs": len(xs),
+                     "x": xa[x], "y": ya[x]} for x in xs]
             ax = axes[i, j]
             sns.scatterplot(x=[xa[x] for x in xs], y=[ya[x] for x in xs], s=14, ax=ax)
             ax.set(xlabel=xn, ylabel=yn, title=f"{ds} (all topics, {len(xs)} runs): ρ={r:.3f}")
             note[(ds, yn, xn)] = round(r, 3)
     fig.tight_layout()
+    export("f11_full_leaderboards", pd.DataFrame(pts))
     save(fig, "f11_full_leaderboards", str(note))
 
 
@@ -554,13 +584,14 @@ def fig_split_half():
     sns.boxplot(df, x="dataset", y="split-half Spearman", hue="judge", palette=pal, fliersize=1, ax=ax)
     ax.set_xlabel("")
     m = df.groupby(["dataset", "judge"])["split-half Spearman"].mean().round(3)
+    export("f12_split_half", df)
     save(fig, "f12_split_half", f"means: {m.to_dict()}")
 
 
 def fig_determinism():
     """F13: identical mirror requests sent twice (one window topic per dataset)."""
     fig, axes = plt.subplots(1, 2, figsize=(6.4, 3))
-    note = {}
+    note, pts = {}, []
     for ax, ds in zip(axes, DATASETS):
         t = SRC[ds]["determinism"]
         use(ds).assert_window([t])
@@ -573,9 +604,11 @@ def fig_determinism():
         sns.scatterplot(x=x, y=y, s=6, alpha=.4, ax=ax)
         ax.plot([0, 1], [0, 1], color="grey", lw=.8, ls=":")
         flips = st.mean((a - .5) * (b - .5) < 0 for a, b in zip(x, y))
+        pts += [{"dataset": ds, "n": len(ks), "flips": flips, "x": a, "y": b} for a, b in zip(x, y)]
         ax.set(xlabel="mirror P, request 1", ylabel="mirror P, request 2",
                title=f"{ds} (1 topic, n={len(ks):,}): flips {flips:.2%}")
         note[ds] = (len(ks), round(flips, 4))
+    export("f13_determinism", pd.DataFrame(pts))
     save(fig, "f13_determinism", f"(n, flip rate): {note}")
 
 
