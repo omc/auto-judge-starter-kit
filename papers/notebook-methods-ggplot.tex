@@ -423,7 +423,7 @@ topics, in \textbf{both orientations}: 64,140 comparisons on rag26 and
 20,480 on ragtime26.
 
 \textbf{Choice probabilities saturate and don't change the ranking}
-(Figure\textasciitilde{}\ref{fig:f01}).
+(Figure~\ref{fig:f01}).
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.8295}}
@@ -448,8 +448,8 @@ Probability-weighted vs binary ranking (Spearman) & 0.9992 & 0.9987 \\
 \end{longtable}
 
 \textbf{Choice has a strong first-slot bias on ties}
-(Figure\textasciitilde{}\ref{fig:f03}). We judged each run's report
-against itself in both slots:
+(Figure~\ref{fig:f03}). We judged each run's report against itself in
+both slots:
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.5053}}
@@ -529,8 +529,8 @@ Board \ensuremath{\rho} vs Gemini & 0.976 & 0.974 & 0.937 & 0.939 \\
   \ensuremath{\rho} 0.998 on both datasets (Kendall 0.975 / 0.980).
 \item
   \textbf{Position effects remain in close pairs}
-  (Figure\textasciitilde{}\ref{fig:f02}). These are pairs whose
-  orientation-averaged P is between 0.4 and 0.6.
+  (Figure~\ref{fig:f02}). These are pairs whose orientation-averaged P
+  is between 0.4 and 0.6.
 
   \begin{itemize}
   \tightlist
@@ -543,11 +543,11 @@ Board \ensuremath{\rho} vs Gemini & 0.976 & 0.974 & 0.937 & 0.939 \\
     We therefore judge \textbf{both orientations} and average.
   \end{itemize}
 \item
-  \textbf{Determinism} (Figure\textasciitilde{}\ref{fig:f13}). Asking
-  the same mirror requests twice with the cache bypassed flipped the
-  winner in 5 of 3,223 comparisons (0.155\%) on rag26 and 7 of 1,024
-  (0.684\%) on ragtime26. Mean \textbar{}\ensuremath{\Delta}P\textbar{}
-  was 0.0049 / 0.0067.
+  \textbf{Determinism} (Figure~\ref{fig:f13}). Asking the same mirror
+  requests twice with the cache bypassed flipped the winner in 5 of
+  3,223 comparisons (0.155\%) on rag26 and 7 of 1,024 (0.684\%) on
+  ragtime26. Mean \textbar{}\ensuremath{\Delta}P\textbar{} was 0.0049 /
+  0.0067.
 \item
   \textbf{Tie flags.} The per-pair tie flag is unstable (17 of 43 flags
   changed on rag26), so it is used only in aggregate.
@@ -587,9 +587,9 @@ dataset (rag2026-3, 2003): winner flips 0.16\% / 0.68\%.}\label{fig:f13}
 
 \subsubsection{4.5 Question wording}\label{question-wording}
 
-\textbf{Prompt variants} (Figure\textasciitilde{}\ref{fig:f05}). Four
-Choice wordings were asked in one request on all window topics (single
-orientation, hashed):
+\textbf{Prompt variants} (Figure~\ref{fig:f05}). Four Choice wordings
+were asked in one request on all window topics (single orientation,
+hashed):
 
 \begin{itemize}
 \tightlist
@@ -634,13 +634,12 @@ precision & 0.673 & 0.439 & 0.982 / 0.938 & 95.1\% / 91.0\% \\
 Rewording changes 3--9\% of pair decisions but doesn't significantly
 impact the ranking.
 
-\textbf{Depth-proportionate wording}
-(Figure\textasciitilde{}\ref{fig:f07}). The submitted question adds one
-clause to the \passthrough{\lstinline!better!} question:
-``\ldots considering relevance, completeness, \textbf{depth
-proportionate to what the query asks for (thorough when the query is
-broad or multi-part, brief and direct when it is narrow)}, and how well
-its claims are grounded?''
+\textbf{Depth-proportionate wording} (Figure~\ref{fig:f07}). The
+submitted question adds one clause to the
+\passthrough{\lstinline!better!} question: ``\ldots considering
+relevance, completeness, \textbf{depth proportionate to what the query
+asks for (thorough when the query is broad or multi-part, brief and
+direct when it is narrow)}, and how well its claims are grounded?''
 
 Neither dataset has genuinely narrow needs, so we changed the request
 instead.
@@ -731,13 +730,12 @@ section explores experiments on this hypothesis. The results show that
 length is not a strong indicator of preference.
 
 \textbf{Natural length dependence is dataset-specific}
-(Figure\textasciitilde{}\ref{fig:f04}). On rag26, longer reports win
-(Choice P(longer) = 0.700; 0.865 when one report is at least twice as
-long). On ragtime26 they don't (0.488), and within topics longer reports
-rank slightly lower. Every judge we ran shows the same pattern.
+(Figure~\ref{fig:f04}). On rag26, longer reports win (Choice P(longer) =
+0.700; 0.865 when one report is at least twice as long). On ragtime26
+they don't (0.488), and within topics longer reports rank slightly
+lower. Every judge we ran shows the same pattern.
 
-\textbf{Controlled padding test} (Figure\textasciitilde{}\ref{fig:f06}).
-Design:
+\textbf{Controlled padding test} (Figure~\ref{fig:f06}). Design:
 
 \begin{itemize}
 \tightlist
@@ -1111,7 +1109,7 @@ Split-half (5 vs 5) & 0.969 {[}0.956, 0.979{]} & 0.854 {[}0.789,
 Per-topic \ensuremath{\rho}(BOD\_MEAN, words), median & 0.518 &
 -0.120 \\
 Board \ensuremath{\rho} vs pairwise judge & \textbf{0.990} (Kendall
-0.919) & 0.918 (Figure\textasciitilde{}\ref{fig:f08}) \\
+0.919) & 0.918 (Figure~\ref{fig:f08}) \\
 Board \ensuremath{\rho} vs Gemini & 0.972 (7 topics) & --- \\
 \end{longtable}
 
@@ -1120,8 +1118,7 @@ Board \ensuremath{\rho} vs Gemini & 0.972 (7 topics) & --- \\
 \item
   \textbf{Probabilities.} The expected grade differs meaningfully from
   the most likely grade on a quarter to a third of questions, so here
-  the probabilities carry information
-  (Figure\textasciitilde{}\ref{fig:f09}).
+  the probabilities carry information (Figure~\ref{fig:f09}).
 \item
   \textbf{Ceiling.} Grades saturate near 3 on rag26, which compresses
   the top of the board.
@@ -1184,7 +1181,7 @@ truncate & 0.67 & \textbf{-0.103} {[}-0.114, -0.092{]} & -0.044
 \end{longtable}
 
 Every criterion passes on each of the 10 topics individually
-(Figure\textasciitilde{}\ref{fig:f06}, right).
+(Figure~\ref{fig:f06}, right).
 
 \subsubsection{5.4 Full runs}\label{full-runs}
 
@@ -1351,8 +1348,8 @@ Per-topic \ensuremath{\rho}(risk, BOD\_MEAN), median & +0.331 &
   that decision before reading ragtime26.
 \item
   \textbf{Small effect.} About four in five unsupported concepts are
-  also stated by some other run, so the private share is small
-  (Figure\textasciitilde{}\ref{fig:f10}).
+  also stated by some other run, so the private share is small (Figures
+  \ref{fig:f10a} and \ref{fig:f10b}).
 \item
   \textbf{No sign of citation gaming.} Risk rises slightly, rather than
   falls, with the number of cited documents.
@@ -1365,11 +1362,16 @@ Per-topic \ensuremath{\rho}(risk, BOD\_MEAN), median & +0.331 &
 
 \begin{figure}
 \centering
-\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio,alt={Left: HALLUC\_RISK and UNGROUNDED\_RATE per answer (risk defined); median risk 0.009 / 0.013. Centre and right: BOD\_GROUNDED vs BOD\_MEAN per answer. The two answers at 0 on rag26 have undefined risk (no usable citations).}]{figures_ggplot/f10_hallucination_risk.pdf}
-\caption{Left: HALLUC\_RISK and UNGROUNDED\_RATE per answer (risk
-defined); median risk 0.009 / 0.013. Centre and right: BOD\_GROUNDED vs
-BOD\_MEAN per answer. The two answers at 0 on rag26 have undefined risk
-(no usable citations).}\label{fig:f10}
+\includegraphics[width=0.5\linewidth,height=\textheight,keepaspectratio,alt={HALLUC\_RISK and UNGROUNDED\_RATE per answer (risk defined); median risk 0.009 / 0.013.}]{figures_ggplot/f10a_hallucination_risk.pdf}
+\caption{HALLUC\_RISK and UNGROUNDED\_RATE per answer (risk defined);
+median risk 0.009 / 0.013.}\label{fig:f10a}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.85\linewidth,height=\textheight,keepaspectratio,alt={BOD\_GROUNDED vs BOD\_MEAN per answer. The two answers at 0 on rag26 have undefined risk (no usable citations).}]{figures_ggplot/f10b_grounded_vs_mean.pdf}
+\caption{BOD\_GROUNDED vs BOD\_MEAN per answer. The two answers at 0 on
+rag26 have undefined risk (no usable citations).}\label{fig:f10b}
 \end{figure}
 
 \subsubsection{6.3 Full runs}\label{full-runs-1}
@@ -1401,7 +1403,7 @@ Wall-clock (spaCy, single process) & 10 min & 146 min \\
 topics)}\label{agreement-between-the-submitted-judges-all-topics}
 
 Read from the submitted leaderboards' aggregate rows after submission,
-for reporting only (Figure\textasciitilde{}\ref{fig:f11}).
+for reporting only (Figure~\ref{fig:f11}).
 
 \begin{longtable}[]{@{}
   >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.4091}}
@@ -1446,8 +1448,8 @@ Shared top-10 & 8 / 8 & 9 / 9 \\
 Same \#1 & no / no & no / no \\
 \end{longtable}
 
-\textbf{Split-half reliability on the window}
-(Figure\textasciitilde{}\ref{fig:f12}; 200 random 5/5 splits, mean):
+\textbf{Split-half reliability on the window} (Figure~\ref{fig:f12}; 200
+random 5/5 splits, mean):
 
 \begin{longtable}[]{@{}lll@{}}
 \toprule\noalign{}
@@ -1554,34 +1556,32 @@ Shows
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-1 & \passthrough{\lstinline!f01\_probability\_distribution!} & §4.4 &
-Choice saturates at 0/1; the mirror does not \\
-2 & \passthrough{\lstinline!f02\_position\_bias!} & §4.4, §4.7 & P(slot
-A wins) by closeness, Choice vs mirror \\
-3 & \passthrough{\lstinline!f03\_identical\_summaries!} & §4.4 &
-Identical summaries: Choice \ensuremath{\approx} 0.79, mirror
-\ensuremath{\approx} 0.54 \\
-4 & \passthrough{\lstinline!f04\_length!} & §4.6, §5.2 & P(longer wins)
-by length ratio; per-topic \ensuremath{\rho}(score, words) for all
-judges \\
-5 & \passthrough{\lstinline!f05\_prompt\_agreement!} & §4.5 & Ranking
-agreement between four wordings \\
-6 & \passthrough{\lstinline!f06\_padding!} & §4.6, §5.3 & Padding test:
-pairwise judges and BOD \\
-7 & \passthrough{\lstinline!f07\_broad\_narrow!} & §4.5 & Proportionate
-DiD per window topic \\
-8 & \passthrough{\lstinline!f08\_judge\_agreement!} & §4.2, §5.2 &
-Window boards: Jev vs Gemini, BOD vs Jev \\
-9 & \passthrough{\lstinline!f09\_bod\_grades!} & §5.2 & BOD grade
+\ref{fig:f01} & f01\_probability\_distribution & §4.4 & Choice saturates
+at 0/1; the mirror does not \\
+\ref{fig:f03} & f03\_identical\_summaries & §4.4 & Identical summaries:
+Choice \ensuremath{\approx} 0.79, mirror \ensuremath{\approx} 0.54 \\
+\ref{fig:f02} & f02\_position\_bias & §4.4, §4.7 & P(slot A wins) by
+closeness, Choice vs mirror \\
+\ref{fig:f13} & f13\_determinism & §4.4 & Repeated identical requests \\
+\ref{fig:f05} & f05\_prompt\_agreement & §4.5 & Ranking agreement
+between four wordings \\
+\ref{fig:f07} & f07\_broad\_narrow & §4.5 & Proportionate DiD per window
+topic \\
+\ref{fig:f04} & f04\_length & §4.6, §5.2 & P(longer wins) by length
+ratio; per-topic \ensuremath{\rho}(score, words) for all judges \\
+\ref{fig:f06} & f06\_padding & §4.6, §5.3 & Padding test: pairwise
+judges and BOD \\
+\ref{fig:f08} & f08\_judge\_agreement & §4.2, §5.2 & Window boards: Jev
+vs Gemini, BOD vs Jev \\
+\ref{fig:f09} & f09\_bod\_grades & §5.2 & BOD grade distributions \\
+\ref{fig:f10a} & f10a\_hallucination\_risk & §6.2 & Risk
 distributions \\
-10 & \passthrough{\lstinline!f10\_hallucination\_risk!} & §6.2 & Risk
-distributions; BOD\_GROUNDED vs BOD\_MEAN \\
-11 & \passthrough{\lstinline!f11\_full\_leaderboards!} & §7 & Submitted
-all-topic boards against each other \\
-12 & \passthrough{\lstinline!f12\_split\_half!} & §4.8, §7 & Split-half
-reliability per judge \\
-13 & \passthrough{\lstinline!f13\_determinism!} & §4.4 & Repeated
-identical requests \\
+\ref{fig:f10b} & f10b\_grounded\_vs\_mean & §6.2 & BOD\_GROUNDED vs
+BOD\_MEAN \\
+\ref{fig:f11} & f11\_full\_leaderboards & §7 & Submitted all-topic
+boards against each other \\
+\ref{fig:f12} & f12\_split\_half & §4.8, §7 & Split-half reliability per
+judge \\
 \end{longtable}
 
 Draft captions with exact values are in

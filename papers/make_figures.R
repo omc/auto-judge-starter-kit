@@ -229,11 +229,14 @@ pb <- ggplot(rd("f10_grounded_vs_mean"), aes(BOD_MEAN, BOD_GROUNDED)) +
   facet_wrap(~dataset) +
   coord_equal() +
   labs(title = "per answer")
-save((pa | pb) + plot_layout(widths = c(1, 2)), "f10_hallucination_risk", 10.5, 3.4)
+# two figures here (the seaborn F10 is one): risk distributions, then GROUNDED vs MEAN
+save(pa, "f10a_hallucination_risk", 4.2, 3.4)
+save(pb, "f10b_grounded_vs_mean", 6, 3.6)
 
 # F11 -----------------------------------------------------------------------------------
 f11 <- rd("f11_full_leaderboards") |>
-  mutate(facet = sprintf("%s: %s vs %s\n%d runs, ρ=%.3f", dataset, yname, xname, runs, rho),
+  mutate(across(c(xname, yname), \(n) sub("BOD_GROUNDED", "BOD_RISK", n, fixed = TRUE)),
+         facet = sprintf("%s: %s vs %s\n%d runs, ρ=%.3f", dataset, yname, xname, runs, rho),
          facet = factor(facet, levels = unique(facet)))
 p <- ggplot(f11, aes(x, y)) +
   geom_point(alpha = .6, size = 1.1, colour = "black") +
