@@ -141,7 +141,7 @@ type-safe-selection from a pre-defined set of options. Jev also emits a
 confidence score for each of its decisions and it offers all of this at
 an order of magnitude cheaper inference costs. Our submissions explore
 Jev's performance as a both pair-wise-response judge and one-shot-QREL
-judge. We also explore a prompt enrichment strategey known as
+judge. We also explore a prompt enrichment strategy known as
 `bag-of-decisions' leveraging a traditional LLM to build an ``enriched''
 request for Jev grading.
 \end{abstract}
@@ -149,20 +149,20 @@ request for Jev grading.
 \section{1. Introduction}\label{introduction}
 
 LLM-as-a-judge (\citeproc{ref-zheng2023judging}{Zheng et al. 2023}) has
-made relevance assesement cheaper than ever. While LLM-judges have
+made relevance assessment cheaper than ever. While LLM-judges have
 become more common in industry applications and create compelling output
 judgements, they still exhibit major drawbacks that limit their
 functional utility including: positional-bias
 (\citeproc{ref-wang2024large}{P. Wang et al. 2024}), self-preference
 (\citeproc{ref-panickssery2024llm}{Panickssery, Bowman, and Feng 2024}),
-score-centrality and over-confidence. Methods to address these short
-comings often involed spending more time ``reasoning'', running more
-permutation-prompts per single assesment, running several foundations
-LLMs in a judge-panel, all of which add to expense and over-confidence
-as context is expanded. We explore the utility of a `bag of decisions'
-context enrichment step that uses a separate LLM to build a evaluation
-rubric of specific yes/no questions that are then used to subsequent Jev
-prompt.
+score-centrality and over-confidence. Methods to address these
+shortcomings often involved spending more time ``reasoning'', running
+more permutation-prompts per single assessment, running several
+foundations LLMs in a judge-panel, all of which add to expense and
+over-confidence as context is expanded. We explore the utility of a `bag
+of decisions' context enrichment step that uses a separate LLM to build
+a evaluation rubric of specific yes/no questions that are then used to
+subsequent Jev prompt.
 
 Jev is a decision model that takes advantage of similar web-scale
 pre-training like an LLM, but instead of generating free-form-text
@@ -185,9 +185,9 @@ response, which gives us a useful marker for ``easy'' compared to
 \section{2. Approach}\label{approach}
 
 Our approaches are aimed at measuring Jev's utility as a judge, at both
-levels of RAG relevance assesment. We judge at both the response and the
-citation level to compare the quality of the assesment to the cost.
-Along the way we explore and try to mitigate Jev's suseptibility to the
+levels of RAG relevance assessment. We judge at both the response and
+the citation level to compare the quality of the assessment to the cost.
+Along the way we explore and try to mitigate Jev's susceptibility to the
 same LLM issues of: positional-bias, over-confidence and
 score-centrality. Our run naming convention is confusing and we are
 sorry about that. All of our work is run via OpenRouter and costs are
@@ -212,9 +212,9 @@ enrichment}\label{bag-of-decisions-rubric-enrichment}
 Bag of decisions is a separate LLM prompt that attempts to enrich the
 provided topic information beyond just the prompt-statement and
 information-need provided. Instead of the singular is this response
-better style question, BOD resquests a list of 5 - 15 rubric questions
-an expert would ask to check distinct parts of the repsonse for
-validity. This list is filtered for near-duplicates and then packaged as
+better style question, BOD requests a list of 5 - 15 rubric questions an
+expert would ask to check distinct parts of the response for validity.
+This list is filtered for near-duplicates and then packaged as
 individual NOUL questions in a new enriched-prompt for the Pairwise Jev,
 with the final prompt answer scores averaged together before combining
 both order-permutation versions.
@@ -245,8 +245,8 @@ together to a final QREL estimate for each citation.
 
 These QRELS were summarized in the style of trec\_eval to construct
 various leaderboard metrics.QRELs were not submitted directly to the
-track, due to evalution limitations. They are available upon requests of
-the authors and open to publishing with the proceedings.
+track, due to evaluation limitations. They are available upon requests
+of the authors and open to publishing with the proceedings.
 
 \section{3. Submissions}\label{submissions}
 
@@ -284,9 +284,9 @@ JudgeJev & {[}omc26\_ragtime26\_judge\_jev, omc26\_rag26\_judge\_jev{]}
 
 \begin{figure}
 \centering
-\includegraphics[width=0.55\linewidth,height=\textheight,keepaspectratio,alt={Jev Choice questions exhibit clear order bias in the Pairwise Jev Judge. Using a mirrored version of the choies with order inverted removes most of that bias.}]{figures_ggplot/f03_identical_summaries.pdf}
+\includegraphics[width=0.55\linewidth,height=\textheight,keepaspectratio,alt={Jev Choice questions exhibit clear order bias in the Pairwise Jev Judge. Using a mirrored version of the choices with order inverted removes most of that bias.}]{figures_ggplot/f03_identical_summaries.pdf}
 \caption{Jev Choice questions exhibit clear order bias in the Pairwise
-Jev Judge. Using a mirrored version of the choies with order inverted
+Jev Judge. Using a mirrored version of the choices with order inverted
 removes most of that bias.}\label{fig:order-bias}
 \end{figure}
 
@@ -303,9 +303,25 @@ of Decisions (BOD)}\label{fig:leaderboards}
 
 \subsection{3.2 Judge Jev datum}\label{judge-jev-datum}
 
-There is strong answer correlation across differen question framing
-within the same prompt. There are distinc confidence distributions
-associtate with SCORE and CHOICE answers.
+\subsubsection{3.2.1}\label{section}
+
+\begin{figure}
+\centering
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio,alt={There is strong answer correlation across different question framing within the same prompt. There are distinct confidence distributions associated with SCORE and CHOICE answers.}]{figures_ggplot/fig3_question_confidence_varies.pdf}
+\caption{There is strong answer correlation across different question
+framing within the same prompt. There are distinct confidence
+distributions associated with SCORE and CHOICE
+answers.}\label{fig:question-confidence}
+\end{figure}
+
+\subsubsection{3.2.2}\label{section-1}
+
+\begin{figure}
+\centering
+\includegraphics[width=1\linewidth,height=\textheight,keepaspectratio,alt={Presentation bias across questions within the same request appears to be minimal}]{figures_ggplot/fig4_fwd_vs_rev_scatter.pdf}
+\caption{Presentation bias across questions within the same request
+appears to be minimal}\label{fig:presentation-bias-qrels}
+\end{figure}
 
 \section{4. Conclusions}\label{conclusions}
 
