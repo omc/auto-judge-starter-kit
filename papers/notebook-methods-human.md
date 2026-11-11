@@ -1,6 +1,6 @@
 # OMC at TREC 2026 AutoJudge: Methods and Results (notebook paper draft)
 
-**Authors:** Max Irwin <max@onemorecloud.com>, Nathan Day <nday@eezy.com>, Daniel Worley <dworley@gmail.com>
+**Authors:** Max Irwin <max@onemorecloud.com>, Nathan Day <nday@eezy.com>, Daniel Worley <worleydl@gmail.com>
 
 ## Abstract
 
